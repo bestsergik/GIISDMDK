@@ -1,0 +1,150 @@
+﻿<Page x:Class="CallLogGIISDMDK.Views.BaseProblems.Instructions.LeaderSertificate"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CallLogGIISDMDK.Views.BaseProblems.Instructions"
+      mc:Ignorable="d" 
+
+      Title="LeaderSertificate">
+
+    <Grid x:Name="SertificatesGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="textLink" Grid.Row="0" HorizontalAlignment="Center" Margin="0,12,0,0" FontSize="18" Text="{Binding GeneralInformation}"  Style="{StaticResource MainTitles }">Инструкция по установке сертификата руководителя организации-участника</TextBlock>
+        <Rectangle Grid.Row="0" VerticalAlignment="Bottom" Margin="40,0,40,0" HorizontalAlignment="Stretch" Fill="#DEE2E6"  Height="1.5"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="34"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock  Grid.Row="3" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">1.</TextBlock>
+            <TextBlock  Grid.Row="4" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">2.</TextBlock>
+            <TextBlock  Grid.Row="7" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">3.</TextBlock>
+            <TextBlock  Grid.Row="8" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">4.</TextBlock>
+            <TextBlock  Grid.Row="9" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">5.</TextBlock>
+            <TextBlock  Grid.Row="11" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">6.</TextBlock>
+            <TextBlock  Grid.Row="12" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">7.</TextBlock>
+            <TextBlock  Grid.Row="14" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">8.</TextBlock>
+            <TextBlock  Grid.Row="16" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">9.</TextBlock>
+            <TextBlock  Grid.Row="18" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">10.</TextBlock>
+            <TextBlock  Grid.Row="20" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">11.</TextBlock>
+            <TextBlock  Grid.Row="22" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">12.</TextBlock>
+            <TextBlock  Grid.Row="24" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">13.</TextBlock>
+            <TextBlock  Grid.Row="25" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">14.</TextBlock>
+            <TextBlock  Grid.Row="27" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">15.</TextBlock>
+            <TextBlock  Grid.Row="29" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">16.</TextBlock>
+            <TextBlock  Grid.Row="31" FontSize="16" Margin="8,11,0,0" FontWeight="Bold">17.</TextBlock>
+            
+            <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBlock}">Для корректной работы с ГИИС ДМДК необходимо ввести реальные данные РУКОВОДИТЕЛЯ организации: ИНН, ОГРН(если юридическое лицо) или ОГРНИП(если индивидуальный предприниматель) и ФИО.</TextBox>
+
+
+            <RichTextBox Grid.Row="3" Grid.Column="1"  Style="{StaticResource TextBlocks}"  IsReadOnly="True" IsDocumentEnabled="True" >
+                <FlowDocument>
+                    <Paragraph>Перейти на страницу регистрации "Тестовый Удостоверяющий Центр ООО ”КРИПТО-ПРО” ГОСТ 2012" (
+                        <Hyperlink NavigateUri="https://testca2012.cryptopro.ru/ui/1/RegRequest.aspx" RequestNavigate="Hyperlink_RequestNavigate">ссылка</Hyperlink>
+                        ). </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+            <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource TextBlock}">В поле "Общее имя*" ввести имя руководителя.</TextBox>
+            <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource TextBlock}">В поле "СНИЛС" необязательно вводить реальный СНИЛС, но его длина должна составлять 11 цифр.</TextBox>
+            <TextBox Grid.Row="6" Grid.Column="1" Style="{StaticResource TextBlock}">Остальные поля необязательны для заполнения</TextBox>
+            <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource TextBlock}">Сохраните или запишите логин и пароль.</TextBox>
+            <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource TextBlock}">После регистрации войдите в личный кабинет</TextBox>
+            <TextBox Grid.Row="9" Grid.Column="1" Style="{StaticResource TextBlock}">В личном кабинете в левом меню нажмите "Сертификаты" ,а затем в главном окне "Создать"</TextBox>
+            <WrapPanel Grid.Row="10" Margin="10"  Grid.Column="1" HorizontalAlignment="Center">
+                <Image MaxHeight="450" MaxWidth="380"  Source="createLeaderSertificate.png" ></Image>
+            </WrapPanel>
+            <TextBox Grid.Row="11" Grid.Column="1" Style="{StaticResource TextBlock}">В окне подтвеждения доступа нажмите "Да"</TextBox>
+            <TextBox Grid.Row="12" Grid.Column="1" Style="{StaticResource TextBlock}">Заполните форму "Запрос на сертификат", как на фото ниже и нажмите "Создать"</TextBox>
+            <WrapPanel Grid.Row="13" Margin="10"  Grid.Column="1" HorizontalAlignment="Center">
+                <Image MaxHeight="550" MaxWidth="430"  Source="requestSertificate.png" ></Image>
+            </WrapPanel>
+            <TextBox Grid.Row="14" Grid.Column="1" Style="{StaticResource TextBlock}">В окне "КриптоПро CSP" нажмите "ОК"</TextBox>
+            <WrapPanel Grid.Row="15" Margin="10"  Grid.Column="1" HorizontalAlignment="Center">
+                <Image MaxHeight="550" MaxWidth="430"  Source="cryptoProCsp.png" ></Image>
+            </WrapPanel>
+            <TextBox Grid.Row="16" Grid.Column="1" Style="{StaticResource TextBlock}">Следуйте инструкции в появившемся окне "КриптоПро CSP".</TextBox>
+            <WrapPanel Grid.Row="17" Margin="10"  Grid.Column="1" HorizontalAlignment="Center">
+                <Image MaxHeight="550" MaxWidth="430"  Source="cryptoProCsp2.png" ></Image>
+            </WrapPanel>
+            
+            <TextBox Grid.Row="18" Grid.Column="1" Style="{StaticResource TextBlock}">В следующем появившемся окне "КриптоПро CSP" задайте пароль, лобо же оставьте его пустым и нажмите "ОК".</TextBox>
+            <WrapPanel Grid.Row="19" Margin="10"  Grid.Column="1" HorizontalAlignment="Center">
+                <Image MaxHeight="550" MaxWidth="430"  Source="cryptoProCsp3.png" ></Image>
+            </WrapPanel>
+            
+            <TextBox Grid.Row="20" Grid.Column="1" Style="{StaticResource TextBlock}">В личном кабинете в главной форме нажмите "Обновить".</TextBox>
+            <WrapPanel Grid.Row="21" Margin="10"  Grid.Column="1" HorizontalAlignment="Center">
+                <Image MaxHeight="550" MaxWidth="430"  Source="updateSertificate.png" ></Image>
+            </WrapPanel>
+            
+            <TextBox Grid.Row="22" Grid.Column="1" Style="{StaticResource TextBlock}">В личном кабинете в главной форме слева нажмите "Установить"</TextBox>
+            <WrapPanel Grid.Row="23" Margin="10"  Grid.Column="1" HorizontalAlignment="Center">
+                <Image MaxHeight="550" MaxWidth="430"  Source="setupSertificate.png" ></Image>
+            </WrapPanel>
+            
+            <TextBox Grid.Row="24" Grid.Column="1" Style="{StaticResource TextBlock}">В окне подтвеждения доступа нажмите "Да"</TextBox>
+            <TextBox Grid.Row="25" Grid.Column="1" Style="{StaticResource TextBlock}">В форме "Установка сертификата" нажмите "Установить сертификат"</TextBox>
+           
+            <WrapPanel Grid.Row="26" Margin="10"  Grid.Column="1" HorizontalAlignment="Center">
+                <Image MaxHeight="550" MaxWidth="430"  Source="setupSertificate2.png" ></Image>
+            </WrapPanel>
+            <TextBox Grid.Row="27" Grid.Column="1" Style="{StaticResource TextBlock}">В окне "КриптоПро CSP" введите заданный пароль.</TextBox>
+            <WrapPanel Grid.Row="28" Margin="10"  Grid.Column="1" HorizontalAlignment="Center">
+                <Image MaxHeight="550" MaxWidth="430"  Source="cryptoProCsp4.png" ></Image>
+            </WrapPanel>
+          
+            <TextBox Grid.Row="29" Grid.Column="1" Style="{StaticResource TextBlock}">В форме "Установка сертификата" нажмите "Подтвердить установку"</TextBox>
+            <WrapPanel Grid.Row="30" Margin="10"  Grid.Column="1" HorizontalAlignment="Center">
+                <Image MaxHeight="550" MaxWidth="430"  Source="confirmSetupSertificate.png" ></Image>
+            </WrapPanel>
+           
+            <TextBox Grid.Row="31" Grid.Column="1" Style="{StaticResource TextBlock}">Всплывающее окно проинформирует об успешной установке сертификата</TextBox>
+            <WrapPanel Grid.Row="32" Margin="10"  Grid.Column="1" HorizontalAlignment="Center">
+                <Image MaxHeight="550" MaxWidth="430"  Source="completeSetupSertificate.png" ></Image>
+            </WrapPanel>
+
+
+        </Grid>
+    </Grid>
+</Page>

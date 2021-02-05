@@ -1,0 +1,25 @@
+﻿<Application
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:CallLogGIISDMDK"
+             xmlns:VM="clr-namespace:CallLogGIISDMDK.ViewModels"
+             xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Class="CallLogGIISDMDK.App"
+             StartupUri="MainWindow.xaml">
+
+    <Application.Resources>
+
+       
+
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="MainDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <VM:MainWindow_VM x:Key="MainWindowVM"/>
+            <VM:FillAppeal_VM x:Key="FillAppealVM"/>
+            <VM:ViewAppeals_VM x:Key="ViewAppealsVM"/>
+            <VM:Authorization_VM x:Key="AuthorizationVM"/>
+            <VM:CommonInformation_VM x:Key="CommonInformationVM"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

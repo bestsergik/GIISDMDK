@@ -1,0 +1,66 @@
+﻿<Page x:Class="CallLogGIISDMDK.Views.Authorization_page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CallLogGIISDMDK.Views"
+      xmlns:VM="clr-namespace:CallLogGIISDMDK.ViewModels"
+      DataContext="{StaticResource AuthorizationVM}"
+      mc:Ignorable="d" 
+     
+      Title="Authorization_page" Loaded="Page_Loaded">
+   
+
+    <Grid Height="470" Width="520">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" FontSize="18" HorizontalAlignment="Center" FontWeight="Bold"  Foreground="LightSeaGreen">Вход/Регистрация в журнал обращений ГИИС ДМДК</TextBlock>
+        <TabControl Grid.Row="1">
+            <TabItem x:Name="Entry">
+                <TabItem.Header >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock  Margin="3">ВХОД</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel>
+                        <Label Height="18" Padding="4,0,0,0"  Content="Логин" Foreground="Black" FontSize="16" FontFamily="Verdana"  Margin="15,50,15,0"></Label>
+                        <TextBox x:Name="entryLoginUserInput"  Text="{Binding LoginEntry , UpdateSourceTrigger=PropertyChanged}" Height="40" FontSize="23"  Margin="15,5,15,0"  />
+                        <Label Height="20"  Content="{Binding PromptsEntry}"  Padding="4,0,0,0"  FontSize="14" Foreground="Chocolate" Width="480" Margin="15,2,15,0"></Label>
+                        <Label Height="18" Padding="4,0,0,0"  Content="Пароль" Foreground="Black" FontSize="16" FontFamily="Verdana"  Margin="15,30,0,0"></Label>
+                        <TextBox x:Name="entryPasswordUserInput"  Height="40"   Text="{Binding PasswordEntry , UpdateSourceTrigger=PropertyChanged}"  FontSize="23"  Margin="15,5,15,0"  />
+                        <Label Height="18" Padding="4,0,0,0"  Content="{Binding PromptsEntryPassword}" Foreground="Chocolate" FontSize="12"  Margin="15,2,15,0"></Label>
+                        <Button x:Name="Entry_btn" Style="{StaticResource MainMenuButton}" IsCancel="{Binding IsLogin}" Command="{Binding LoginCommand}"   Height="50" FontSize="26" FontFamily="Arial"   Margin="15,30,15, 20" Click="Entry_btn_Click">Войти</Button>
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+
+            <TabItem x:Name="Registration">
+                <TabItem.Header >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3">Регистрация</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel>
+                        <Label Height="18" Padding="4,0,0,0"  Content="Логин" Foreground="Black" FontSize="16" FontFamily="Verdana"  Margin="15,10,15,0"></Label>
+                        <TextBox  x:Name="loginRegistrationUserInput"  Height="40" FontSize="23" Text="{Binding LoginRegistration , UpdateSourceTrigger=PropertyChanged}"  Margin="15,5,15,0"  />
+                        <Label Height="18" Padding="4,0,0,0"  Content="{Binding PromptsRegistration}" Foreground="Chocolate" FontSize="12"  Margin="15,2,15,0"></Label>
+                        <Label Height="18" Padding="4,0,0,0"  Content="Пароль" Foreground="Black" FontSize="16" FontFamily="Verdana"  Margin="15,6,0,0"></Label>
+                        <TextBox x:Name="passwordRegistrationUserInput" Height="40" FontSize="23" Text="{Binding PasswordRegistration , UpdateSourceTrigger=PropertyChanged}" Margin="15,5,15,0"  />
+
+                        <Label Height="18" Padding="4,0,0,0"  Content="{Binding PromptsRegistrationPassword}" Foreground="Chocolate" FontSize="12"  Margin="15,2,15,0"></Label>
+                        <Label Height="18" Padding="4,0,0,0"  Content="Подтвердите пароль" Foreground="Black" FontSize="16" FontFamily="Verdana"  Margin="15,6,0,0"></Label>
+
+                        <TextBox x:Name="passwordRepeatRegistrationUserInput" Height="40" FontSize="23" Text="{Binding RepeatPasswordRegistration , UpdateSourceTrigger=PropertyChanged}" Margin="15,5,15,0"  />
+                        <Label Height="18" Padding="4,0,0,0"  Content="{Binding PromptsRegistrationRepeatPassword}" Foreground="Chocolate" FontSize="12"  Margin="15,2,15,0"></Label>
+
+                        <Button x:Name="Registration_btn" Style="{StaticResource MainMenuButton}" Command="{Binding RegistrationCommand}" IsCancel="{Binding IsRegistrationPass}"  Height="50" FontSize="26"  FontFamily="Arial" Margin="15,20,15, 20" Click="Registration_btn_Click" >Зарегистрироваться</Button>
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>

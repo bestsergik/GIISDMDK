@@ -1,0 +1,98 @@
+﻿<Page x:Class="CallLogGIISDMDK.Views.BaseKnowledge.News"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CallLogGIISDMDK.Views.BaseKnowledge"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="News">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding GeneralInformation}"  Style="{StaticResource MainTitles }">Новости</TextBlock>
+        <Rectangle Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Fill="#DEE2E6" Margin="10" Height="1.5"/>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="250"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Style="{StaticResource MainMenuButton}" Click="Button_Click">Назад</Button>
+        </Grid>
+        <Border Grid.Row="1" Grid.Column="1" CornerRadius="3" BorderThickness="2" Margin="10" BorderBrush="Black">
+
+            <ScrollViewer  Grid.Row="1" Grid.Column="1">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="56"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="56"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="10"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0" Style="{StaticResource TextBlock}" HorizontalAlignment="Center" FontWeight="Bold">Сроки внедрения маркировки ювелирных изделий в России перенесут на 1 января 2022 года</TextBox>
+                    <RichTextBox Grid.Row="1" Grid.Column="1"  Style="{StaticResource TextBlocks}"  IsReadOnly="True" IsDocumentEnabled="True" >
+                        <FlowDocument>
+                            <Paragraph>
+                                Ввод ГИИС ДМДК (присвоение УИН и регистрацию продаж) намечен на 1 января 2022 года (перенесли на 6 месяцев, раньше планировалось с 1 июля 21 года). Физическое нанесение DataMatrix-кода на изделие (для золота) запланировано с 1 января 2023 года, сообщил руководитель компании ЮвелирСофт Дмитрий Румянцев по итогам заседания подкомиссии по совершенствованию контрольных (надзорных) и разрешительных функций федеральных органов исполнительной власти при Правительственной комиссии по проведению административной реформы. 
+
+Министерство финансов не соглашалось со сроками, предложенными ювелирным сообществом. Гончаренко Ю. А. настаивала на начале физической маркировки изделий с 01.01.2022 года. На голосование был поставлен вопрос о внесении в проект изменений в части сроков внедрения.
+
+В итоге позиция предпринимательского сообщества была поддержана 15 голосами против двух.
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Rectangle Grid.Row="2" Grid.ColumnSpan="3"  Margin="50,0,50,0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Fill="LightGray"  Height="1.5"/>
+
+                    <TextBox Grid.Row="3" Style="{StaticResource TextBlock}" HorizontalAlignment="Center" FontWeight="Bold">Изменения, предложенные Минфином РФ 27.01. 2021 года по срокам введения ГИИС ДМДК</TextBox>
+
+                    <Grid Grid.Row="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBox  Style="{StaticResource TextBlock}" >1. Начало спец.учета в ГИИС ДМДК ЮЛ и ИП; Запуск реестр именников в ГИИС ДМДК; Подключение личных кабинетов в ГИИС ДМДК. – 01.09.21.</TextBox>
+                        <TextBox Grid.Row="1" Style="{StaticResource TextBlock}" >2. Спец.учет только в ГИИС; Учет именников только в ГИИС. – 1.09.21.</TextBox>
+                        <TextBox Grid.Row="2" Style="{StaticResource TextBlock}" >3. Аффинажные организации вносят сведения о поступлении сырья и отгрузке продукции. – 01.09.21.</TextBox>
+                        <TextBox Grid.Row="3" Style="{StaticResource TextBlock}" >4. Скупка вносит информацию о поступлении и реализации ценностей в ГИИС ДМДК. – 01.09.21 (добровольно).</TextBox>
+                        <TextBox Grid.Row="4" Style="{StaticResource TextBlock}" >5. Переработчики лома и отходов вносят информацию о поступлении и реализации ценностей в ГИИС ДМДК. – 01.09.21.</TextBox>
+                        <TextBox Grid.Row="5" Style="{StaticResource TextBlock}" >6. Производители технической продукции вносят информацию о поступлении ДМДК и отгрузке продукции. – 01.09.21.</TextBox>
+                        <TextBox Grid.Row="6" Style="{StaticResource TextBlock}" >7. ЮР.ЛИЦА И ИП передают уточненные сведения о ювелирные изделия (остатках по состоянию на 01.01.22) с учетом реализации на 14.02.22 до 15.02.22.</TextBox>
+                        <TextBox Grid.Row="7" Style="{StaticResource TextBlock}" >8. Аффинажные организации передают сведения об остатках ДМДК, по состоянию на 01.01.22 г. до 15.02.22.</TextBox>
+                        <TextBox Grid.Row="8" Style="{StaticResource TextBlock}" >9. Ювелирные изделия (остатки по состоянию на 01.01.22) должны иметь присвоение УИН каждому изделию, навешивание дополнительных ярлыков с QR-кодами и УИН изделий. – 28.02.22.</TextBox>
+                        <TextBox Grid.Row="9" Style="{StaticResource TextBlock}" >10. Запрещается оборот ювелирных и других изделий из ДМДК без УИН, дополнительного ярлыка, также стандартных и мерных слитков и другой продукции без УИН. – 01.03.22</TextBox>
+                        <TextBox Grid.Row="10" Style="{StaticResource TextBlock}" >11. Полный запрет на оборот изделий без физической маркировки. – 01.09.22.</TextBox>
+                        <TextBox Grid.Row="11" Style="{StaticResource TextBlock}" >*Кроме остатков, заявленных по состоянию на 01.01.22 или на 01.01.23, остатки могут не иметь маркировки до 01.07.24</TextBox>
+                    </Grid>
+                    <Rectangle Grid.Row="5" Grid.ColumnSpan="3" Margin="50,0,50,0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Fill="LightGray"  Height="1.5"/>
+
+
+                </Grid>
+            </ScrollViewer>
+        </Border>
+
+    </Grid>
+</Page>

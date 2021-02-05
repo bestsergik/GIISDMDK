@@ -1,0 +1,92 @@
+﻿<Page x:Class="CallLogGIISDMDK.Views.ViewAppeals_page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CallLogGIISDMDK.Views"
+      DataContext="{StaticResource ViewAppealsVM}"
+      mc:Ignorable="d" 
+      Title="ViewAppeals_page">
+
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </Page.Resources>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Margin="40,30,0,0" Grid.ColumnSpan="4"  Style="{StaticResource MainTitles}">Список обращений</TextBlock>
+
+        <Button  Grid.Row="2" Grid.Column="1" Command="{Binding AddAppealCommand}" Style="{StaticResource MainMenuButton}"  >Править обращение</Button>
+        <Button  Grid.Row="2" Grid.Column="0" Style="{StaticResource MainMenuButton}"  x:Name="btnBack"   Click="btnBack_Click" >Назад</Button>
+        <Label Grid.Row="1" Content="Обращения отсутствуют"></Label>
+
+        <ListBox Grid.Row="1" Grid.Column="0" Visibility="{Binding IsVisibleData}" ItemsSource="{Binding Appeals}"
+                 SelectedItem="{Binding SelectedAppeal}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="18" Text="{Binding Path=FullName}" />
+                        <TextBlock Text="{Binding Path=InputPhone}" />
+                     
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+        <ScrollViewer >
+            <Grid >
+            <StackPanel  DataContext="{Binding SelectedAppeal}">
+                <!--<TextBlock Text="Подробно"  />-->
+                <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="ФИО" />
+                <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Телефон" />
+                    <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding InputPhone, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Дата обращения" />
+                    <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding CurrentDay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Время обращения" />
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                            <TextBlock Margin="4,5,0,0"  Style="{StaticResource DetailsViewAppeal}" Text="{Binding CurrentHour, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Margin="0,5,0,0"  Grid.Column="1" Style="{StaticResource DetailsViewAppeal}" Text=":" />
+                            <TextBlock Margin="0,5,0,0"  Style="{StaticResource DetailsViewAppeal}" Grid.Column="2" Text="{Binding CurrentMinute, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+
+                    <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Роль участника" />
+                    <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding ParticipantRole, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Обращение" />
+                    <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Appeal, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Email" />
+                    <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Организация" />
+                    <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Company, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Дополнительаня информация" />
+                    <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding AdditionalInfo, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Специалист" />
+                    <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+        </Grid>
+        </ScrollViewer>
+        </Border>
+    </Grid>
+</Page>
