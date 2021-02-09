@@ -28,7 +28,10 @@ namespace CallLogGIISDMDK.Views
         private void Registration_btn_Click(object sender, RoutedEventArgs e)
         {
             if (Registration_btn.IsCancel == true)
+            {
                 this.NavigationService.Navigate(new Menu_page());
+                StaticData.IsLoggin = true;
+            }
         }
 
         private void Entry_btn_Click(object sender, RoutedEventArgs e)
@@ -39,6 +42,8 @@ namespace CallLogGIISDMDK.Views
          
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            if(StaticData.IsLoggin == true)
+            Registration.Visibility = Visibility.Hidden;
             StaticData.User = "";
             entryLoginUserInput.Text = "";
             entryPasswordUserInput.Text = "";

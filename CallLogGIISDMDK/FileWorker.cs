@@ -81,8 +81,6 @@ namespace CallLogGIISDMDK
 
         private void UserLevelUp(string temp)
         {
-            
-
             Console.WriteLine(temp.Substring(0, (temp.Length - 5)));
             if (temp.Substring(0, (temp.Length - 5)) == StaticData.User)
             {

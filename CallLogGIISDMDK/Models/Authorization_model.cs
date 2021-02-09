@@ -15,27 +15,27 @@ namespace CallLogGIISDMDK.Models
         Compress compress = new Compress();
 
         private string PathToLogins = @"logins.txt";
-        private string ZipPathToLogins = @"UserLogins.zip";
+        private string _zipPathToLogins = @"UserLogins.zip";
         private string _pathToAppeals = @"callLog.txt";
         private string _pathToZipAppeals = @"CallLog.zip";
         FileWorker fileWorker = new FileWorker();
 
 
-        public Authorization_model()
-        {
-            if (File.Exists(_pathToZipAppeals))
-            {
-                compress.DecompressCallLog();
-                fileWorker.GetUserStatus();
-                File.Delete(_pathToAppeals);
-            }
-            else StaticData.UserStatus = "малыш";
+        //public Authorization_model()
+        //{
+        //    if (File.Exists(_pathToZipAppeals))
+        //    {
+        //        compress.DecompressCallLog();
+        //        fileWorker.GetUserStatus();
+        //        File.Delete(_pathToAppeals);
+        //    }
+        //    else StaticData.UserStatus = "малыш";
         
-        }
+        //}
 
         internal string CheckLenghtLoginRegistration(string loginRegistration)
         {
-         if (loginRegistration.Length > 15) return loginRegistration.Substring(0, loginRegistration.Length - 1);
+         if (loginRegistration.Length > 23) return loginRegistration.Substring(0, loginRegistration.Length - 1);
          else return loginRegistration;
         }
 
@@ -70,7 +70,7 @@ namespace CallLogGIISDMDK.Models
 
         internal void RegistrationUser(string loginRegistration, string passwordRegistration)
         {
-            if (!File.Exists(ZipPathToLogins))
+            if (!File.Exists(_zipPathToLogins))
             {
                 using (FileStream fs = File.Create(PathToLogins))
                 {
@@ -79,14 +79,14 @@ namespace CallLogGIISDMDK.Models
             }
             else
             {
-                compress.DecompressUserLogins();
+                compress.DecompressData(_zipPathToLogins);
             }
 
             using (StreamWriter str = new StreamWriter(PathToLogins, true, Encoding.Unicode))
             {
                 str.WriteLine($"{loginRegistration}-{passwordRegistration}");
             }
-            compress.CompressUserLogins();
+            compress.CompressData(PathToLogins, _zipPathToLogins);
             File.Delete(PathToLogins);
         }
     }

@@ -6,9 +6,11 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using CallLogGIISDMDK.Models;
+using CallLogGIISDMDK.WorkWithFiles;
 
 
 
@@ -16,6 +18,8 @@ namespace CallLogGIISDMDK.ViewModels
 {
     class FillAppeal_VM : INotifyPropertyChanged
     {
+
+        FileWriter fileWriter = new FileWriter();
         FillAppeal_model fillAppeal_Model = new FillAppeal_model();
         private RelayCommand _addAppealCommand;
         private RelayCommand _checkFirstStepFillAppealCommand;
@@ -24,6 +28,7 @@ namespace CallLogGIISDMDK.ViewModels
         private List<string> _minuteAppeal;
         private List<string> _hourAppeal;
         private List<string> _participantRoles;
+        private List<string> _statuses;
         private List<string> _daysCurrentMonthStringFormat;
 
         private int _currentHour = DateTime.Now.Hour;
@@ -35,6 +40,7 @@ namespace CallLogGIISDMDK.ViewModels
         private string _participantRole;
         private string _currentDay = DateTime.Now.ToString("dddd, d MMMM", CultureInfo.GetCultureInfo("ru-RU"));
         private string _currentMinute;
+        private string _currentTime;
         private string _inputPhone;
         private string _appeal;
         private string _additionalInfo;
@@ -42,6 +48,7 @@ namespace CallLogGIISDMDK.ViewModels
         private string _email;
         private string _company;
         private string _userName;
+        private string _status;
 
         private string _promptsFullName = "";
         private string _promptsPhoneNumber = "";
@@ -49,6 +56,7 @@ namespace CallLogGIISDMDK.ViewModels
         private string _promptsCompany = "";
         private string _promptsRole = "";
         private string _promptsAppeal = "";
+        private string _promptsStatus = "";
 
         private bool _isFirstStepFillAppeal;
         private bool _isSecondStepFillAppeal;
@@ -64,7 +72,7 @@ namespace CallLogGIISDMDK.ViewModels
 
 
 
-        string[] _prompts = new string[5];
+        string[] _prompts = new string[6];
 
         public FillAppeal_VM()
         {
@@ -73,7 +81,8 @@ namespace CallLogGIISDMDK.ViewModels
             _daysCurrentMonthStringFormat = fillAppeal_Model.FillDaysCurrentMonth();
             _currentMinute = fillAppeal_Model.NearMinute();
             _participantRoles = fillAppeal_Model.GetParticipantRoles();
-            _prompts[0] = _promptsFullName; _prompts[1] = _promptsPhoneNumber; _prompts[2] = _promptsEmail; _prompts[3] = _promptsCompany; _prompts[4] = _promptsRole;
+            _statuses = fillAppeal_Model.GetStatusesAppeal();
+            _prompts[0] = _promptsFullName; _prompts[1] = _promptsPhoneNumber; _prompts[2] = _promptsEmail; _prompts[3] = _promptsCompany; _prompts[4] = _promptsRole; _prompts[5] = _promptsStatus;
         }
 
         #region Commands
@@ -128,8 +137,9 @@ namespace CallLogGIISDMDK.ViewModels
         void CheckFirstStepFillAppeal(object p)
         {
            
-            _prompts = fillAppeal_Model.CheckLeghtFields(FullName, InputPhone, Email, Company, ParticipantRole, IsIrregular);
+            _prompts = fillAppeal_Model.CheckLeghtFields(FullName, InputPhone, Email, Company, ParticipantRole, Status, IsIrregular);
             IsFirstStepFillAppeal = fillAppeal_Model.isValidFirstStep;
+          
            if(p != null)
             ShowPrompts();
         }
@@ -157,10 +167,19 @@ namespace CallLogGIISDMDK.ViewModels
             PromptsEmail = _prompts[2];
             PromptsCompany = _prompts[3];
             PromptsRole = _prompts[4];
+            PromptsStatus = _prompts[5];
         }
         private void AddAppeal()
         {
-            fillAppeal_Model.SaveAppeal(FullName, InputPhone, CurrentDay, CurrentHour, CurrentMinute, Email, Company, ParticipantRole, Appeal, AdditionalInfo);
+            Thread myThread = new Thread(new ThreadStart(Adding));
+            myThread.Start();
+         }
+
+        private void Adding()
+        {
+            fileWriter.WriteAppealToFile(FullName, InputPhone, CurrentDay, CurrentHour.ToString(), CurrentMinute, Status, ParticipantRole, Email, Company, Appeal, AdditionalInfo);
+            //fillAppeal_Model.SaveAppeal(FullName, InputPhone, CurrentDay, CurrentHour, CurrentMinute, Email, Company, ParticipantRole, Appeal, AdditionalInfo);
+
         }
 
         private void ShowChoiseSex()
@@ -383,6 +402,15 @@ namespace CallLogGIISDMDK.ViewModels
             }
         }
 
+        public string CurrentTime
+        {
+            get { return _currentTime; }
+            set
+            {
+                _currentTime = value;
+            }
+        }
+
         public string CurrentMinute
         {
             get { return _currentMinute; }
@@ -430,6 +458,19 @@ namespace CallLogGIISDMDK.ViewModels
 
             }
         }
+        public string Status
+        {
+            get { return _status; }
+            set
+            {
+                _status = value;
+                OnPropertyChanged("Status");
+                CheckFirstStepFillAppeal(null);
+                PromptsStatus = fillAppeal_Model.ClearPrompt(Status, PromptsStatus);
+
+            }
+        }
+
 
         public string PromptsFullName
         {
@@ -482,6 +523,16 @@ namespace CallLogGIISDMDK.ViewModels
             {
                 _promptsCompany = value;
                 OnPropertyChanged("PromptsCompany");
+            }
+        }
+
+        public string PromptsStatus
+        {
+            get { return _promptsStatus; }
+            set
+            {
+                _promptsStatus = value;
+                OnPropertyChanged("PromptsStatus");
             }
         }
 
@@ -623,6 +674,16 @@ namespace CallLogGIISDMDK.ViewModels
             {
                 _participantRoles = value;
                 OnPropertyChanged("ParticipantRoles");
+            }
+        }
+
+        public List<string> Statuses
+        {
+            get { return _statuses; }
+            set
+            {
+                _statuses = value;
+                OnPropertyChanged("Statuses");
             }
         }
 

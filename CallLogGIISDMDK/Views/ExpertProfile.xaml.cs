@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CallLogGIISDMDK.WorkWithFiles;
 
 namespace CallLogGIISDMDK.Views
 {
@@ -20,14 +21,19 @@ namespace CallLogGIISDMDK.Views
     /// </summary>
     public partial class ExpertProfile : Page
     {
+        
         public ExpertProfile()
         {
             InitializeComponent();
+            
+        
+        }
 
-            UserName.Text = StaticData.User;
-            UserStatus.Text = StaticData.User;
+        private void FileReader_onReadingComplete()
+        {
+            UserStatus.Text = StaticData.UserStatus;
             UserLvl.Text = StaticData.UserLvl.ToString();
-            CountCompleteAppeal.Text = StaticData.UserLvl.ToString();
+            CountCompleteAppeal.Text = StaticData.UserTopLvl.ToString();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -40,10 +46,6 @@ namespace CallLogGIISDMDK.Views
         {
             this.NavigationService.GoBack();
         }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            UserStatus.Text = StaticData.UserStatus;
-        }
+       
     }
 }

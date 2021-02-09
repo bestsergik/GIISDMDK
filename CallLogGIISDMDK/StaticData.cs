@@ -9,13 +9,22 @@ namespace CallLogGIISDMDK
    static class StaticData
     {
        static private string _user;
-       static private string _userStatus;
+       static private string _userStatus = "малыш";
        static private int _userLvl = 0;
+       static private int _userTopLvl = 0;
+       static private bool _isLoggin = false;
+   
 
         static public string User
         {
             get { return _user; }
             set { _user = value; }
+        }
+
+        static public bool IsLoggin
+        {
+            get { return _isLoggin; }
+            set { _isLoggin = value; }
         }
 
         static public string UserStatus
@@ -32,20 +41,37 @@ namespace CallLogGIISDMDK
             }
         }
 
+        static public int UserTopLvl
+        {
+            get { return _userTopLvl; }
+            set
+            {
+                _userTopLvl = value;
+                DefineUserStatus();
+            }
+        }
+
         private static void DefineUserStatus()
         {
             if (UserLvl < 10)
-                _userStatus = "малыш";
+                UserStatus = "малыш";
             else if (UserLvl > 9 && UserLvl < 20)
-                _userStatus = "Новичёк";
+                UserStatus = "Новичёк";
             else if (UserLvl > 19 && UserLvl < 40)
-                _userStatus = "Бывалый";
+                UserStatus = "Бывалый";
             else if (UserLvl > 39 && UserLvl < 100)
-                _userStatus = "Опытный";
+                UserStatus = "Опытный";
             else if (UserLvl > 99 && UserLvl < 300)
-                _userStatus = "Эксперт";
-            else if (UserLvl > 300 )
-                _userStatus = "Советник Бога";
+                UserStatus = "Эксперт";
+            else if (UserLvl > 300)
+                UserStatus = "Советник Бога";
+        }
+
+
+        static public void ClearData()
+        {
+            UserLvl = 0;
+            UserTopLvl = 0;
         }
     }
 }

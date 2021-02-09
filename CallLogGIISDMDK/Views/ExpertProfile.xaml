@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:CallLogGIISDMDK.Views"
       DataContext="{StaticResource AuthorizationVM}"
       mc:Ignorable="d" 
-      Title="ExpertProfile" Loaded="Page_Loaded">
+      Title="ExpertProfile" >
 
     <Grid Background="White">
 
@@ -39,16 +39,16 @@
                 <ColumnDefinition Width="2.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Style="{StaticResource TitlesViewAppeal}" >Специалист</TextBlock>
-            <TextBlock x:Name="UserName" Grid.Column="1" Style="{StaticResource DetailsViewAppeal}"></TextBlock>
+            <TextBlock x:Name="UserName" Grid.Column="1" Style="{StaticResource DetailsViewAppeal}" Text="{Binding ExpertName}"></TextBlock>
 
             <TextBlock Grid.Row="1" Style="{StaticResource TitlesViewAppeal}" >Текуший статус специалиста</TextBlock>
-            <TextBlock Grid.Row="1" x:Name="UserStatus" Grid.Column="1" Style="{StaticResource DetailsViewAppeal}" ></TextBlock>
+            <TextBlock Grid.Row="1" x:Name="UserStatus" Grid.Column="1" Style="{StaticResource DetailsViewAppeal}" Text="{Binding StatusExpert}" ></TextBlock>
 
             <TextBlock Grid.Row="2" Style="{StaticResource TitlesViewAppeal}" >Количество принятых заявок</TextBlock>
-            <TextBlock Grid.Row="2" x:Name="UserLvl" Grid.Column="1" Style="{StaticResource DetailsViewAppeal}" ></TextBlock>
+            <TextBlock Grid.Row="2" x:Name="UserLvl" Grid.Column="1" Style="{StaticResource DetailsViewAppeal}" Text="{Binding LvlExpert}"></TextBlock>
 
             <TextBlock Grid.Row="3" Style="{StaticResource TitlesViewAppeal}" >Количество закрытых заявок</TextBlock>
-            <TextBlock Grid.Row="3" x:Name="CountCompleteAppeal" Grid.Column="1" Style="{StaticResource DetailsViewAppeal}" ></TextBlock>
+            <TextBlock Grid.Row="3" x:Name="CountCompleteAppeal" Grid.Column="1" Style="{StaticResource DetailsViewAppeal}" Text="{Binding CompleteAppealsExpert}"></TextBlock>
 
         </Grid>
         <Grid Grid.Row="2" Grid.ColumnSpan="2">

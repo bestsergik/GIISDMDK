@@ -5,10 +5,12 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using CallLogGIISDMDK.Models;
+using CallLogGIISDMDK.WorkWithFiles;
 
 namespace CallLogGIISDMDK.ViewModels
 {
@@ -18,10 +20,12 @@ namespace CallLogGIISDMDK.ViewModels
     {
 
         Compress compress = new Compress();
+        FileReader fileReader = new FileReader();
 
         private RelayCommand loginCommand;
         private RelayCommand registrationCommand;
         private RelayCommand _logOutCommand;
+        private RelayCommand _userProfileCommand;
 
         Authorization_model authorizationModel = new Authorization_model();
 
@@ -36,6 +40,11 @@ namespace CallLogGIISDMDK.ViewModels
 
         private string promptsEntry;
         private string promptsEntryPassword;
+
+        private string _expertName;
+        private string _lvlExpert;
+        private string _completeAppealsExpert;
+        private string _statusExpert;
 
         private string promptsRegistration;
         private string promptsPasswordRegistration;
@@ -52,7 +61,16 @@ namespace CallLogGIISDMDK.ViewModels
 
         public Authorization_VM()
         {
+            fileReader.onReadingComplete += FileReader_onReadingComplete;
             CheckFileData();
+        }
+
+        private void FileReader_onReadingComplete()
+        {
+            ExpertName = StaticData.User;
+            LvlExpert = StaticData.UserLvl.ToString();
+            CompleteAppealsExpert = StaticData.UserTopLvl.ToString();
+            StatusExpert = StaticData.UserStatus;
         }
 
 
@@ -70,6 +88,22 @@ namespace CallLogGIISDMDK.ViewModels
                 return loginCommand;
             }
         }
+
+        public RelayCommand UserProfileCommand
+        {
+            get
+            {
+                if (_userProfileCommand == null)
+                {
+                    _userProfileCommand = new RelayCommand(
+
+                        p => this.FillUserProfile());
+                }
+                return _userProfileCommand;
+            }
+        }
+
+       
 
         public RelayCommand LogOutCommand
         {
@@ -108,7 +142,18 @@ namespace CallLogGIISDMDK.ViewModels
         #endregion
 
         #region Methods
-      
+
+        private void FillUserProfile()
+        {
+            Thread myThread = new Thread(new ThreadStart(FillProfile));
+            myThread.Start();
+        }
+
+        private void FillProfile()
+        {
+             fileReader.GetAppeals();
+             fileReader.ReadingComplete();
+        }
 
         private void CheckRegistrationUser()
         {
@@ -178,7 +223,7 @@ namespace CallLogGIISDMDK.ViewModels
 
             if(File.Exists(ZipPathToLogins))
             {
-                compress.DecompressUserLogins();
+                compress.DecompressData(ZipPathToLogins);
             }
 
             if (File.Exists(PathToLogins))
@@ -295,6 +340,47 @@ namespace CallLogGIISDMDK.ViewModels
                 CompareLoginPassword();
             }
         }
+
+        public string StatusExpert
+        {
+            get { return _statusExpert; }
+            set
+            {
+                _statusExpert = value;
+                OnPropertyChanged("StatusExpert");
+            }
+        }
+
+        public string LvlExpert
+        {
+            get { return _lvlExpert; }
+            set
+            {
+                _lvlExpert = value;
+                OnPropertyChanged("LvlExpert");
+            }
+        }
+
+        public string CompleteAppealsExpert
+        {
+            get { return _completeAppealsExpert; }
+            set
+            {
+                _completeAppealsExpert = value;
+                OnPropertyChanged("CompleteAppealsExpert");
+            }
+        }
+
+        public string ExpertName
+        {
+            get { return _expertName; }
+            set
+            {
+                _expertName = value;
+                OnPropertyChanged("ExpertName");
+            }
+        }
+
 
         public string PromptsEntry
         {

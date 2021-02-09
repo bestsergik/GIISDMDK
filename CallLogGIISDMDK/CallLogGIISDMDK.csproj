@@ -96,6 +96,9 @@
     <Compile Include="Views\BaseProblems\Instructions\SetupRootSertificate.xaml.cs">
       <DependentUpon>SetupRootSertificate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ClientCard.xaml.cs">
+      <DependentUpon>ClientCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ExpertProfile.xaml.cs">
       <DependentUpon>ExpertProfile.xaml</DependentUpon>
     </Compile>
@@ -123,7 +126,8 @@
     <Compile Include="Views\ViewAppeals_page.xaml.cs">
       <DependentUpon>ViewAppeals_page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XmlEditing.cs" />
+    <Compile Include="WorkWithFiles\FileReader.cs" />
+    <Compile Include="WorkWithFiles\FileWriter.cs" />
     <Page Include="MainDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -165,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BaseProblems\Instructions\SetupRootSertificate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -318,6 +326,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Home2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="iconfinder_Icons-09_7120956.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="home3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="home4.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

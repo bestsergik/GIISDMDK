@@ -67,7 +67,7 @@ namespace CallLogGIISDMDK.Models
         internal List<string[]> FillCallLog()
         {
             List<string[]> appeals = new List<string[]>();
-            compress.DecompressCallLog();
+            compress.DecompressData(_pathToZipAppeals);
             appeals = fileWorker.GetAppeals();
             File.Delete(_pathToAppeals);
             return appeals;
@@ -103,9 +103,18 @@ namespace CallLogGIISDMDK.Models
             //return appeals;
         }
 
-        internal string[] CheckLeghtFields(string fullName, string inputPhone, string email, string company, string participantRole, bool isReggular)
+        internal List<string> GetStatusesAppeal()
         {
-            string[] prompts = new string[5] { "", "", "", "", ""};
+            List<string> statuses = new List<string>();
+            statuses.Add("Закрыто");
+            statuses.Add("Открыто");
+            statuses.Add("Срочно");
+            return statuses;
+        }
+
+        internal string[] CheckLeghtFields(string fullName, string inputPhone, string email, string company, string participantRole, string status, bool isReggular)
+        {
+            string[] prompts = new string[6] { "", "", "", "", "", ""};
             if (fullName == null || fullName.Length < 1)
             {
                 prompts[0]  = "Обязательное поле";
@@ -114,8 +123,6 @@ namespace CallLogGIISDMDK.Models
             if (inputPhone == null || inputPhone.Length < 1)
             {
                 prompts[1] = "Обязательное поле";
-                
-              
             }
             if (inputPhone != null && inputPhone.Length > 0 && inputPhone.Length < 15)
                 prompts[1] = "Некорректный номер телефона";
@@ -143,6 +150,11 @@ namespace CallLogGIISDMDK.Models
                 prompts[4] = participantRole = "Обязательное поле";
             }
 
+            if (status == null || status.Length < 1)
+            {
+                prompts[5] = status = "Обязательное поле";
+            }
+
             for (int i = 0; i < prompts.Length; i++)
             {
                 if (prompts[i] != "" )
@@ -154,6 +166,8 @@ namespace CallLogGIISDMDK.Models
             }
             return prompts;
         }
+
+        
 
         internal string NearMinute()
         {
@@ -181,7 +195,7 @@ namespace CallLogGIISDMDK.Models
         {
             if(File.Exists(_pathToZipAppeals))
             {
-                compress.DecompressCallLog();
+                compress.DecompressData(_pathToZipAppeals);
             }
             else 
             {
@@ -208,7 +222,7 @@ namespace CallLogGIISDMDK.Models
             
             fileWorker.GetUserStatus();
             File.Delete(_pathToZipAppeals);
-            compress.CompressCallLog();
+            compress.CompressData(_pathToAppeals, _pathToZipAppeals);
             File.Delete(_pathToAppeals);
         }
 
