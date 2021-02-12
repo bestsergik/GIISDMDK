@@ -31,6 +31,7 @@ namespace CallLogGIISDMDK.ViewModels
 
         private string PathToLogins = @"logins.txt";
         private string ZipPathToLogins = @"UserLogins.zip";
+        private string ZipPathToAppeal = @"Appeals.zip";
 
         private string loginEntry = "";
         private string loginRegistration = "";
@@ -41,10 +42,10 @@ namespace CallLogGIISDMDK.ViewModels
         private string promptsEntry;
         private string promptsEntryPassword;
 
-        private string _expertName;
-        private string _lvlExpert;
-        private string _completeAppealsExpert;
-        private string _statusExpert;
+        private string _expertName = StaticData.User;
+        private string _lvlExpert = StaticData.UserLvl.ToString();
+        private string _completeAppealsExpert = StaticData.UserTopLvl.ToString();
+        private string _statusExpert = StaticData.UserStatus;
 
         private string promptsRegistration;
         private string promptsPasswordRegistration;
@@ -145,14 +146,23 @@ namespace CallLogGIISDMDK.ViewModels
 
         private void FillUserProfile()
         {
+            
             Thread myThread = new Thread(new ThreadStart(FillProfile));
             myThread.Start();
         }
 
         private void FillProfile()
         {
-             fileReader.GetAppeals();
-             fileReader.ReadingComplete();
+            if (File.Exists(ZipPathToAppeal))
+            {
+                fileReader.GetAppeals();
+                fileReader.ReadingComplete();
+            }
+            else
+            {
+                fileReader.ReadingComplete();
+            }
+             
         }
 
         private void CheckRegistrationUser()

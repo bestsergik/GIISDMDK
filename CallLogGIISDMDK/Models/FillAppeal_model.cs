@@ -24,8 +24,6 @@ namespace CallLogGIISDMDK.Models
         FileWorker fileWorker = new FileWorker();
 
 
-
-
         internal List<string> GetMinutesAppeal()
         {
             int stepMinutes = 0;
@@ -51,7 +49,6 @@ namespace CallLogGIISDMDK.Models
                 hours[i] += i;
                 if(i< 10) hoursAppeal.Add("0" + hours[i].ToString());
                 else hoursAppeal.Add(hours[i].ToString());
-
             }
             return hoursAppeal;
         }
@@ -103,18 +100,43 @@ namespace CallLogGIISDMDK.Models
             //return appeals;
         }
 
+        internal List<string> GetTypesAppeal()
+        {
+            List<string> types = new List<string>();
+            types.Add("Затруднения при входе");
+            types.Add("Затруднения при работе");
+            return types;
+        }
+
+        internal List<List<string>> SearchInsertAppeal(string insertAppeal, List<List<string>> appeals)
+        {
+            List<List<string>> suitableAppeals = new List<List<string>>();
+            foreach (var appeal in appeals)
+            {
+                for (int fieldAppeal = 0; fieldAppeal < appeal.Count; fieldAppeal++)
+                {
+                    if (appeal[fieldAppeal].ContainsWithoutRegistr(insertAppeal, StringComparison.OrdinalIgnoreCase))
+                    {
+                        suitableAppeals.Add(appeal);
+                        break;
+                    }
+                }
+            }
+            return suitableAppeals;
+        }
+
         internal List<string> GetStatusesAppeal()
         {
             List<string> statuses = new List<string>();
             statuses.Add("Закрыто");
             statuses.Add("Открыто");
-            statuses.Add("Срочно");
+            statuses.Add("Срочное");
             return statuses;
         }
 
-        internal string[] CheckLeghtFields(string fullName, string inputPhone, string email, string company, string participantRole, string status, bool isReggular)
+        internal string[] CheckLeghtFields(string fullName, string inputPhone, string email, string company, string participantRole, string status, bool isReggular, string inn, string sity, string ogrn)
         {
-            string[] prompts = new string[6] { "", "", "", "", "", ""};
+            string[] prompts = new string[10] { "", "", "", "", "", "", "", "", "", "" };
             if (fullName == null || fullName.Length < 1)
             {
                 prompts[0]  = "Обязательное поле";
@@ -126,7 +148,7 @@ namespace CallLogGIISDMDK.Models
             }
             if (inputPhone != null && inputPhone.Length > 0 && inputPhone.Length < 15)
                 prompts[1] = "Некорректный номер телефона";
-            if (isReggular && inputPhone.Length > 0) prompts[1] = "";
+            if (isReggular && inputPhone != null && inputPhone.Length > 0) prompts[1] = "";
 
             if (email != null && email.Length > 0)
             {
@@ -144,7 +166,10 @@ namespace CallLogGIISDMDK.Models
                     prompts[2] = "Некорректный email";
                 }
             }
-         
+            if (company == null || company.Length < 1)
+            {
+                prompts[3] = "Обязательное поле";
+            }
             if (participantRole == null || participantRole.Length < 1)
             {
                 prompts[4] = participantRole = "Обязательное поле";
@@ -154,7 +179,19 @@ namespace CallLogGIISDMDK.Models
             {
                 prompts[5] = status = "Обязательное поле";
             }
-
+            if (inn == null || inn.Length < 1)
+            {
+                prompts[6] = "Обязательное поле";
+            }
+            if (inn != null && inn.Length > 0 && inn.Length < 12)
+                prompts[6] = "Некорректный ИНН";
+            if (sity == null || sity.Length < 1)
+            {
+                prompts[7] = sity = "Обязательное поле";
+            }
+            if (ogrn != null && ogrn.Length > 0 && ogrn.Length < 15)
+                prompts[8] = "Некорректный ОГРН";
+          
             for (int i = 0; i < prompts.Length; i++)
             {
                 if (prompts[i] != "" )
@@ -255,7 +292,7 @@ namespace CallLogGIISDMDK.Models
                 }
             }
           
-            return userInput.Trim(Convert.ToChar(lastChar));
+            return userInput.Substring(0, userInput.Length - 1);
         }
 
         internal List<DateTime> GetDates(int year, int month)
@@ -292,6 +329,26 @@ namespace CallLogGIISDMDK.Models
             if (property != null && property.Length > 0)
                 return prompt = "";
             else return prompt;
+        }
+
+        internal string CheckInputInn(string inn)
+        {
+            if (inn.Length < 13)
+            {
+                return inn;
+            }
+
+            return inn.Substring(0, inn.Length - 1);
+        }
+
+        internal string CheckInputOgrn(string ogrn)
+        {
+           
+            if (ogrn.Length < 16)
+            {
+                return ogrn;
+            }
+            return ogrn.Substring(0, ogrn.Length - 1);
         }
     }
 }

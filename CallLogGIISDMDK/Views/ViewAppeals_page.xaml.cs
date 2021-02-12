@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,10 +20,12 @@ using CallLogGIISDMDK.ViewModels;
 
 namespace CallLogGIISDMDK.Views
 {
+
+ 
     /// <summary>
     /// Логика взаимодействия для ViewAppeals_page.xaml
     /// </summary>
-    public partial class ViewAppeals_page : Page
+    public partial class ViewAppeals_page : Page 
     {
         public ViewAppeals_page()
         {
@@ -31,6 +37,14 @@ namespace CallLogGIISDMDK.Views
             this.NavigationService.GoBack();
         }
 
-       
+        private void Status_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(Status.Text == "Открыто")
+                Status.Foreground = new SolidColorBrush(Colors.Orange);
+            else if(Status.Text == "Открыто")
+                Status.Foreground = new SolidColorBrush(Colors.Red);
+
+
+        }
     }
 }

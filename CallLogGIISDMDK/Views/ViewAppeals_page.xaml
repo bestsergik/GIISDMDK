@@ -4,37 +4,98 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CallLogGIISDMDK.Views"
+      xmlns:main="clr-namespace:CallLogGIISDMDK"
       DataContext="{StaticResource ViewAppealsVM}"
       mc:Ignorable="d" 
       Title="ViewAppeals_page">
 
     <Page.Resources>
+        <ItemsPanelTemplate x:Key="ItemsTemplate">
+            <VirtualizingStackPanel/>
+        </ItemsPanelTemplate>
+
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="14" />
         </Style>
+        <Style x:Key="AutoCompleteStyle"
+            TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Foreground" Value="Orange"></Setter>
+        </Style>
+      
+
     </Page.Resources>
+   
+
     <Grid Background="White">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="90"></RowDefinition>
+            <RowDefinition Height="60" ></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="80"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2.3*" />
         </Grid.ColumnDefinitions>
 
+        <Grid Margin="20,0,20,0" Grid.Row="1" Grid.ColumnSpan="2">
+            <Border BorderBrush="Black"
+            BorderThickness="1"
+            VerticalAlignment="Center"
+            CornerRadius="5">
+                <TextBox  IsTabStop="False"  Text="{Binding InsertAppeal, UpdateSourceTrigger=PropertyChanged}" Height="40" VerticalAlignment="Center">
+                <TextBox.Style>
+                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                        <Setter Property="FontSize" Value="20"></Setter>
+                       
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+
+                                    <Label Content="Поиск" FontSize="16" Foreground="Gray" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+             
+            </TextBox>
+            </Border>
+        </Grid>
+        
         <TextBlock Margin="40,30,0,0" Grid.ColumnSpan="4"  Style="{StaticResource MainTitles}">Список обращений</TextBlock>
 
-        <Button Background="Gray"  Grid.Row="2" Grid.Column="1" Command="{Binding AddAppealCommand}" IsEnabled="False" Style="{StaticResource MainMenuButton}"  >Править обращение</Button>
-        <Button  Grid.Row="2" Grid.Column="0" Style="{StaticResource MainMenuButton}"  x:Name="btnBack"   Click="btnBack_Click" >Назад</Button>
-        <Label Grid.Row="1" Content="Обращения отсутствуют"></Label>
+             
 
-        <ListBox   Grid.Row="1" Grid.Column="0" Visibility="{Binding IsVisibleData}" ItemsSource="{Binding Appeals}"
+
+
+
+
+
+
+
+
+        <ListBox  x:Name="BrieflyAppeal" Grid.Row="2" Grid.Column="0" Visibility="{Binding IsVisibleData}" ItemsSource="{Binding Appeals}"
                  SelectedItem="{Binding SelectedAppeal}">
 
             <ListBox.ItemTemplate>
@@ -47,18 +108,26 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="2" Grid.Column="1">
             <ScrollViewer >
                 <Grid >
                     <StackPanel  DataContext="{Binding SelectedAppeal}">
+                        <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Организация" />
+                        <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Company, UpdateSourceTrigger=PropertyChanged}" />
+                        
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="ФИО" />
                         <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" />
+                       
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Телефон" />
                         <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding InputPhone, UpdateSourceTrigger=PropertyChanged}" />
+                       
+                        <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Статус обращения" />
+                        <TextBlock x:Name="Status" Style="{StaticResource DetailsViewAppeal}" Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" Loaded="Status_Loaded" />
+
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Дата обращения" />
                         <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding CurrentDay, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Время обращения" />
 
+                        <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Время обращения" />
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -71,26 +140,39 @@
                             <TextBlock Margin="0,5,0,0"  Grid.Column="1" Style="{StaticResource DetailsViewAppeal}" Text=":" />
                             <TextBlock Margin="0,5,0,0"  Style="{StaticResource DetailsViewAppeal}" Grid.Column="2" Text="{Binding CurrentMinute, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
-
+                      
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Обращение" />
                         <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Appeal, UpdateSourceTrigger=PropertyChanged}" />
 
-                        <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Статус обращения" />
-                        <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="ИНН" />
+                        <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Inn, UpdateSourceTrigger=PropertyChanged}" />
+                      
+                        <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Город" />
+                        <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Sity, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Email" />
+                        <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
 
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Роль участника" />
                         <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding ParticipantRole, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Email" />
-                        <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Организация" />
-                        <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Company, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="ОГРН" />
+                        <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding ogrn, UpdateSourceTrigger=PropertyChanged}" />
+
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Дополнительаня информация" />
                         <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding AdditionalInfo, UpdateSourceTrigger=PropertyChanged}" />
+                      
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Специалист" />
                         <TextBlock Foreground="SaddleBrown" FontStyle="Italic"  Style="{StaticResource DetailsViewAppeal}" Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
         </Border>
+
+
+        <Button Background="Gray"  Grid.Row="3" Grid.Column="1" Command="{Binding AddAppealCommand}" IsEnabled="False" Style="{StaticResource MainMenuButton}"  >Править обращение</Button>
+        <Button  Grid.Row="3" Grid.Column="0" Style="{StaticResource MainMenuButton}"  x:Name="btnBack"   Click="btnBack_Click" >Назад</Button>
+
+
     </Grid>
 </Page>

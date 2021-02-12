@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 namespace CallLogGIISDMDK.Views.FillAppeal
 {
+
     /// <summary>
     /// Логика взаимодействия для FillAppeal_page1.xaml
     /// </summary>
@@ -40,6 +41,15 @@ namespace CallLogGIISDMDK.Views.FillAppeal
         {
             txboxPhoneNumber.Focus();
             txboxPhoneNumber.CaretIndex = txboxPhoneNumber.Text.Length;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(StaticData.IsNewAppeal)
+            {
+                Role.SelectedIndex = -1;
+                Status.SelectedIndex = -1;
+            }
         }
     }
 }

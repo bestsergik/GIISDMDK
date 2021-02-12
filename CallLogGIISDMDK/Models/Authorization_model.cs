@@ -16,8 +16,8 @@ namespace CallLogGIISDMDK.Models
 
         private string PathToLogins = @"logins.txt";
         private string _zipPathToLogins = @"UserLogins.zip";
-        private string _pathToAppeals = @"callLog.txt";
-        private string _pathToZipAppeals = @"CallLog.zip";
+        //private string _pathToAppeals = @"callLog.txt";
+        //private string _pathToZipAppeals = @"CallLog.zip";
         FileWorker fileWorker = new FileWorker();
 
 
@@ -85,6 +85,7 @@ namespace CallLogGIISDMDK.Models
             using (StreamWriter str = new StreamWriter(PathToLogins, true, Encoding.Unicode))
             {
                 str.WriteLine($"{loginRegistration}-{passwordRegistration}");
+                StaticData.User = loginRegistration;
             }
             compress.CompressData(PathToLogins, _zipPathToLogins);
             File.Delete(PathToLogins);

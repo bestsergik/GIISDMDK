@@ -13,7 +13,10 @@ namespace CallLogGIISDMDK
        static private int _userLvl = 0;
        static private int _userTopLvl = 0;
        static private bool _isLoggin = false;
-   
+       static private bool _isNewAppeal = false;
+
+
+
 
         static public string User
         {
@@ -50,6 +53,23 @@ namespace CallLogGIISDMDK
                 DefineUserStatus();
             }
         }
+
+
+        static public bool IsNewAppeal
+        {
+            get { return _isNewAppeal; }
+            set
+            {
+                _isNewAppeal = value;
+                DefineUserStatus();
+            }
+        }
+
+        public static bool ContainsWithoutRegistr(this string source, string toCheck, StringComparison comp)
+        {
+            return source != null && toCheck != null && source.IndexOf(toCheck, comp) >= 0;
+        }
+
 
         private static void DefineUserStatus()
         {

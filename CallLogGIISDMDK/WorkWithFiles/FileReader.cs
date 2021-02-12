@@ -10,7 +10,6 @@ namespace CallLogGIISDMDK.WorkWithFiles
 {
     class FileReader
     {
-        public event EventHandler ThresholdReached;
         Compress fileArchiving = new Compress();
         string pathToZipAppeals = @"Appeals.zip";
         string pathToAppeals = @"appeals.xml";
@@ -29,33 +28,40 @@ namespace CallLogGIISDMDK.WorkWithFiles
                 appeal = new List<string>();
 
                 XElement fullNameElement = currentAppeal.Element("fullName");
+                XElement companyElement = currentAppeal.Element("company");
                 XElement phoneNumberElement = currentAppeal.Element("phoneNumber");
+                XElement innElement = currentAppeal.Element("inn");
+                XElement sityElement = currentAppeal.Element("sity");
+                XElement roleElement = currentAppeal.Element("role");
+                XElement statusElement = currentAppeal.Element("status");
+                XElement emailElement = currentAppeal.Element("email");
+                XElement ogrnElement = currentAppeal.Element("ogrn");
                 XElement dateElement = currentAppeal.Element("date");
                 XElement currentHourElement = currentAppeal.Element("currentHour");
                 XElement currentMinuteElement = currentAppeal.Element("currentMinute");
-                XElement statusElement = currentAppeal.Element("status");
-                XElement roleElement = currentAppeal.Element("role");
-                XElement emailElement = currentAppeal.Element("email");
-                XElement companyElement = currentAppeal.Element("company");
                 XElement appealElement = currentAppeal.Element("appeal");
                 XElement additionalInfoElement = currentAppeal.Element("additionalInfo");
                 XElement userElement = currentAppeal.Element("user");
                
                 appeal.Add(fullNameElement.Value);
+                appeal.Add(companyElement.Value);
                 appeal.Add(phoneNumberElement.Value);
+                appeal.Add(innElement.Value);
+                appeal.Add(sityElement.Value);
+                appeal.Add(roleElement.Value);
+                appeal.Add(statusElement.Value);
+                appeal.Add(emailElement.Value);
+                appeal.Add(ogrnElement.Value);
                 appeal.Add(dateElement.Value);
                 appeal.Add(currentHourElement.Value);
                 appeal.Add(currentMinuteElement.Value);
-                appeal.Add(statusElement.Value);
-                appeal.Add(roleElement.Value);
-                appeal.Add(emailElement.Value);
-                appeal.Add(companyElement.Value);
                 appeal.Add(appealElement.Value);
                 appeal.Add(additionalInfoElement.Value);
                 appeal.Add(userElement.Value);
                 appeals.Add(appeal);
                 FillDataUser(statusElement.Value, userElement.Value);
             }
+            
             File.Delete(pathToAppeals);
             appeals.Reverse();
             return appeals;
