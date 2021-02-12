@@ -14,15 +14,21 @@ using CallLogGIISDMDK.WorkWithFiles;
 
 namespace CallLogGIISDMDK.ViewModels
 {
-    class ViewAppeals_VM
+    class ViewAppeals_VM : INotifyPropertyChanged
     {
+
+        
+        
+
         private string _pathToZipAppeals = @"Appeals.zip";
-        private string _pathToAppeals = @"appeals.xml";
         private FillAppeal_VM _selectedAppeal;
         FillAppeal_model _fillAppeal_Model;
         private RelayCommand _updatecCallLogCommand;
         FileReader fileReader = new FileReader();
-        List<List<string>> appeals = new List<List<string>>();
+        List<List<string>> suitableAppeals;
+        List<List<string>> _appeals = new List<List<string>>();
+        List<string> _appeal = new List<string>();
+        string _insertAppeal = String.Empty;
 
         public ObservableCollection<FillAppeal_VM> Appeals { get; set; }
         public FillAppeal_VM SelectedAppeal
@@ -44,13 +50,7 @@ namespace CallLogGIISDMDK.ViewModels
 
         private void FileReader_onWrite()
         {
-            foreach (var appeal in appeals)
-            {
-                App.Current.Dispatcher.BeginInvoke((Action)delegate // <--- HERE
-                {
-                    Appeals.Add(new FillAppeal_VM { FullName = appeal[0], InputPhone = appeal[1], CurrentDay = appeal[2], CurrentHour = Convert.ToInt32(appeal[3]), CurrentMinute = appeal[4], Status = appeal[5], ParticipantRole = appeal[6], Email = appeal[7], Company = appeal[8], Appeal = appeal[9], AdditionalInfo = appeal[10], UserName = appeal[11] });
-                });
-            }
+            ShowAppeal(_appeals);
         }
 
         public RelayCommand UpdatecCallLogCommand
@@ -78,11 +78,54 @@ namespace CallLogGIISDMDK.ViewModels
             }
         }
 
+
+        public List<string> Appeal
+        {
+            get { return _appeal; }
+            set
+            {
+                _appeal = value;
+                OnPropertyChanged("Appeal");
+            }
+        }
+
+        public string InsertAppeal
+        {
+            get { return _insertAppeal; }
+            set
+            {
+                _insertAppeal = value;
+                OnPropertyChanged("InsertAppeal");
+                SearchInsertAppeal(InsertAppeal);
+            }
+        }
+
+        void ShowAppeal(List<List<string>> appeals)
+        {
+            foreach (var appeal in appeals)
+            {
+                App.Current.Dispatcher.BeginInvoke((Action)delegate // <--- HERE
+                {
+                    Appeals.Add(new FillAppeal_VM { FullName = appeal[0], Company = appeal[1], InputPhone = appeal[2], Inn = appeal[3], Sity = appeal[4], ParticipantRole = appeal[5], Status = appeal[6], Email = appeal[7],  Ogrn = appeal[8], CurrentDay = appeal[9],  CurrentHour = Convert.ToInt32(appeal[10]), CurrentMinute = appeal[11], Appeal = appeal[12] , AdditionalInfo = appeal[13], UserName = appeal[14] });
+                });
+            }
+        }
+
+        private void SearchInsertAppeal(string insertAppeal)
+        {
+            suitableAppeals = new List<List<string>>();
+            Appeals.Clear();
+            suitableAppeals =  _fillAppeal_Model.SearchInsertAppeal(insertAppeal, _appeals);
+            ShowAppeal(suitableAppeals);
+        }
+
         private void FillAppeal()
         {
-             appeals = fileReader.GetAppeals();
-             fileReader.ReadingComplete();
+            _appeals = fileReader.GetAppeals();
+            fileReader.ReadingComplete();
         }
+
+     
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
