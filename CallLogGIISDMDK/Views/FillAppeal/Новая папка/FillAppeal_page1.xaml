@@ -18,7 +18,7 @@
     <Grid Background="White" >
         <Grid.RowDefinitions>
             <RowDefinition Height="90"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="1"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition ></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
@@ -109,17 +109,6 @@
         <StackPanel Grid.Column="5" Grid.Row="6" Grid.RowSpan="2"   Orientation="Horizontal">
             <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
         </StackPanel>
-
-        <ComboBox x:Name="Searchable"  Grid.Row="1" Grid.ColumnSpan="5" Style="{StaticResource FillingAppeal}"
-                    SelectionChanged="Searchable_SelectionChanged"
-              IsTextSearchEnabled="False"
-              PreviewTextInput="PreviewTextInput_EnhanceComboSearch"
-              PreviewKeyUp="PreviewKeyUp_EnhanceComboSearch"
-              DataObject.Pasting="Pasting_EnhanceComboSearch">
-          
-            
-        </ComboBox>
-
 
 
         <Button  Grid.Row="8" Grid.Column="4" Name="NextStep" IsCancel="{Binding IsFirstStepFillAppeal}" Command="{Binding CheckFirstStepFillAppealCommand}" Style="{StaticResource MainMenuButton}"  Click="Button_Click">Далее</Button>
@@ -215,14 +204,6 @@
                 <RowDefinition ></RowDefinition>
             </Grid.RowDefinitions>
             <TextBox x:Name="Company" IsEnabled="{Binding IsEnableCompanyForm}"  Text="{Binding Company, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}" ></TextBox>
-
-         
-
-
-
-
-
-
             <Label Grid.Row="{Binding PositionPromptCompany}" Style="{StaticResource promptsFillAppeal}" Content="{Binding PromptsCompany}" ></Label>
             <CheckBox Style="{StaticResource StepsFillAppeal}" Grid.Row="{Binding PositionCheckCompany}" IsChecked="{Binding IsIP}">ИП</CheckBox>
 
@@ -241,7 +222,7 @@
                 <RowDefinition Height="60"></RowDefinition>
                 <RowDefinition ></RowDefinition>
             </Grid.RowDefinitions>
-            <ComboBox Name="Role"  VerticalAlignment="top" Style="{StaticResource FillingAppeal}"   ItemsSource="{Binding ParticipantRoles}"  SelectedItem="{Binding ParticipantRole}"   Height="50"  SelectedIndex="20"    >
+            <ComboBox Name="Role"  VerticalAlignment="top"    ItemsSource="{Binding ParticipantRoles}"  SelectedItem="{Binding ParticipantRole}"   Height="50"  SelectedIndex="20"    >
             </ComboBox>
             <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsRole}" ></Label>
         </Grid>

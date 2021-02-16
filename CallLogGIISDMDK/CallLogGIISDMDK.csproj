@@ -70,6 +70,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Compress.cs" />
+    <Compile Include="Data.cs" />
     <Compile Include="FileWorker.cs" />
     <Compile Include="Models\Authorization_model.cs" />
     <Compile Include="Models\CommonInformation_model.cs" />
@@ -117,6 +118,9 @@
     </Compile>
     <Compile Include="Views\FillAppeal\FillAppeal_page1.xaml.cs">
       <DependentUpon>FillAppeal_page1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FillAppeal\FillAppeal_page1_test.xaml.cs">
+      <DependentUpon>FillAppeal_page1_test.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FillAppeal\FillAppeal_page2.xaml.cs">
       <DependentUpon>FillAppeal_page2.xaml</DependentUpon>
@@ -196,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FillAppeal\FillAppeal_page1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FillAppeal\FillAppeal_page1_test.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -18,7 +18,7 @@ namespace CallLogGIISDMDK.ViewModels
 {
     class FillAppeal_VM : INotifyPropertyChanged
     {
-
+        Data data = new Data();
         FileWriter fileWriter = new FileWriter();
         FileReader fileReader = new FileReader();
         FillAppeal_model fillAppeal_Model = new FillAppeal_model();
@@ -26,13 +26,16 @@ namespace CallLogGIISDMDK.ViewModels
         private RelayCommand _checkFirstStepFillAppealCommand;
         private RelayCommand _checkSecondStepFillAppealCommand;
         private RelayCommand _loadedPageCommand;
-
+        private RelayCommand _selectionChangedCommand;
+        private RelayCommand _updateComnListCommand;
         private List<string> _minuteAppeal;
         private List<string> _hourAppeal;
         private List<string> _participantRoles;
         private List<string> _statuses;
         private List<string> _types;
         private List<string> _daysCurrentMonthStringFormat;
+        private List<string> _displayAppeals = new List<string>();
+
 
         private int _currentHour = DateTime.Now.Hour;
         private int _positionPromptName = 2;
@@ -57,6 +60,7 @@ namespace CallLogGIISDMDK.ViewModels
         private string _ogrn;
         private string _inn;
         private string _sity;
+        private string _selectedSuitableAppeal;
         private string _type;
 
         private string _promptsFullName = "";
@@ -95,6 +99,7 @@ namespace CallLogGIISDMDK.ViewModels
             _participantRoles = fillAppeal_Model.GetParticipantRoles();
             _statuses = fillAppeal_Model.GetStatusesAppeal();
             _types = fillAppeal_Model.GetTypesAppeal();
+            FillDisplayAppeals();
             FillPrompts();
        
         }
@@ -126,6 +131,43 @@ namespace CallLogGIISDMDK.ViewModels
                 }
                 return _addAppealCommand;
             }
+        }
+        public RelayCommand UpdateComnListCommand
+        {
+            get
+            {
+                if (_updateComnListCommand == null)
+                {
+                    _updateComnListCommand = new RelayCommand(
+
+                        p => this.UpdateComnList()); ;
+                }
+                return _updateComnListCommand;
+            }
+        }
+
+        private void UpdateComnList()
+        {
+               DisplayAppeals = fillAppeal_Model.CheckSuitableAppeal(SelectedSuitableAppeal);
+        }
+
+        public RelayCommand SelectionChangedCommand
+        {
+            get
+            {
+                if (_selectionChangedCommand == null)
+                {
+                    _selectionChangedCommand = new RelayCommand(
+
+                        p => this.SelectionChanged()); ;
+                }
+                return _selectionChangedCommand;
+            }
+        }
+
+        private void SelectionChanged()
+        {
+            FillAppeal();
         }
 
         public RelayCommand CheckFirstStepFillAppealCommand
@@ -170,12 +212,21 @@ namespace CallLogGIISDMDK.ViewModels
             }
         }
 
+       void FillDisplayAppeals()
+        {
+            foreach (var appeal in data.GetAppeals())
+            {
+                DisplayAppeals.Add($"{appeal[0]},{appeal[1]},{appeal[2]}");
+            }
+        }
+
         private void NewAppeal()
         {
-          //ParticipantRole = null;
-         
-           if(StaticData.IsNewAppeal)
+          
+            //ParticipantRole = null;
+            if (StaticData.IsNewAppeal)
             {
+                FillDisplayAppeals();
                 InputPhone = "";
                 InputPhone = "";
                 Appeal = "";
@@ -208,6 +259,22 @@ namespace CallLogGIISDMDK.ViewModels
             ShowPrompts();
         }
 
+
+        private void FillAppeal()
+        {
+                //FullName = fillAppeal_Model.suitableAppeal[0];
+                //Company = fillAppeal_Model.suitableAppeal[1];
+                //InputPhone = fillAppeal_Model.suitableAppeal[2];
+                //Inn = fillAppeal_Model.suitableAppeal[3];
+                //Sity = fillAppeal_Model.suitableAppeal[4];
+                //ParticipantRole = fillAppeal_Model.suitableAppeal[5];
+                //Status = fillAppeal_Model.suitableAppeal[6];
+                //Email = fillAppeal_Model.suitableAppeal[7];
+                //Ogrn = fillAppeal_Model.suitableAppeal[8];
+                //CurrentDay = fillAppeal_Model.suitableAppeal[9];
+                //CurrentHour = Convert.ToInt32(fillAppeal_Model.suitableAppeal[10]);
+                //CurrentMinute = fillAppeal_Model.suitableAppeal[11];
+        }
 
         void CheckSecondStepFillAppeal()
         {
@@ -636,6 +703,16 @@ namespace CallLogGIISDMDK.ViewModels
             }
         }
 
+        public string SelectedSuitableAppeal
+        {
+            get { return _selectedSuitableAppeal; }
+            set
+            {
+                _selectedSuitableAppeal = value;
+                OnPropertyChanged("SelectedSuitableAppeal");
+            }
+        }
+
         public string Sity
         {
             get { return _sity; }
@@ -682,9 +759,10 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("Company");
                 CheckFirstStepFillAppeal(null);
                 PromptsCompany = fillAppeal_Model.ClearPrompt(Company, PromptsCompany);
-
             }
         }
+
+      
 
         public string PromptsPhoneNumber
         {
@@ -867,6 +945,16 @@ namespace CallLogGIISDMDK.ViewModels
             {
                 _daysCurrentMonthStringFormat = value;
                 OnPropertyChanged("DaysCurrentMonth");
+            }
+        }
+
+        public List<string> DisplayAppeals
+        {
+            get {  return _displayAppeals; }
+            set
+            {
+                _displayAppeals = value;
+                OnPropertyChanged("DisplayAppeals");
             }
         }
 

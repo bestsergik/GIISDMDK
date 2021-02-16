@@ -6,14 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Xml;
 
 namespace CallLogGIISDMDK.Models
 {
     class FillAppeal_model
     {
+        Data data = new Data();
         List<string>  minutesAppeal = new List<string>();
         List<string> hoursAppeal = new List<string>();
+        List<string> appeals = new List<string>();
+        public List<string> suitableAppeal = new List<string>();
 
         private string _pathToAppeals = @"callLog.txt";
         private string _pathToZipAppeals = @"CallLog.zip";
@@ -22,7 +26,7 @@ namespace CallLogGIISDMDK.Models
 
         Compress compress = new Compress();
         FileWorker fileWorker = new FileWorker();
-
+        List<string> suitableAppeals;
 
         internal List<string> GetMinutesAppeal()
         {
@@ -108,8 +112,34 @@ namespace CallLogGIISDMDK.Models
             return types;
         }
 
+
+        public List<List<string>> GetAppeals()
+        {
+           return data.GetAppeals();
+        }
+
+        public List<string> CheckSuitableAppeal(string userInput)
+        {
+
+            suitableAppeals = new List<string>();
+            foreach (var appeal in data.GetAppeals())
+            {
+                for (int fieldAppeal = 0; fieldAppeal < appeal.Count; fieldAppeal++)
+                {
+                    if (appeal[fieldAppeal].ContainsWithoutRegistr(userInput, StringComparison.OrdinalIgnoreCase))
+                    {
+                        suitableAppeal = appeal;
+                        suitableAppeals.Add($"{appeal[1]}, {appeal[0]}, {appeal[5]}, {appeal[4]}");
+                        break;
+                    }
+                } 
+            }
+            return suitableAppeals;
+        }
+
         internal List<List<string>> SearchInsertAppeal(string insertAppeal, List<List<string>> appeals)
         {
+          
             List<List<string>> suitableAppeals = new List<List<string>>();
             foreach (var appeal in appeals)
             {
@@ -189,9 +219,10 @@ namespace CallLogGIISDMDK.Models
             {
                 prompts[7] = sity = "Обязательное поле";
             }
-            if (ogrn != null && ogrn.Length > 0 && ogrn.Length < 15)
+            if (ogrn != null && ogrn.Length > 0 && ogrn.Length < 13)
                 prompts[8] = "Некорректный ОГРН";
-          
+            if(ogrn != null && ogrn.Length > 0 && ogrn.Length == 14)
+                prompts[8] = "Некорректный ОГРН";
             for (int i = 0; i < prompts.Length; i++)
             {
                 if (prompts[i] != "" )
@@ -291,7 +322,6 @@ namespace CallLogGIISDMDK.Models
                     }
                 }
             }
-          
             return userInput.Substring(0, userInput.Length - 1);
         }
 

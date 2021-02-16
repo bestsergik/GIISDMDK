@@ -339,7 +339,7 @@
     
     <Style TargetType="{x:Type Label}" x:Key="titleBoxesFillAppeal">
         <Setter Property="FontSize" Value="18"/>
-        <Setter Property="Margin" Value="4"/>
+        <Setter Property="Margin" Value="8,8,4,4"/>
         <Setter Property="FontFamily" Value="Franklin Gothic Medium"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -489,6 +489,106 @@
                         <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
                         </Trigger>
                      
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="FillingAppeal" TargetType="ComboBox">
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="IsSynchronizedWithCurrentItem" Value="False"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+
+    
+        <Setter Property="MinWidth" Value="120"/>
+        <Setter Property="Margin" Value="10,0,10,0"/>
+        <Setter Property="FontSize" Value="25"/>
+        <Setter Property="MinHeight" Value="20"/>
+     
+        <Setter Property="FontFamily" Value="Calibri,Arial"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="IsEditable" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBox}">
+                    <Grid>
+                        <ToggleButton 
+                            Name="ToggleButton" 
+                            Template="{StaticResource ComboBoxToggleButton}" 
+                            Grid.Column="2" 
+                            Focusable="false"
+                            IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                            ClickMode="Press">
+                        </ToggleButton>
+                        <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
+                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                            Margin="3,3,23,3"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left" />
+                        <TextBox x:Name="PART_EditableTextBox"
+                            Style="{x:Null}" 
+                            Template="{StaticResource ComboBoxTextBox}" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center" 
+                            Margin="3,3,23,3"
+                            Focusable="True" 
+                          
+                            Visibility="Hidden"
+                            IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                        <Popup 
+                            Name="Popup"
+                            Placement="Bottom"
+                            IsOpen="{TemplateBinding IsDropDownOpen}"
+                            AllowsTransparency="True" 
+                            Focusable="False"
+                            PopupAnimation="Slide">
+
+                            <Grid Name="DropDown"
+                              SnapsToDevicePixels="True"                
+                              MinWidth="{TemplateBinding ActualWidth}"
+                              MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                <Border 
+                                x:Name="DropDownBorder"
+                               
+                                Background="Linen"
+                                BorderThickness="1"
+                                BorderBrush="Gray"/>
+                                <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                </ScrollViewer>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasItems" Value="false">
+                            <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="#888888"/>
+                        </Trigger>
+                        <Trigger Property="IsGrouping" Value="true">
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </Trigger>
+                        <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                            <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="0"/>
+                            <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                        </Trigger>
+                        <Trigger Property="IsEditable"  Value="true">
+                            <Setter Property="IsTabStop" Value="false"/>
+                            <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

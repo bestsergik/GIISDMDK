@@ -85,16 +85,6 @@
         
         <TextBlock Margin="40,30,0,0" Grid.ColumnSpan="4"  Style="{StaticResource MainTitles}">Список обращений</TextBlock>
 
-             
-
-
-
-
-
-
-
-
-
         <ListBox  x:Name="BrieflyAppeal" Grid.Row="2" Grid.Column="0" Visibility="{Binding IsVisibleData}" ItemsSource="{Binding Appeals}"
                  SelectedItem="{Binding SelectedAppeal}">
 

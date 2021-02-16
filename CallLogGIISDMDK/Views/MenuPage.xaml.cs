@@ -37,6 +37,8 @@ namespace CallLogGIISDMDK.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new FillAppeal_page1());
+            //this.NavigationService.Navigate(new FillAppeal_page1_test());
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
