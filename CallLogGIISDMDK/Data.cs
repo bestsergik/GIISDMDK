@@ -15,5 +15,13 @@ namespace CallLogGIISDMDK
         {
             return fileReader.GetAppeals();
         }
+
+
+        public List<List<string>> ConvertToDateTime(List<List<string>> appeals)
+        {
+            List<List<string>> Appeals = new List<List<string>>();
+           
+            return Appeals;
+        }
     }
 }

@@ -12,8 +12,6 @@ using System.Windows;
 using CallLogGIISDMDK.Models;
 using CallLogGIISDMDK.WorkWithFiles;
 
-
-
 namespace CallLogGIISDMDK.ViewModels
 {
     class FillAppeal_VM : INotifyPropertyChanged
@@ -26,8 +24,10 @@ namespace CallLogGIISDMDK.ViewModels
         private RelayCommand _checkFirstStepFillAppealCommand;
         private RelayCommand _checkSecondStepFillAppealCommand;
         private RelayCommand _loadedPageCommand;
+        private RelayCommand _loadedPage2Command;
         private RelayCommand _selectionChangedCommand;
         private RelayCommand _updateComnListCommand;
+
         private List<string> _minuteAppeal;
         private List<string> _hourAppeal;
         private List<string> _participantRoles;
@@ -44,7 +44,7 @@ namespace CallLogGIISDMDK.ViewModels
         private int _positionPromptCompany = 2;
         private int _positionCheckCompany = 1;
         private int _positionCheckName = 1;
-
+        private int _positionPhoneForm = 1;
         private string _participantRole;
         private string _currentDay = DateTime.Now.ToString("dddd, d MMMM", CultureInfo.GetCultureInfo("ru-RU"));
         private string _currentMinute;
@@ -73,6 +73,7 @@ namespace CallLogGIISDMDK.ViewModels
         private string _promptsInn = "";
         private string _promptsOgrn = "";
         private string _promptsSity = "";
+        private string _promptsType = "";
 
         private bool _isFirstStepFillAppeal;
         private bool _isSecondStepFillAppeal;
@@ -85,11 +86,14 @@ namespace CallLogGIISDMDK.ViewModels
         private bool _isFemale;
         private bool _isEnableMaleForm = true;
         private bool _isEnableFemaleForm = true;
-
+        private bool _isEnablePhoneForm = true;
+        private bool _isEnableIrregularCheck = true;
+        private bool _isEnableEmailCheck = true;
+        private bool _isEmail;
         private Visibility _choiseSex = Visibility.Hidden;
-
-        string[] _prompts = new string[9];
-
+        private Visibility _isVisibleNumber7;
+        string[] _prompts = new string[10];
+      
         public FillAppeal_VM()
         {
             _hourAppeal = fillAppeal_Model.GetHoursAppeal();
@@ -99,11 +103,10 @@ namespace CallLogGIISDMDK.ViewModels
             _participantRoles = fillAppeal_Model.GetParticipantRoles();
             _statuses = fillAppeal_Model.GetStatusesAppeal();
             _types = fillAppeal_Model.GetTypesAppeal();
-            FillDisplayAppeals();
+            // FillDisplayAppeals();
             FillPrompts();
-       
-        }
 
+        }
         private void FillPrompts()
         {
             _prompts[0] = _promptsFullName;
@@ -115,10 +118,9 @@ namespace CallLogGIISDMDK.ViewModels
             _prompts[6] = _promptsInn;
             _prompts[7] = _promptsSity;
             _prompts[8] = _promptsOgrn;
+            _prompts[9] = _promptsType;
         }
-
         #region Commands
-
         public RelayCommand AddAppealCommand
         {
             get
@@ -126,10 +128,31 @@ namespace CallLogGIISDMDK.ViewModels
                 if (_addAppealCommand == null)
                 {
                     _addAppealCommand = new RelayCommand(
-
                         p => this.AddAppeal()); ;
                 }
                 return _addAppealCommand;
+            }
+        }
+
+        public RelayCommand LoadedPage2Command
+        {
+            get
+            {
+                if (_loadedPage2Command == null)
+                {
+                    _loadedPage2Command = new RelayCommand(
+                        p => this.NewAppeal2()); ;
+                }
+                return _loadedPage2Command;
+            }
+        }
+        private void NewAppeal2()
+        {
+            if (StaticData.IsNewAppeal2)
+            {
+                Appeal = "";
+                AdditionalInfo = "";
+                StaticData.IsNewAppeal2 = false;
             }
         }
         public RelayCommand UpdateComnListCommand
@@ -139,18 +162,15 @@ namespace CallLogGIISDMDK.ViewModels
                 if (_updateComnListCommand == null)
                 {
                     _updateComnListCommand = new RelayCommand(
-
                         p => this.UpdateComnList()); ;
                 }
                 return _updateComnListCommand;
             }
         }
-
         private void UpdateComnList()
         {
-               DisplayAppeals = fillAppeal_Model.CheckSuitableAppeal(SelectedSuitableAppeal);
+            DisplayAppeals = fillAppeal_Model.CheckSuitableAppeal(SelectedSuitableAppeal);
         }
-
         public RelayCommand SelectionChangedCommand
         {
             get
@@ -158,18 +178,15 @@ namespace CallLogGIISDMDK.ViewModels
                 if (_selectionChangedCommand == null)
                 {
                     _selectionChangedCommand = new RelayCommand(
-
                         p => this.SelectionChanged()); ;
                 }
                 return _selectionChangedCommand;
             }
         }
-
         private void SelectionChanged()
         {
             FillAppeal();
         }
-
         public RelayCommand CheckFirstStepFillAppealCommand
         {
             get
@@ -177,13 +194,11 @@ namespace CallLogGIISDMDK.ViewModels
                 if (_checkFirstStepFillAppealCommand == null)
                 {
                     _checkFirstStepFillAppealCommand = new RelayCommand(
-
                         p => this.CheckFirstStepFillAppeal(_checkFirstStepFillAppealCommand)); ;
                 }
                 return _checkFirstStepFillAppealCommand;
             }
         }
-
         public RelayCommand CheckSecondStepFillAppealCommand
         {
             get
@@ -191,13 +206,11 @@ namespace CallLogGIISDMDK.ViewModels
                 if (_checkSecondStepFillAppealCommand == null)
                 {
                     _checkSecondStepFillAppealCommand = new RelayCommand(
-
                         p => this.CheckSecondStepFillAppeal()); ;
                 }
                 return _checkSecondStepFillAppealCommand;
             }
         }
-
         public RelayCommand LoadedPageCommand
         {
             get
@@ -205,31 +218,26 @@ namespace CallLogGIISDMDK.ViewModels
                 if (_loadedPageCommand == null)
                 {
                     _loadedPageCommand = new RelayCommand(
-
                         p => this.NewAppeal()); ;
                 }
                 return _loadedPageCommand;
             }
         }
-
-       void FillDisplayAppeals()
+        void FillDisplayAppeals()
         {
             foreach (var appeal in data.GetAppeals())
             {
                 DisplayAppeals.Add($"{appeal[0]},{appeal[1]},{appeal[2]}");
             }
         }
-
         private void NewAppeal()
         {
-          
             //ParticipantRole = null;
             if (StaticData.IsNewAppeal)
             {
-                FillDisplayAppeals();
+                // FillDisplayAppeals();
                 InputPhone = "";
                 InputPhone = "";
-                Appeal = "";
                 AdditionalInfo = "";
                 FullName = "";
                 Email = "";
@@ -239,43 +247,49 @@ namespace CallLogGIISDMDK.ViewModels
                 Inn = "";
                 Sity = "";
                 Status = "";
+                IsIrregular = false;
+                IsEnableCompanyForm = true;
+                IsIP = false;
+                IsEmail = false;
+                IsHaveName = false;
+                IsEnableFemaleForm = true;
+                IsEnableMaleForm = true;
+                IsMale = false;
+                IsFemale = false;
+                IsEnablePhoneForm = true;
+                IsEnableNameForm = true;
+                Type = "";
                 ParticipantRole = "";
                 StaticData.IsNewAppeal = false;
             }
-
         }
-
         #endregion
-
         #region Methods
-
         void CheckFirstStepFillAppeal(object p)
         {
-           
-            _prompts = fillAppeal_Model.CheckLeghtFields(FullName, InputPhone, Email, Company, ParticipantRole, Status, IsIrregular, Inn, Sity, Ogrn);
-            IsFirstStepFillAppeal = fillAppeal_Model.isValidFirstStep;
-          
-           if(p != null)
-            ShowPrompts();
-        }
 
+            _prompts = fillAppeal_Model.CheckLeghtFields(FullName, InputPhone, Email, Company, ParticipantRole, Status, IsIrregular, Inn, Sity, Ogrn, Type, IsEmail);
+            IsFirstStepFillAppeal = fillAppeal_Model.isValidFirstStep;
+
+            if (p != null)
+                ShowPrompts();
+        }
 
         private void FillAppeal()
         {
-                //FullName = fillAppeal_Model.suitableAppeal[0];
-                //Company = fillAppeal_Model.suitableAppeal[1];
-                //InputPhone = fillAppeal_Model.suitableAppeal[2];
-                //Inn = fillAppeal_Model.suitableAppeal[3];
-                //Sity = fillAppeal_Model.suitableAppeal[4];
-                //ParticipantRole = fillAppeal_Model.suitableAppeal[5];
-                //Status = fillAppeal_Model.suitableAppeal[6];
-                //Email = fillAppeal_Model.suitableAppeal[7];
-                //Ogrn = fillAppeal_Model.suitableAppeal[8];
-                //CurrentDay = fillAppeal_Model.suitableAppeal[9];
-                //CurrentHour = Convert.ToInt32(fillAppeal_Model.suitableAppeal[10]);
-                //CurrentMinute = fillAppeal_Model.suitableAppeal[11];
+            //FullName = fillAppeal_Model.suitableAppeal[0];
+            //Company = fillAppeal_Model.suitableAppeal[1];
+            //InputPhone = fillAppeal_Model.suitableAppeal[2];
+            //Inn = fillAppeal_Model.suitableAppeal[3];
+            //Sity = fillAppeal_Model.suitableAppeal[4];
+            //ParticipantRole = fillAppeal_Model.suitableAppeal[5];
+            //Status = fillAppeal_Model.suitableAppeal[6];
+            //Email = fillAppeal_Model.suitableAppeal[7];
+            //Ogrn = fillAppeal_Model.suitableAppeal[8];
+            //CurrentDay = fillAppeal_Model.suitableAppeal[9];
+            //CurrentHour = Convert.ToInt32(fillAppeal_Model.suitableAppeal[10]);
+            //CurrentMinute = fillAppeal_Model.suitableAppeal[11];
         }
-
         void CheckSecondStepFillAppeal()
         {
             //_prompts = fillAppeal_Model.CheckLeghtFields(FullName, InputPhone, Email, Company, ParticipantRole);
@@ -302,22 +316,21 @@ namespace CallLogGIISDMDK.ViewModels
             PromptsInn = _prompts[6];
             PromptsSity = _prompts[7];
             PromptsOgrn = _prompts[8];
+            PromptsType = _prompts[9];
         }
         private void AddAppeal()
         {
             Thread myThread = new Thread(new ThreadStart(Adding));
             myThread.Start();
-         }
-
+        }
         private void Adding()
         {
-            fileWriter.WriteAppealToFile(FullName, Company, InputPhone, Inn, Sity, ParticipantRole, Status, Email, Ogrn, CurrentDay, CurrentHour.ToString(), CurrentMinute,  Appeal, AdditionalInfo);
+            fileWriter.WriteAppealToFile(FullName, Company, Sity, InputPhone, Inn, ParticipantRole, Type, Status, Email, Ogrn, CurrentDay, CurrentHour.ToString(), CurrentMinute, Appeal, AdditionalInfo);
             //fillAppeal_Model.SaveAppeal(FullName, InputPhone, CurrentDay, CurrentHour, CurrentMinute, Email, Company, ParticipantRole, Appeal, AdditionalInfo);
         }
-
         private void ShowChoiseSex()
         {
-            if(IsHaveName)
+            if (IsHaveName)
             {
                 ChoiseSex = Visibility.Visible;
                 IsEnableNameForm = false;
@@ -332,10 +345,8 @@ namespace CallLogGIISDMDK.ViewModels
                 IsFemale = false;
             }
         }
-
         void CheckPositionControls()
         {
-
             if (PromptsFullName != "")
             {
                 PositionPromptName = 1;
@@ -367,11 +378,8 @@ namespace CallLogGIISDMDK.ViewModels
                 PositionCheckCompany = 1;
             }
         }
-
         #endregion
-
         #region Bolean properties
-
         public bool IsFirstStepFillAppeal
         {
             get { return _isFirstStepFillAppeal; }
@@ -381,7 +389,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("IsFirstStepFillAppeal");
             }
         }
-
         public bool IsEnableNameForm
         {
             get { return _isEnableNameForm; }
@@ -391,7 +398,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("IsEnableNameForm");
             }
         }
-
         public bool IsEnableCompanyForm
         {
             get { return _isEnableCompanyForm; }
@@ -401,9 +407,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("IsEnableCompanyForm");
             }
         }
-
-
-
         public bool IsMale
         {
             get { return _isMale; }
@@ -414,7 +417,6 @@ namespace CallLogGIISDMDK.ViewModels
                 BlockSexForm();
             }
         }
-
         public bool IsFemale
         {
             get { return _isFemale; }
@@ -425,7 +427,6 @@ namespace CallLogGIISDMDK.ViewModels
                 BlockSexForm();
             }
         }
-
         public bool IsEnableFemaleForm
         {
             get { return _isEnableFemaleForm; }
@@ -433,10 +434,18 @@ namespace CallLogGIISDMDK.ViewModels
             {
                 _isEnableFemaleForm = value;
                 OnPropertyChanged("IsEnableFemaleForm");
-              
+
             }
         }
-
+        public bool IsEnablePhoneForm
+        {
+            get { return _isEnablePhoneForm; }
+            set
+            {
+                _isEnablePhoneForm = value;
+                OnPropertyChanged("IsEnablePhoneForm");
+            }
+        }
         private void BlockCompanyForm()
         {
             if (IsIP)
@@ -451,7 +460,6 @@ namespace CallLogGIISDMDK.ViewModels
             }
         }
 
-
         private void BlockSexForm()
         {
             if (IsFemale)
@@ -463,7 +471,6 @@ namespace CallLogGIISDMDK.ViewModels
             {
                 IsEnableFemaleForm = false;
                 FullName = "Мужчина";
-
             }
             else if (!IsFemale && !IsMale)
             {
@@ -472,7 +479,6 @@ namespace CallLogGIISDMDK.ViewModels
                 FullName = "";
             }
         }
-
         public bool IsEnableMaleForm
         {
             get { return _isEnableMaleForm; }
@@ -480,9 +486,62 @@ namespace CallLogGIISDMDK.ViewModels
             {
                 _isEnableMaleForm = value;
                 OnPropertyChanged("IsEnableMaleForm");
-             
+
             }
         }
+        public bool IsEmail
+        {
+            get { return _isEmail; }
+            set
+            {
+                _isEmail = value;
+                OnPropertyChanged("IsEmail");
+                SettingPhoneForm();
+            }
+        }
+        private void SettingPhoneForm()
+        {
+     
+            if (IsEmail)
+            {
+                IsVisibleNumber7 = Visibility.Hidden;
+                PositionPhoneForm = 0;
+                IsEnablePhoneForm = false;
+                IsEnableIrregularCheck = false;
+                
+            }
+            else
+            {
+                InputPhone = "";
+                IsVisibleNumber7 = Visibility.Visible;
+                PositionPhoneForm = 1;
+                IsEnablePhoneForm = true;
+                IsEnableIrregularCheck = true;
+               
+            }
+          
+        }
+
+        private void SettingPhoneFormIrregular()
+        {
+
+           
+            if (IsIrregular)
+            {
+                IsVisibleNumber7 = Visibility.Hidden;
+                PositionPhoneForm = 0;
+                IsEnableEmailCheck = false;
+            }
+            else
+            {
+                IsVisibleNumber7 = Visibility.Visible;
+                PositionPhoneForm = 1;
+                IsEnableEmailCheck = true;
+            }
+        }
+
+
+
 
         public Visibility ChoiseSex
         {
@@ -491,6 +550,16 @@ namespace CallLogGIISDMDK.ViewModels
             {
                 _choiseSex = value;
                 OnPropertyChanged("ChoiseSex");
+            }
+        }
+
+        public Visibility IsVisibleNumber7
+        {
+            get { return _isVisibleNumber7; }
+            set
+            {
+                _isVisibleNumber7 = value;
+                OnPropertyChanged("IsVisibleNumber7");
             }
         }
 
@@ -503,7 +572,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("IsSecondStepFillAppeal");
             }
         }
-
         public bool IsHaveName
         {
             get { return _isHaveName; }
@@ -515,7 +583,6 @@ namespace CallLogGIISDMDK.ViewModels
             }
         }
 
-        
         public bool IsIrregular
         {
             get { return _isIrregular; }
@@ -524,10 +591,10 @@ namespace CallLogGIISDMDK.ViewModels
                 _isIrregular = value;
                 OnPropertyChanged("IsIrregular");
                 if (InputPhone != null) InputPhone = "";
-               // CheckSecondStepFillAppeal();
+                SettingPhoneFormIrregular();
+                // CheckSecondStepFillAppeal();
             }
         }
-
 
         public bool IsIP
         {
@@ -539,13 +606,28 @@ namespace CallLogGIISDMDK.ViewModels
                 BlockCompanyForm();
             }
         }
+        public bool IsEnableIrregularCheck
+        {
+            get { return _isEnableIrregularCheck; }
+            set
+            {
+                _isEnableIrregularCheck = value;
+                OnPropertyChanged("IsEnableIrregularCheck");
+            }
+        }
 
-      
+        public bool IsEnableEmailCheck
+        {
+            get { return _isEnableEmailCheck; }
+            set
+            {
+                _isEnableEmailCheck = value;
+                OnPropertyChanged("IsEnableEmailCheck");
+            }
+        }
 
         #endregion
-
         #region String properties
-
         public string UserName
         {
             get { return _userName; }
@@ -555,7 +637,17 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("UserName");
             }
         }
-
+        public string Type
+        {
+            get { return _type; }
+            set
+            {
+                _type = value;
+                OnPropertyChanged("Type");
+                CheckFirstStepFillAppeal(null);
+                PromptsType = fillAppeal_Model.ClearPrompt(Type, PromptsType);
+            }
+        }
         public string CurrentDay
         {
             get { return _currentDay; }
@@ -565,7 +657,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("CurrentDay");
             }
         }
-
         public string Appeal
         {
             get { return _appeal; }
@@ -576,7 +667,6 @@ namespace CallLogGIISDMDK.ViewModels
                 CheckSecondStepFillAppeal();
             }
         }
-
         public string AdditionalInfo
         {
             get { return _additionalInfo; }
@@ -586,7 +676,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("AdditionalInfo");
             }
         }
-
         public string CurrentTime
         {
             get { return _currentTime; }
@@ -595,7 +684,6 @@ namespace CallLogGIISDMDK.ViewModels
                 _currentTime = value;
             }
         }
-
         public string CurrentMinute
         {
             get { return _currentMinute; }
@@ -605,7 +693,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("CurrentMinute");
             }
         }
-
         public string ParticipantRole
         {
             get { return _participantRole; }
@@ -616,9 +703,7 @@ namespace CallLogGIISDMDK.ViewModels
                 CheckFirstStepFillAppeal(null);
                 PromptsRole = fillAppeal_Model.ClearPrompt(ParticipantRole, PromptsRole);
             }
-
         }
-
         public string Email
         {
             get { return _email; }
@@ -627,10 +712,9 @@ namespace CallLogGIISDMDK.ViewModels
                 _email = value;
                 OnPropertyChanged("Email");
                 CheckFirstStepFillAppeal(null);
-                PromptsEmail = fillAppeal_Model.ClearPrompt(Email, PromptsEmail); 
+                PromptsEmail = fillAppeal_Model.ClearPrompt(Email, PromptsEmail);
             }
         }
-
         public string FullName
         {
             get { return _fullName; }
@@ -640,26 +724,22 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("FullName");
                 CheckFirstStepFillAppeal(null);
                 PromptsFullName = fillAppeal_Model.ClearPrompt(FullName, PromptsFullName);
-
             }
         }
-
         public string InputPhone
         {
             get { return _inputPhone; }
             set
             {
                 _inputPhone = value;
-
                 OnPropertyChanged("InputPhone");
                 if (_inputPhone != "" && !IsIrregular)
-                    _inputPhone = fillAppeal_Model.CheckInputNumber(InputPhone);
+                    _inputPhone = fillAppeal_Model.CheckInputNumber(InputPhone, IsEmail);
                 CheckFirstStepFillAppeal(null);
+                //if (_inputPhone == "Обращение по почте") IsEmail = true;
                 PromptsPhoneNumber = fillAppeal_Model.ClearPrompt(InputPhone, PromptsPhoneNumber);
-
             }
         }
-
         public string Status
         {
             get { return _status; }
@@ -669,12 +749,8 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("Status");
                 CheckFirstStepFillAppeal(null);
                 PromptsStatus = fillAppeal_Model.ClearPrompt(Status, PromptsStatus);
-
             }
         }
-
-
-
         public string Inn
         {
             get { return _inn; }
@@ -688,7 +764,6 @@ namespace CallLogGIISDMDK.ViewModels
                 PromptsInn = fillAppeal_Model.ClearPrompt(Inn, PromptsInn);
             }
         }
-
         public string Ogrn
         {
             get { return _ogrn; }
@@ -702,7 +777,6 @@ namespace CallLogGIISDMDK.ViewModels
                 PromptsOgrn = fillAppeal_Model.ClearPrompt(Ogrn, PromptsOgrn);
             }
         }
-
         public string SelectedSuitableAppeal
         {
             get { return _selectedSuitableAppeal; }
@@ -712,7 +786,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("SelectedSuitableAppeal");
             }
         }
-
         public string Sity
         {
             get { return _sity; }
@@ -724,9 +797,6 @@ namespace CallLogGIISDMDK.ViewModels
                 PromptsSity = fillAppeal_Model.ClearPrompt(Ogrn, PromptsSity);
             }
         }
-
-
-
         public string PromptsFullName
         {
             get { return _promptsFullName; }
@@ -735,10 +805,8 @@ namespace CallLogGIISDMDK.ViewModels
                 _promptsFullName = value;
                 OnPropertyChanged("PromptsFullName");
                 CheckPositionControls();
-
             }
         }
-
         public string PromptsInn
         {
             get { return _promptsInn; }
@@ -749,7 +817,16 @@ namespace CallLogGIISDMDK.ViewModels
                 CheckPositionControls();
             }
         }
-
+        public string PromptsType
+        {
+            get { return _promptsType; }
+            set
+            {
+                _promptsType = value;
+                OnPropertyChanged("PromptsType");
+                CheckPositionControls();
+            }
+        }
         public string Company
         {
             get { return _company; }
@@ -762,8 +839,6 @@ namespace CallLogGIISDMDK.ViewModels
             }
         }
 
-      
-
         public string PromptsPhoneNumber
         {
             get { return _promptsPhoneNumber; }
@@ -774,7 +849,6 @@ namespace CallLogGIISDMDK.ViewModels
                 CheckPositionControls();
             }
         }
-
         public string PromptsOgrn
         {
             get { return _promptsOgrn; }
@@ -785,7 +859,6 @@ namespace CallLogGIISDMDK.ViewModels
                 CheckPositionControls();
             }
         }
-
         public string PromptsSity
         {
             get { return _promptsSity; }
@@ -796,7 +869,6 @@ namespace CallLogGIISDMDK.ViewModels
                 CheckPositionControls();
             }
         }
-
         public string PromptsEmail
         {
             get { return _promptsEmail; }
@@ -806,7 +878,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("PromptsEmail");
             }
         }
-
         public string PromptsCompany
         {
             get { return _promptsCompany; }
@@ -817,7 +888,6 @@ namespace CallLogGIISDMDK.ViewModels
                 CheckPositionControls();
             }
         }
-
         public string PromptsStatus
         {
             get { return _promptsStatus; }
@@ -827,7 +897,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("PromptsStatus");
             }
         }
-
         public string PromptsRole
         {
             get { return _promptsRole; }
@@ -837,7 +906,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("PromptsRole");
             }
         }
-
         public string PromptsAppeal
         {
             get { return _promptsAppeal; }
@@ -847,11 +915,9 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("PromptsAppeal");
             }
         }
-
         #endregion
 
         #region Int properties
-
         public int CurrentHour
         {
             get { return _currentHour; }
@@ -859,6 +925,16 @@ namespace CallLogGIISDMDK.ViewModels
             {
                 _currentHour = value;
                 OnPropertyChanged("CurrentHour");
+            }
+        }
+
+        public int PositionPhoneForm
+        {
+            get { return _positionPhoneForm; }
+            set
+            {
+                _positionPhoneForm = value;
+                OnPropertyChanged("PositionPhoneForm");
             }
         }
 
@@ -872,7 +948,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("PositionCheckName");
             }
         }
-
         public int PositionCheckPhone
         {
             get { return _positionCheckPhone; }
@@ -882,7 +957,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("PositionCheckPhone");
             }
         }
-
         public int PositionCheckCompany
         {
             get { return _positionCheckCompany; }
@@ -892,7 +966,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("PositionCheckCompany");
             }
         }
-
         public int PositionPromptName
         {
             get { return _positionPromptName; }
@@ -902,7 +975,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("PositionPromptName");
             }
         }
-
         public int PositionPromptPhoneNumber
         {
             get { return _positionPromptPhoneNumber; }
@@ -912,7 +984,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("PositionPromptPhoneNumber");
             }
         }
-
         public int PositionPromptCompany
         {
             get { return _positionPromptCompany; }
@@ -923,11 +994,8 @@ namespace CallLogGIISDMDK.ViewModels
             }
         }
 
-
         #endregion
-
         #region List Properties
-
         public List<string> HourAppeal
         {
             get { return _hourAppeal; }
@@ -937,7 +1005,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("HourAppeal");
             }
         }
-
         public List<string> DaysCurrentMonth
         {
             get { return _daysCurrentMonthStringFormat; }
@@ -947,19 +1014,15 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("DaysCurrentMonth");
             }
         }
-
         public List<string> DisplayAppeals
         {
-            get {  return _displayAppeals; }
+            get { return _displayAppeals; }
             set
             {
                 _displayAppeals = value;
                 OnPropertyChanged("DisplayAppeals");
             }
         }
-
-
-
         public List<string> MinuteAppeal
         {
             get { return _minuteAppeal; }
@@ -969,7 +1032,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("MinuteAppeal");
             }
         }
-
         public List<string> ParticipantRoles
         {
             get { return _participantRoles; }
@@ -979,7 +1041,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("ParticipantRoles");
             }
         }
-
         public List<string> Statuses
         {
             get { return _statuses; }
@@ -990,7 +1051,6 @@ namespace CallLogGIISDMDK.ViewModels
             }
         }
 
-
         public List<string> Types
         {
             get { return _types; }
@@ -1000,9 +1060,7 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("Types");
             }
         }
-
         #endregion
-
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string propName)
         {
@@ -1011,7 +1069,6 @@ namespace CallLogGIISDMDK.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
-
         //public interface ICommand
         //{
         //    void Execute(object param);
@@ -1020,3 +1077,4 @@ namespace CallLogGIISDMDK.ViewModels
         //}
     }
 }
+

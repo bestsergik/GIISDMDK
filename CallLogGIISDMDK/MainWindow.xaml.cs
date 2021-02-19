@@ -38,10 +38,11 @@ namespace CallLogGIISDMDK
             //MainFrame.NavigationService.Navigate(new Views.BaseKnowledge.KnowledgeBase());
 
 
-            MainFrame.Navigate(new Authorization_page());
+            //MainFrame.Navigate(new Authorization_page());
             //MainFrame.NavigationService.Navigate(new Menu_page());
             //MainFrame.NavigationService.Navigate(new Views.FillAppeal.FillAppeal_page1());
             // MainFrame.NavigationService.Navigate(new Views.FillAppeal.AddAppeal_page());
+            MainFrame.NavigationService.Navigate(new Views.ViewAppeals_page2());
         }
 
 

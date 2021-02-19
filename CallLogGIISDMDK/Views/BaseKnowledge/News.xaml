@@ -42,9 +42,12 @@
                         <RowDefinition Height="56"></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="56"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="10"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBox Grid.Row="0" Style="{StaticResource TextBlock}" HorizontalAlignment="Center" FontWeight="Bold">Сроки внедрения маркировки ювелирных изделий в России перенесут на 1 января 2022 года</TextBox>
-                    <RichTextBox Grid.Row="1" Grid.Column="1"  Style="{StaticResource TextBlocks}"  IsReadOnly="True" IsDocumentEnabled="True" >
+                    <TextBox Grid.Row="6" Style="{StaticResource TextBlock}" HorizontalAlignment="Center" FontWeight="Bold">Сроки внедрения маркировки ювелирных изделий в России перенесут на 1 января 2022 года</TextBox>
+                    <RichTextBox Grid.Row="7" Grid.Column="1"  Style="{StaticResource TextBlocks}"  IsReadOnly="True" IsDocumentEnabled="True" >
                         <FlowDocument>
                             <Paragraph>
                                 Ввод ГИИС ДМДК (присвоение УИН и регистрацию продаж) намечен на 1 января 2022 года (перенесли на 6 месяцев, раньше планировалось с 1 июля 21 года). Физическое нанесение DataMatrix-кода на изделие (для золота) запланировано с 1 января 2023 года, сообщил руководитель компании ЮвелирСофт Дмитрий Румянцев по итогам заседания подкомиссии по совершенствованию контрольных (надзорных) и разрешительных функций федеральных органов исполнительной власти при Правительственной комиссии по проведению административной реформы. 
@@ -88,6 +91,23 @@
                         <TextBox Grid.Row="11" Style="{StaticResource TextBlock}" >*Кроме остатков, заявленных по состоянию на 01.01.22 или на 01.01.23, остатки могут не иметь маркировки до 01.07.24</TextBox>
                     </Grid>
                     <Rectangle Grid.Row="5" Grid.ColumnSpan="3" Margin="50,0,50,0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Fill="LightGray"  Height="1.5"/>
+
+                    <TextBox Grid.Row="0" Style="{StaticResource TextBlock}" HorizontalAlignment="Center" FontWeight="Bold">Перенесены сроки обязательной маркировки ювелирных изделий.</TextBox>
+                    <RichTextBox Grid.Row="1" Grid.Column="1"  Style="{StaticResource TextBlocks}"  IsReadOnly="True" IsDocumentEnabled="True" >
+                        <FlowDocument>
+                            <Paragraph>
+                                Минфин РФ перенёс сроки начальной маркировки драгоценных металлов и камней на 1 марта 2022 года, а обязательную — на 1 марта 2024 года.
+
+С 1 марта 2024 года в РФ запретят продавать ювелирные изделия из золота, платины и палладия без маркировки. На металлическую часть изделия должны быть нанесены специальные штрихкоды рядом с клеймом. Код размером 0,8 х 0,8 мм будет содержать уникальный идентификационный номер, в частности, он будет наноситься и на бирку.
+
+С 1 марта 2022 года такие штрихкоды в обязательном порядке будут наноситься на бирку новых или ввезенных на территорию страны ювелирных украшений, а с 1 марта 2023 года - на сами изделия.
+
+Еще год выделен на лазерную маркировку товарных остатков.
+
+«Что касается клеймения, то для бизнеса не будет кардинальных изменений - штрихкод будет наноситься на изделие Пробирной палатой одновременно с нанесением клейма. Разница только в том, что у каждого изделия будет свой уникальный номер, который невозможно подделать», - отметила руководитель департамента государственного регулирования отрасли драгоценных металлов и драгоценных камней Минфина РФ Юлия Гончаренко.
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
 
 
                 </Grid>

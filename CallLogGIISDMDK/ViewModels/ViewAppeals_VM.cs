@@ -11,15 +11,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using CallLogGIISDMDK.Models;
 using CallLogGIISDMDK.WorkWithFiles;
-
 namespace CallLogGIISDMDK.ViewModels
 {
     class ViewAppeals_VM : INotifyPropertyChanged
     {
-
-        
-        
-
         private string _pathToZipAppeals = @"Appeals.zip";
         private FillAppeal_VM _selectedAppeal;
         FillAppeal_model _fillAppeal_Model;
@@ -29,7 +24,6 @@ namespace CallLogGIISDMDK.ViewModels
         List<List<string>> _appeals = new List<List<string>>();
         List<string> _appeal = new List<string>();
         string _insertAppeal = String.Empty;
-
         public ObservableCollection<FillAppeal_VM> Appeals { get; set; }
         public FillAppeal_VM SelectedAppeal
         {
@@ -40,19 +34,16 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("SelectedAppeal");
             }
         }
-
         public ViewAppeals_VM()
         {
             Appeals = new ObservableCollection<FillAppeal_VM>();
             _fillAppeal_Model = new FillAppeal_model();
             fileReader.onReadingComplete += FileReader_onWrite;
         }
-
         private void FileReader_onWrite()
         {
             ShowAppeal(_appeals);
         }
-
         public RelayCommand UpdatecCallLogCommand
         {
             get
@@ -60,13 +51,11 @@ namespace CallLogGIISDMDK.ViewModels
                 if (_updatecCallLogCommand == null)
                 {
                     _updatecCallLogCommand = new RelayCommand(
-
                         p => this.FillAppeals());
                 }
                 return _updatecCallLogCommand;
             }
         }
-
         private void FillAppeals()
         {
             if (File.Exists(_pathToZipAppeals))
@@ -74,10 +63,9 @@ namespace CallLogGIISDMDK.ViewModels
                 Appeals.Clear();
                 Thread myThread = new Thread(new ThreadStart(FillAppeal));
                 myThread.Start();
-               
+
             }
         }
-
 
         public List<string> Appeal
         {
@@ -88,7 +76,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("Appeal");
             }
         }
-
         public string InsertAppeal
         {
             get { return _insertAppeal; }
@@ -99,33 +86,28 @@ namespace CallLogGIISDMDK.ViewModels
                 SearchInsertAppeal(InsertAppeal);
             }
         }
-
         void ShowAppeal(List<List<string>> appeals)
         {
             foreach (var appeal in appeals)
             {
                 App.Current.Dispatcher.BeginInvoke((Action)delegate // <--- HERE
                 {
-                    Appeals.Add(new FillAppeal_VM { FullName = appeal[0], Company = appeal[1], InputPhone = appeal[2], Inn = appeal[3], Sity = appeal[4], ParticipantRole = appeal[5], Status = appeal[6], Email = appeal[7],  Ogrn = appeal[8], CurrentDay = appeal[9],  CurrentHour = Convert.ToInt32(appeal[10]), CurrentMinute = appeal[11], Appeal = appeal[12] , AdditionalInfo = appeal[13], UserName = appeal[14] });
+                    Appeals.Add(new FillAppeal_VM { FullName = appeal[0], Company = appeal[1], Sity = appeal[2], InputPhone = appeal[3], Inn = appeal[4], ParticipantRole = appeal[5], Type = appeal[6], Status = appeal[7], Email = appeal[8], Ogrn = appeal[9], CurrentDay = appeal[10], CurrentHour = Convert.ToInt32(appeal[11]), CurrentMinute = appeal[12], Appeal = appeal[13], AdditionalInfo = appeal[14], UserName = appeal[15] });
                 });
             }
         }
-
         private void SearchInsertAppeal(string insertAppeal)
         {
             suitableAppeals = new List<List<string>>();
             Appeals.Clear();
-            suitableAppeals =  _fillAppeal_Model.SearchInsertAppeal(insertAppeal, _appeals);
+            suitableAppeals = _fillAppeal_Model.SearchInsertAppeal(insertAppeal, _appeals);
             ShowAppeal(suitableAppeals);
         }
-
         private void FillAppeal()
         {
             _appeals = fileReader.GetAppeals();
             fileReader.ReadingComplete();
         }
-
-     
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

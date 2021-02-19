@@ -48,5 +48,13 @@ namespace CallLogGIISDMDK.Views
             entryLoginUserInput.Text = "";
             entryPasswordUserInput.Text = "";
         }
+
+    
+
+        private void Page_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                Entry_btn.Focus();
+        }
     }
 }

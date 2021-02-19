@@ -8,12 +8,10 @@
       DataContext="{StaticResource ViewAppealsVM}"
       mc:Ignorable="d" 
       Title="ViewAppeals_page">
-
     <Page.Resources>
         <ItemsPanelTemplate x:Key="ItemsTemplate">
             <VirtualizingStackPanel/>
         </ItemsPanelTemplate>
-
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
         </Style>
@@ -27,13 +25,11 @@
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="Foreground" Value="Orange"></Setter>
         </Style>
-      
 
     </Page.Resources>
-   
 
     <Grid Background="White">
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="90"></RowDefinition>
             <RowDefinition Height="60" ></RowDefinition>
@@ -42,58 +38,73 @@
             <RowDefinition Height="20"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="2.3*" />
+            <ColumnDefinition Width="370"/>
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
-
         <Grid Margin="20,0,20,0" Grid.Row="1" Grid.ColumnSpan="2">
             <Border BorderBrush="Black"
             BorderThickness="1"
             VerticalAlignment="Center"
             CornerRadius="5">
                 <TextBox  IsTabStop="False"  Text="{Binding InsertAppeal, UpdateSourceTrigger=PropertyChanged}" Height="40" VerticalAlignment="Center">
-                <TextBox.Style>
-                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                        <Setter Property="FontSize" Value="20"></Setter>
-                       
-                        <Style.Resources>
-                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                <VisualBrush.Visual>
+                    <TextBox.Style>
+                        <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                            <Setter Property="FontSize" Value="20"></Setter>
 
-                                    <Label Content="Поиск" FontSize="16" Foreground="Gray" />
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </Style.Resources>
-                        <Style.Triggers>
-                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                            </Trigger>
-                            <Trigger Property="Text" Value="{x:Null}">
-                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                            </Trigger>
-                            <Trigger Property="IsKeyboardFocused" Value="True">
-                                <Setter Property="Background" Value="White" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Style>
-             
-            </TextBox>
+                            <Style.Resources>
+                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                    <VisualBrush.Visual>
+                                        <Label Content="Поиск" FontSize="16" Foreground="Gray" />
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </Style.Resources>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                </Trigger>
+                                <Trigger Property="Text" Value="{x:Null}">
+                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter Property="Background" Value="White" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+
+                </TextBox>
             </Border>
         </Grid>
-        
-        <TextBlock Margin="40,30,0,0" Grid.ColumnSpan="4"  Style="{StaticResource MainTitles}">Список обращений</TextBlock>
 
+        <TextBlock Margin="40,30,0,0" Grid.ColumnSpan="4"  Style="{StaticResource MainTitles}">Список обращений</TextBlock>
         <ListBox  x:Name="BrieflyAppeal" Grid.Row="2" Grid.Column="0" Visibility="{Binding IsVisibleData}" ItemsSource="{Binding Appeals}"
                  SelectedItem="{Binding SelectedAppeal}">
-
             <ListBox.ItemTemplate>
                 <DataTemplate >
-                    <StackPanel Margin="5" >
-                        <TextBlock FontSize="18" Text="{Binding Path=FullName}" />
-                        <TextBlock Text="{Binding Path=InputPhone}" />
-
+                    <StackPanel Margin="5,5,0,5" >
+                        <Grid x:Name="AppealGrid" Loaded="AppealGrid_Loaded">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="1"></RowDefinition>
+                                <RowDefinition Height="1"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"></ColumnDefinition>
+                                <ColumnDefinition Width="260"></ColumnDefinition>
+                                <ColumnDefinition Width="32"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" FontSize="16" FontWeight="Bold" Foreground="SaddleBrown" Text="{Binding Path=Company}" />
+                            <TextBlock Grid.Column="1" FontSize="14" FontWeight="Bold" Grid.Row="1" Text="{Binding Path=FullName}" />
+                            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Path=InputPhone}" />
+                            <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Path=Status}" />
+                            <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Path=Type}" />
+                            <Image Grid.Column="2" Width="30"  Height="24"  Grid.RowSpan="5" HorizontalAlignment="Right"  x:Name="TypeArrow" Source="outgoing.png">
+                            </Image>
+                            <Ellipse Margin="4,0,0,0"  Grid.RowSpan="4" HorizontalAlignment="Left" x:Name="IndicationAppeal" Fill="White" Width="15" Height="15" />
+                        </Grid>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -101,22 +112,23 @@
         <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="2" Grid.Column="1">
             <ScrollViewer >
                 <Grid >
-                    <StackPanel  DataContext="{Binding SelectedAppeal}">
+                    <StackPanel x:Name="DetailStackPanel" Loaded="DetailStackPanel_Loaded"  DataContext="{Binding SelectedAppeal}">
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Организация" />
                         <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Company, UpdateSourceTrigger=PropertyChanged}" />
-                        
+
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="ФИО" />
                         <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" />
-                       
+
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Телефон" />
                         <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding InputPhone, UpdateSourceTrigger=PropertyChanged}" />
-                       
+
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Статус обращения" />
-                        <TextBlock x:Name="Status" Style="{StaticResource DetailsViewAppeal}" Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" Loaded="Status_Loaded" />
+                        <TextBlock x:Name="Status" Loaded="Status_Loaded" Style="{StaticResource DetailsViewAppeal}" Text="{Binding Status, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  />
+                        <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Тип обращения" />
+                        <TextBlock x:Name="TypeAppeal" Style="{StaticResource DetailsViewAppeal}" Text="{Binding Type, UpdateSourceTrigger=PropertyChanged}"  />
 
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Дата обращения" />
                         <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding CurrentDay, UpdateSourceTrigger=PropertyChanged}" />
-
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Время обращения" />
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -125,33 +137,27 @@
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-
                             <TextBlock Margin="4,5,0,0"  Style="{StaticResource DetailsViewAppeal}" Text="{Binding CurrentHour, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBlock Margin="0,5,0,0"  Grid.Column="1" Style="{StaticResource DetailsViewAppeal}" Text=":" />
                             <TextBlock Margin="0,5,0,0"  Style="{StaticResource DetailsViewAppeal}" Grid.Column="2" Text="{Binding CurrentMinute, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
-                      
+
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Обращение" />
                         <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Appeal, UpdateSourceTrigger=PropertyChanged}" />
-
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="ИНН" />
                         <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Inn, UpdateSourceTrigger=PropertyChanged}" />
-                      
+
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Город" />
                         <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Sity, UpdateSourceTrigger=PropertyChanged}" />
-
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Email" />
                         <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
-
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Роль участника" />
                         <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding ParticipantRole, UpdateSourceTrigger=PropertyChanged}" />
-
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="ОГРН" />
-                        <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding ogrn, UpdateSourceTrigger=PropertyChanged}" />
-
+                        <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding Ogrn, UpdateSourceTrigger=PropertyChanged}" />
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Дополнительаня информация" />
                         <TextBlock Style="{StaticResource DetailsViewAppeal}" Text="{Binding AdditionalInfo, UpdateSourceTrigger=PropertyChanged}" />
-                      
+
                         <TextBlock Style="{StaticResource TitlesViewAppeal}" Text="Специалист" />
                         <TextBlock Foreground="SaddleBrown" FontStyle="Italic"  Style="{StaticResource DetailsViewAppeal}" Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
@@ -159,10 +165,9 @@
             </ScrollViewer>
         </Border>
 
-
         <Button Background="Gray"  Grid.Row="3" Grid.Column="1" Command="{Binding AddAppealCommand}" IsEnabled="False" Style="{StaticResource MainMenuButton}"  >Править обращение</Button>
         <Button  Grid.Row="3" Grid.Column="0" Style="{StaticResource MainMenuButton}"  x:Name="btnBack"   Click="btnBack_Click" >Назад</Button>
 
-
     </Grid>
 </Page>
+ 

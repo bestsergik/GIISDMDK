@@ -35,5 +35,15 @@ namespace CallLogGIISDMDK.Views.FillAppeal
             this.NavigationService.Navigate(new Menu_page());
 
         }
+
+        private void PhoneGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            string firstLetter = Phone.Text.Substring(0, 1);
+            if (firstLetter == "О"  || firstLetter != "(")
+            {
+                Grid.SetColumn(Phone, 0);
+                Number7.Visibility = Visibility.Hidden;
+            }
+        }
     }
 }

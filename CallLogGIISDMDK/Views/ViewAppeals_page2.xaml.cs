@@ -23,9 +23,9 @@ namespace CallLogGIISDMDK.Views
     /// <summary>
     /// Логика взаимодействия для ViewAppeals_page.xaml
     /// </summary>
-    public partial class ViewAppeals_page : Page
+    public partial class ViewAppeals_page2 : Page
     {
-        public ViewAppeals_page()
+        public ViewAppeals_page2()
         {
             InitializeComponent();
         }
@@ -74,10 +74,7 @@ namespace CallLogGIISDMDK.Views
                 }
             }
         }
-        private void Status_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
+   
         private void DetailStackPanel_Loaded(object sender, RoutedEventArgs e)
         {
             StackPanel stackPanel = (StackPanel)sender;
@@ -91,8 +88,6 @@ namespace CallLogGIISDMDK.Views
                         if (((TextBlock)element).Text == "Открыто")
                             ((TextBlock)element).Foreground = new SolidColorBrush(Colors.Peru);
                     }
-
-
                     if (((TextBlock)element).Name == "Срочно")
                         ((TextBlock)element).Foreground = new SolidColorBrush(Colors.Red);
                 }

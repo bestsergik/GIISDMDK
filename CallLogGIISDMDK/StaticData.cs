@@ -3,33 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace CallLogGIISDMDK
 {
-   static class StaticData
+    static class StaticData
     {
-       static private string _user;
-       static private string _userStatus = "малыш";
-       static private int _userLvl = 0;
-       static private int _userTopLvl = 0;
-       static private bool _isLoggin = false;
-       static private bool _isNewAppeal = false;
-
-
-
+        static private string _user;
+        static private string _userStatus = "малыш";
+        static private int _userLvl = 0;
+        static private int _userTopLvl = 0;
+        static private bool _isLoggin = false;
+        static private bool _isNewAppeal = false;
+        static private bool _isNewAppeal2 = false;
 
         static public string User
         {
             get { return _user; }
             set { _user = value; }
         }
-
         static public bool IsLoggin
         {
             get { return _isLoggin; }
             set { _isLoggin = value; }
         }
-
         static public string UserStatus
         {
             get { return _userStatus; }
@@ -38,12 +33,12 @@ namespace CallLogGIISDMDK
         static public int UserLvl
         {
             get { return _userLvl; }
-            set {
+            set
+            {
                 _userLvl = value;
                 DefineUserStatus();
             }
         }
-
         static public int UserTopLvl
         {
             get { return _userTopLvl; }
@@ -54,22 +49,26 @@ namespace CallLogGIISDMDK
             }
         }
 
-
         static public bool IsNewAppeal
         {
             get { return _isNewAppeal; }
             set
             {
                 _isNewAppeal = value;
-                DefineUserStatus();
             }
         }
-
+        static public bool IsNewAppeal2
+        {
+            get { return _isNewAppeal2; }
+            set
+            {
+                _isNewAppeal2 = value;
+            }
+        }
         public static bool ContainsWithoutRegistr(this string source, string toCheck, StringComparison comp)
         {
             return source != null && toCheck != null && source.IndexOf(toCheck, comp) >= 0;
         }
-
 
         private static void DefineUserStatus()
         {
@@ -87,7 +86,6 @@ namespace CallLogGIISDMDK
                 UserStatus = "Советник Бога";
         }
 
-
         static public void ClearData()
         {
             UserLvl = 0;
@@ -95,3 +93,4 @@ namespace CallLogGIISDMDK
         }
     }
 }
+

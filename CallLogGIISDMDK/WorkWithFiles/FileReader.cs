@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-
 namespace CallLogGIISDMDK.WorkWithFiles
 {
     class FileReader
@@ -15,7 +14,7 @@ namespace CallLogGIISDMDK.WorkWithFiles
         string pathToAppeals = @"appeals.xml";
         public delegate void MethodContainer();
         public event MethodContainer onReadingComplete;
-        
+
         public List<List<string>> GetAppeals()
         {
             StaticData.ClearData();
@@ -26,13 +25,13 @@ namespace CallLogGIISDMDK.WorkWithFiles
             foreach (XElement currentAppeal in xdoc.Element("Appeals").Elements("Appeal"))
             {
                 appeal = new List<string>();
-
                 XElement fullNameElement = currentAppeal.Element("fullName");
                 XElement companyElement = currentAppeal.Element("company");
+                XElement sityElement = currentAppeal.Element("sity");
                 XElement phoneNumberElement = currentAppeal.Element("phoneNumber");
                 XElement innElement = currentAppeal.Element("inn");
-                XElement sityElement = currentAppeal.Element("sity");
                 XElement roleElement = currentAppeal.Element("role");
+                XElement typeElement = currentAppeal.Element("type");
                 XElement statusElement = currentAppeal.Element("status");
                 XElement emailElement = currentAppeal.Element("email");
                 XElement ogrnElement = currentAppeal.Element("ogrn");
@@ -42,13 +41,14 @@ namespace CallLogGIISDMDK.WorkWithFiles
                 XElement appealElement = currentAppeal.Element("appeal");
                 XElement additionalInfoElement = currentAppeal.Element("additionalInfo");
                 XElement userElement = currentAppeal.Element("user");
-               
+
                 appeal.Add(fullNameElement.Value);
                 appeal.Add(companyElement.Value);
+                appeal.Add(sityElement.Value);
                 appeal.Add(phoneNumberElement.Value);
                 appeal.Add(innElement.Value);
-                appeal.Add(sityElement.Value);
                 appeal.Add(roleElement.Value);
+                appeal.Add(typeElement.Value);
                 appeal.Add(statusElement.Value);
                 appeal.Add(emailElement.Value);
                 appeal.Add(ogrnElement.Value);
@@ -61,17 +61,15 @@ namespace CallLogGIISDMDK.WorkWithFiles
                 appeals.Add(appeal);
                 FillDataUser(statusElement.Value, userElement.Value);
             }
-            
+
             File.Delete(pathToAppeals);
             appeals.Reverse();
             return appeals;
         }
-
         internal void ReadingComplete()
         {
             onReadingComplete();
         }
-
         private void FillDataUser(string status, string user)
         {
             if (user == StaticData.User)
@@ -85,3 +83,4 @@ namespace CallLogGIISDMDK.WorkWithFiles
         }
     }
 }
+

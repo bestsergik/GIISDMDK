@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-
 namespace CallLogGIISDMDK.WorkWithFiles
 {
     class FileWriter
@@ -14,8 +13,7 @@ namespace CallLogGIISDMDK.WorkWithFiles
         Compress fileArchiving = new Compress();
         string pathToZipAppeals = @"Appeals.zip";
         string pathToAppeals = @"appeals.xml";
-
-        public void WriteAppealToFile(string fullName, string company, string phoneNumber, string inn, string sity, string role, string status, string email, string ogrn, string date, string currentHour, string currentMinute,  string appeal, string additionalInfo)
+        public void WriteAppealToFile(string fullName, string company, string sity, string phoneNumber, string inn, string role, string type, string status, string email, string ogrn, string date, string currentHour, string currentMinute, string appeal, string additionalInfo)
         {
             if (File.Exists(pathToAppeals))
                 File.Delete(pathToAppeals);
@@ -27,10 +25,11 @@ namespace CallLogGIISDMDK.WorkWithFiles
                       new XElement("Appeal",
                       new XElement("fullName", fullName),
                       new XElement("company", company),
+                      new XElement("sity", sity),
                       new XElement("phoneNumber", phoneNumber),
                       new XElement("inn", inn),
-                      new XElement("sity", sity),
                       new XElement("role", role),
+                      new XElement("type", type),
                       new XElement("status", status),
                       new XElement("email", email),
                       new XElement("ogrn", ogrn),
@@ -48,14 +47,14 @@ namespace CallLogGIISDMDK.WorkWithFiles
             {
                 fileArchiving.DecompressData(pathToZipAppeals);
                 XDocument appeals = XDocument.Load(pathToAppeals);
-                
                 XElement root = new XElement("Appeal");
                 root.Add(new XElement("fullName", fullName));
                 root.Add(new XElement("company", company));
+                root.Add(new XElement("sity", sity));
                 root.Add(new XElement("phoneNumber", phoneNumber));
                 root.Add(new XElement("inn", inn));
-                root.Add(new XElement("sity", sity));
                 root.Add(new XElement("role", role));
+                root.Add(new XElement("type", type));
                 root.Add(new XElement("status", status));
                 root.Add(new XElement("email", email));
                 root.Add(new XElement("ogrn", ogrn));
@@ -69,8 +68,10 @@ namespace CallLogGIISDMDK.WorkWithFiles
                 appeals.Save(pathToAppeals);
             }
             StaticData.IsNewAppeal = true;
+            StaticData.IsNewAppeal2 = true;
             fileArchiving.CompressData(pathToAppeals, pathToZipAppeals);
             File.Delete(pathToAppeals);
         }
     }
 }
+

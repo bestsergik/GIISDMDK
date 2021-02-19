@@ -8,7 +8,7 @@
       DataContext="{StaticResource AuthorizationVM}"
       mc:Ignorable="d" 
      
-      Title="Authorization_page" Loaded="Page_Loaded">
+      Title="Authorization_page" Loaded="Page_Loaded" PreviewKeyDown="Page_PreviewKeyDown">
    
 
     <Grid Height="470" Width="520">
@@ -32,7 +32,7 @@
                         <Label Height="18" Padding="4,0,0,0"  Content="Пароль" Foreground="Black" FontSize="16" FontFamily="Verdana"  Margin="15,30,0,0"></Label>
                         <TextBox x:Name="entryPasswordUserInput"  Height="40"   Text="{Binding PasswordEntry , UpdateSourceTrigger=PropertyChanged}"  FontSize="23"  Margin="15,5,15,0"  />
                         <Label Height="18" Padding="4,0,0,0"  Content="{Binding PromptsEntryPassword}" Foreground="Chocolate" FontSize="12"  Margin="15,2,15,0"></Label>
-                        <Button x:Name="Entry_btn" Style="{StaticResource MainMenuButton}" IsCancel="{Binding IsLogin}" Command="{Binding LoginCommand}"   Height="50" FontSize="26" FontFamily="Arial"   Margin="15,30,15, 20" Click="Entry_btn_Click">Войти</Button>
+                        <Button x:Name="Entry_btn" Style="{StaticResource MainMenuButton}" IsCancel="{Binding IsLogin}" Command="{Binding LoginCommand}"   Height="50" FontSize="26" FontFamily="Arial"   Margin="15,30,15, 20" Click="Entry_btn_Click" >Войти</Button>
                     </StackPanel>
                 </TabItem.Content>
             </TabItem>
