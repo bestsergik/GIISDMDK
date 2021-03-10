@@ -24,6 +24,7 @@ namespace CallLogGIISDMDK
 
         private Action<object> execute;
         private Func<object, bool> canExecute;
+        private ICommand setPhoneEmail;
 
         public event EventHandler CanExecuteChanged
         {
@@ -37,6 +38,10 @@ namespace CallLogGIISDMDK
             this.canExecute = canExecute;
         }
 
+        public RelayCommand(ICommand setPhoneEmail)
+        {
+            this.setPhoneEmail = setPhoneEmail;
+        }
 
         public bool CanExecute(object parameter)
         {

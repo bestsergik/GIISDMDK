@@ -37,7 +37,7 @@
         </Grid.ColumnDefinitions>
         
         <Button Style="{StaticResource MainMenuButton}" Grid.Column="1"  Grid.Row="2"  Margin="10" Click="Button_Click">Добавить обращение</Button>
-        <Button Style="{StaticResource MainMenuButton}" Command="{Binding UpdatecCallLogCommand}" Grid.Column="1"  Grid.Row="3" Click="Button_Click_1" >Просмотр обращений</Button>
+        <Button Style="{StaticResource MainMenuButton}" Grid.Column="1"  Grid.Row="3" Click="Button_Click_1" >Просмотр обращений</Button>
         <Button Style="{StaticResource MainMenuButton}" Grid.Column="1"  Grid.Row="4" Click="Button_Click_2" >Типовые обращения</Button>
         <Button Style="{StaticResource MainMenuButton}"  Grid.Column="1"  Grid.Row="5" Click="Button_Click_3" >База знаний</Button>
         <Button Style="{StaticResource MainMenuButton}" Grid.Column="1"  Grid.Row="6" Click="Button_Click_4" >Инструкции</Button>

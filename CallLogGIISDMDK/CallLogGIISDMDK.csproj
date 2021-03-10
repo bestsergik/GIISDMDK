@@ -41,6 +41,9 @@
     <Reference Include="DotNetZip, Version=1.15.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.15.0\lib\net40\DotNetZip.dll</HintPath>
     </Reference>
+    <Reference Include="HamburgerMenu, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HamburgerMenu.0.1.0\lib\net40\HamburgerMenu.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
@@ -63,6 +66,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9e7cd3b544a090dc, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfAnimatedGif.2.0.0\lib\net40\WpfAnimatedGif.dll</HintPath>
+    </Reference>
     <Reference Include="WPFTextBoxAutoComplete, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WPFTextBoxAutoComplete.1.0.5\lib\net40\WPFTextBoxAutoComplete.dll</HintPath>
     </Reference>
@@ -122,6 +128,12 @@
     <Compile Include="Views\BaseKnowledge\CommonInformation.xaml.cs">
       <DependentUpon>CommonInformation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FillAppeal\AddDataToAppealByID.xaml.cs">
+      <DependentUpon>AddDataToAppealByID.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FillAppeal\EditAppealByPersonalID.xaml.cs">
+      <DependentUpon>EditAppealByPersonalID.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FillAppeal\FillAppeal_page1.xaml.cs">
       <DependentUpon>FillAppeal_page1.xaml</DependentUpon>
     </Compile>
@@ -146,7 +158,10 @@
     <Compile Include="Views\ViewAppeals_page.xaml.cs">
       <DependentUpon>ViewAppeals_page.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WorkWithFiles\DefinerAvailabilityAppeals.cs" />
+    <Compile Include="WorkWithFiles\DefinerCorrectPathToAppeals.cs" />
     <Compile Include="WorkWithFiles\FileReader.cs" />
+    <Compile Include="WorkWithFiles\FileRemover.cs" />
     <Compile Include="WorkWithFiles\FileWriter.cs" />
     <Page Include="MainDictionary.xaml">
       <SubType>Designer</SubType>
@@ -212,6 +227,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FillAppeal\AddDataToAppealByID.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FillAppeal\EditAppealByPersonalID.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\FillAppeal\FillAppeal_page1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -274,12 +297,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="home1.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\BaseProblems\Instructions\rootSertificates.png" />
@@ -357,12 +374,6 @@
     <Resource Include="Profile2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Home2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="iconfinder_Icons-09_7120956.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="home3.png" />
   </ItemGroup>
   <ItemGroup>
@@ -372,13 +383,169 @@
     <Resource Include="Views\loupe.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\incoming.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\outgoing.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="goznak.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\guild.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\MRU FPP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\performed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\attantion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\incomingCall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\incomingEmail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\outCall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\outEmail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\waiting.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\editHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\deleteAppealHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\deleteAppeal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingArrowToPhone.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingArrowToPhoneHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingArrowToPhoneEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingArrowEmail.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingArrowEmailHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingArrowEmailEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\offEmail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingArrowEmail.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingArrowEmailHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingArrowEmailEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\offInWork.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\inWorkHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\inWorkEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\inWork.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\offComplete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\completeHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\complete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\offPhone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingArrowToPhone.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingArrowToPhoneHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingArrowToPhoneEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\completeEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\completeHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingPhone.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingPhoneHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingPhoneEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingPhone.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingPhoneHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingPhoneEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingEmail.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingEmailHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingEmailEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingEmail.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingEmailHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingEmailEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\arrowLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\arrowLeftHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\arrowRightHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\arrowRight.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

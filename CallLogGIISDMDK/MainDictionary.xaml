@@ -4,60 +4,43 @@
                     xmlns:VM="clr-namespace:CallLogGIISDMDK.ViewModels"
                     xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
 
-
-                        <!-- COLORS-->
-    
-    <SolidColorBrush x:Key="BorderBrushComboBox" Color="DarkGray" />
-
+    <!-- COLORS-->
+    <SolidColorBrush x:Key="BorderBrushComboBox" Color="DimGray" />
     <LinearGradientBrush x:Key="BackgroundBrushComboBox" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="White" Offset="0"/>
         <GradientStop Color="AliceBlue" Offset="1"/>
     </LinearGradientBrush>
-
     <LinearGradientBrush x:Key="BackgroundBrushPopUpComboBox" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="White" Offset="1"/>
         <GradientStop Color="AliceBlue" Offset="0"/>
     </LinearGradientBrush>
-
     <SolidColorBrush x:Key="ArrowBrushComboBox" Color="#757575" />
-
     <SolidColorBrush x:Key="DisabledBorderBrushComboBox" Color="#FF919191" />
-
     <LinearGradientBrush x:Key="DisabledBackgroundComboBox" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="#f4f4f4" Offset="0"/>
         <GradientStop Color="#d7d7d7" Offset="0.7"/>
         <GradientStop Color="#c2c2c2" Offset="1"/>
     </LinearGradientBrush>
-
     <SolidColorBrush x:Key="DisabledForegroundComboBox" Color="#aaaaaa" />
-
     <SolidColorBrush x:Key="HoverBorderBrush" Color="Black" />
-
     <LinearGradientBrush x:Key="HoverBackground" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="#da5e69" Offset="0"/>
         <GradientStop Color="#d12e27" Offset="1"/>
     </LinearGradientBrush>
-
     <LinearGradientBrush x:Key="HoverToggleBackground" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="White" Offset="0"></GradientStop>
         <GradientStop Color="AliceBlue" Offset="1"></GradientStop>
     </LinearGradientBrush>
-
     <LinearGradientBrush x:Key="HoverItemComboBox" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="LightGray" Offset="0"></GradientStop>
         <GradientStop Color="LightGray" Offset="1"></GradientStop>
     </LinearGradientBrush>
-
     <Color x:Key="detailMark">#FFA1A9B3</Color>
     <SolidColorBrush x:Key="detailMarkBrush" Color="{StaticResource ResourceKey=detailMark}" />
-
-
-
     <!-- TEXTBLOCK-->
-                    <!-- TEXTBLOCK-->
-                    <!-- TEXTBLOCK-->
+    <!-- TEXTBLOCK-->
+    <!-- TEXTBLOCK-->
 
-    
     <Style TargetType="{x:Type TextBlock}" x:Key="MainTitles">
         <Setter Property="FontSize" Value="22"/>
         <Setter Property="Foreground" Value="Black"/>
@@ -65,17 +48,14 @@
         <Setter Property="Margin" Value="15"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
-
     <Style TargetType="{x:Type TextBlock}" x:Key="DetailsViewAppeal">
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontFamily" Value="Trebuchet MS"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
-
         <Setter Property="Margin" Value="5"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
-
 
     <Style TargetType="TextBlock" x:Key="TitlesViewAppeal">
         <Setter Property="FontSize" Value="14"/>
@@ -84,9 +64,8 @@
         <Setter Property="FontFamily" Value="Trebuchet MS"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Margin" Value="4,6,0,0"/>
+        <Setter Property="Margin" Value="4,1,0,0"/>
     </Style>
-
 
     <Style TargetType="TextBlock" x:Key="DataAppeal">
         <Setter Property="FontSize" Value="17"/>
@@ -97,11 +76,10 @@
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="Margin" Value="10,14,0,0"/>
     </Style>
-    
-                         <!--BUTTONS-->
-                         <!--BUTTONS-->
-                         <!--BUTTONS-->
 
+    <!--BUTTONS-->
+    <!--BUTTONS-->
+    <!--BUTTONS-->
     <Style TargetType="{x:Type Button}" x:Key="MainMenuButton">
         <Setter Property="Background" Value="Green"/>
         <Setter Property="Template">
@@ -109,16 +87,15 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border CornerRadius="5"
                                 Background="{TemplateBinding Background}">
-
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                            
+
                         </ContentPresenter>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
- 
+
         <Setter Property="FontFamily" Value="Arial"/>
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Background" Value="#006666"/>
@@ -132,7 +109,54 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
+    <Style x:Key="myButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <ContentControl>
+                        <Grid>
+                            <Border Name="PressedBorder" BorderBrush="Gray" BorderThickness="1,1,2,2">
+                                <ContentPresenter/>
+                            </Border>
+                            <Border Name="NormalBorder" BorderBrush="Black"  BorderThickness="2"/>
+                        </Grid>
+                    </ContentControl>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsPressed" Value="True" >
+                            <Setter TargetName="NormalBorder" Property="BorderBrush" Value="Transparent" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type Button}" x:Key="TypeAppeal">
+        <Setter Property="Background" Value="Gray"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="5"
+                                Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                        </ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Background" Value="Gray"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Background" Value="LightSlateGray"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
     <Style TargetType="{x:Type Button}" x:Key="Back">
         <Setter Property="Background" Value="Green"/>
         <Setter Property="Template">
@@ -140,17 +164,14 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border CornerRadius="5"
                                 Background="{TemplateBinding Background}">
-
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-
                         </ContentPresenter>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
 
-       
         <Setter Property="Background" Value="#006666"/>
         <Setter Property="Margin" Value="10"/>
         <Style.Triggers>
@@ -160,9 +181,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-
-
     <Style TargetType="{x:Type Button}" x:Key="TopPanel">
         <Setter Property="Background" Value="Green"/>
         <Setter Property="Template">
@@ -170,16 +188,13 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border CornerRadius="5"
                                 Background="{TemplateBinding Background}">
-
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-
                         </ContentPresenter>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
         <Setter Property="FontFamily" Value="Arial"/>
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Background" Value="#006666"/>
@@ -189,29 +204,37 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Cursor" Value="Hand" />
-               
+
             </Trigger>
         </Style.Triggers>
     </Style>
 
-
-
-
     <!--BORDER-->
-                     <!--BORDER-->
-                     <!--BORDER-->
-
+    <!--BORDER-->
+    <!--BORDER-->
     <Style x:Key="CommonInformation" TargetType="Border">
         <Setter Property="CornerRadius" Value="2"></Setter>
         <Setter Property="BorderBrush" Value="Gray"></Setter>
         <Setter Property="BorderThickness" Value="1"></Setter>
     </Style>
 
+    <!--IMAGES-->
+    <!--IMAGES-->
+    <!--IMAGES-->
 
-    <!-- RICHTEXTBLOCKs-->
-    <!-- RICHTEXTBLOCKs-->
-    <!-- RICHTEXTBLOCKs-->
+    <Style x:Key="cursorHand" TargetType="{x:Type Image}">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
+
+
+    <!-- RICHTEXTBLOCKS-->
+    <!-- RICHTEXTBLOCKS-->
+    <!-- RICHTEXTBLOCKS-->
 
     <Style x:Key="TextBlocks" TargetType="{x:Type RichTextBox}">
         <Setter Property="BorderBrush" Value="{x:Null}"></Setter>
@@ -222,24 +245,20 @@
         <Setter Property="Margin" Value="8,10,0,0"></Setter>
     </Style>
 
-
-                     <!-- TEXT BOXES-->
-                     <!-- TEXT BOXES-->
-                     <!-- TEXT BOXES-->
-
+    <!-- TEXT BOXES-->
+    <!-- TEXT BOXES-->
+    <!-- TEXT BOXES-->
 
     <Style x:Key="AppealMini" TargetType="{x:Type TextBox}">
         <Setter Property="Height" Value="55"></Setter>
         <Setter Property="VerticalAlignment" Value="Top"></Setter>
         <Setter Property="Margin" Value="10,0,8,0"></Setter>
-        
-        <Setter Property="FontSize" Value="27"></Setter>
 
+        <Setter Property="FontSize" Value="27"></Setter>
         <Setter Property="FontFamily" Value="Calibri,Arial"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
-
                     <Grid>
                         <Border x:Name="DropDownBorder" Background="{StaticResource BackgroundBrushPopUpComboBox}" BorderThickness="1,1,1,1" CornerRadius="3" Margin="0,3,0,3"
                                         BorderBrush="{StaticResource BorderBrushComboBox}"/>
@@ -251,7 +270,33 @@
                             <Setter TargetName="DropDownBorder" Property="Background" Value="{StaticResource HoverToggleBackground}" />
                             <Setter TargetName="DropDownBorder" Property="BorderThickness" Value="1" />
                             <Setter TargetName="DropDownBorder" Property="BorderBrush" Value="{StaticResource HoverBorderBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
+    <Style x:Key="AddingDataToAppeal" TargetType="{x:Type TextBox}">
+        <Setter Property="Height" Value="44"></Setter>
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        <Setter Property="Margin" Value="10,0,8,0"></Setter>
+        <Setter Property="FontSize" Value="21"></Setter>
+        <Setter Property="FontFamily" Value="Calibri,Arial"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Grid>
+                        <Border x:Name="DropDownBorder" Background="{StaticResource BackgroundBrushPopUpComboBox}" BorderThickness="1,1,1,1" CornerRadius="3" Margin="0,3,0,3"
+                                        BorderBrush="{StaticResource BorderBrushComboBox}"/>
+                        <!--<Rectangle x:Name="border"  Stroke="{StaticResource ResourceKey=detailMarkBrush}" StrokeThickness="1"/>-->
+                        <TextBox  Margin="10" Text="{Binding  RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="DropDownBorder" Property="Background" Value="{StaticResource HoverToggleBackground}" />
+                            <Setter TargetName="DropDownBorder" Property="BorderThickness" Value="1" />
+                            <Setter TargetName="DropDownBorder" Property="BorderBrush" Value="{StaticResource HoverBorderBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -269,17 +314,14 @@
         <Setter Property="HorizontalAlignment" Value="Left"></Setter>
         <Setter Property="Margin" Value="8,10,0,0"></Setter>
     </Style>
-
     <Style x:Key="AppealBig" TargetType="{x:Type TextBox}">
         <Setter Property="Margin" Value="10,0,8,0"></Setter>
-
         <Setter Property="FontSize" Value="22"></Setter>
         <Setter Property="TextWrapping" Value="Wrap"></Setter>
         <Setter Property="FontFamily" Value="Calibri,Arial"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
-
                     <Grid>
                         <Border x:Name="DropDownBorder" Background="{StaticResource BackgroundBrushPopUpComboBox}" BorderThickness="1,1,1,1" CornerRadius="3" Margin="0,3,0,3"
                                         BorderBrush="{StaticResource BorderBrushComboBox}"/>
@@ -297,22 +339,43 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <!-- LIST BOXES-->
     <!-- LIST BOXES-->
     <!-- LIST BOXES-->
 
-    
+    <SolidColorBrush x:Key="BorderInExpanderBackgroundKey"  Color="Bisque"/>
+    <SolidColorBrush x:Key="ListBoxBackgroundKey"  Color="#FFFBEEDB"/>
+    <SolidColorBrush x:Key="BorderBackgroundKey"  Color="#F2F2F2"/>
+    <DropShadowEffect x:Key="DropShadowEffectKey" Opacity="0.5"/>
+    <Style x:Key="BorderBackgroundItemsStyleKey" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource BorderBackgroundKey}" />
+        <Setter Property="CornerRadius" Value="2" />
+        <Setter Property="Margin" Value="0,1,0,1" />
+        <Setter Property="Effect" Value="{StaticResource DropShadowEffectKey}"/>
+    </Style>
+    <Style x:Key="ListBoxBackgroundStyleKey"  TargetType="ListBox">
+        <Setter Property="Background" Value="{StaticResource ListBoxBackgroundKey}" />
+    </Style>
+    <!-- GRID-->
+    <!-- GRID-->
+    <!-- GRID-->
+    <!-- Показывает Grid только при наведении на него -->
+    <Style x:Key="hider" TargetType="{x:Type Grid}">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="1" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Opacity" Value="0" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
- 
-
-
-                  <!-- CHECK BOXES-->
-                  <!-- CHECK BOXES-->
-                  <!-- CHECK BOXES-->
-
+    <!-- CHECK BOXES-->
+    <!-- CHECK BOXES-->
+    <!-- CHECK BOXES-->
     <Style TargetType="CheckBox" x:Key="StepsFillAppeal">
-      
+
         <Setter Property="FontSize" Value="12" ></Setter>
         <Setter Property="Foreground" Value="DimGray" ></Setter>
         <Setter Property="FontSize" Value="16" ></Setter>
@@ -331,18 +394,45 @@
         </Setter>
     </Style>
 
-
     <!-- LABELS-->
-                     <!-- LABELS-->
-                     <!-- LABELS-->
-    
-    
+    <!-- LABELS-->
+    <!-- LABELS-->
+
+    <Style TargetType="{x:Type Label}" x:Key="typeAppeal">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontFamily" Value="Franklin Gothic Medium"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Black"></Setter>
+    </Style>
     <Style TargetType="{x:Type Label}" x:Key="titleBoxesFillAppeal">
+
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Margin" Value="8,8,4,4"/>
         <Setter Property="FontFamily" Value="Franklin Gothic Medium"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="#693B00"/>
+    </Style>
+    <Style TargetType="{x:Type Label}" x:Key="titleUnderGifAddingToAppeal">
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="FontFamily" Value="Franklin Gothic Medium"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Foreground" Value="DimGray"/>
+
+    </Style>
+
+    <Style TargetType="{x:Type Label}" x:Key="titleAddingDataToAppealByID">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="28,0,0,0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
     </Style>
 
     <Style TargetType="{x:Type Label}" x:Key="promptsFillAppeal">
@@ -353,9 +443,8 @@
         <Setter Property="Padding" Value="4,0,0,0"/>
         <Setter Property="Height" Value="18"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
-       
-    </Style>
 
+    </Style>
     <Style TargetType="{x:Type Label}" x:Key="titleAddingAppeal">
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Margin" Value="8,8,0,0"/>
@@ -364,33 +453,24 @@
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="Foreground" Value="DimGray"/>
     </Style>
-
-
-
-                 <!--SCROLL BAR-->
-                 <!--SCROLL BAR-->
-                 <!--SCROLL BAR-->
-
+    <!--SCROLL BAR-->
+    <!--SCROLL BAR-->
+    <!--SCROLL BAR-->
     <Style x:Key="{x:Type ScrollViewer}" 
-
     TargetType="{x:Type ScrollViewer}">
         <Style.Triggers>
             <Trigger Property="IsEnabled" 
-
                 Value="false">
                 <Setter Property="Foreground" 
-
                 Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
+    <!-- COMBO   BOX -->
+    <!-- COMBO   BOX -->
+    <!-- COMBO   BOX -->
 
-                     <!-- COMBO   BOX -->
-                     <!-- COMBO   BOX -->
-                     <!-- COMBO   BOX -->
-
-    
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -405,7 +485,7 @@
                   Data="M -2 0 L 2 4 L 6 0 Z"/>
         </Grid>
         <ControlTemplate.Triggers>
-            
+
             <Trigger Property="ToggleButton.IsMouseOver" Value="true">
                 <Setter TargetName="Border" Property="Background" Value="{StaticResource HoverToggleBackground}" />
                 <Setter TargetName="Border" Property="BorderThickness" Value="1" />
@@ -420,11 +500,9 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-
     <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
         <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
     </ControlTemplate>
-
     <Style x:Key="{x:Type ComboBox}" TargetType="ComboBox">
         <Setter Property="Width" Value="Auto"/>
         <Setter Property="Height" Value="26"/>
@@ -438,7 +516,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
-        
+
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
@@ -449,7 +527,6 @@
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
-
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">
@@ -468,7 +545,7 @@
                                         BorderBrush="{StaticResource BorderBrushComboBox}"/>
                                 <!--***Scroll***-->
                                 <ScrollViewer  Margin="0,3" SnapsToDevicePixels="True">
-                                    
+
                                     <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
                                 </ScrollViewer>
                             </Grid>
@@ -488,7 +565,7 @@
                         </Trigger>
                         <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
                         </Trigger>
-                     
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -496,7 +573,6 @@
         <Style.Triggers>
         </Style.Triggers>
     </Style>
-
 
     <Style x:Key="FillingAppeal" TargetType="ComboBox">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
@@ -509,12 +585,11 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
 
-    
         <Setter Property="MinWidth" Value="120"/>
         <Setter Property="Margin" Value="10,0,10,0"/>
         <Setter Property="FontSize" Value="25"/>
         <Setter Property="MinHeight" Value="20"/>
-     
+
         <Setter Property="FontFamily" Value="Calibri,Arial"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="IsEditable" Value="True"/>
@@ -553,7 +628,6 @@
                             AllowsTransparency="True" 
                             Focusable="False"
                             PopupAnimation="Slide">
-
                             <Grid Name="DropDown"
                               SnapsToDevicePixels="True"                
                               MinWidth="{TemplateBinding ActualWidth}"
@@ -597,11 +671,10 @@
         </Style.Triggers>
     </Style>
 
-
     <Style x:Key="ComboBoxTimeAppeal" TargetType="ComboBox">
         <Setter Property="Width" Value="80"/>
         <Setter Property="Height" Value="26"/>
-  
+
         <Setter Property="FontFamily" Value="Calibri,Arial"/>
         <Setter Property="FontSize" Value="27"/>
         <Setter Property="Margin" Value="0,2,0,0"/>
@@ -611,7 +684,6 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
-
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
@@ -622,7 +694,6 @@
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
-
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">
@@ -641,7 +712,6 @@
                                         BorderBrush="{StaticResource BorderBrushComboBox}"/>
                                 <!--***Scroll***-->
                                 <ScrollViewer  Margin="0,3" SnapsToDevicePixels="True">
-
                                     <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
                                 </ScrollViewer>
                             </Grid>
@@ -661,7 +731,6 @@
                         </Trigger>
                         <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
                         </Trigger>
-
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -669,11 +738,6 @@
         <Style.Triggers>
         </Style.Triggers>
     </Style>
-
-
-
-
-
     <!-- ComboBoxItem -->
     <!--<Style x:Key="{x:Type ComboBoxItem}" TargetType="ComboBoxItem">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
@@ -696,17 +760,4 @@
             </Setter.Value>
         </Setter>
     </Style>-->
-
-
-
-
-
-
-
-
-
-
-
-
-
 </ResourceDictionary>

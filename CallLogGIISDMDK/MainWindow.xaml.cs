@@ -30,19 +30,15 @@ namespace CallLogGIISDMDK
             InitializeComponent();
             //DataContext = new MainWindow_VM();
 
-            
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
             timer.Start();
-            //MainFrame.NavigationService.Navigate(new Views.BaseKnowledge.KnowledgeBase());
-
+            //MainFrame.NavigationService.Navigate(new Views.FillAppeal.FillAppeal_page1());
 
             //MainFrame.Navigate(new Authorization_page());
-            //MainFrame.NavigationService.Navigate(new Menu_page());
-            //MainFrame.NavigationService.Navigate(new Views.FillAppeal.FillAppeal_page1());
-            // MainFrame.NavigationService.Navigate(new Views.FillAppeal.AddAppeal_page());
-            MainFrame.NavigationService.Navigate(new Views.ViewAppeals_page2());
+            MainFrame.NavigationService.Navigate(new Menu_page());
+            //MainFrame.NavigationService.Navigate(new Views.FillAppeal.AddDataToAppealByID());
         }
 
 

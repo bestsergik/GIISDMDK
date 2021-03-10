@@ -1,0 +1,573 @@
+﻿<Page x:Class="CallLogGIISDMDK.Views.FillAppeal.EditAppealByPersonalID"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CallLogGIISDMDK.Views.FillAppeal"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:gif="http://wpfanimatedgif.codeplex.com"
+      
+      mc:Ignorable="d" 
+      Title="EditAppealByPersonalID" Loaded="Page_Loaded">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedPageCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="78"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="401"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="40,10,0,0" Grid.ColumnSpan="4"  Style="{StaticResource MainTitles}">Редактирование обращения №</TextBlock>
+            <TextBlock Grid.Column="1" Margin="5,10,0,0" Grid.ColumnSpan="4" Text="{Binding ID}"  Style="{StaticResource MainTitles}"/>
+        </Grid>
+        <Border Grid.Row="1" CornerRadius="5" Margin="5" Grid.ColumnSpan="2"  BorderBrush="Gray" BorderThickness="1.5" >
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <Grid x:Name="CenterGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="155*"/>
+                        <ColumnDefinition Width="1189*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="280"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="300"></RowDefinition>
+                        <RowDefinition Height="170"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="TextAppeal" Grid.ColumnSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Label  FontSize="15" Padding="0" Margin="0" Content="Содержание" HorizontalAlignment="Center" Grid.ColumnSpan="2" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                        <Grid Margin="10" Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBox x:Name="Appeal"  Text="{Binding Appeal, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealBig}"   AcceptsReturn="True" TextWrapping="Wrap" />
+                            <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsAppeal}" ></Label>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition ></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label  Content="Канал связи" HorizontalAlignment="Center"  Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                        <Label   Grid.Column="1" Content="Статус" HorizontalAlignment="Center"  Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                        <Label   Grid.Column="2" VerticalAlignment="Bottom"   Content="Дата и время" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition ></ColumnDefinition>
+                            <ColumnDefinition ></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Border x:Name="DateBorder" Grid.Column="2"   CornerRadius="5" Margin="19.8,0,20.4,0"   BorderBrush="Gray" BorderThickness="1" Grid.ColumnSpan="2" >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="1" Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"></RowDefinition>
+                                        <RowDefinition ></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                </Grid>
+                                <Grid  Grid.Row="1" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="10"></RowDefinition>
+                                        <RowDefinition Height="50"></RowDefinition>
+                                        <RowDefinition Height="10"></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="10"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4">
+                                        <ComboBox  VerticalAlignment="top"  Style="{StaticResource ComboBoxTimeAppeal}" ItemsSource="{Binding HourAppeal}"  SelectedItem="{Binding CurrentHour}"    Height="50"  SelectedIndex="{Binding CurrentHour}"    >
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <StackPanel HorizontalAlignment="Left" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4">
+                                        <ComboBox x:Name="ComboBoxMinuteAppel" Style="{StaticResource ComboBoxTimeAppeal}" VerticalAlignment="top"  ItemsSource="{Binding MinuteAppeal}"  SelectedItem="{Binding CurrentMinute}"  Height="50" SelectedIndex="20">
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <Label Grid.Column="1" Content=":" Margin="2,6,0,0" FontFamily="Arial Black" Padding="0"  VerticalAlignment="top" Grid.Row="1" FontSize="17" Foreground="Black"></Label>
+                                </Grid>
+                                <StackPanel Margin="0,20,0,0" >
+                                    <ComboBox  VerticalAlignment="top"    ItemsSource="{Binding DaysCurrentMonth}"  SelectedItem="{Binding CurrentDay}"   Height="50"  SelectedIndex="20"    >
+                                    </ComboBox>
+                                </StackPanel>
+                            </Grid>
+
+                        </Border>
+
+                        <Border x:Name="StatusBorder" Grid.Column="1"   CornerRadius="5" Margin="19.8,0,20.4,0"   BorderBrush="Gray" BorderThickness="1"  >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition ></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition ></ColumnDefinition>
+                                    <ColumnDefinition ></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Margin="0"  Grid.Row="1" VerticalAlignment="Top" FontSize="16" Content="В работе" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <Grid  x:Name="Wait" Visibility="Hidden" MouseDown="Wait_MouseDown" MouseEnter="Wait_MouseEnter"  >
+                                    <Image  
+       gif:ImageBehavior.AnimatedSource="inWorkEnter.gif" Source="inWorkEnter.gif"  >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <Grid  x:Name="WaitHover"  Visibility="Hidden" MouseDown="Wait_MouseDown" MouseEnter="Wait_MouseEnter" MouseLeave="Wait_MouseLeave">
+                                    <Image  
+       gif:ImageBehavior.AnimatedSource="inWorkHover.gif" Source="inWorkHover.gif"  >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+
+                                <Grid   x:Name="OffWait" MouseDown="Wait_MouseDown" MouseEnter="Wait_MouseEnter" MouseLeave="Wait_MouseLeave">
+                                    <Image   
+       Source="offInWork.png">
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+
+                                <!--Complete-->
+                                <Label Margin="0" Grid.Column="1"  Grid.Row="1" VerticalAlignment="Top" FontSize="16" Content="Завершено" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <Grid Grid.Column="1" x:Name="Complete" Visibility="Hidden" MouseDown="Complete_MouseDown" MouseEnter="Complete_MouseEnter"  >
+                                    <Image  Source="complete.png"  >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <Grid Grid.Column="1" x:Name="CompleteHover"  >
+                                    <Image Source="completeHover.png" MouseDown="Complete_MouseDown" MouseEnter="Complete_MouseEnter" MouseLeave="Complete_MouseLeave" >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <Grid Grid.Column="1"   x:Name="OffComplete" MouseDown="Complete_MouseDown" MouseEnter="Complete_MouseEnter" MouseLeave="Complete_MouseLeave">
+                                    <Image   
+       Source="offComplete.png">
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <Border CornerRadius="5" Margin="20,0,20.2,0" x:Name="PhoneEmailBorder"  BorderBrush="Gray" BorderThickness="1" MouseEnter="PhoneEmailBorder_MouseEnter" MouseLeave="PhoneEmailBorder_MouseLeave"   >
+                            <Grid  Margin="0,10,0,0" x:Name="CenterFilling1"   >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition ></ColumnDefinition>
+                                    <ColumnDefinition ></ColumnDefinition>
+                                    <ColumnDefinition ></ColumnDefinition>
+                                    <ColumnDefinition ></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Visibility="Hidden" x:Name="EmailGrid" Margin="0,4,0,0" Grid.Row="2"  Grid.ColumnSpan="4">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"></RowDefinition>
+                                        <RowDefinition ></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBox x:Name="Email" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
+                                    <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsEmail}" ></Label>
+                                    <Label Grid.Row="1" Margin="0" HorizontalAlignment="Left"    Content="Почта" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                </Grid>
+
+                                <Grid Margin="0,4,0,0" x:Name="PhoneGrid" Visibility="Hidden" Grid.Row="2" Grid.ColumnSpan="4">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50"></RowDefinition>
+                                        <RowDefinition Height="20"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="58"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Height="48" Grid.Column="{Binding PositionPhoneForm}" Grid.ColumnSpan="2" IsEnabled="{Binding IsEnablePhoneForm}"  x:Name="Phone"    Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}" />
+                                    <TextBox Height="48"  Margin="6,0,0,4" Visibility="{Binding IsVisibleNumber7}"  VerticalAlignment="Center"  x:Name="number7" IsEnabled="False"  Style="{StaticResource AppealMini}" Text="+7">
+                                    </TextBox>
+                                    <CheckBox Margin="8,2,0,0" Grid.Row="1" x:Name="IsIrregular" FontSize="13" Grid.ColumnSpan="2" Style="{StaticResource StepsFillAppeal}" IsEnabled="{Binding IsEnableIrregularCheck}"  IsChecked="{Binding IsIrregular}">Нестандартный номер</CheckBox>
+                                </Grid>
+                                <Label x:Name="OutPhoneLabel" Margin="0" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" FontSize="13" Foreground="DimGray" Content="Исходящий звонок" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+
+                                <Grid  Grid.Column="1" Visibility="Hidden" x:Name="OutgoingPhone" MouseDown="OutgoingPhone_MouseDown" MouseEnter="OutgoingPhone_MouseEnter"  >
+                                    <Image  
+       gif:ImageBehavior.AnimatedSource="outgoingArrowToPhone.gif" Source="outgoingArrowToPhone.gif"  >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <Grid  Grid.Column="1"  x:Name="OutgoingPhoneHover"  Visibility="Hidden"  MouseDown="OutgoingPhone_MouseDown" MouseEnter="OutgoingPhone_MouseEnter" MouseLeave="OutgoingPhone_MouseLeave">
+                                    <Image 
+       gif:ImageBehavior.AnimatedSource="outgoingArrowToPhoneHover.gif" Source="outgoingArrowToPhoneHover.gif"  >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <Grid  Grid.Column="1"  x:Name="OutgoingPhoneEnter" Visibility="Hidden" MouseDown="OutgoingPhone_MouseDown" MouseEnter="OutgoingPhone_MouseEnter" MouseLeave="OutgoingPhone_MouseLeave">
+                                    <Image   
+       gif:ImageBehavior.AnimatedSource="outgoingArrowToPhoneEnter.gif" Source="outgoingArrowToPhoneEnter.gif"  >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <Grid  Grid.Column="1" x:Name="OffOutPhone"  MouseDown="OutgoingPhone_MouseDown" MouseEnter="OutgoingPhone_MouseEnter" MouseLeave="OutgoingPhone_MouseLeave">
+                                    <Image   
+       Source="offPhone.png">
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+
+                                <!--<Grid Grid.Row="1" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="1"></RowDefinition>
+                                <RowDefinition ></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="58"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="{Binding PositionPhoneForm}" Grid.ColumnSpan="2" IsEnabled="{Binding IsEnablePhoneForm}"  x:Name="txboxPhoneNumber"    Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}" TextChanged="ChangeTextBox" LostKeyboardFocus="txboxPhoneNumber_LostKeyboardFocus"/>
+                            <TextBox  Margin="6,0,0,4" Visibility="{Binding IsVisibleNumber7}"  VerticalAlignment="Center"  x:Name="number7" IsEnabled="False"  Style="{StaticResource AppealMini}" Text="+7">
+                            </TextBox>
+                            <Label Grid.ColumnSpan="2" Grid.Row="{Binding PositionPromptPhoneNumber}" Style="{StaticResource promptsFillAppeal}" Content="{Binding PromptsPhone}" ></Label>
+                            <CheckBox x:Name="IsIrregular" Grid.ColumnSpan="2" Style="{StaticResource StepsFillAppeal}" IsEnabled="{Binding IsEnableIrregularCheck}" Grid.Row="4" IsChecked="{Binding IsIrregular}">Нестандартный номер</CheckBox>
+                            <CheckBox x:Name="IsEmail" IsEnabled="{Binding IsEnableEmailCheck}" Grid.ColumnSpan="2" Style="{StaticResource StepsFillAppeal}" Grid.Row="{Binding PositionCheckPhone}" IsChecked="{Binding IsEmail}" Checked="IsEmail_Checked">Заявка по почте</CheckBox>
+                        </Grid>-->
+                                <Label Name="InPhoneLabel" Margin="0" Grid.Row="1" FontSize="13" Foreground="DimGray"  VerticalAlignment="Top" Content="Входящий звонок" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <Grid x:Name="IncomingPhone" Visibility="Hidden" MouseEnter="IncomingPhoneGrid_MouseEnter"  MouseDown="IncomingPhoneGrid_MouseDown">
+                                    <Image  
+       gif:ImageBehavior.AnimatedSource="incomingArrowToPhone.gif" Source="incomingArrowToPhone.gif"  >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <Grid x:Name="IncomingPhoneHover"  Visibility="Hidden"  MouseEnter="IncomingPhoneGrid_MouseEnter" MouseLeave="IncomingPhoneGrid_MouseLeave" MouseDown="IncomingPhoneGrid_MouseDown">
+                                    <Image 
+       gif:ImageBehavior.AnimatedSource="incomingArrowToPhoneHover.gif" Source="incomingArrowToPhoneHover.gif"  >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <Grid x:Name="IncomingPhoneEnter" Visibility="Hidden" MouseEnter="IncomingPhoneGrid_MouseEnter" MouseLeave="IncomingPhoneGrid_MouseLeave" MouseDown="IncomingPhoneGrid_MouseDown">
+                                    <Image   
+       gif:ImageBehavior.AnimatedSource="incomingArrowToPhoneEnter.gif" Source="incomingArrowToPhoneEnter.gif" >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <Grid   x:Name="OffInPhone"  MouseEnter="IncomingPhoneGrid_MouseEnter" MouseLeave="IncomingPhoneGrid_MouseLeave" MouseDown="IncomingPhoneGrid_MouseDown">
+                                    <Image 
+       Source="offPhone.png">
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <!--<Grid Grid.Row="1" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60"></RowDefinition>
+                                <RowDefinition ></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <ComboBox x:Name="TypeAppeal" VerticalAlignment="top" ItemsSource="{Binding Types}"  SelectedItem="{Binding Type}"   Height="50"  SelectedIndex="20"    >
+                            </ComboBox>
+                            <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsType}" ></Label>
+                        </Grid>-->
+                                <Label Margin="0" x:Name="OutEmailLabel" Grid.Column="2" VerticalAlignment="Top" FontSize="13" Foreground="DimGray" Grid.Row="1"  Content="Исходящая почта" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <Grid  Grid.Column="2" Visibility="Hidden" x:Name="OutgoingEmail" MouseDown="OutgoingEmail_MouseDown" MouseEnter="OutgoingEmail_MouseEnter"   >
+                                    <Image  
+       gif:ImageBehavior.AnimatedSource="outgoingArrowEmail.gif" Source="outgoingArrowEmail.gif"   >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <Grid Grid.Column="2"  x:Name="OutgoingEmailHover"  Visibility="Hidden" MouseDown="OutgoingEmail_MouseDown" MouseEnter="OutgoingEmail_MouseEnter" MouseLeave="OutgoingEmail_MouseLeave" >
+                                    <Image 
+       gif:ImageBehavior.AnimatedSource="outgoingArrowEmailHover.gif" Source="outgoingArrowEmailHover.gif"  >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <Grid  Grid.Column="2"  x:Name="OutgoingEmailEnter" Visibility="Hidden" MouseDown="OutgoingEmail_MouseDown" MouseEnter="OutgoingEmail_MouseEnter" MouseLeave="OutgoingEmail_MouseLeave" >
+                                    <Image   
+       gif:ImageBehavior.AnimatedSource="outgoingArrowEmailEnter.gif" Source="outgoingArrowEmailEnter.gif" >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <Grid  Grid.Column="2"  x:Name="OffOutEmail" MouseDown="OutgoingEmail_MouseDown" MouseEnter="OutgoingEmail_MouseEnter" MouseLeave="OutgoingEmail_MouseLeave">
+                                    <Image Source="offEmail.png">
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+
+                                <!--wqwfqwf-->
+                                <Label Margin="0" x:Name="InEmainLabel" Grid.Column="3" VerticalAlignment="Top" FontSize="13" Foreground="DimGray" Grid.Row="1"  Content="Входящая почта" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <Grid Grid.Column="3" Visibility="Hidden" x:Name="IncomingEmail" MouseDown="IncomingEmail_MouseDown" MouseEnter="IncomingEmail_MouseEnter"  >
+                                    <Image  
+       gif:ImageBehavior.AnimatedSource="incomingArrowEmail.gif" Source="incomingArrowEmail.gif"   >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <Grid Grid.Column="3"  x:Name="IncomingEmailHover"  Visibility="Hidden" MouseDown="IncomingEmail_MouseDown" MouseEnter="IncomingEmail_MouseEnter" MouseLeave="IncomingEmail_MouseLeave">
+                                    <Image 
+       gif:ImageBehavior.AnimatedSource="incomingArrowEmailHover.gif" Source="incomingArrowEmailHover.gif"  >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <Grid Grid.Column="3"  x:Name="IncomingEmailEnter" Visibility="Hidden" MouseDown="IncomingEmail_MouseDown" MouseEnter="IncomingEmail_MouseEnter" MouseLeave="IncomingEmail_MouseLeave">
+                                    <Image   
+       gif:ImageBehavior.AnimatedSource="incomingArrowEmailEnter.gif" Source="incomingArrowEmailEnter.gif" >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <Grid  Grid.Column="3"  x:Name="OffInEmail"  MouseDown="IncomingEmail_MouseDown" MouseEnter="IncomingEmail_MouseEnter" MouseLeave="IncomingEmail_MouseLeave">
+                                    <Image   
+       Source="offEmail.png">
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                                <!--<StackPanel Grid.Row="1" Grid.Column="2">
+                            <ComboBox  VerticalAlignment="top"    ItemsSource="{Binding DaysCurrentMonth}"  SelectedItem="{Binding CurrentDay}"   Height="50"  SelectedIndex="20"    >
+                            </ComboBox>
+                        </StackPanel>-->
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                    <Grid Grid.Row="3" x:Name="CenterFilling2" Grid.ColumnSpan="2" Margin="0,0,0,0.4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <!--<Label   VerticalAlignment="Bottom"  Content="Почта" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                        <Grid Grid.Row="1" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBox x:Name="Email" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
+                            <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsEmail}" ></Label>
+                        </Grid>-->
+                    </Grid>
+                    <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,0,0.4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition ></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Label Content="Дополнительная информация" HorizontalAlignment="Left" Grid.ColumnSpan="2" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                        <Grid Grid.Row="1" Margin="10">
+                            <TextBox Text="{Binding AdditionalInfo, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealBig}" AcceptsReturn="True" TextWrapping="Wrap" />
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="CancelAdding"  Style="{StaticResource MainMenuButton}" Click="CancelAdding_Click" >Отмена</Button>
+            <Button Grid.Column="2"  x:Name="AddDataToCurrentAppeal" IsCancel="{Binding IsValidAddingDataToAppeal}" Command="{Binding AddDataToCurrentAppealCommmand}"  Style="{StaticResource MainMenuButton}" Click="AddDataToCurrentAppeal_Click"  >Добавить запись</Button>
+        </Grid>
+    </Grid>
+</Page>
+ 
+ 
+ 
+
+

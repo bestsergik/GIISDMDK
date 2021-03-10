@@ -6,7 +6,6 @@
       xmlns:local="clr-namespace:CallLogGIISDMDK.Views.FillAppeal"
       xmlns:cmd ="http://www.galasoft.ch/mvvmlight"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-      
       DataContext="{StaticResource FillAppealVM}"
       mc:Ignorable="d" 
       Title="FillAppeal_page1" Loaded="Page_Loaded">
@@ -16,241 +15,876 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <!--<Grid Background="White" Width="1400" Height="1000">-->
-    <Grid Background="White" >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="90"></RowDefinition>
-            <RowDefinition Height="90"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="2.1*"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition ></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition ></RowDefinition>
-            <RowDefinition Height="80"></RowDefinition>
-            <RowDefinition Height="20" ></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10"></ColumnDefinition>
-            <ColumnDefinition Width="1.2*"></ColumnDefinition>
-            <ColumnDefinition Width="1.2*"></ColumnDefinition>
-            <ColumnDefinition ></ColumnDefinition>
-            <ColumnDefinition ></ColumnDefinition>
-            <ColumnDefinition Width="10"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <TextBlock Margin="40,30,0,0" Grid.ColumnSpan="4"  Style="{StaticResource MainTitles}">Форма заполнения обращения</TextBlock>
-        <Rectangle Grid.Row="1" Grid.Column="1"  VerticalAlignment="Bottom" Grid.ColumnSpan="5"  HorizontalAlignment="Stretch" Fill="LightSlateGray" Margin="6,0,6,0" Height="1.5"/>
-        <Rectangle Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="5"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="LightSlateGray"  Margin="6,0,10,0" Height="1.5"/>
-        <Rectangle Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="LightSlateGray"  Margin="13,0,10,0" Height="1.5"/>
-        <Rectangle Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="LightSlateGray"  Margin="13,0,10,0" Height="1.5"/>
-        <Rectangle Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="LightSlateGray"  Margin="13,0,10,0" Height="1.5"/>
-        <Rectangle Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="LightSlateGray"  Margin="13,0,10,0" Height="1.5"/>
-        <Rectangle Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="LightSlateGray"  Margin="13,0,10,0" Height="1.5"/>
-        <Rectangle Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="LightSlateGray"  Margin="13,0,10,0" Height="1.5"/>
-        <Rectangle Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="LightSlateGray"  Margin="13,0,10,0" Height="1.5"/>
-        <StackPanel Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Orientation="Horizontal">
-            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>
-        <StackPanel Grid.Column="3" Grid.Row="3"  Margin="0,5,0,5" Orientation="Horizontal">
-            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>
-        <StackPanel Grid.Column="4" Grid.Row="3"  Margin="0,5,0,5" Orientation="Horizontal">
-            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>
-        <StackPanel Grid.Column="2" Grid.Row="3"  Margin="0,5,0,5" Orientation="Horizontal">
-            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>
-        <!--<StackPanel Grid.Column="3" Grid.Row="3"  Margin="0,5,0,5"  Orientation="Horizontal">
-            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>-->
-        <StackPanel Grid.Column="2" Grid.Row="5" Grid.RowSpan="1"  Margin="0,5,0,5" Orientation="Horizontal">
-            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>
-        <StackPanel Grid.Column="3" Grid.Row="5"  Grid.RowSpan="1"  Margin="0,5,0,5"  Orientation="Horizontal">
-            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>
-        <StackPanel Grid.Column="4" Grid.Row="5"  Grid.RowSpan="1"  Margin="0,5,0,5"  Orientation="Horizontal">
-            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>
-        <StackPanel Grid.Column="5" Grid.Row="2" Grid.RowSpan="2"   Orientation="Horizontal">
-            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>
-        <StackPanel Grid.Column="5" Grid.Row="4" Grid.RowSpan="2"   Orientation="Horizontal">
-            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="4" Grid.RowSpan="2"   Orientation="Horizontal">
-            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="6" Grid.RowSpan="2"   Orientation="Horizontal">
-            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>
-        <StackPanel Grid.Column="2" Grid.Row="6" Grid.RowSpan="2"   Orientation="Horizontal">
-            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>
-        <StackPanel Grid.Column="3" Grid.Row="6" Grid.RowSpan="2"   Orientation="Horizontal">
-            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>
-        <StackPanel Grid.Column="4" Grid.Row="6" Grid.RowSpan="2"   Orientation="Horizontal">
-            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>
-        <StackPanel Grid.Column="5" Grid.Row="6" Grid.RowSpan="2"   Orientation="Horizontal">
-            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>
-        <ComboBox IsEnabled="false"  Margin="20,10,15,10" x:Name="Searchable"  Grid.Row="1" Grid.ColumnSpan="5" Style="{StaticResource FillingAppeal}"
+    <Grid Background="White">
+
+        <Grid MouseDown="Search_MouseDown">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition x:Name="SearchRow" Height="1"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="70"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock   Style="{StaticResource MainTitles}">Форма заполнения обращения</TextBlock>
+                <Image x:Name="Search" Grid.Column="1" HorizontalAlignment="Right" Margin="6" MouseDown="Search_MouseDown">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Source" Value="Search.png"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Source" Value="Search.png"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Cursor" Value="Hand" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Grid>
+            
+            <ComboBox IsEnabled="false"  Margin="20,10,15,10" x:Name="Searchable"  Grid.Row="1" Grid.ColumnSpan="5" Style="{StaticResource FillingAppeal}"
                     SelectionChanged="Searchable_SelectionChanged"
               IsTextSearchEnabled="False"
               PreviewTextInput="PreviewTextInput_EnhanceComboSearch"
               PreviewKeyUp="PreviewKeyUp_EnhanceComboSearch"
               DataObject.Pasting="Pasting_EnhanceComboSearch">
+            </ComboBox>
 
-        </ComboBox>
-        <Button  Grid.Row="8" Grid.Column="4" Name="NextStep" IsCancel="{Binding IsFirstStepFillAppeal}" Command="{Binding CheckFirstStepFillAppealCommand}" Style="{StaticResource MainMenuButton}"  Click="Button_Click">Далее</Button>
-        <Button  Grid.Row="8" Grid.Column="1" Style="{StaticResource MainMenuButton}" Click="Button_Click_1" >Назад</Button>
-        <Label  Grid.Row="6" Grid.Column="3"  Content="Дата обращения" Style="{StaticResource titleBoxesFillAppeal}"></Label>
-        <Label  Grid.Row="2" Grid.Column="1"  Content="ФИО" Style="{StaticResource titleBoxesFillAppeal}"></Label>
-        <Label  Grid.Row="6" Grid.Column="4"  Content="Время обращения" Style="{StaticResource titleBoxesFillAppeal}"></Label>
-        <Label  Grid.Row="2" Grid.Column="2"  Content="Телефон" Style="{StaticResource titleBoxesFillAppeal}"></Label>
-        <Label  Grid.Row="6" Grid.Column="1" VerticalAlignment="Bottom"  Content="Почта" Style="{StaticResource titleBoxesFillAppeal}"></Label>
-        <Label  Grid.Row="4" Grid.Column="1" VerticalAlignment="Bottom"   Content="Организация" Style="{StaticResource titleBoxesFillAppeal}"></Label>
-        <Label  Grid.Row="2" VerticalAlignment="Bottom" Grid.Column="4"  Content="Роль участника" Style="{StaticResource titleBoxesFillAppeal}"></Label>
-        <Label  Grid.Row="4" VerticalAlignment="Bottom" Grid.Column="3"  Content="Тип обращения" Style="{StaticResource titleBoxesFillAppeal}"></Label>
-        <Label  Grid.Row="4" Grid.Column="4" VerticalAlignment="Bottom"   Content="Статус обращения" Style="{StaticResource titleBoxesFillAppeal}"></Label>
-        <Label  Grid.Row="4" Grid.Column="2" VerticalAlignment="Bottom"   Content="ИНН" Style="{StaticResource titleBoxesFillAppeal}"></Label>
-        <Label  Grid.Row="2" Grid.Column="3" VerticalAlignment="Bottom"   Content="Город" Style="{StaticResource titleBoxesFillAppeal}"></Label>
-        <Label  Grid.Row="6" Grid.Column="2" VerticalAlignment="Bottom"   Content="ОГРН (ОГРНИП)" Style="{StaticResource titleBoxesFillAppeal}"></Label>
-        <Grid Grid.Row="7" Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <TextBox x:Name="OGRN" Text="{Binding Ogrn, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
-            <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsOgrn}" ></Label>
-        </Grid>
-        <Grid Grid.Row="5" Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <TextBox x:Name="INN" Text="{Binding Inn, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
-            <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsInn}" ></Label>
-        </Grid>
-        <Grid Grid.Row="5" Grid.Column="3">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"></RowDefinition>
-                <RowDefinition ></RowDefinition>
-            </Grid.RowDefinitions>
-            <ComboBox x:Name="TypeAppeal" VerticalAlignment="top" ItemsSource="{Binding Types}"  SelectedItem="{Binding Type}"   Height="50"  SelectedIndex="20"    >
-            </ComboBox>
-            <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsType}" ></Label>
-        </Grid>
-        <Grid Grid.Row="3" Grid.Column="3">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <TextBox x:Name="Sity" Text="{Binding Sity, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
-            <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsSity}" ></Label>
-        </Grid>
-        <Grid Grid.Row="3" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition ></RowDefinition>
-                <RowDefinition ></RowDefinition>
-                <RowDefinition ></RowDefinition>
-            </Grid.RowDefinitions>
-            <TextBox x:Name="FullName" Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnableNameForm}" Style="{StaticResource AppealMini}" ></TextBox>
-            <Label Grid.Row="{Binding PositionPromptName}" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsFullName}" Height="Auto" VerticalAlignment="Stretch" ></Label>
-            <CheckBox x:Name="IsHaveFullName"  Style="{StaticResource StepsFillAppeal}" Grid.Row="{Binding PositionCheckName}" IsChecked="{Binding IsHaveName}" Content="Не представился"></CheckBox>
-            <CheckBox Grid.Row="3" Style="{StaticResource StepsFillAppeal}" IsEnabled="{Binding IsEnableMaleForm}" Visibility="{Binding ChoiseSex}"  IsChecked="{Binding IsMale}" Content="Мужчина"></CheckBox>
-            <CheckBox Grid.Row="4" Style="{StaticResource StepsFillAppeal}" IsEnabled ="{Binding IsEnableFemaleForm}"  Visibility="{Binding ChoiseSex}" IsChecked="{Binding IsFemale}" Content="Женщина"></CheckBox>
-        </Grid>
-        <Grid Grid.Row="3" Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"></RowDefinition>
-                <RowDefinition Height="30"></RowDefinition>
-                <RowDefinition Height="30"></RowDefinition>
-                <RowDefinition Height="1"></RowDefinition>
-                <RowDefinition ></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="58"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="{Binding PositionPhoneForm}" Grid.ColumnSpan="2" IsEnabled="{Binding IsEnablePhoneForm}"  x:Name="txboxPhoneNumber"    Text="{Binding InputPhone, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}" TextChanged="ChangeTextBox" LostKeyboardFocus="txboxPhoneNumber_LostKeyboardFocus"/>
-            <TextBox  Margin="6,0,0,4" Visibility="{Binding IsVisibleNumber7}"  VerticalAlignment="Center"  x:Name="number7" IsEnabled="False"  Style="{StaticResource AppealMini}" Text="+7">
-            </TextBox>
-            <Label Grid.ColumnSpan="2" Grid.Row="{Binding PositionPromptPhoneNumber}" Style="{StaticResource promptsFillAppeal}" Content="{Binding PromptsPhoneNumber}" ></Label>
-            <CheckBox x:Name="IsIrregular" Grid.ColumnSpan="2" Style="{StaticResource StepsFillAppeal}" IsEnabled="{Binding IsEnableIrregularCheck}" Grid.Row="4" IsChecked="{Binding IsIrregular}">Нестандартный номер</CheckBox>
-            <CheckBox x:Name="IsEmail" IsEnabled="{Binding IsEnableEmailCheck}" Grid.ColumnSpan="2" Style="{StaticResource StepsFillAppeal}" Grid.Row="{Binding PositionCheckPhone}" IsChecked="{Binding IsEmail}" Checked="IsEmail_Checked">Обращение по почте</CheckBox>
-        </Grid>
-        <Grid Grid.Row="7" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <TextBox x:Name="Email" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
-            <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsEmail}" ></Label>
-        </Grid>
-        <Grid Grid.Row="5" Grid.Column="1" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition ></RowDefinition>
-            </Grid.RowDefinitions>
-            <TextBox x:Name="Company" IsEnabled="{Binding IsEnableCompanyForm}"  Text="{Binding Company, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}" ></TextBox>
-            <Label Grid.Row="{Binding PositionPromptCompany}" Style="{StaticResource promptsFillAppeal}" Content="{Binding PromptsCompany}" ></Label>
-            <CheckBox x:Name="IsIP" Style="{StaticResource StepsFillAppeal}" Grid.Row="{Binding PositionCheckCompany}" IsChecked="{Binding IsIP}">ИП</CheckBox>
-        </Grid>
+            <Border Background="WhiteSmoke" x:Name="MainBorder" Grid.Row="2" CornerRadius="5" Margin="4" Grid.ColumnSpan="2"  BorderBrush="Black" BorderThickness="1.5" >
+                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+                    <Grid Margin="10" x:Name="CenterGrid">
 
-        <StackPanel Grid.Row="7" Grid.Column="3">
-            <ComboBox  VerticalAlignment="top"    ItemsSource="{Binding DaysCurrentMonth}"  SelectedItem="{Binding CurrentDay}"   Height="50"  SelectedIndex="20"    >
-            </ComboBox>
-        </StackPanel>
-        <Grid Grid.Row="3" Grid.Column="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="19*"/>
-                <ColumnDefinition Width="33*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"></RowDefinition>
-                <RowDefinition ></RowDefinition>
-            </Grid.RowDefinitions>
-            <ComboBox Name="Role"  VerticalAlignment="top"   ItemsSource="{Binding ParticipantRoles}"  SelectedItem="{Binding ParticipantRole}"   Height="50"  SelectedIndex="20" Grid.ColumnSpan="2"    >
-            </ComboBox>
-            <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsRole}" Grid.ColumnSpan="2" Margin="15,2,15,-0.8" ></Label>
-        </Grid>
-        <Grid Grid.Row="5" Grid.Column="4">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"></RowDefinition>
-                <RowDefinition ></RowDefinition>
-            </Grid.RowDefinitions>
-            <ComboBox x:Name="Status"   VerticalAlignment="top" ItemsSource="{Binding Statuses}"  SelectedItem="{Binding Status}"   Height="50"  SelectedIndex="20"    >
-            </ComboBox>
-            <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsStatus}" ></Label>
-        </Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="200"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Border Background="Linen" x:Name="FirstLine" CornerRadius="5" Margin="5" Grid.ColumnSpan="2"  BorderBrush="Gray" BorderThickness="1.5" >
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label   Content="ФИО" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <Label   Grid.Column="1"   Content="Организация" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <Grid Grid.Row="1" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"></RowDefinition>
+                                        <RowDefinition Height="auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBox x:Name="FullName" Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnableNameForm}" Style="{StaticResource AppealMini}" ></TextBox>
+                                    <Label Grid.Row="{Binding PositionPromptName}" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsFullName}" Height="Auto" VerticalAlignment="Stretch" ></Label>
+                                    <!--<CheckBox x:Name="IsHaveFullName"  Style="{StaticResource StepsFillAppeal}" Grid.Row="{Binding PositionCheckName}" IsChecked="{Binding IsHaveName}" Content="Не представился"></CheckBox>
+                                <CheckBox Grid.Row="3" Style="{StaticResource StepsFillAppeal}" IsEnabled="{Binding IsEnableMaleForm}" Visibility="{Binding ChoiseSex}"  IsChecked="{Binding IsMale}" Content="Мужчина"></CheckBox>
+                                <CheckBox Grid.Row="4" Style="{StaticResource StepsFillAppeal}" IsEnabled ="{Binding IsEnableFemaleForm}"  Visibility="{Binding ChoiseSex}" IsChecked="{Binding IsFemale}" Content="Женщина"></CheckBox>-->
+                                </Grid>
+                                <Grid Grid.Row="3" Grid.Column="3" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"></RowDefinition>
+                                        <RowDefinition Height="auto"></RowDefinition>
+                                        <RowDefinition ></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBox x:Name="Company" IsEnabled="{Binding IsEnableCompanyForm}"  Text="{Binding Company, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}" ></TextBox>
+                                    <Label Grid.Row="{Binding PositionPromptCompany}" Style="{StaticResource promptsFillAppeal}" Content="{Binding PromptsCompany}" ></Label>
+                                    <!--<CheckBox x:Name="IsIP" Style="{StaticResource StepsFillAppeal}" Grid.Row="{Binding PositionCheckCompany}" IsChecked="{Binding IsIP}">ИП</CheckBox>-->
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <Border Background="Linen" Grid.Row="1" x:Name="SecondLine"  CornerRadius="5" Margin="5" Grid.ColumnSpan="2"  BorderBrush="Gray" BorderThickness="1.5" >
 
-        <Grid  Grid.Row="7" Grid.Column="4">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10"></RowDefinition>
-                <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="10"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="10"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <StackPanel HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4">
-                <ComboBox  VerticalAlignment="top"  Style="{StaticResource ComboBoxTimeAppeal}" ItemsSource="{Binding HourAppeal}"  SelectedItem="{Binding CurrentHour}"    Height="50"  SelectedIndex="{Binding CurrentHour}"    >
-                </ComboBox>
-            </StackPanel>
-            <StackPanel HorizontalAlignment="Left" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4">
-                <ComboBox x:Name="ComboBoxMinuteAppel" Style="{StaticResource ComboBoxTimeAppeal}" VerticalAlignment="top"  ItemsSource="{Binding MinuteAppeal}"  SelectedItem="{Binding CurrentMinute}"  Height="50" SelectedIndex="20">
-                </ComboBox>
-            </StackPanel>
-            <Label Grid.Column="1" Content=":" Margin="2,6,0,0" FontFamily="Arial Black" Padding="0"  VerticalAlignment="top" Grid.Row="1" FontSize="17" Foreground="Black"></Label>
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Канал связи" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <Label Grid.Column="1"  Content="Телефон" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <Label Grid.Column="2"   Content="Email" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+
+                                <Grid Grid.Row="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"></RowDefinition>
+                                        <RowDefinition ></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <ComboBox x:Name="TypeAppeal" VerticalAlignment="top" ItemsSource="{Binding CommunicationСhannels}"  SelectedItem="{Binding CommunicationChannel}"   Height="50"  SelectedIndex="20"    >
+                                    </ComboBox>
+                                    <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsCommunicationСhannel}" ></Label>
+                                </Grid>
+                                <Grid Grid.Row="1" Grid.Column="1" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"></RowDefinition>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                        <RowDefinition ></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="58"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="{Binding PositionPhoneForm}" Grid.ColumnSpan="2" IsEnabled="{Binding IsEnablePhoneForm}"  x:Name="txboxPhoneNumber"    Text="{Binding InputPhone, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}" TextChanged="ChangeTextBox" LostKeyboardFocus="txboxPhoneNumber_LostKeyboardFocus"/>
+                                    <TextBox  Margin="6,0,0,4" Visibility="{Binding IsVisibleNumber7}"  VerticalAlignment="Center"  x:Name="number7" IsEnabled="False"  Style="{StaticResource AppealMini}" Text="+7">
+                                    </TextBox>
+                                    <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Label   Style="{StaticResource promptsFillAppeal}" Content="{Binding PromptsPhoneNumber}" ></Label>
+                                        <CheckBox HorizontalAlignment="Right" Margin="0,0,10,0"  Grid.Column="1" FontSize="12" x:Name="IsIrregular"  Style="{StaticResource StepsFillAppeal}" IsEnabled="{Binding IsEnableIrregularCheck}"  IsChecked="{Binding IsIrregular}">Нестандартный номер</CheckBox>
+                                    </Grid>
+
+                                    <!--<CheckBox x:Name="IsEmail" IsEnabled="{Binding IsEnableEmailCheck}" Grid.ColumnSpan="2" Style="{StaticResource StepsFillAppeal}" Grid.Row="{Binding PositionCheckPhone}" IsChecked="{Binding IsEmail}" Checked="IsEmail_Checked">Обращение по почте</CheckBox>-->
+                                </Grid>
+
+                                <Grid Grid.Row="1" Grid.Column="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBox x:Name="Email" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
+                                    <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsEmail}" ></Label>
+                                </Grid>
+
+                            </Grid>
+                        </Border>
+                        <Border Background="Linen" Grid.Row="2" x:Name="ThirdLine"  CornerRadius="5" Margin="5" Grid.ColumnSpan="2"  BorderBrush="Gray" BorderThickness="1.5" >
+
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label   Content="Город" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <Label   Grid.Column="1" VerticalAlignment="Bottom"   Content="ОГРН(ИП)" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <Label   Grid.Column="2" VerticalAlignment="Bottom"   Content="ИНН" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <Grid Grid.Row="1" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBox x:Name="Sity" Text="{Binding Sity, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
+                                    <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsSity}" ></Label>
+                                </Grid>
+                                <Grid Grid.Row="1" Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBox x:Name="OGRN" Text="{Binding Ogrn, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
+                                    <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsOgrn}" ></Label>
+                                </Grid>
+                                <Grid Grid.Row="1" Grid.Column="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBox x:Name="INN" Text="{Binding Inn, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
+                                    <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsInn}" ></Label>
+                                </Grid>
+                            </Grid>
+                        </Border>
+
+                        <Border Background="Linen" Grid.Row="3" x:Name="FourthLine"  CornerRadius="5" Margin="5" Grid.ColumnSpan="2"  BorderBrush="Gray" BorderThickness="1.5" >
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Дата обращения" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <Label Grid.Column="1"  Content="Время обращения" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <Label Grid.Column="2"  Content="Роль участника" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <Label Grid.Column="3"   Content="Статус обращения" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <StackPanel Grid.Row="1" >
+                                    <ComboBox  VerticalAlignment="top"    ItemsSource="{Binding DaysCurrentMonth}"  SelectedItem="{Binding CurrentDay}"   Height="50"  SelectedIndex="20"    >
+                                    </ComboBox>
+                                </StackPanel>
+                                <Grid  Grid.Row="1" Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"></RowDefinition>
+
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="10"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" >
+                                        <ComboBox  VerticalAlignment="top"  Style="{StaticResource ComboBoxTimeAppeal}" ItemsSource="{Binding HourAppeal}"  SelectedItem="{Binding CurrentHour}"    Height="50"  SelectedIndex="{Binding CurrentHour}"    >
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <StackPanel HorizontalAlignment="Left" Grid.Row="0" Grid.Column="2" >
+                                        <ComboBox x:Name="ComboBoxMinuteAppel" Style="{StaticResource ComboBoxTimeAppeal}" VerticalAlignment="top"  ItemsSource="{Binding MinuteAppeal}"  SelectedItem="{Binding CurrentMinute}"  Height="50" SelectedIndex="20">
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <Label Grid.Column="1" Content=":" Margin="1,0,0,8" FontFamily="Sylfaen" Padding="0"  VerticalAlignment="Center"  FontSize="30" Foreground="Black"></Label>
+                                    <Label HorizontalAlignment="Center" Grid.Row="3" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsTime}" Grid.ColumnSpan="5" Margin="15,2,15,-0.8" ></Label>
+                                </Grid>
+                                <Grid Grid.Row="1" Grid.Column="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="19*"/>
+                                        <ColumnDefinition Width="33*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"></RowDefinition>
+                                        <RowDefinition ></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <ComboBox Name="Role"  VerticalAlignment="top"   ItemsSource="{Binding ParticipantRoles}"  SelectedItem="{Binding ParticipantRole}"   Height="50"  SelectedIndex="20" Grid.ColumnSpan="2"    >
+                                    </ComboBox>
+                                    <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsRole}" Grid.ColumnSpan="2" Margin="15,2,15,-0.8" ></Label>
+                                </Grid>
+                                <Grid Grid.Row="1" Grid.Column="3">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"></RowDefinition>
+                                        <RowDefinition ></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <ComboBox x:Name="Status"   VerticalAlignment="top" ItemsSource="{Binding Statuses}"  SelectedItem="{Binding Status}"   Height="50"  SelectedIndex="20"    >
+                                    </ComboBox>
+                                    <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsStatus}" ></Label>
+                                </Grid>
+
+
+
+                            </Grid>
+                        </Border>
+                        <Border Background="Linen" Grid.Row="4" x:Name="FifthLine"  CornerRadius="5" Margin="5" Grid.ColumnSpan="2"  BorderBrush="Gray" BorderThickness="1.5" >
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="43"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition  Height="20"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Label   Grid.ColumnSpan="3"   Content="Характер обращения" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                                <Button Grid.Row="1" >
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseDown" >
+                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Информационная консультация" >
+                                            </i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Cursor" Value="Hand" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <Button.Template>
+                                        <ControlTemplate TargetType ="{x:Type Button}">
+                                            <Grid RenderTransformOrigin="0.5,0.5" x:Name="RootGrid" MouseDown="RootGrid_MouseDown">
+                                                <Rectangle  x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="MouseDown" >
+                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Информационная консультация" >
+                                                            </i:InvokeCommandAction>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Rectangle>
+                                                <Label   Style="{StaticResource typeAppeal}"  Content="Информационная консультация">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="MouseDown" >
+                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Информационная консультация" >
+                                                            </i:InvokeCommandAction>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Label>
+                                                <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property ="IsPressed" Value ="True">
+                                                    <Setter TargetName="RootGrid" Property="RenderTransform">
+                                                        <Setter.Value>
+                                                            <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+
+                                </Button>
+                                <Button Grid.Row="1" Grid.Column="1" >
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseDown" >
+                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Сертификат" >
+                                            </i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Cursor" Value="Hand" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <Button.Template>
+                                        <ControlTemplate TargetType ="{x:Type Button}">
+                                            <Grid RenderTransformOrigin="0.5,0.5" x:Name="RootGrid" MouseDown="RootGrid_MouseDown">
+                                                <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="MouseDown" >
+                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Сертификат" >
+                                                            </i:InvokeCommandAction>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Rectangle>
+                                                <Label   Style="{StaticResource typeAppeal}"  Content="Сертификат">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="MouseDown" >
+                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Сертификат" >
+                                                            </i:InvokeCommandAction>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Label>
+                                                <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property ="IsPressed" Value ="True">
+                                                    <Setter TargetName="RootGrid" Property="RenderTransform">
+                                                        <Setter.Value>
+                                                            <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Button Grid.Row="1" Grid.Column="2" >
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseDown" >
+                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Ошибка" >
+                                            </i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Cursor" Value="Hand" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <Button.Template>
+                                        <ControlTemplate TargetType ="{x:Type Button}">
+                                            <Grid RenderTransformOrigin="0.5,0.5" x:Name="RootGrid" MouseDown="RootGrid_MouseDown">
+                                                <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="MouseDown" >
+                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Ошибка" >
+                                                            </i:InvokeCommandAction>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Rectangle>
+                                                <Label   Style="{StaticResource typeAppeal}"  Content="Ошибка">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="MouseDown" >
+                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Ошибка" >
+                                                            </i:InvokeCommandAction>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Label>
+                                                <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property ="IsPressed" Value ="True">
+                                                    <Setter TargetName="RootGrid" Property="RenderTransform">
+                                                        <Setter.Value>
+                                                            <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Button Grid.Row="2"  >
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseDown" >
+                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Техническая консультация" >
+                                            </i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Cursor" Value="Hand" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <Button.Template>
+                                        <ControlTemplate TargetType ="{x:Type Button}">
+                                            <Grid RenderTransformOrigin="0.5,0.5" x:Name="RootGrid" MouseDown="RootGrid_MouseDown">
+                                                <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="MouseDown" >
+                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Техническая консультация" >
+                                                            </i:InvokeCommandAction>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Rectangle>
+                                                <Label   Style="{StaticResource typeAppeal}"  Content="Техническая консультация">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="MouseDown" >
+                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Техническая консультация" >
+                                                            </i:InvokeCommandAction>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Label>
+                                                <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property ="IsPressed" Value ="True">
+                                                    <Setter TargetName="RootGrid" Property="RenderTransform">
+                                                        <Setter.Value>
+                                                            <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Button Grid.Row="2" Grid.Column="1" >
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseDown" >
+                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Жалоба" >
+                                            </i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Cursor" Value="Hand" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <Button.Template>
+                                        <ControlTemplate TargetType ="{x:Type Button}">
+                                            <Grid RenderTransformOrigin="0.5,0.5" x:Name="RootGrid" MouseDown="RootGrid_MouseDown">
+                                                <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="MouseDown" >
+                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Жалоба" >
+                                                            </i:InvokeCommandAction>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Rectangle>
+                                                <Label   Style="{StaticResource typeAppeal}"  Content="Жалоба">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="MouseDown" >
+                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Жалоба" >
+                                                            </i:InvokeCommandAction>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Label>
+                                                <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property ="IsPressed" Value ="True">
+                                                    <Setter TargetName="RootGrid" Property="RenderTransform">
+                                                        <Setter.Value>
+                                                            <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Button Grid.Row="2" Grid.Column="2" >
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseDown" >
+                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Пожелание" >
+                                            </i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Cursor" Value="Hand" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <Button.Template>
+                                        <ControlTemplate TargetType ="{x:Type Button}">
+                                            <Grid RenderTransformOrigin="0.5,0.5" x:Name="RootGrid" MouseDown="RootGrid_MouseDown">
+                                                <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="MouseDown" >
+                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Пожелание" >
+                                                            </i:InvokeCommandAction>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Rectangle>
+                                                <Label   Style="{StaticResource typeAppeal}"  Content="Пожелание">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="MouseDown" >
+                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Пожелание" >
+                                                            </i:InvokeCommandAction>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Label>
+                                                <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property ="IsPressed" Value ="True">
+                                                    <Setter TargetName="RootGrid" Property="RenderTransform">
+                                                        <Setter.Value>
+                                                            <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Label x:Name="PromptTypeAppel" Grid.Row="3" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsType}" ></Label>
+
+                                <!--<Button Grid.Row="1" Style="{StaticResource TypeAppeal}">Техническая консультация</Button>-->
+                                <!--<Button Grid.Row="1" Grid.Column="1"  Style="{StaticResource  TypeAppeal}">Сертификат</Button>-->
+                                <!--<Button Grid.Row="1" Grid.Column="2"  Style="{StaticResource TypeAppeal}">Ошибка</Button>-->
+                                <!--<Button Grid.Row="2" Style="{StaticResource TypeAppeal}">Информационная консультация</Button>
+                                <Button Grid.Row="2"  Grid.Column="1"  Style="{StaticResource TypeAppeal}"></Button>
+                                <Button Grid.Row="2"  Grid.Column="2"  Style="{StaticResource TypeAppeal}">Ошибка</Button>-->
+                            </Grid>
+                        </Border>
+                        <!--<Grid.RowDefinitions>
+                        <RowDefinition Height="1"></RowDefinition>
+                        <RowDefinition Height="1"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="2.1*"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition ></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition ></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="20" ></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"></ColumnDefinition>
+                        <ColumnDefinition Width="1.4*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                        <ColumnDefinition ></ColumnDefinition>
+                        <ColumnDefinition ></ColumnDefinition>
+                        <ColumnDefinition Width="10"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Row="1" Grid.Column="1"  VerticalAlignment="Bottom" Grid.ColumnSpan="5"  HorizontalAlignment="Stretch" Fill="LightSlateGray" Margin="6,0,6,0" Height="1.5"/>
+                    <Rectangle Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="5"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="LightSlateGray"  Margin="6,0,10,0" Height="1.5"/>
+                    -->
+                        <!--<Rectangle Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="LightSlateGray"  Margin="13,0,10,0" Height="1.5"/>-->
+                        <!--
+                    <Rectangle Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="LightSlateGray"  Margin="13,0,10,0" Height="1.5"/>
+                    <Rectangle Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="LightSlateGray"  Margin="13,0,10,0" Height="1.5"/>
+                    <Rectangle Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="LightSlateGray"  Margin="13,0,10,0" Height="1.5"/>
+                    <Rectangle Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="LightSlateGray"  Margin="13,0,10,0" Height="1.5"/>
+                    <Rectangle Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="LightSlateGray"  Margin="13,0,10,0" Height="1.5"/>
+                    <Rectangle Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="LightSlateGray"  Margin="13,0,10,0" Height="1.5"/>
+                    <StackPanel Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Orientation="Horizontal">
+                        <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="3" Grid.Row="3"  Margin="0,5,0,5" Orientation="Horizontal">
+                        <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="4" Grid.Row="3"  Margin="0,5,0,5" Orientation="Horizontal">
+                        <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Grid.Row="3"  Margin="0,5,0,5" Orientation="Horizontal">
+                        <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+                    -->
+                        <!--<StackPanel Grid.Column="3" Grid.Row="3"  Margin="0,5,0,5"  Orientation="Horizontal">
+            <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+        </StackPanel>-->
+                        <!--
+                    <StackPanel Grid.Column="2" Grid.Row="5" Grid.RowSpan="1"  Margin="0,5,0,5" Orientation="Horizontal">
+                        <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="3" Grid.Row="5"  Grid.RowSpan="1"  Margin="0,5,0,5"  Orientation="Horizontal">
+                        <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="4" Grid.Row="5"  Grid.RowSpan="1"  Margin="0,5,0,5"  Orientation="Horizontal">
+                        <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="5" Grid.Row="2" Grid.RowSpan="2"   Orientation="Horizontal">
+                        <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="5" Grid.Row="4" Grid.RowSpan="2"   Orientation="Horizontal">
+                        <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="4" Grid.RowSpan="2"   Orientation="Horizontal">
+                        <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="6" Grid.RowSpan="2"   Orientation="Horizontal">
+                        <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Grid.Row="6" Grid.RowSpan="2"   Orientation="Horizontal">
+                        <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="3" Grid.Row="6" Grid.RowSpan="2"   Orientation="Horizontal">
+                        <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="4" Grid.Row="6" Grid.RowSpan="2"   Orientation="Horizontal">
+                        <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="5" Grid.Row="6" Grid.RowSpan="2"   Orientation="Horizontal">
+                        <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+                 
+                    <Label  Grid.Row="6" Grid.Column="1"  Content="Дата обращения" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                    <Label  Grid.Row="2" Grid.Column="2"  Content="ФИО" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                    <Label  Grid.Row="6" Grid.Column="2"  Content="Время обращения" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                    <Label  Grid.Row="4" VerticalAlignment="Bottom" Grid.Column="3"  Content="Роль участника" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                    <Label  Grid.Row="4" Grid.Column="4" VerticalAlignment="Bottom"   Content="Статус обращения" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                    <Label  Grid.Row="4" Grid.Column="2" VerticalAlignment="Bottom"   Content="ИНН" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                    <Label  Grid.Row="2" Grid.Column="4" VerticalAlignment="Bottom"   Content="Город" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                    <Label  Grid.Row="6" Grid.Column="3" VerticalAlignment="Bottom"   Content="ОГРН (ОГРНИП)" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                    <Label  Grid.Row="6" Grid.Column="4" VerticalAlignment="Bottom"   Content="Характер обращения" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+
+                    <Grid Margin="0,24,0,0" Grid.Row="2" Grid.Column="1" Grid.RowSpan="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="80"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                      
+                      
+                        <Label  VerticalAlignment="Bottom" Grid.Column="1"  Content="Канал связи" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                        <Label  Grid.Row="2"   Content="Телефон" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                        <Label  Grid.Row="4" Grid.Column="1" VerticalAlignment="Bottom"  Content="Почта" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60"></RowDefinition>
+                                <RowDefinition ></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <ComboBox x:Name="TypeAppeal" VerticalAlignment="top" ItemsSource="{Binding CommunicationСhannels}"  SelectedItem="{Binding СommunicationСhannel}"   Height="50"  SelectedIndex="20"    >
+                            </ComboBox>
+                            <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsType}" ></Label>
+                        </Grid>
+                        <Grid Grid.Row="3" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition ></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="58"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="{Binding PositionPhoneForm}" Grid.ColumnSpan="2" IsEnabled="{Binding IsEnablePhoneForm}"  x:Name="txboxPhoneNumber"    Text="{Binding InputPhone, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}" TextChanged="ChangeTextBox" LostKeyboardFocus="txboxPhoneNumber_LostKeyboardFocus"/>
+                            <TextBox  Margin="6,0,0,4" Visibility="{Binding IsVisibleNumber7}"  VerticalAlignment="Center"  x:Name="number7" IsEnabled="False"  Style="{StaticResource AppealMini}" Text="+7">
+                            </TextBox>
+                            <Label Grid.ColumnSpan="2" Grid.Row="{Binding PositionPromptPhoneNumber}" Style="{StaticResource promptsFillAppeal}" Content="{Binding PromptsPhoneNumber}" ></Label>
+                            <CheckBox x:Name="IsIrregular" Grid.ColumnSpan="2" Style="{StaticResource StepsFillAppeal}" IsEnabled="{Binding IsEnableIrregularCheck}" Grid.Row="{Binding PositionCheckPhone}" IsChecked="{Binding IsIrregular}">Нестандартный номер</CheckBox>
+                            -->
+                        <!--<CheckBox x:Name="IsEmail" IsEnabled="{Binding IsEnableEmailCheck}" Grid.ColumnSpan="2" Style="{StaticResource StepsFillAppeal}" Grid.Row="{Binding PositionCheckPhone}" IsChecked="{Binding IsEmail}" Checked="IsEmail_Checked">Обращение по почте</CheckBox>-->
+                        <!--
+                        </Grid>
+                        <Grid Grid.Row="5" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBox x:Name="Email" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
+                            <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsEmail}" ></Label>
+                        </Grid>
+                    </Grid>
+                    
+                    
+                    
+                    
+                    
+                    <Grid Grid.Row="7" Grid.Column="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="OGRN" Text="{Binding Ogrn, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
+                        <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsOgrn}" ></Label>
+                    </Grid>
+                  
+                  
+                    <Grid Grid.Row="5" Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="INN" Text="{Binding Inn, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
+                        <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsInn}" ></Label>
+                    </Grid>
+                   
+                   
+                   
+                    <Grid Grid.Row="3" Grid.Column="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="Sity" Text="{Binding Sity, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
+                        <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsSity}" ></Label>
+                    </Grid>
+                    <Grid Grid.Row="3" Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition ></RowDefinition>
+                            <RowDefinition ></RowDefinition>
+                            <RowDefinition ></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="FullName" Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnableNameForm}" Style="{StaticResource AppealMini}" ></TextBox>
+                        <Label Grid.Row="{Binding PositionPromptName}" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsFullName}" Height="Auto" VerticalAlignment="Stretch" ></Label>
+                        <CheckBox x:Name="IsHaveFullName"  Style="{StaticResource StepsFillAppeal}" Grid.Row="{Binding PositionCheckName}" IsChecked="{Binding IsHaveName}" Content="Не представился"></CheckBox>
+                        <CheckBox Grid.Row="3" Style="{StaticResource StepsFillAppeal}" IsEnabled="{Binding IsEnableMaleForm}" Visibility="{Binding ChoiseSex}"  IsChecked="{Binding IsMale}" Content="Мужчина"></CheckBox>
+                        <CheckBox Grid.Row="4" Style="{StaticResource StepsFillAppeal}" IsEnabled ="{Binding IsEnableFemaleForm}"  Visibility="{Binding ChoiseSex}" IsChecked="{Binding IsFemale}" Content="Женщина"></CheckBox>
+                    </Grid>
+         
+                  
+                    
+                    <Grid Grid.Row="3" Grid.Column="3" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition ></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="Company" IsEnabled="{Binding IsEnableCompanyForm}"  Text="{Binding Company, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}" ></TextBox>
+                        <Label Grid.Row="{Binding PositionPromptCompany}" Style="{StaticResource promptsFillAppeal}" Content="{Binding PromptsCompany}" ></Label>
+                        -->
+                        <!--<CheckBox x:Name="IsIP" Style="{StaticResource StepsFillAppeal}" Grid.Row="{Binding PositionCheckCompany}" IsChecked="{Binding IsIP}">ИП</CheckBox>-->
+                        <!--
+                    </Grid>
+                    <StackPanel Grid.Row="7" Grid.Column="1">
+                        <ComboBox  VerticalAlignment="top"    ItemsSource="{Binding DaysCurrentMonth}"  SelectedItem="{Binding CurrentDay}"   Height="50"  SelectedIndex="20"    >
+                        </ComboBox>
+                    </StackPanel>
+                    <Grid Grid.Row="5" Grid.Column="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="19*"/>
+                            <ColumnDefinition Width="33*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"></RowDefinition>
+                            <RowDefinition ></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <ComboBox Name="Role"  VerticalAlignment="top"   ItemsSource="{Binding ParticipantRoles}"  SelectedItem="{Binding ParticipantRole}"   Height="50"  SelectedIndex="20" Grid.ColumnSpan="2"    >
+                        </ComboBox>
+                        <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsRole}" Grid.ColumnSpan="2" Margin="15,2,15,-0.8" ></Label>
+                    </Grid>
+                    <Grid Grid.Row="5" Grid.Column="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"></RowDefinition>
+                            <RowDefinition ></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <ComboBox x:Name="Status"   VerticalAlignment="top" ItemsSource="{Binding Statuses}"  SelectedItem="{Binding Status}"   Height="50"  SelectedIndex="20"    >
+                        </ComboBox>
+                        <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsStatus}" ></Label>
+                    </Grid>
+
+                    <Grid Grid.Row="7" Grid.Column="4" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition ></RowDefinition>
+                            <RowDefinition ></RowDefinition>
+                            <RowDefinition ></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <CheckBox  x:Name="asf" Style="{StaticResource StepsFillAppeal}"  IsChecked="{Binding IsIrregular}">Нестандартный номер</CheckBox>
+                        <CheckBox Grid.Row="1" x:Name="fsafe" Style="{StaticResource StepsFillAppeal}"  IsChecked="{Binding IsIrregular}">Нестандартный номер</CheckBox>
+                        <CheckBox Grid.Row="2" x:Name="fаse" Style="{StaticResource StepsFillAppeal}"  IsChecked="{Binding IsIrregular}">Нестандартный номер</CheckBox>
+                        
+                        -->
+                        <!--<CheckBox x:Name="IsEmail" IsEnabled="{Binding IsEnableEmailCheck}" Grid.ColumnSpan="2" Style="{StaticResource StepsFillAppeal}" Grid.Row="{Binding PositionCheckPhone}" IsChecked="{Binding IsEmail}" Checked="IsEmail_Checked">Обращение по почте</CheckBox>-->
+                        <!--
+                    </Grid>
+                    <Grid  Grid.Row="7" Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"></RowDefinition>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="10"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4">
+                            <ComboBox  VerticalAlignment="top"  Style="{StaticResource ComboBoxTimeAppeal}" ItemsSource="{Binding HourAppeal}"  SelectedItem="{Binding CurrentHour}"    Height="50"  SelectedIndex="{Binding CurrentHour}"    >
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Left" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4">
+                            <ComboBox x:Name="ComboBoxMinuteAppel" Style="{StaticResource ComboBoxTimeAppeal}" VerticalAlignment="top"  ItemsSource="{Binding MinuteAppeal}"  SelectedItem="{Binding CurrentMinute}"  Height="50" SelectedIndex="20">
+                            </ComboBox>
+                        </StackPanel>
+                        <Label Grid.Column="1" Content=":" Margin="2,6,0,0" FontFamily="Arial Black" Padding="0"  VerticalAlignment="top" Grid.Row="1" FontSize="17" Foreground="Black"></Label>
+                    </Grid>-->
+                    </Grid>
+                </ScrollViewer>
+            </Border>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button    Style="{StaticResource MainMenuButton}" Click="Button_Click_1" >Назад</Button>
+                <Button Grid.Column="2" MouseLeave="NextStep_MouseLeave" Name="NextStep" IsCancel="{Binding IsFirstStepFillAppeal}" Command="{Binding CheckFirstStepFillAppealCommand}" Style="{StaticResource MainMenuButton}"  Click="Button_Click">Далее</Button>
+            </Grid>
         </Grid>
     </Grid>
 </Page>
+ 
+ 
  
