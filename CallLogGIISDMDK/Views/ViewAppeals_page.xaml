@@ -101,7 +101,7 @@
                             <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Path=InputPhone}" />
                             <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Path=Status}" />
                             <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Path=Type}" />
-                            <Image Grid.Column="2" Width="30"  Height="24"  Grid.RowSpan="5" HorizontalAlignment="Right"  x:Name="TypeArrow" Source="outgoing.png">
+                            <Image Grid.Column="2" Width="30"  Height="24"  Grid.RowSpan="5" HorizontalAlignment="Right"  x:Name="TypeArrow" >
                             </Image>
                             <Ellipse Margin="4,0,0,0"  Grid.RowSpan="4" HorizontalAlignment="Left" x:Name="IndicationAppeal" Fill="White" Width="15" Height="15" />
                         </Grid>

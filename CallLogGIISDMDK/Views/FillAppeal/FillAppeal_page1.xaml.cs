@@ -67,6 +67,7 @@ namespace CallLogGIISDMDK.Views.FillAppeal
                 Role.SelectedIndex = -1;
                 Status.SelectedIndex = -1;
                 TypeAppeal.SelectedIndex = -1;
+                ComboBoxMinuteAppel.SelectedIndex = -1;
             }
             if (File.Exists(pathToZipAppeals))
             {

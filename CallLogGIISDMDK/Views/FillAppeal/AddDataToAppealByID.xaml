@@ -112,129 +112,67 @@
                             </Grid>
                         </Border>
 
+
                         <!-- Status -->
 
                         <Border x:Name="StatusBorder"  Grid.Row="1" Grid.Column="2"   CornerRadius="5" Margin="19.8,0,20.4,0"   BorderBrush="Gray" BorderThickness="1"  >
-                            <Grid x:Name="StatusGrid" Loaded="StatusGrid_Loaded">
+                            <Grid x:Name="StatusGrid" >
                                 <Grid.RowDefinitions>
                                     <RowDefinition ></RowDefinition>
                                     <RowDefinition ></RowDefinition>
                                 </Grid.RowDefinitions>
+
                                 <Grid Grid.Row="1">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="90"></RowDefinition>
                                         <RowDefinition></RowDefinition>
                                     </Grid.RowDefinitions>
+
+                                    <!-- Complete -->
+
                                     <Label  Padding="0" x:Name="CompleteLabel"  Grid.Column="1"  Grid.Row="1"  Content="Завершено" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
-                                    <Grid Grid.Column="1"   Margin="20"  x:Name="CompleteEnter" Visibility="Hidden" MouseDown="Complete_MouseDown" MouseEnter="Complete_MouseEnter" MouseLeave="Complete_MouseLeave" >
-                                        <Image Style="{StaticResource cursorHand}"  x:Name="CompleteEnterGif" >
-                                        </Image>
+                                    <Image Margin="14"  Grid.Column="1"  Style="{StaticResource cursorHand}"  x:Name="completeenter" Loaded="LoadGif"></Image>
+                                    <Image Margin="14"  Source="complete.png" Grid.Column="1" Style="{StaticResource cursorHand}"></Image>
+                                    <Image Grid.Column="1" Style="{StaticResource cursorHand}" x:Name="completehover" Loaded="LoadGif">
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="MouseDown" >
                                                 <i:InvokeCommandAction Command="{Binding SetStatusAppealCommand}" CommandParameter="complete" >
                                                 </i:InvokeCommandAction>
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
-
-                                    </Grid>
-                                    <Grid Grid.Column="1"  x:Name="Complete"  Margin="20"  MouseDown="Complete_MouseDown" MouseEnter="Complete_MouseEnter" MouseLeave="Complete_MouseLeave">
-                                        <Image Source="complete.png"  >
-                                            <Image.Style>
-                                                <Style TargetType="{x:Type Image}">
-                                                    <Style.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Cursor" Value="Hand" />
-                                                        </Trigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Image.Style>
-                                        </Image>
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="MouseDown" >
-                                                <i:InvokeCommandAction Command="{Binding SetStatusAppealCommand}" CommandParameter="complete" >
-                                                </i:InvokeCommandAction>
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                    </Grid>
-                                    <Grid Grid.Column="1" Margin="20"  Visibility="Hidden"  x:Name="CompleteHover" MouseDown="Complete_MouseDown" MouseEnter="Complete_MouseEnter" MouseLeave="Complete_MouseLeave">
-                                        <Image Style="{StaticResource cursorHand}" x:Name="CompleteHoverGif" gif:ImageBehavior.AnimatedSource="completeHover.gif" Source="completeHover.gif"  ></Image>
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="MouseDown" >
-                                                <i:InvokeCommandAction Command="{Binding SetStatusAppealCommand}" CommandParameter="complete" >
-                                                </i:InvokeCommandAction>
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                    </Grid>
-
-                                    <Grid Grid.Column="1"  Margin="20"  Visibility="Hidden" x:Name="OffComplete"  MouseDown="Complete_MouseDown" MouseEnter="Complete_MouseEnter" MouseLeave="Complete_MouseLeave">
-                                        <Image    Source="offComplete.png">
-                                            <Image.Style>
-                                                <Style TargetType="{x:Type Image}">
-                                                    <Style.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Cursor" Value="Hand" />
-                                                        </Trigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Image.Style>
-                                        </Image>
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="MouseDown" >
-                                                <i:InvokeCommandAction Command="{Binding SetStatusAppealCommand}" CommandParameter="complete" >
-                                                </i:InvokeCommandAction>
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                    </Grid>
+                                    </Image>
+                                    <Image Grid.Column="1" Margin="14"   Source="offComplete.png" Style="{StaticResource cursorHand}"></Image>
                                 </Grid>
+
+                                <!-- In Work-->
+
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="90"></RowDefinition>
                                         <RowDefinition></RowDefinition>
                                     </Grid.RowDefinitions>
+
                                     <Label x:Name="InWorkLabel"   Grid.Row="1"  Content="В работе" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
-                                    <Grid x:Name="InWorkEnter"  Visibility="Hidden" MouseDown="InWork_MouseDown" MouseEnter="InWork_MouseEnter" MouseLeave="InWork_MouseLeave">
-                                        <Image Style="{StaticResource cursorHand}" x:Name="InWorkEnterGif" >
-                                        </Image>
-
-                                    </Grid>
-                                    <Grid  x:Name="InWork"   MouseDown="InWork_MouseDown" MouseEnter="InWork_MouseEnter" MouseLeave="InWork_MouseLeave" >
-                                        <Image Style="{StaticResource cursorHand}" Source="inWork.png" >
-                                        </Image>
-
-                                    </Grid>
-                                    <Grid  x:Name="InWorkHover"   Visibility="Hidden"  MouseDown="InWork_MouseDown" MouseEnter="InWork_MouseEnter" MouseLeave="InWork_MouseLeave">
-                                        <Image Style="{StaticResource cursorHand}" x:Name="InWorkHoverGif" >
-                                        </Image>
+                                    <Image Style="{StaticResource cursorHand}" x:Name="inWorkenter" Loaded="LoadGif"></Image>
+                                    <Image Style="{StaticResource cursorHand}" Source="inWork.png" ></Image>
+                                    <Image Style="{StaticResource cursorHand}" x:Name="inworkhover" Loaded="LoadGif">
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="MouseDown" >
                                                 <i:InvokeCommandAction Command="{Binding SetStatusAppealCommand}" CommandParameter="inWork" >
                                                 </i:InvokeCommandAction>
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
+                                    </Image>
+                                    <Image Source="offInWork.png" Style="{StaticResource cursorHand}"></Image>
 
-                                    </Grid>
-                                    <Grid   x:Name="OffInWork"  Visibility="Hidden"  MouseDown="InWork_MouseDown" MouseEnter="InWork_MouseEnter" MouseLeave="InWork_MouseLeave">
-                                        <Image Source="offInWork.png">
-                                            <Image.Style>
-                                                <Style TargetType="{x:Type Image}">
-                                                    <Style.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Cursor" Value="Hand" />
-                                                        </Trigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Image.Style>
-                                        </Image>
-                                    </Grid>
                                 </Grid>
-                                <!--Complete-->
                             </Grid>
                         </Border>
 
                         <!-- Choice phone or email   -->
 
-                        <Border Grid.Row="1" CornerRadius="5" Margin="20,0,20.2,0" x:Name="PhoneEmailBorder"  BorderBrush="Gray" BorderThickness="1" MouseEnter="PhoneEmailBorder_MouseEnter" MouseLeave="PhoneEmailBorder_MouseLeave"   >
-                            <Grid  Margin="0,10,0,0" x:Name="PhoneEmailGrid"   Loaded="PhoneEmailGrid_Loaded" >
+                        <Border Grid.Row="1" CornerRadius="5" Margin="20,0,20.2,0" x:Name="PhoneEmailBorder"  BorderBrush="Gray" BorderThickness="1"    >
+                            <Grid  Margin="0,10,0,0" x:Name="PhoneEmailGrid">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="80"></RowDefinition>
                                     <RowDefinition Height="22"></RowDefinition>
@@ -289,165 +227,59 @@
                                 <StackPanel Grid.Column="2" Grid.RowSpan="2"   Orientation="Horizontal">
                                     <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
                                 </StackPanel>
+                              
                                 <Label x:Name="OutPhoneLabel" Grid.Column="1" Grid.Row="1"  Content="Исходящий звонок" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
-                                <Grid  Grid.Column="1" Visibility="Hidden" x:Name="OutgoingPhone" MouseDown="OutgoingPhone_MouseDown" MouseEnter="OutgoingPhone_MouseEnter"  >
-                                    <Image Style="{StaticResource cursorHand}" x:Name="OutGoingPhoneGif"  ></Image>
-
-                                </Grid>
-                                <Grid  Grid.Column="1"  x:Name="OutgoingPhoneHover"  Visibility="Hidden"  MouseDown="OutgoingPhone_MouseDown" MouseEnter="OutgoingPhone_MouseEnter" MouseLeave="OutgoingPhone_MouseLeave">
-                                    <Image  Style="{StaticResource cursorHand}" x:Name="OutGoingPhoneHoverGif"  ></Image>
+                                <Image  Grid.Column="1" Style="{StaticResource cursorHand}" x:Name="outgoingphone"  MouseEnter="Load_Gif" ></Image>
+                                <Image  Grid.Column="1" Style="{StaticResource cursorHand}" x:Name="outgoingphonehover"  MouseEnter="Load_Gif" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="MouseDown" >
                                             <i:InvokeCommandAction Command="{Binding SetTypeConnectCommand}" CommandParameter="out" >
                                             </i:InvokeCommandAction>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
-                                    <!--<Image gif:ImageBehavior.AnimatedSource="outgoingArrowToPhoneHover.gif" Source="outgoingArrowToPhoneHover.gif"  >
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="MouseDown" >
-                                                <i:InvokeCommandAction Command="{Binding SetTypeConnectCommand}" CommandParameter="out" >
-                                                </i:InvokeCommandAction>
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                        <Image.Style>
-                                            <Style TargetType="{x:Type Image}">
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Cursor" Value="Hand" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Image.Style>
-                                    </Image>-->
-                                </Grid>
-                                <Grid  Grid.Column="1"  x:Name="OutgoingPhoneEnter" Visibility="Hidden" MouseDown="OutgoingPhone_MouseDown" MouseEnter="OutgoingPhone_MouseEnter" MouseLeave="OutgoingPhone_MouseLeave">
-                                    <Image Style="{StaticResource cursorHand}" x:Name="OutGoingPhoneEnterGif"  ></Image>
-                                </Grid>
-                                <Grid  Grid.Column="1" x:Name="OffOutPhone"  MouseDown="OutgoingPhone_MouseDown" MouseEnter="OutgoingPhone_MouseEnter" MouseLeave="OutgoingPhone_MouseLeave">
-                                    <Image Source="offPhone.png"></Image>
-                                    <!--<Image      Source="offPhone.png">
-                                        <Image.Style>
-                                            <Style TargetType="{x:Type Image}">
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Cursor" Value="Hand" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Image.Style>
-                                    </Image>-->
-                                </Grid>
+                                </Image>
+                                <Image Grid.Column="1" Style="{StaticResource cursorHand}" x:Name="outgoingphoneenter" MouseEnter="Load_Gif" ></Image>
+                                <Image Grid.Column="1" Source="offPhone.png"></Image>
+
                                 <Label Name="InPhoneLabel"  Grid.Row="1"   Content="Входящий звонок" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
-                                <Grid x:Name="IncomingPhone" Visibility="Hidden" MouseEnter="IncomingPhoneGrid_MouseEnter"  MouseDown="IncomingPhoneGrid_MouseDown">
-                                    <Image Style="{StaticResource cursorHand}" x:Name="IncomingPhoneGif"  ></Image>
-                                </Grid>
-                                <Grid x:Name="IncomingPhoneHover" Visibility="Hidden"  MouseEnter="IncomingPhoneGrid_MouseEnter" MouseLeave="IncomingPhoneGrid_MouseLeave" MouseDown="IncomingPhoneGrid_MouseDown">
-                                    <Image Style="{StaticResource cursorHand}" x:Name="IncomingPhoneHoverGif"  ></Image>
+                                <Image Style="{StaticResource cursorHand}" x:Name="incomingphone" ></Image>
+                                <Image Style="{StaticResource cursorHand}" x:Name="incomingphonehover" MouseEnter="Load_Gif" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="MouseDown" >
                                             <i:InvokeCommandAction Command="{Binding SetTypeConnectCommand}" CommandParameter="in" >
                                             </i:InvokeCommandAction>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
-                                    <!--<Image   gif:ImageBehavior.AnimatedSource="incomingArrowToPhoneHover.gif" Source="incomingArrowToPhoneHover.gif"  >
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="MouseDown" >
-                                                <i:InvokeCommandAction Command="{Binding SetTypeConnectCommand}" CommandParameter="in" >
-                                                </i:InvokeCommandAction>
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                        <Image.Style>
-                                            <Style TargetType="{x:Type Image}">
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Cursor" Value="Hand"/>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Image.Style>
-                                    </Image>-->
-                                </Grid>
-                                <Grid x:Name="IncomingPhoneEnter" Visibility="Hidden" MouseEnter="IncomingPhoneGrid_MouseEnter" MouseLeave="IncomingPhoneGrid_MouseLeave" MouseDown="IncomingPhoneGrid_MouseDown">
-                                    <Image  Style="{StaticResource cursorHand}" x:Name="IncomingPhoneEnterGif" ></Image>
-                                </Grid>
-                                <Grid   x:Name="OffInPhone"  MouseEnter="IncomingPhoneGrid_MouseEnter" MouseLeave="IncomingPhoneGrid_MouseLeave" MouseDown="IncomingPhoneGrid_MouseDown">
-                                    <Image Style="{StaticResource cursorHand}"   Source="offPhone.png">
-                                    </Image>
-                                </Grid>
+                                </Image>
+                                <Image  Style="{StaticResource cursorHand}" x:Name="incomingphoneenter" MouseEnter="Load_Gif" ></Image>
+                                <Image  Style="{StaticResource cursorHand}"  Source="offPhone.png">
+                                </Image>
+                                
                                 <Label  x:Name="OutEmailLabel" Grid.Column="2"  Grid.Row="1"  Content="Исходящая почта" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
-                                <Grid  Grid.Column="2" Visibility="Hidden" x:Name="OutgoingEmail" MouseDown="OutgoingEmail_MouseDown" MouseEnter="OutgoingEmail_MouseEnter"   >
-                                    <Image Style="{StaticResource cursorHand}" x:Name="OutgoingEmailGif" ></Image>
-                                </Grid>
-                                <Grid Grid.Column="2"  x:Name="OutgoingEmailHover"  Visibility="Hidden" MouseDown="OutgoingEmail_MouseDown" MouseEnter="OutgoingEmail_MouseEnter" MouseLeave="OutgoingEmail_MouseLeave" >
-                                    <Image Style="{StaticResource cursorHand}" x:Name="OutGoingEmailHoverGif"></Image>
+                                <Image Grid.Column="2"  Style="{StaticResource cursorHand}" x:Name="outgoingemail"  MouseEnter="Load_Gif" ></Image>
+                                <Image Grid.Column="2"  Style="{StaticResource cursorHand}" x:Name="outgoingemailhover" MouseEnter="Load_Gif" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="MouseDown" >
                                             <i:InvokeCommandAction Command="{Binding SetTypeConnectCommand}" CommandParameter="outEmail" >
                                             </i:InvokeCommandAction>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
-                                    <!--<Image
-       gif:ImageBehavior.AnimatedSource="outgoingArrowEmailHover.gif" Source="outgoingArrowEmailHover.gif"  >
-                                       
-                                        <Image.Style>
-                                            <Style TargetType="{x:Type Image}">
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Cursor" Value="Hand" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Image.Style>
-                                    </Image>-->
-                                </Grid>
-                                <Grid  Grid.Column="2"  x:Name="OutgoingEmailEnter" Visibility="Hidden" MouseDown="OutgoingEmail_MouseDown" MouseEnter="OutgoingEmail_MouseEnter" MouseLeave="OutgoingEmail_MouseLeave" >
-                                    <Image Style="{StaticResource cursorHand}" x:Name="OutgoingEmailEnterGif"  ></Image>
-                                </Grid>
-                                <Grid  Grid.Column="2"  x:Name="OffOutEmail" MouseDown="OutgoingEmail_MouseDown" MouseEnter="OutgoingEmail_MouseEnter" MouseLeave="OutgoingEmail_MouseLeave">
-                                    <Image Style="{StaticResource cursorHand}" Source="offEmail.png"></Image>
-                                </Grid>
-                                <!--wqwfqwf-->
+                                </Image>
+                                <Image Grid.Column="2"  Style="{StaticResource cursorHand}" x:Name="outgoingemailenter" MouseEnter="Load_Gif" ></Image>
+                                <Image Grid.Column="2" Style="{StaticResource cursorHand}" Source="offEmail.png"></Image>
+                              
                                 <Label  x:Name="InEmainLabel" Grid.Column="3" Grid.Row="1"  Content="Входящая почта" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
-                                <Grid Grid.Column="3" Visibility="Hidden" x:Name="IncomingEmail" MouseDown="IncomingEmail_MouseDown" MouseEnter="IncomingEmail_MouseEnter"  >
-                                    <Image Style="{StaticResource cursorHand}" x:Name="IncomingEmailGif" ></Image>
-                                </Grid>
-                                <Grid Grid.Column="3"  x:Name="IncomingEmailHover"  Visibility="Hidden" MouseDown="IncomingEmail_MouseDown" MouseEnter="IncomingEmail_MouseEnter" MouseLeave="IncomingEmail_MouseLeave">
-                                    <Image Style="{StaticResource cursorHand}" x:Name="IncomingEmailHoverGif"  ></Image>
+                                <Image Grid.Column="3" Style="{StaticResource cursorHand}" x:Name="incomingemailgif" MouseEnter="Load_Gif" ></Image>
+                                <Image Grid.Column="3"  Style="{StaticResource cursorHand}" x:Name="incomingemailhover" MouseEnter="Load_Gif"  >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="MouseDown" >
                                             <i:InvokeCommandAction Command="{Binding SetTypeConnectCommand}" CommandParameter="inEmail" >
                                             </i:InvokeCommandAction>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
-                                    <!--<Image
-       gif:ImageBehavior.AnimatedSource="incomingArrowEmailHover.gif" Source="incomingArrowEmailHover.gif"  >
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="MouseDown" >
-                                                <i:InvokeCommandAction Command="{Binding SetTypeConnectCommand}" CommandParameter="in" >
-                                                </i:InvokeCommandAction>
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                        <Image.Style>
-                                            <Style TargetType="{x:Type Image}">
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Cursor" Value="Hand" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Image.Style>
-                                    </Image>-->
-                                </Grid>
-                                <Grid Grid.Column="3"  x:Name="IncomingEmailEnter" Visibility="Hidden" MouseDown="IncomingEmail_MouseDown" MouseEnter="IncomingEmail_MouseEnter" MouseLeave="IncomingEmail_MouseLeave">
-                                    <Image Style="{StaticResource cursorHand}" x:Name="IncomingEmailEnterGif"  ></Image>
-                                </Grid>
-                                <Grid  Grid.Column="3"  x:Name="OffInEmail"  MouseDown="IncomingEmail_MouseDown" MouseEnter="IncomingEmail_MouseEnter" MouseLeave="IncomingEmail_MouseLeave">
-                                    <Image  Style="{StaticResource cursorHand}" Source="offEmail.png"></Image>
-                                </Grid>
-                                <!--<StackPanel Grid.Row="1" Grid.Column="2">
-                            <ComboBox  VerticalAlignment="top"    ItemsSource="{Binding DaysCurrentMonth}"  SelectedItem="{Binding CurrentDay}"   Height="50"  SelectedIndex="20"    >
-                            </ComboBox>
-                        </StackPanel>-->
+                                </Image>
+                                <Image Grid.Column="3" Style="{StaticResource cursorHand}" x:Name="incomingemailenter" MouseEnter="Load_Gif"  ></Image>
+                                <Image Grid.Column="3"   Style="{StaticResource cursorHand}" Source="offEmail.png"></Image>
                             </Grid>
                         </Border>
                     </Grid>
@@ -505,7 +337,6 @@
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Label>
-                                                <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Grid>
                                             <ControlTemplate.Triggers>
@@ -605,7 +436,6 @@
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Label>
-                                                <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Grid>
                                             <ControlTemplate.Triggers>
@@ -655,7 +485,6 @@
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Label>
-                                                <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Grid>
                                             <ControlTemplate.Triggers>
@@ -705,7 +534,6 @@
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Label>
-                                                <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Grid>
                                             <ControlTemplate.Triggers>
@@ -755,7 +583,6 @@
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Label>
-                                                <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Grid>
                                             <ControlTemplate.Triggers>
@@ -771,17 +598,9 @@
                                     </Button.Template>
                                 </Button>
                                 <Label x:Name="PromptTypeAppel" Grid.Row="3" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsType}" ></Label>
-                                <!--<Button Grid.Row="1" Style="{StaticResource TypeAppeal}">Техническая консультация</Button>-->
-                                <!--<Button Grid.Row="1" Grid.Column="1"  Style="{StaticResource  TypeAppeal}">Сертификат</Button>-->
-                                <!--<Button Grid.Row="1" Grid.Column="2"  Style="{StaticResource TypeAppeal}">Ошибка</Button>-->
-                                <!--<Button Grid.Row="2" Style="{StaticResource TypeAppeal}">Информационная консультация</Button>
-                                <Button Grid.Row="2"  Grid.Column="1"  Style="{StaticResource TypeAppeal}"></Button>
-                                <Button Grid.Row="2"  Grid.Column="2"  Style="{StaticResource TypeAppeal}">Ошибка</Button>-->
-                            </Grid>
+                        </Grid>
                         </Border>
                     </Grid>
-
-
 
                     <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,0,0.4">
                         <Grid.RowDefinitions>

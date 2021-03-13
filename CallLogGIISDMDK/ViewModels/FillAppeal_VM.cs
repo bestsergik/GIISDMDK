@@ -297,7 +297,7 @@ namespace CallLogGIISDMDK.ViewModels
             if (StaticData.IsNewAppeal)
             {
                 // FillDisplayAppeals();
-                InputPhone = "";
+                
                 InputPhone = "";
                 AdditionalInfo = "";
                 FullName = "";
@@ -308,6 +308,7 @@ namespace CallLogGIISDMDK.ViewModels
                 Inn = "";
                 Sity = "";
                 Status = "";
+                CurrentMinute = "";
                 IsIrregular = false;
                 IsEnableCompanyForm = true;
                 IsIP = false;

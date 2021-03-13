@@ -17,6 +17,7 @@ namespace CallLogGIISDMDK.ViewModels
 {
     class ViewAppeals_VM : INotifyPropertyChanged
     {
+        DefinerAvailabilityAppealsByDate definerAvailabilityAppealsByDate = new DefinerAvailabilityAppealsByDate();
         public ObservableCollection<FillAppeal_VM> Appeals { get; set; }
         public ObservableCollection<FillAppeal_VM> DataAppealByID { get; set; }
         Data data = new Data();
@@ -30,6 +31,7 @@ namespace CallLogGIISDMDK.ViewModels
         private ICommand _setEmailPhoneCommand;
         private ICommand _addTypeAppealCommand;
         private ICommand _setStatusAppealCommand;
+        private ICommand _setMonthCommand;
         private FillAppeal_VM _selectedAppeal;
         private FillAppeal_VM _currentAppeal;
         FillAppeal_model _fillAppeal_Model;
@@ -56,6 +58,8 @@ namespace CallLogGIISDMDK.ViewModels
         private string _status;
         private string _type = "";
         private string _route;
+        private string _month;
+        private string _year;
         private string _communicationСhannel;
         private string _ID;
         private string _personalID;
@@ -87,6 +91,8 @@ namespace CallLogGIISDMDK.ViewModels
             _fillAppeal_Model = new FillAppeal_model();
             SetDefaultFields();
             FillPrompts();
+            _year = DateTime.Now.Year.ToString();
+            _month = DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("ru-RU"));
 
         }
         public FillAppeal_VM SelectedAppeal
@@ -157,6 +163,25 @@ namespace CallLogGIISDMDK.ViewModels
             {
                 return _setStatusAppealCommand ?? (_setStatusAppealCommand = new RelayCommand(SetStatusAppeal));
             }
+        }
+        public ICommand SetMonthCommand
+        {
+            get
+            {
+                return _setMonthCommand ?? (_setMonthCommand = new RelayCommand(SetMonth));
+            }
+        }
+        private void SetMonth(object route)
+        {
+            string[] date = new string[2];
+            date = definerAvailabilityAppealsByDate.GetCorrectDate(route, _month, _year);
+            ChangeRepresentationMonth(date[0]);
+            Year = date[1];
+        }
+        void ChangeRepresentationMonth(string month)
+        {
+            DateTime date = new DateTime(2000, Convert.ToInt32(month), 1);
+            Month = date.ToString("MMMM", CultureInfo.CreateSpecificCulture("ru-RU"));
         }
         private void SetStatusAppeal(object status)
         {
@@ -240,12 +265,8 @@ namespace CallLogGIISDMDK.ViewModels
             DateTime dateForConverted = DateTime.Parse(CurrentDay);
             string convertedDate = dateForConverted.ToString("dd/MM/yyyy");
             CurrentTime = (DateTime.Parse($"{CurrentHour.ToString()}:{CurrentMinute}")).ToString("HH:mm");
-            // var currentTime = (DateTime.Parse($"{CurrentHour.ToString()}:{CurrentMinute}")).ToString("HH:mm");
-            //  string convertedTime = currentTime.ToString("HH:mm");
-            fileWriter.WriteAppealToFile(_currentAppeal.FullName, _currentAppeal.Company, _currentAppeal.Sity, Phone, _currentAppeal.Inn, _currentAppeal.ParticipantRole, Type, Status, Email, _currentAppeal.Ogrn, convertedDate, Appeal, AdditionalInfo, CommunicationСhannel, CurrentTime, Route);
-            //fileWriter.WriteAppealToFile(_currentAppeal.FullName, _currentAppeal.Company, _currentAppeal.Sity, Phone, _currentAppeal.Inn, _currentAppeal.ParticipantRole, CommunicationСhannel, Status, Email, _currentAppeal.Ogrn, CurrentDay, CurrentHour.ToString(), CurrentMinute, Appeal, AdditionalInfo);
-            ////if(data.IsFileReady())
-            // FillAppeals();
+           fileWriter.WriteAppealToFile(_currentAppeal.FullName, _currentAppeal.Company, _currentAppeal.Sity, Phone, _currentAppeal.Inn, _currentAppeal.ParticipantRole, Type, Status, Email, _currentAppeal.Ogrn, convertedDate, Appeal, AdditionalInfo, CommunicationСhannel, CurrentTime, Route);
+      
         }
         private void LoadedPage()
         {
@@ -258,13 +279,14 @@ namespace CallLogGIISDMDK.ViewModels
             AdditionalInfo = "";
             _hourAppeal = new List<string>();
             _minuteAppeal = new List<string>();
+            CurrentMinute = "";
+            Type = "";
             _daysCurrentMonthStringFormat = new List<string>();
             _statuses = new List<string>();
             _types = new List<string>();
             _hourAppeal = _fillAppeal_Model.GetHoursAppeal();
             _minuteAppeal = _fillAppeal_Model.GetMinutesAppeal();
             _daysCurrentMonthStringFormat = _fillAppeal_Model.FillDaysCurrentMonth();
-            // _currentMinute = _fillAppeal_Model.NearMinute();
             _statuses = _fillAppeal_Model.GetStatusesAppeal();
             _types = _fillAppeal_Model.GetTypesAppeal();
         }
@@ -511,7 +533,6 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("PromptsTime");
             }
         }
-
         public string PromptsCommunicationChannel
         {
             get { return _promptsCommunicationChannel; }
@@ -580,6 +601,28 @@ namespace CallLogGIISDMDK.ViewModels
                 //PromptsStatus = _fillAppeal_Model.ClearPrompt(Status, PromptsStatus);
             }
         }
+        public string Month
+        {
+            get { return _month; }
+            set
+            {
+                _month = value;
+                OnPropertyChanged("Month");
+                //ValidateAdding(null);
+                //PromptsStatus = _fillAppeal_Model.ClearPrompt(Status, PromptsStatus);
+            }
+        }
+        public string Year
+        {
+            get { return _year; }
+            set
+            {
+                _year = value;
+                OnPropertyChanged("Year");
+                //ValidateAdding(null);
+                //PromptsStatus = _fillAppeal_Model.ClearPrompt(Status, PromptsStatus);
+            }
+        }
         public string ID
         {
             get { return _ID; }
@@ -632,7 +675,6 @@ namespace CallLogGIISDMDK.ViewModels
                     ValidateAdding(null);
                     PromptsPhone = _fillAppeal_Model.ClearPrompt(Phone, PromptsPhone);
                 }
-
             }
         }
         public string Email
@@ -647,7 +689,6 @@ namespace CallLogGIISDMDK.ViewModels
                     ValidateAdding(null);
                     PromptsEmail = _fillAppeal_Model.ClearPrompt(Email, PromptsEmail);
                 }
-
             }
         }
         public string CommunicationСhannel

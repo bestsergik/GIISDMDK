@@ -158,7 +158,7 @@
     <Compile Include="Views\ViewAppeals_page.xaml.cs">
       <DependentUpon>ViewAppeals_page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WorkWithFiles\DefinerAvailabilityAppeals.cs" />
+    <Compile Include="WorkWithFiles\DefinerAvailabilityAppealsByDate.cs" />
     <Compile Include="WorkWithFiles\DefinerCorrectPathToAppeals.cs" />
     <Compile Include="WorkWithFiles\FileReader.cs" />
     <Compile Include="WorkWithFiles\FileRemover.cs" />
@@ -425,15 +425,6 @@
     <Resource Include="Views\deleteAppeal.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\FillAppeal\incomingArrowToPhone.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\FillAppeal\incomingArrowToPhoneHover.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\FillAppeal\incomingArrowToPhoneEnter.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Views\FillAppeal\outgoingArrowEmail.gif" />
   </ItemGroup>
   <ItemGroup>
@@ -444,15 +435,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\FillAppeal\offEmail.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\FillAppeal\incomingArrowEmail.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\FillAppeal\incomingArrowEmailHover.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\FillAppeal\incomingArrowEmailEnter.gif" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\FillAppeal\offInWork.png" />

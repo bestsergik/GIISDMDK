@@ -167,11 +167,20 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20"></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition Width="20"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" TextAlignment="Center" Padding="4,0,0,0" FontSize="18.5" Foreground="Black" Text="Месяц" />
 
-                        <Image x:Name="arrowLeft"  Margin="1" MouseDown="Search_MouseDown">
+                        <TextBlock Grid.Column="1" TextAlignment="Right" Padding="4,0,0,0" FontSize="18.5" Foreground="Black" Text="{Binding Month}" />
+                        <TextBlock Grid.Column="2" TextAlignment="Left" Padding="4,0,0,0" FontSize="18.5" Foreground="Black" Text="{Binding Year}" />
+
+                        <Image x:Name="arrowLeft"  Margin="1" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown" >
+                                    <i:InvokeCommandAction Command="{Binding SetMonthCommand}" CommandParameter="Previous" >
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <Image.Style>
                                 <Style TargetType="{x:Type Image}">
                                     <Setter Property="Source" Value="arrowLeft.png"/>
@@ -187,7 +196,13 @@
                             </Image.Style>
                         </Image>
 
-                        <Image x:Name="arrowRight" Grid.Column="2" Margin="1" MouseDown="Search_MouseDown">
+                        <Image x:Name="arrowRight" Grid.Column="3" Margin="1" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown" >
+                                    <i:InvokeCommandAction Command="{Binding SetMonthCommand}" CommandParameter="Next" >
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <Image.Style>
                                 <Style TargetType="{x:Type Image}">
                                     <Setter Property="Source" Value="arrowRight.png"/>
@@ -352,7 +367,7 @@
                             <ItemsControl Grid.Column="1" ItemsSource="{Binding DataAppealByID}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid   Background="LightSeaGreen">
+                                        <Grid Background="LightSeaGreen">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="20"></ColumnDefinition>
                                                 <ColumnDefinition Width="30"></ColumnDefinition>
@@ -360,7 +375,7 @@
                                             </Grid.ColumnDefinitions>
                                             <TextBlock    Padding="4,6,0,0"  FontFamily="Impact, Arial" FontSize="18" Foreground="MistyRose" Text="№" />
                                             <TextBlock   Grid.Column="1"  Padding="4,6,0,0"  FontFamily="Impact, Arial" FontSize="18" Foreground="MistyRose" Text="{Binding Path=ID, UpdateSourceTrigger=PropertyChanged}" />
-                                            <TextBlock Grid.Column="2"  Padding="0,4,0,0"    FontSize="18.5" Foreground="White" Text="История обращений" />
+                                            <TextBlock Grid.Column="2"  Padding="0,4,0,0"    FontSize="18.5" Foreground="White" Text="История обращения" />
                                         </Grid>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -588,7 +603,7 @@
             </Grid.ColumnDefinitions>
             <Button Style="{StaticResource MainMenuButton}"  x:Name="btnBack"   Click="btnBack_Click" >Главное меню</Button>
             <Button Grid.Column="1" Style="{StaticResource MainMenuButton}"  x:Name="btnNewAppeal" Click="btnNewAppeal_Click">Добавить новое</Button>
-            <Button IsCancel="{Binding IsSelectedAppeal}" Visibility="Hidden" IsEnabled="{Binding IsSelectedAppeal}"  x:Name="AddDataToCurrentAppeal" Grid.Column="2" Command="{Binding AddDataToCurrentAppealCommmand}"  Style="{StaticResource MainMenuButton}" Click="AddDataToCurrentAppeal_Click" >Добавить к текущему</Button>
+            <Button IsCancel="{Binding IsSelectedAppeal}" Visibility="Hidden" IsEnabled="{Binding IsSelectedAppeal}"  x:Name="AddDataToCurrentAppeal" Grid.Column="2"   Style="{StaticResource MainMenuButton}" Click="AddDataToCurrentAppeal_Click" >Добавить к текущему</Button>
         </Grid>
     </Grid>
 </Page>

@@ -12,6 +12,7 @@ namespace CallLogGIISDMDK
     {
         FileReader fileReader = new FileReader();
         List<int> idAppeals = new List<int>();
+        List<int> idPersonalAppeals = new List<int>();
         //string pathToZipAppeals = @"Appeals.zip";
 
         public List<List<string>> GetAppeals()
@@ -41,10 +42,18 @@ namespace CallLogGIISDMDK
             List<List<string>> Appeals = GetAppeals();
             foreach (var appeal in Appeals)
             {
-                idAppeals.Add(Convert.ToInt32(appeal[18]));
+                idPersonalAppeals.Add(Convert.ToInt32(appeal[18]));
             }
-            numberPersonalIdAppeal = idAppeals.Max();
+            numberPersonalIdAppeal = idPersonalAppeals.Max();
             return numberPersonalIdAppeal + 1;
+            //int numberPersonalIdAppeal = 0;
+            //List<List<string>> Appeals = GetAppeals();
+            //foreach (var appeal in Appeals)
+            //{
+            //    idAppeals.Add(Convert.ToInt32(appeal[18]));
+            //}
+            //numberPersonalIdAppeal = idAppeals.Max();
+            //return numberPersonalIdAppeal + 1;
         }
         public List<List<string>> ConvertToDateTime(List<List<string>> appeals)
         {
