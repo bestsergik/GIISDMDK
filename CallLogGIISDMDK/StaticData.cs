@@ -15,6 +15,8 @@ namespace CallLogGIISDMDK
         static private bool _isNewAppeal = false;
         static private bool _isNewAppeal2 = false;
         static private int _currentId = 0;
+        static private string _correctPathToZip = "";
+        static private string _correctPathToXml = "";
         static private string _currentPersonalId = "";
         static private List<List<string>> _dataAppealByPersonalID;
 
@@ -48,6 +50,17 @@ namespace CallLogGIISDMDK
             set { _currentPersonalId = value; }
         }
 
+        static public string CorrectPathToXml
+        {
+            get { return _correctPathToXml; }
+            set { _correctPathToXml = value; }
+        }
+        static public string CorrectPathToZip
+        {
+            get { return _correctPathToZip; }
+            set { _correctPathToZip = value; }
+        }
+
         static public List<List<string>> DataAppealByPersonalID
         {
             get { return _dataAppealByPersonalID; }
@@ -60,7 +73,7 @@ namespace CallLogGIISDMDK
             set { _isLoggin = value; }
         }
 
-   
+     
 
         static public string UserStatus
         {

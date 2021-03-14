@@ -18,28 +18,6 @@ using System.Windows.Threading;
 using WpfAnimatedGif;
 namespace CallLogGIISDMDK.Views.FillAppeal
 {
-
-
-    class CreatorThreads
-    {
-
-        List<Thread> gifThreads = new List<Thread>();
-
-        public void CreateNewThread()
-        {
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(3);
-            timer.Tick += Timer_Tick;
-            timer.Start();
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            //Thread myThread = new Thread(new ParameterizedThreadStart(Count));
-        }
-    }
-
-
     /// <summary>
     /// Логика взаимодействия для AddDataToAppealByID.xaml
     /// </summary>
@@ -55,10 +33,12 @@ namespace CallLogGIISDMDK.Views.FillAppeal
         private void AddDataToCurrentAppeal_Click(object sender, RoutedEventArgs e)
         {
             if (AddDataToCurrentAppeal.IsCancel == true)
+            {
                 this.NavigationService.Navigate(new Menu_page());
+            }
+               
             else
             {
-            
                     StatusBorder.BorderBrush = System.Windows.Media.Brushes.Green;
                 if (ComboBoxMinuteAppel.Text == "")
                     DateBorder.BorderBrush = System.Windows.Media.Brushes.Red;
@@ -72,14 +52,13 @@ namespace CallLogGIISDMDK.Views.FillAppeal
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+         
             Phone.Text = StaticData.Phone;
             ComboBoxMinuteAppel.SelectedIndex = -1;
+            CommunicationChannel.SelectedIndex = -1;
+            Route.SelectedIndex = -1;
             Email.Text = StaticData.Email;
         }
-
-
-
-   
    
         void MainValid()
         {
@@ -91,9 +70,6 @@ namespace CallLogGIISDMDK.Views.FillAppeal
                     MainBorder.BorderBrush = System.Windows.Media.Brushes.Gray;
             }
         }
-
-
-  
 
         private void ComboBoxMinuteAppel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -166,9 +142,6 @@ namespace CallLogGIISDMDK.Views.FillAppeal
 
         private void LoadGif(object sender, RoutedEventArgs e)
         {
-
-         
-
             Thread newThread = new Thread(new ParameterizedThreadStart(LoadingGif));
             newThread.Start(sender);
         }
@@ -176,40 +149,158 @@ namespace CallLogGIISDMDK.Views.FillAppeal
 
         private void LoadingGif(object sender)
         {
-          
             Application.Current.Dispatcher.BeginInvoke(
 DispatcherPriority.Background,
 new Action(() =>
 {
-    
         var image = new BitmapImage();
         image.BeginInit();
         image.UriSource = new Uri(((Image)sender).Name + @".gif", UriKind.Relative);
         image.EndInit();
-
         ImageBehavior.SetAnimatedSource((Image)sender, image);
-    
-  
 }));
         }
 
-        private void Load_Gif(object sender, MouseEventArgs e)
-        {
-           
-                Application.Current.Dispatcher.BeginInvoke(
-    DispatcherPriority.Background,
-    new Action(() =>
-    {
-        
-            var image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(((Image)sender).Name + @".gif", UriKind.Relative);
-            image.EndInit();
+        //    private void Load_Gif(object sender, MouseEventArgs e)
+        //    {
 
-            ImageBehavior.SetAnimatedSource((Image)sender, image);
-        
-    }));
+        //            Application.Current.Dispatcher.BeginInvoke(
+        //DispatcherPriority.Background,
+        //new Action(() =>
+        //{
+
+        //        var image = new BitmapImage();
+        //        image.BeginInit();
+        //        image.UriSource = new Uri(((Image)sender).Name + @".gif", UriKind.Relative);
+        //        image.EndInit();
+
+        //        ImageBehavior.SetAnimatedSource((Image)sender, image);
+
+        //}));
+        //    }
+
+        private void CommunicationChannel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Route.Visibility == Visibility.Visible)
+            {
+                ShowEmailPhoneGrid();
+            }
+            if (((ComboBox)sender).SelectedItem != null && ((ComboBox)sender).SelectedItem.ToString() != "")
+                Route.Visibility = Visibility.Visible;
         }
+
+        private void Route_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (((ComboBox)sender).SelectedItem != null && ((ComboBox)sender).SelectedItem.ToString() != "")
+                ShowEmailPhoneGrid();
+            Route.Visibility = Visibility.Visible;
+        }
+
+        void ShowEmailPhoneGrid()
+        {
+            if (CommunicationChannel.SelectedItem.ToString() == "Телефон")
+            {
+                PhoneGrid.Visibility = Visibility.Visible;
+                EmailGrid.Visibility = Visibility.Hidden;
+                if (Route.SelectedItem.ToString() == "Входящий")
+                {
+                    DescriptionTypeConnect.Visibility = Visibility.Visible;
+                    DescriptionTypeConnect.Content = "Входящий звонок с:";
+                }
+                else if (Route.SelectedItem.ToString() == "Исходящий")
+                {
+                    DescriptionTypeConnect.Visibility = Visibility.Visible;
+                    DescriptionTypeConnect.Content = "Исходящий звонок на:";
+                }
+            }
+            else if (CommunicationChannel.SelectedItem.ToString() == "Email")
+            {
+                PhoneGrid.Visibility = Visibility.Hidden;
+                EmailGrid.Visibility = Visibility.Visible;
+                if (Route.SelectedItem.ToString() == "Входящий")
+                {
+                    DescriptionTypeConnect.Visibility = Visibility.Visible;
+                    DescriptionTypeConnect.Content = "Входящий Email с:";
+                }
+                else if (Route.SelectedItem.ToString() == "Исходящий")
+                {
+                    DescriptionTypeConnect.Visibility = Visibility.Visible;
+                    DescriptionTypeConnect.Content = "Исходящий Email на:";
+                }
+            }
+        }
+
+        private void Complete_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Complete.Visibility = Visibility.Hidden;
+            completehover.Visibility = Visibility.Visible;
+            if (OffComplete.Visibility == Visibility.Visible)
+                OffComplete.Visibility = Visibility.Hidden;
+        }
+
+        private void Complete_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            inworkenter.Visibility = Visibility.Hidden;
+            completehover.Visibility = Visibility.Hidden;
+            OffComplete.Visibility = Visibility.Hidden;
+            completeenter.Visibility = Visibility.Visible;
+            OffInWork.Visibility = Visibility.Visible;
+        }
+
+
+
+        private void Complete_MouseLeave(object sender, MouseEventArgs e)
+        {
+           if(completeenter.Visibility != Visibility.Visible)
+            {
+                completehover.Visibility = Visibility.Hidden;
+               
+                if (OffComplete.Visibility == Visibility.Hidden && inworkenter.Visibility != Visibility.Visible)
+                    Complete.Visibility = Visibility.Visible;
+                else
+                    OffComplete.Visibility = Visibility.Visible;
+            }
+        }
+
+
+
+
+
+        private void InWork_MouseEnter(object sender, MouseEventArgs e)
+        {
+            InWork.Visibility = Visibility.Hidden;
+            inworkhover.Visibility = Visibility.Visible;
+            if (OffInWork.Visibility == Visibility.Visible)
+            {
+                OffInWork.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void InWork_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            completeenter.Visibility = Visibility.Hidden;
+            inworkhover.Visibility = Visibility.Hidden;
+            OffInWork.Visibility = Visibility.Hidden;
+            inworkenter.Visibility = Visibility.Visible;
+            OffComplete.Visibility = Visibility.Visible;
+        }
+
+        private void InWork_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (inworkenter.Visibility != Visibility.Visible)
+            {
+                inworkhover.Visibility = Visibility.Hidden;
+              
+                if (OffInWork.Visibility == Visibility.Hidden && completeenter.Visibility != Visibility.Visible)
+                    InWork.Visibility = Visibility.Visible;
+                else
+                    OffInWork.Visibility = Visibility.Visible;
+            }
+            if(completeenter.Visibility == Visibility.Visible)
+                inworkhover.Visibility = Visibility.Hidden;
+           
+        }
+
     }
 }
 

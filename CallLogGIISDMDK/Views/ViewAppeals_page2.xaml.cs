@@ -103,6 +103,7 @@ namespace CallLogGIISDMDK.Views
         //}
         private void AddDataToCurrentAppeal_Click(object sender, RoutedEventArgs e)
         {
+            
             if (AddDataToCurrentAppeal.IsCancel == true)
                 this.NavigationService.Navigate(new AddDataToAppealByID());
         }

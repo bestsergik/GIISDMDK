@@ -128,6 +128,15 @@ namespace CallLogGIISDMDK.Models
             appealsId.Add(appeal[0]);
             return isIdenticalId;
         }
+
+        internal List<string> GetRoutes()
+        {
+            List<string> statuses = new List<string>();
+            statuses.Add("Входящий");
+            statuses.Add("Исходящий");
+            return statuses;
+        }
+
         public List<string> CheckSuitableAppeal(string userInput)
         {
             suitableAppeals = new List<string>();

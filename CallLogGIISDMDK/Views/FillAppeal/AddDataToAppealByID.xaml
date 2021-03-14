@@ -130,10 +130,10 @@
 
                                     <!-- Complete -->
 
-                                    <Label  Padding="0" x:Name="CompleteLabel"  Grid.Column="1"  Grid.Row="1"  Content="Завершено" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
-                                    <Image Margin="14"  Grid.Column="1"  Style="{StaticResource cursorHand}"  x:Name="completeenter" Loaded="LoadGif"></Image>
-                                    <Image Margin="14"  Source="complete.png" Grid.Column="1" Style="{StaticResource cursorHand}"></Image>
-                                    <Image Grid.Column="1" Style="{StaticResource cursorHand}" x:Name="completehover" Loaded="LoadGif">
+                                    <Label Padding="0" x:Name="CompleteLabel"  Grid.Column="1"  Grid.Row="1"  Content="Завершено" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
+                                    <Image  Margin="14" Grid.Column="1"  Style="{StaticResource cursorHand}" Visibility="Hidden"  x:Name="completeenter" Loaded="LoadGif"></Image>
+                                    <Image Margin="14" Source="complete.png" x:Name="Complete" Grid.Column="1" Style="{StaticResource cursorHand}" MouseEnter="Complete_MouseEnter"></Image>
+                                    <Image Margin="14" Grid.Column="1" Style="{StaticResource cursorHand}" Visibility="Hidden"  x:Name="completehover" MouseLeave="Complete_MouseLeave" MouseDown="Complete_MouseDown" Loaded="LoadGif">
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="MouseDown" >
                                                 <i:InvokeCommandAction Command="{Binding SetStatusAppealCommand}" CommandParameter="complete" >
@@ -141,7 +141,7 @@
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </Image>
-                                    <Image Grid.Column="1" Margin="14"   Source="offComplete.png" Style="{StaticResource cursorHand}"></Image>
+                                    <Image Grid.Column="1" Margin="14"  MouseEnter="Complete_MouseEnter" Visibility="Hidden"  x:Name="OffComplete"  Source="offComplete.png" Style="{StaticResource cursorHand}"></Image>
                                 </Grid>
 
                                 <!-- In Work-->
@@ -152,10 +152,10 @@
                                         <RowDefinition></RowDefinition>
                                     </Grid.RowDefinitions>
 
-                                    <Label x:Name="InWorkLabel"   Grid.Row="1"  Content="В работе" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
-                                    <Image Style="{StaticResource cursorHand}" x:Name="inWorkenter" Loaded="LoadGif"></Image>
-                                    <Image Style="{StaticResource cursorHand}" Source="inWork.png" ></Image>
-                                    <Image Style="{StaticResource cursorHand}" x:Name="inworkhover" Loaded="LoadGif">
+                                    <Label  x:Name="InWorkLabel" Grid.Row="1"  Content="В работе" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
+                                    <Image  x:Name="inworkenter" Visibility="Hidden" Style="{StaticResource cursorHand}"     Loaded="LoadGif"></Image>
+                                    <Image  Source="inWork.png" x:Name="InWork" Style="{StaticResource cursorHand}"  MouseEnter="InWork_MouseEnter"></Image>
+                                    <Image  Visibility="Hidden" MouseDown="InWork_MouseDown" Style="{StaticResource cursorHand}"   MouseLeave="InWork_MouseLeave" x:Name="inworkhover" Loaded="LoadGif">
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="MouseDown" >
                                                 <i:InvokeCommandAction Command="{Binding SetStatusAppealCommand}" CommandParameter="inWork" >
@@ -163,7 +163,7 @@
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </Image>
-                                    <Image Source="offInWork.png" Style="{StaticResource cursorHand}"></Image>
+                                    <Image Source="offInWork.png" x:Name="OffInWork" MouseEnter="InWork_MouseEnter" Visibility="Hidden" Style="{StaticResource cursorHand}"></Image>
 
                                 </Grid>
                             </Grid>
@@ -172,7 +172,77 @@
                         <!-- Choice phone or email   -->
 
                         <Border Grid.Row="1" CornerRadius="5" Margin="20,0,20.2,0" x:Name="PhoneEmailBorder"  BorderBrush="Gray" BorderThickness="1"    >
-                            <Grid  Margin="0,10,0,0" x:Name="PhoneEmailGrid">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition  Height="80"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Grid Margin="0,20,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <ComboBox x:Name="CommunicationChannel" SelectionChanged="CommunicationChannel_SelectionChanged" VerticalAlignment="top" ItemsSource="{Binding CommunicationСhannels}"  SelectedItem="{Binding CommunicationСhannel}"   Height="50"  SelectedIndex="20"    >
+                                    </ComboBox>
+
+                                    <ComboBox Grid.Column="1" x:Name="Route" Visibility="Hidden" SelectionChanged="Route_SelectionChanged" VerticalAlignment="top" ItemsSource="{Binding Routes}"  SelectedItem="{Binding Route}"   Height="50"  SelectedIndex="20"    >
+                                    </ComboBox>
+                                    
+                                </Grid>
+
+                                <Label x:Name="DescriptionTypeConnect" Foreground="Chocolate" FontSize="13" Grid.Row="1" Visibility="Hidden" Style="{StaticResource titleAddingDataToAppealByID}"></Label>
+
+
+                                <Grid  Grid.Row="2" >
+
+                                    <Grid Margin="0,4,20,0"   x:Name="EmailGrid"  Visibility="Hidden" Grid.Column="1" >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="55"></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBox IsEnabled="False"  x:Name="Email" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
+                                        <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsEmail}" ></Label>
+                                        <CheckBox Margin="10,2,15,0" Grid.Row="1"  HorizontalAlignment="Left" Grid.Column="1" x:Name="EditEmail" FontSize="13"  Style="{StaticResource StepsFillAppeal}" Click="EditEmail_Click">Изменить</CheckBox>
+                                        <!--<Label Grid.Row="1" Margin="0" Padding="0,2,20,0" HorizontalAlignment="Right" Foreground="Chocolate"   FontSize="14" VerticalAlignment="Top"  Content="Почта" Style="{StaticResource titleBoxesFillAppeal}"></Label>-->
+                                    </Grid>
+
+                                    <Grid  Margin="0,4,20,0"   x:Name="PhoneGrid" Visibility="Hidden"  Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="55"></RowDefinition>
+                                            <RowDefinition Height="22"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="58"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="{Binding PositionPhoneForm}" Grid.ColumnSpan="2" IsEnabled="False" x:Name="Phone"    Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}" TextChanged="Phone_TextChanged" />
+                                        <TextBox  Margin="10,0,0,0" Visibility="{Binding IsVisibleNumber7}"    x:Name="number7" IsEnabled="False"  Style="{StaticResource AppealMini}" Text="+7">
+                                        </TextBox>
+                                        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <CheckBox Margin="10,2,0,0"  HorizontalAlignment="Left" x:Name="IsIrregular" FontSize="13"  Style="{StaticResource StepsFillAppeal}" IsEnabled="{Binding IsEnableIrregularCheck}"  IsChecked="{Binding IsIrregular}">Нестандартный номер</CheckBox>
+                                            <CheckBox Margin="10,2,15,0"  HorizontalAlignment="Right" Grid.Column="1" x:Name="EditPhone" FontSize="13"  Style="{StaticResource StepsFillAppeal}" Click="EditPhone_Click">Изменить</CheckBox>
+                                            <!--<Label Grid.Row="1" Margin="0" Padding="0,2,20,0" HorizontalAlignment="Right" Grid.ColumnSpan="2" Foreground="Chocolate"   FontSize="14" VerticalAlignment="Top"  Content="Телефон" Style="{StaticResource titleBoxesFillAppeal}"></Label>-->
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+
+
+
+
+                            </Grid>
+                            
+                            
+                            
+                            
+                            <!--<Grid  Margin="0,10,0,0" x:Name="PhoneEmailGrid">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="80"></RowDefinition>
                                     <RowDefinition Height="22"></RowDefinition>
@@ -198,7 +268,7 @@
                                         <TextBox IsEnabled="False"  x:Name="Email" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AddingDataToAppeal}"></TextBox>
                                         <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsEmail}" ></Label>
                                         <CheckBox Margin="10,2,15,0" Grid.Row="1"  HorizontalAlignment="Right" Grid.Column="1" x:Name="EditEmail" FontSize="13"  Style="{StaticResource StepsFillAppeal}" Click="EditEmail_Click">Изменить</CheckBox>
-                                        <!--<Label Grid.Row="1" Margin="0" Padding="0,2,20,0" HorizontalAlignment="Right" Foreground="#001A86"   FontSize="14" VerticalAlignment="Top"  Content="Почта" Style="{StaticResource titleBoxesFillAppeal}"></Label>-->
+                                        --><!--<Label Grid.Row="1" Margin="0" Padding="0,2,20,0" HorizontalAlignment="Right" Foreground="#001A86"   FontSize="14" VerticalAlignment="Top"  Content="Почта" Style="{StaticResource titleBoxesFillAppeal}"></Label>--><!--
                                     </Grid>
                                     <Label Margin="0,8,0,0" x:Name="TypeConnectLabel" HorizontalAlignment="Right"  Foreground="Black" Visibility="Hidden" FontSize="14"   Content="" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
                                     <Grid Margin="0,0,20,0"   x:Name="PhoneGrid" Visibility="Hidden"  Grid.Column="1">
@@ -220,7 +290,7 @@
                                             </Grid.ColumnDefinitions>
                                             <CheckBox Margin="10,2,0,0"  HorizontalAlignment="Left" x:Name="IsIrregular" FontSize="13"  Style="{StaticResource StepsFillAppeal}" IsEnabled="{Binding IsEnableIrregularCheck}"  IsChecked="{Binding IsIrregular}">Нестандартный номер</CheckBox>
                                             <CheckBox Margin="10,2,15,0"  HorizontalAlignment="Right" Grid.Column="1" x:Name="EditPhone" FontSize="13"  Style="{StaticResource StepsFillAppeal}" Click="EditPhone_Click">Изменить</CheckBox>
-                                            <!--<Label Grid.Row="1" Margin="0" Padding="0,2,20,0" HorizontalAlignment="Right" Grid.ColumnSpan="2" Foreground="#001A86"   FontSize="14" VerticalAlignment="Top"  Content="Телефон" Style="{StaticResource titleBoxesFillAppeal}"></Label>-->
+                                            --><!--<Label Grid.Row="1" Margin="0" Padding="0,2,20,0" HorizontalAlignment="Right" Grid.ColumnSpan="2" Foreground="#001A86"   FontSize="14" VerticalAlignment="Top"  Content="Телефон" Style="{StaticResource titleBoxesFillAppeal}"></Label>--><!--
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -280,7 +350,7 @@
                                 </Image>
                                 <Image Grid.Column="3" Style="{StaticResource cursorHand}" x:Name="incomingemailenter" MouseEnter="Load_Gif"  ></Image>
                                 <Image Grid.Column="3"   Style="{StaticResource cursorHand}" Source="offEmail.png"></Image>
-                            </Grid>
+                            </Grid>-->
                         </Border>
                     </Grid>
                     <Grid Grid.Row="2" Grid.ColumnSpan="2">

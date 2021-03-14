@@ -9,6 +9,7 @@ namespace CallLogGIISDMDK.WorkWithFiles
 {
     class FileReader
     {
+        DefinerAvailabilityAppealsByDate definerAvailabilityAppealsByDate = new DefinerAvailabilityAppealsByDate();
         DefinerCorrectPathToAppeals definerPath = new DefinerCorrectPathToAppeals();
         Compress fileArchiving = new Compress();
         //string pathToZipAppeals = @"Appeals.zip";
@@ -27,6 +28,7 @@ namespace CallLogGIISDMDK.WorkWithFiles
 
         public List<List<string>> GetAppeals()
         {
+            DefinerCorrectPathToAppeals();
             List<List<string>> appeals = new List<List<string>>();
             if (File.Exists(pathToZipAppeals))
             {
@@ -88,6 +90,15 @@ namespace CallLogGIISDMDK.WorkWithFiles
             }
             else return appeals;
         }
+
+        private void DefinerCorrectPathToAppeals()
+        {
+            string[] correctPath = new string[2];
+            correctPath = definerAvailabilityAppealsByDate.GetCorrectPathToAppeal();
+            pathToZipAppeals = correctPath[0];
+            pathToAppeals = correctPath[1];
+        }
+
         bool CheckIdenticalId(List<string> idAppeals, string currentIdAppeal)
         {
             bool isIdenticalId = false;

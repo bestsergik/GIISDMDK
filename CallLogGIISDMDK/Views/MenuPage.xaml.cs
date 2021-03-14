@@ -61,5 +61,10 @@ namespace CallLogGIISDMDK.Views
         {
             this.NavigationService.Navigate(new BaseProblems.CommonInformation());
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.RemoveBackEntry();
+        }
     }
 }

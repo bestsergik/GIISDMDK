@@ -156,25 +156,25 @@
                 <Grid  x:Name="LeftPartCenterGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1"></RowDefinition>
-                        <RowDefinition Height="28"></RowDefinition>
+                        <!--<RowDefinition Height="28"></RowDefinition>-->
                         <RowDefinition Height="28"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <Rectangle Grid.Row="0"  HorizontalAlignment="Stretch" Fill="Gray"  VerticalAlignment="Top"  Height="1.5"/>
                     <Rectangle Grid.Row="1"  HorizontalAlignment="Stretch" Fill="Gray"  VerticalAlignment="Top"  Height="1.5"/>
-                    <TextBlock Grid.Row="1" Background="LightSeaGreen" TextAlignment="Center" Padding="4,0,0,0" Grid.ColumnSpan="3"  FontSize="18.5" Foreground="White" Text="Обращения" />
-                    <Grid Grid.Row="2">
+                    <!--<TextBlock Grid.Row="1" Background="LightSeaGreen" TextAlignment="Center" Padding="4,0,0,0" Grid.ColumnSpan="3"  FontSize="18.5" Foreground="White" Text="Обращения" />-->
+                    <Grid Grid.Row="1" Background="LightSeaGreen">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20"></ColumnDefinition>
+                            <ColumnDefinition Width="30"></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="20"></ColumnDefinition>
+                            <ColumnDefinition Width="30"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="1" TextAlignment="Right" Padding="4,0,0,0" FontSize="18.5" Foreground="Black" Text="{Binding Month}" />
-                        <TextBlock Grid.Column="2" TextAlignment="Left" Padding="4,0,0,0" FontSize="18.5" Foreground="Black" Text="{Binding Year}" />
+                        <TextBlock Grid.Column="1" TextAlignment="Right" Padding="4,0,0,0" FontSize="18.5" Foreground="White" Text="{Binding Month}" />
+                        <TextBlock Grid.Column="2" TextAlignment="Left" Padding="4,0,0,0" FontSize="18.5" Foreground="White" Text="{Binding Year}" />
 
-                        <Image x:Name="arrowLeft"  Margin="1" >
+                        <Image  x:Name="arrowLeft"  Margin="1" >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDown" >
                                     <i:InvokeCommandAction Command="{Binding SetMonthCommand}" CommandParameter="Previous" >

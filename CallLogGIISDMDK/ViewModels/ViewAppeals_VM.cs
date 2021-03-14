@@ -43,6 +43,8 @@ namespace CallLogGIISDMDK.ViewModels
         private List<string> _hourAppeal;
         private List<string> _statuses;
         private List<string> _types;
+        private List<string> _communicationСhannels;
+        private List<string> _routes;
         private List<string> _daysCurrentMonthStringFormat = new List<string>();
         private string _insertAppeal = String.Empty;
         private string _pathToZipAppeals = @"Appeals.zip";
@@ -91,6 +93,9 @@ namespace CallLogGIISDMDK.ViewModels
             _fillAppeal_Model = new FillAppeal_model();
             SetDefaultFields();
             FillPrompts();
+            _communicationСhannels = _fillAppeal_Model.GetTypesAppeal();
+            _routes = _fillAppeal_Model.GetRoutes();
+
             _year = DateTime.Now.Year.ToString();
             _month = DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("ru-RU"));
 
@@ -173,10 +178,18 @@ namespace CallLogGIISDMDK.ViewModels
         }
         private void SetMonth(object route)
         {
+            var num = DateTime.Parse($"{_month} 1, 2000");
+            var numberMonth = num.Month;
             string[] date = new string[2];
             date = definerAvailabilityAppealsByDate.GetCorrectDate(route, _month, _year);
             ChangeRepresentationMonth(date[0]);
             Year = date[1];
+            if (numberMonth.ToString() != date[0])
+            {
+                FillAppeals();
+                numberMonth = Convert.ToInt32(date[0]);
+            }
+               
         }
         void ChangeRepresentationMonth(string month)
         {
@@ -281,14 +294,21 @@ namespace CallLogGIISDMDK.ViewModels
             _minuteAppeal = new List<string>();
             CurrentMinute = "";
             Type = "";
+            Route = "";
+            CommunicationСhannel = "";
             _daysCurrentMonthStringFormat = new List<string>();
             _statuses = new List<string>();
             _types = new List<string>();
+            _routes = new List<string>();
+            _communicationСhannels = new List<string>();
+
             _hourAppeal = _fillAppeal_Model.GetHoursAppeal();
             _minuteAppeal = _fillAppeal_Model.GetMinutesAppeal();
             _daysCurrentMonthStringFormat = _fillAppeal_Model.FillDaysCurrentMonth();
             _statuses = _fillAppeal_Model.GetStatusesAppeal();
             _types = _fillAppeal_Model.GetTypesAppeal();
+            _communicationСhannels = _fillAppeal_Model.GetTypesAppeal();
+            _routes = _fillAppeal_Model.GetRoutes();
         }
         private void ShowDataAppealByID(string appealID)
         {
@@ -478,6 +498,27 @@ namespace CallLogGIISDMDK.ViewModels
                 OnPropertyChanged("Types");
             }
         }
+
+        public List<string> Routes
+        {
+            get { return _routes; }
+            set
+            {
+                _routes = value;
+                OnPropertyChanged("Routes");
+            }
+        }
+
+        public List<string> CommunicationСhannels
+        {
+            get { return _communicationСhannels; }
+            set
+            {
+                _communicationСhannels = value;
+                OnPropertyChanged("CommunicationСhannels");
+            }
+        }
+
         public string PromptsAppeal
         {
             get { return _promptsAppeal; }
