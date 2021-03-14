@@ -18,11 +18,14 @@ using System.Windows.Threading;
 using WpfAnimatedGif;
 namespace CallLogGIISDMDK.Views.FillAppeal
 {
+   
     /// <summary>
     /// Логика взаимодействия для AddDataToAppealByID.xaml
     /// </summary>
     public partial class AddDataToAppealByID : Page
     {
+        bool handlerAttached;
+        int counterChoisedTypeAppeal = 0;
         //bool qwefwefwe = false;
         //bool firstEnterMessadgeGrid = false;
         public AddDataToAppealByID()
@@ -35,31 +38,60 @@ namespace CallLogGIISDMDK.Views.FillAppeal
             if (AddDataToCurrentAppeal.IsCancel == true)
             {
                 this.NavigationService.Navigate(new Menu_page());
+                if (handlerAttached)
+                {
+                    CommunicationChannel.SelectionChanged -= CommunicationChannel_SelectionChanged;
+                    Route.SelectionChanged -= Route_SelectionChanged;
+                    handlerAttached = true;
+                }
             }
-               
+
             else
             {
-                    StatusBorder.BorderBrush = System.Windows.Media.Brushes.Green;
+                if (completeenter.Visibility == Visibility.Hidden && inworkenter.Visibility == Visibility.Hidden)
+                    StatusBorder.BorderBrush = Brushes.Red;
                 if (ComboBoxMinuteAppel.Text == "")
-                    DateBorder.BorderBrush = System.Windows.Media.Brushes.Red;
-                else DateBorder.BorderBrush = System.Windows.Media.Brushes.Green;
+                    DateBorder.BorderBrush = Brushes.Red;
+                if (PhoneGrid.Visibility == Visibility.Hidden && EmailGrid.Visibility == Visibility.Hidden)
+                    PhoneEmailBorder.BorderBrush = Brushes.Red;
+                if (TypeAppealBorder.BorderBrush != Brushes.Green)
+                    TypeAppealBorder.BorderBrush = Brushes.Red;
+                if (StatusBorder.BorderBrush != Brushes.Green || DateBorder.BorderBrush != Brushes.Green || PhoneEmailBorder.BorderBrush != Brushes.Green || TypeAppealBorder.BorderBrush != Brushes.Red || Appeal.Text == "")
+                {
+                    MainBorder.BorderThickness = new Thickness(2.5);
+                    MainBorder.BorderBrush = Brushes.Red;
+                }
+                if(PhoneGrid.Visibility == Visibility.Hidden && EmailGrid.Visibility == Visibility.Hidden)
+                    PhoneEmailBorder.BorderBrush = Brushes.Red;
+                else if (PhoneGrid.Visibility == Visibility.Visible && Phone.Text.Length < 15 && IsIrregular.IsChecked == false) PhoneEmailBorder.BorderBrush = Brushes.Red;
+               
+                else if (IsIrregular.IsChecked == true && Phone.Text == "") PhoneEmailBorder.BorderBrush = Brushes.Red;
+               
+                else if (EmailGrid.Visibility == Visibility.Visible && PromptEmail.Content.ToString() != "") PhoneEmailBorder.BorderBrush = Brushes.Red;
+                else PhoneEmailBorder.BorderBrush = Brushes.Green;
+
             }
             MainValid();
         }
+
+
         private void CancelAdding_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-         
+            //Route.Visibility = Visibility.Hidden;
+            //PhoneGrid.Visibility = Visibility.Hidden;
+            //EmailGrid.Visibility = Visibility.Hidden;
             Phone.Text = StaticData.Phone;
             ComboBoxMinuteAppel.SelectedIndex = -1;
             CommunicationChannel.SelectedIndex = -1;
             Route.SelectedIndex = -1;
             Email.Text = StaticData.Email;
+            counterChoisedTypeAppeal = 0;
         }
-   
+
         void MainValid()
         {
             if (StatusBorder != null)
@@ -76,33 +108,33 @@ namespace CallLogGIISDMDK.Views.FillAppeal
             DateBorder.BorderBrush = System.Windows.Media.Brushes.Green;
             MainValid();
         }
-        private void EditPhone_Click(object sender, RoutedEventArgs e)
-        {
-            if (EditPhone.IsChecked == true)
-            {
-                Phone.IsEnabled = true;
-            }
-            else
-            {
-                Phone.IsEnabled = false;
-            }
-        }
+        //private void EditPhone_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (EditPhone.IsChecked == true)
+        //    {
+        //        Phone.IsEnabled = true;
+        //    }
+        //    else
+        //    {
+        //        Phone.IsEnabled = false;
+        //    }
+        //}
         private void Phone_TextChanged(object sender, TextChangedEventArgs e)
         {
             Phone.Focus();
             Phone.CaretIndex = Phone.Text.Length;
         }
-        private void EditEmail_Click(object sender, RoutedEventArgs e)
-        {
-            if (EditEmail.IsChecked == true)
-            {
-                Email.IsEnabled = true;
-            }
-            else
-            {
-                Email.IsEnabled = false;
-            }
-        }
+        //private void EditEmail_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (EditEmail.IsChecked == true)
+        //    {
+        //        Email.IsEnabled = true;
+        //    }
+        //    else
+        //    {
+        //        Email.IsEnabled = false;
+        //    }
+        //}
         private void MainBorder_MouseLeave(object sender, MouseEventArgs e)
         {
             MainValid();
@@ -110,6 +142,7 @@ namespace CallLogGIISDMDK.Views.FillAppeal
      
         private void RootGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            
             Grid grid = (Grid)sender;
             foreach (UIElement element in grid.Children)
             {
@@ -120,14 +153,15 @@ namespace CallLogGIISDMDK.Views.FillAppeal
                         ((Rectangle)element).Fill = Brushes.OliveDrab;
                         ((Rectangle)element).RadiusX = 12;
                         ((Rectangle)element).RadiusY = 12;
+                        counterChoisedTypeAppeal++;
                     }
                     else
                     {
                         ((Rectangle)element).Fill = Brushes.LightGray;
                         ((Rectangle)element).RadiusX = 2;
                         ((Rectangle)element).RadiusY = 2;
+                        counterChoisedTypeAppeal--;
                     }
-
                 }
                 if (element is Label)
                 {
@@ -136,16 +170,15 @@ namespace CallLogGIISDMDK.Views.FillAppeal
                     else ((Label)element).Foreground = Brushes.Black;
                 }
             }
+            if (counterChoisedTypeAppeal > 0) TypeAppealBorder.BorderBrush = Brushes.Green;
+            else TypeAppealBorder.BorderBrush = Brushes.Gray;
         }
-
-
 
         private void LoadGif(object sender, RoutedEventArgs e)
         {
             Thread newThread = new Thread(new ParameterizedThreadStart(LoadingGif));
             newThread.Start(sender);
         }
-
 
         private void LoadingGif(object sender)
         {
@@ -181,53 +214,83 @@ new Action(() =>
 
         private void CommunicationChannel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Route.Visibility == Visibility.Visible)
+            if (Route != null && Route.Visibility == Visibility.Visible)
             {
                 ShowEmailPhoneGrid();
             }
             if (((ComboBox)sender).SelectedItem != null && ((ComboBox)sender).SelectedItem.ToString() != "")
                 Route.Visibility = Visibility.Visible;
+            if (Route != null && Route.Visibility == Visibility.Visible && (PhoneGrid.Visibility == Visibility.Visible || EmailGrid.Visibility == Visibility.Visible)) DefineColorBorderPhoneEmail();
         }
 
         private void Route_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (((ComboBox)sender).SelectedItem != null && ((ComboBox)sender).SelectedItem.ToString() != "")
-                ShowEmailPhoneGrid();
-            Route.Visibility = Visibility.Visible;
+            {
+                {
+                    Route.Visibility = Visibility.Visible;
+                    DefineColorBorderPhoneEmail();
+                    ShowEmailPhoneGrid();
+                }
+            }
+              
+           
+           
+        }
+
+        private void DefineColorBorderPhoneEmail()
+        {
+            if(CommunicationChannel.SelectedItem.ToString() == "Телефон")
+            {
+                if(Phone.Text != "")
+                    PhoneEmailBorder.BorderBrush = Brushes.Green;
+                else PhoneEmailBorder.BorderBrush = Brushes.Gray;
+            }
+
+            if (CommunicationChannel.SelectedItem.ToString() == "Email")
+            {
+                if (Email.Text != "")
+                    PhoneEmailBorder.BorderBrush = Brushes.Green;
+                else PhoneEmailBorder.BorderBrush = Brushes.Gray;
+            }
         }
 
         void ShowEmailPhoneGrid()
         {
-            if (CommunicationChannel.SelectedItem.ToString() == "Телефон")
+            if(Route != null  && Route.SelectedItem.ToString() != "")
             {
-                PhoneGrid.Visibility = Visibility.Visible;
-                EmailGrid.Visibility = Visibility.Hidden;
-                if (Route.SelectedItem.ToString() == "Входящий")
+                if (CommunicationChannel.SelectedItem.ToString() == "Телефон")
                 {
-                    DescriptionTypeConnect.Visibility = Visibility.Visible;
-                    DescriptionTypeConnect.Content = "Входящий звонок с:";
+                    PhoneGrid.Visibility = Visibility.Visible;
+                    EmailGrid.Visibility = Visibility.Hidden;
+                    if (Route.SelectedItem.ToString() == "Входящий")
+                    {
+                        DescriptionTypeConnect.Visibility = Visibility.Visible;
+                        DescriptionTypeConnect.Content = "Входящий звонок с:";
+                    }
+                    else if (Route.SelectedItem.ToString() == "Исходящий")
+                    {
+                        DescriptionTypeConnect.Visibility = Visibility.Visible;
+                        DescriptionTypeConnect.Content = "Исходящий звонок на:";
+                    }
                 }
-                else if (Route.SelectedItem.ToString() == "Исходящий")
+                else if (CommunicationChannel.SelectedItem.ToString() == "Email")
                 {
-                    DescriptionTypeConnect.Visibility = Visibility.Visible;
-                    DescriptionTypeConnect.Content = "Исходящий звонок на:";
+                    PhoneGrid.Visibility = Visibility.Hidden;
+                    EmailGrid.Visibility = Visibility.Visible;
+                    if (Route.SelectedItem.ToString() == "Входящий")
+                    {
+                        DescriptionTypeConnect.Visibility = Visibility.Visible;
+                        DescriptionTypeConnect.Content = "Входящий Email с:";
+                    }
+                    else if (Route.SelectedItem.ToString() == "Исходящий")
+                    {
+                        DescriptionTypeConnect.Visibility = Visibility.Visible;
+                        DescriptionTypeConnect.Content = "Исходящий Email на:";
+                    }
                 }
             }
-            else if (CommunicationChannel.SelectedItem.ToString() == "Email")
-            {
-                PhoneGrid.Visibility = Visibility.Hidden;
-                EmailGrid.Visibility = Visibility.Visible;
-                if (Route.SelectedItem.ToString() == "Входящий")
-                {
-                    DescriptionTypeConnect.Visibility = Visibility.Visible;
-                    DescriptionTypeConnect.Content = "Входящий Email с:";
-                }
-                else if (Route.SelectedItem.ToString() == "Исходящий")
-                {
-                    DescriptionTypeConnect.Visibility = Visibility.Visible;
-                    DescriptionTypeConnect.Content = "Исходящий Email на:";
-                }
-            }
+      
         }
 
         private void Complete_MouseEnter(object sender, MouseEventArgs e)
@@ -245,9 +308,8 @@ new Action(() =>
             OffComplete.Visibility = Visibility.Hidden;
             completeenter.Visibility = Visibility.Visible;
             OffInWork.Visibility = Visibility.Visible;
+            StatusBorder.BorderBrush = Brushes.Green;
         }
-
-
 
         private void Complete_MouseLeave(object sender, MouseEventArgs e)
         {
@@ -261,10 +323,6 @@ new Action(() =>
                     OffComplete.Visibility = Visibility.Visible;
             }
         }
-
-
-
-
 
         private void InWork_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -283,6 +341,7 @@ new Action(() =>
             OffInWork.Visibility = Visibility.Hidden;
             inworkenter.Visibility = Visibility.Visible;
             OffComplete.Visibility = Visibility.Visible;
+            StatusBorder.BorderBrush = Brushes.Green;
         }
 
         private void InWork_MouseLeave(object sender, MouseEventArgs e)
@@ -298,9 +357,28 @@ new Action(() =>
             }
             if(completeenter.Visibility == Visibility.Visible)
                 inworkhover.Visibility = Visibility.Hidden;
-           
         }
 
+        private void AddDataToCurrentAppeal_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (MainBorder.BorderBrush == Brushes.Red)
+            {
+                MainBorder.BorderThickness = new Thickness(1.5);
+                MainBorder.BorderBrush = Brushes.Gray;
+            }
+               
+        }
+
+
+        private void CommunicationChannel_DropDownOpened(object sender, EventArgs e)
+        {
+            if (!handlerAttached)
+            {
+                CommunicationChannel.SelectionChanged += CommunicationChannel_SelectionChanged;
+                Route.SelectionChanged += Route_SelectionChanged;
+                handlerAttached = true;
+            }
+        }
     }
 }
 

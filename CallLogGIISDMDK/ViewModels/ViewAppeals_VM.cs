@@ -288,14 +288,16 @@ namespace CallLogGIISDMDK.ViewModels
         void SetDefaultFields()
         {
             //Phone = "";
+
             Appeal = "";
             AdditionalInfo = "";
-            _hourAppeal = new List<string>();
-            _minuteAppeal = new List<string>();
             CurrentMinute = "";
             Type = "";
             Route = "";
             CommunicationСhannel = "";
+
+            _hourAppeal = new List<string>();
+            _minuteAppeal = new List<string>();
             _daysCurrentMonthStringFormat = new List<string>();
             _statuses = new List<string>();
             _types = new List<string>();
@@ -309,6 +311,8 @@ namespace CallLogGIISDMDK.ViewModels
             _types = _fillAppeal_Model.GetTypesAppeal();
             _communicationСhannels = _fillAppeal_Model.GetTypesAppeal();
             _routes = _fillAppeal_Model.GetRoutes();
+
+            
         }
         private void ShowDataAppealByID(string appealID)
         {

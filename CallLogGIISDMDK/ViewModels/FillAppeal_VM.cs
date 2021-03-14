@@ -161,9 +161,9 @@ namespace CallLogGIISDMDK.ViewModels
             CheckFirstStepFillAppeal(null);
             PromptsType = fillAppeal_Model.ClearPrompt(Type, PromptsType);
         }
-        public void FillEditableAppeal(object personalID)
+        public void FillEditableAppeal(object appeal)
         {
-            StaticData.DataAppealByPersonalID = data.GetAppealByPersonalID(personalID);
+            
         }
         //ICommand YourCommand = new DelegateCommand<int>(a =>
         //{

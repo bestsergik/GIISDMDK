@@ -37,7 +37,7 @@ namespace CallLogGIISDMDK
             //MainFrame.NavigationService.Navigate(new Views.FillAppeal.FillAppeal_page1());
 
             //MainFrame.Navigate(new Authorization_page());
-            MainFrame.NavigationService.Navigate(new Menu_page());
+              MainFrame.NavigationService.Navigate(new Menu_page());
             //MainFrame.NavigationService.Navigate(new Views.FillAppeal.AddDataToAppealByID());
         }
 

@@ -28,7 +28,7 @@
             <TextBlock Margin="40,10,0,0" Grid.ColumnSpan="4"  Style="{StaticResource MainTitles}">Добавить запись к обращению №</TextBlock>
             <TextBlock Grid.Column="1" Margin="5,10,0,0" Grid.ColumnSpan="4" Text="{Binding ID}"  Style="{StaticResource MainTitles}"/>
         </Grid>
-        <Border x:Name="MainBorder" Grid.Row="1" CornerRadius="5" Margin="5" Grid.ColumnSpan="2"  BorderBrush="Gray" BorderThickness="1.5" >
+        <Border x:Name="MainBorder" Grid.Row="1"  Margin="5" Grid.ColumnSpan="2"  BorderBrush="Gray" BorderThickness="1.5" >
             <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <Grid x:Name="CenterGrid">
                     <Grid.ColumnDefinitions>
@@ -48,7 +48,7 @@
                         </Grid.RowDefinitions>
                         <Label Content="Содержание" Grid.ColumnSpan="2" Style="{StaticResource titleAddingDataToAppealByID}"></Label>
                         <Grid Margin="10,0,10,0" Grid.Row="1">
-                            <TextBox x:Name="Appeal"  Text="{Binding Appeal, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealBig}"   AcceptsReturn="True" TextWrapping="Wrap" />
+                                <TextBox x:Name="Appeal" Margin="0" Padding="0"  Text="{Binding Appeal, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealBig}"   AcceptsReturn="True" TextWrapping="Wrap" />
                         </Grid>
                     </Grid>
                     <Grid x:Name="CommonCenterGrid"  Grid.Row="1" Grid.ColumnSpan="2">
@@ -172,7 +172,6 @@
                         <!-- Choice phone or email   -->
 
                         <Border Grid.Row="1" CornerRadius="5" Margin="20,0,20.2,0" x:Name="PhoneEmailBorder"  BorderBrush="Gray" BorderThickness="1"    >
-
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition  Height="80"></RowDefinition>
@@ -185,10 +184,10 @@
                                         <ColumnDefinition></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <ComboBox x:Name="CommunicationChannel" SelectionChanged="CommunicationChannel_SelectionChanged" VerticalAlignment="top" ItemsSource="{Binding CommunicationСhannels}"  SelectedItem="{Binding CommunicationСhannel}"   Height="50"  SelectedIndex="20"    >
+                                    <ComboBox  x:Name="CommunicationChannel" ItemsSource="{Binding CommunicationСhannels}" VerticalAlignment="top" SelectedItem="{Binding CommunicationСhannel}"   Height="50"  SelectedIndex="20"  DropDownOpened="CommunicationChannel_DropDownOpened"    >
                                     </ComboBox>
 
-                                    <ComboBox Grid.Column="1" x:Name="Route" Visibility="Hidden" SelectionChanged="Route_SelectionChanged" VerticalAlignment="top" ItemsSource="{Binding Routes}"  SelectedItem="{Binding Route}"   Height="50"  SelectedIndex="20"    >
+                                    <ComboBox Grid.Column="1"  x:Name="Route" Visibility="Hidden"  VerticalAlignment="top"  ItemsSource="{Binding Routes}"  SelectedItem="{Binding Route}"   Height="50"  SelectedIndex="20"   >
                                     </ComboBox>
                                     
                                 </Grid>
@@ -204,10 +203,9 @@
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
-                                        <TextBox IsEnabled="False"  x:Name="Email" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
-                                        <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsEmail}" ></Label>
-                                        <CheckBox Margin="10,2,15,0" Grid.Row="1"  HorizontalAlignment="Left" Grid.Column="1" x:Name="EditEmail" FontSize="13"  Style="{StaticResource StepsFillAppeal}" Click="EditEmail_Click">Изменить</CheckBox>
-                                        <!--<Label Grid.Row="1" Margin="0" Padding="0,2,20,0" HorizontalAlignment="Right" Foreground="Chocolate"   FontSize="14" VerticalAlignment="Top"  Content="Почта" Style="{StaticResource titleBoxesFillAppeal}"></Label>-->
+                                        <TextBox  x:Name="Email" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}"></TextBox>
+                                        <!--<CheckBox Margin="10,2,15,0" Grid.Row="1"  HorizontalAlignment="Left" Grid.Column="1" x:Name="EditEmail" FontSize="13"  Style="{StaticResource StepsFillAppeal}" Click="EditEmail_Click">Изменить</CheckBox>-->
+                                        <Label Height="0.1" x:Name="PromptEmail" Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsEmail}" ></Label>
                                     </Grid>
 
                                     <Grid  Margin="0,4,20,0"   x:Name="PhoneGrid" Visibility="Hidden"  Grid.Column="1">
@@ -219,7 +217,7 @@
                                             <ColumnDefinition Width="58"></ColumnDefinition>
                                             <ColumnDefinition></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
-                                        <TextBox Grid.Column="{Binding PositionPhoneForm}" Grid.ColumnSpan="2" IsEnabled="False" x:Name="Phone"    Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}" TextChanged="Phone_TextChanged" />
+                                        <TextBox Grid.Column="{Binding PositionPhoneForm}" Grid.ColumnSpan="2" x:Name="Phone"    Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealMini}" TextChanged="Phone_TextChanged" />
                                         <TextBox  Margin="10,0,0,0" Visibility="{Binding IsVisibleNumber7}"    x:Name="number7" IsEnabled="False"  Style="{StaticResource AppealMini}" Text="+7">
                                         </TextBox>
                                         <Grid Grid.Row="1" Grid.ColumnSpan="2">
@@ -228,7 +226,7 @@
                                                 <ColumnDefinition></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
                                             <CheckBox Margin="10,2,0,0"  HorizontalAlignment="Left" x:Name="IsIrregular" FontSize="13"  Style="{StaticResource StepsFillAppeal}" IsEnabled="{Binding IsEnableIrregularCheck}"  IsChecked="{Binding IsIrregular}">Нестандартный номер</CheckBox>
-                                            <CheckBox Margin="10,2,15,0"  HorizontalAlignment="Right" Grid.Column="1" x:Name="EditPhone" FontSize="13"  Style="{StaticResource StepsFillAppeal}" Click="EditPhone_Click">Изменить</CheckBox>
+                                            <!--<CheckBox Margin="10,2,15,0"  HorizontalAlignment="Right" Grid.Column="1" x:Name="EditPhone" FontSize="13"  Style="{StaticResource StepsFillAppeal}" Click="EditPhone_Click">Изменить</CheckBox>-->
                                             <!--<Label Grid.Row="1" Margin="0" Padding="0,2,20,0" HorizontalAlignment="Right" Grid.ColumnSpan="2" Foreground="Chocolate"   FontSize="14" VerticalAlignment="Top"  Content="Телефон" Style="{StaticResource titleBoxesFillAppeal}"></Label>-->
                                         </Grid>
                                     </Grid>
@@ -359,13 +357,12 @@
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Label   Content="Характер обращения" Style="{StaticResource titleAddingDataToAppealByID}"></Label>
-                        <Border Margin="20,2,20,20"  Grid.Row="1" x:Name="FifthLine"  CornerRadius="5"  Grid.ColumnSpan="3" BorderBrush="Gray" BorderThickness="1.5" >
+                        <Border Margin="20,2,20,20"  Grid.Row="1" x:Name="TypeAppealBorder"  CornerRadius="5"  Grid.ColumnSpan="3" BorderBrush="Gray" BorderThickness="1.2" >
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1"></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
-                                    <RowDefinition  Height="20"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition></ColumnDefinition>
@@ -667,7 +664,7 @@
                                         </ControlTemplate>
                                     </Button.Template>
                                 </Button>
-                                <Label x:Name="PromptTypeAppel" Grid.Row="3" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsType}" ></Label>
+                                <!--<Label x:Name="PromptTypeAppel" Grid.Row="3" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsType}" ></Label>-->
                         </Grid>
                         </Border>
                     </Grid>
@@ -692,7 +689,7 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button x:Name="CancelAdding"  Style="{StaticResource MainMenuButton}" Click="CancelAdding_Click" >Отмена</Button>
-            <Button Grid.Column="2"  x:Name="AddDataToCurrentAppeal" IsCancel="{Binding IsValidAddingDataToAppeal}" Command="{Binding AddDataToCurrentAppealCommmand}"  Style="{StaticResource MainMenuButton}" Click="AddDataToCurrentAppeal_Click"  >Добавить запись</Button>
+            <Button Grid.Column="2" MouseLeave="AddDataToCurrentAppeal_MouseLeave"  x:Name="AddDataToCurrentAppeal" IsCancel="{Binding IsValidAddingDataToAppeal}" Command="{Binding AddDataToCurrentAppealCommmand}"  Style="{StaticResource MainMenuButton}" Click="AddDataToCurrentAppeal_Click"  >Добавить запись</Button>
         </Grid>
     </Grid>
 </Page>
