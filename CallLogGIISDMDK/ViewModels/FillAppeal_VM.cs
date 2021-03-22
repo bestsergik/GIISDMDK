@@ -20,8 +20,6 @@ namespace CallLogGIISDMDK.ViewModels
         FileWriter fileWriter = new FileWriter();
         FileReader fileReader = new FileReader();
         FileRemover fileRemover = new FileRemover();
-        //public delegate void MethodContainer();
-        //public event MethodContainer onReadyToUpdateAppeals;
         FillAppeal_model fillAppeal_Model = new FillAppeal_model();
         private RelayCommand _addAppealCommand;
         private RelayCommand _checkFirstStepFillAppealCommand;
@@ -32,6 +30,7 @@ namespace CallLogGIISDMDK.ViewModels
         private RelayCommand _updateComnListCommand;
         private ICommand _fillEditableAppealCommand;
         private ICommand _addTypeAppealCommand;
+        private ICommand _addDetailTypeAppealCommand;
         private RelayCommand _deleteAppealCommand;
         private List<string> _minuteAppeal;
         private List<string> _hourAppeal;
@@ -54,6 +53,7 @@ namespace CallLogGIISDMDK.ViewModels
         private string _currentTime;
         private string _inputPhone;
         private string _appeal;
+        private string _answer;
         private string _additionalInfo;
         private string _fullName;
         private string _email;
@@ -65,6 +65,7 @@ namespace CallLogGIISDMDK.ViewModels
         private string _inn;
         private string _sity;
         private string _type = "";
+        private string _detailType = "";
         private string _selectedSuitableAppeal;
         private string _communicationChannel = "";
         private string _ID;
@@ -75,11 +76,13 @@ namespace CallLogGIISDMDK.ViewModels
         private string _promptsCompany = "";
         private string _promptsRole = "";
         private string _promptsAppeal = "";
+        private string _promptsAnswer = "";
         private string _promptsStatus = "";
         private string _promptsInn = "";
         private string _promptsOgrn = "";
         private string _promptsSity = "";
         private string _promptsType = "";
+        private string _promptsDetailType = "";
         private string _promptsCommunicationСhannel = "";
         private string _promptsTime = "";
         private bool _isFirstStepFillAppeal;
@@ -99,47 +102,20 @@ namespace CallLogGIISDMDK.ViewModels
         private bool _isReadyUpdateAppeals = false;
         private Visibility _choiseSex = Visibility.Hidden;
         private Visibility _isVisibleNumber7;
-        string[] _prompts = new string[12];
+        string[] _prompts = new string[13];
         public FillAppeal_VM()
         {
             _hourAppeal = fillAppeal_Model.GetHoursAppeal();
             _minuteAppeal = fillAppeal_Model.GetMinutesAppeal();
             _daysCurrentMonthStringFormat = fillAppeal_Model.FillDaysCurrentMonth();
-            //_currentMinute = fillAppeal_Model.NearMinute();
             _participantRoles = fillAppeal_Model.GetParticipantRoles();
             _statuses = fillAppeal_Model.GetStatusesAppeal();
             _communicationСhannels = fillAppeal_Model.GetTypesAppeal();
-            // FillDisplayAppeals();
             FillPrompts();
         }
-        private void FillPrompts()
-        {
-            _prompts[0] = _promptsFullName;
-            _prompts[1] = _promptsPhoneNumber;
-            _prompts[2] = _promptsEmail;
-            _prompts[3] = _promptsCompany;
-            _prompts[4] = _promptsRole;
-            _prompts[5] = _promptsStatus;
-            _prompts[6] = _promptsInn;
-            _prompts[7] = _promptsSity;
-            _prompts[8] = _promptsOgrn;
-            _prompts[9] = _promptsCommunicationСhannel;
-            _prompts[10] = _promptsType;
-            _prompts[11] = _promptsTime;
-        }
+
         #region Commands
-        //public RelayCommand EditAppealCommand
-        //{
-        //    get
-        //    {
-        //        if (_editAppealCommand == null)
-        //        {
-        //            _editAppealCommand = new RelayCommand(
-        //                p => this.EditAppeal()); ;
-        //        }
-        //        return _editAppealCommand;
-        //    }
-        //}]
+
         public ICommand ClickCommand
         {
             get
@@ -154,22 +130,13 @@ namespace CallLogGIISDMDK.ViewModels
                 return _addTypeAppealCommand ?? (_addTypeAppealCommand = new RelayCommand(AddTypeAppeal));
             }
         }
-        private void AddTypeAppeal(object type)
+        public ICommand AddDetailTypeAppealCommand
         {
-            string typeAppeal = type.ToString();
-            _type = fillAppeal_Model.AddTypeAppeal(_type, typeAppeal);
-            CheckFirstStepFillAppeal(null);
-            PromptsType = fillAppeal_Model.ClearPrompt(Type, PromptsType);
+            get
+            {
+                return _addDetailTypeAppealCommand ?? (_addDetailTypeAppealCommand = new RelayCommand(AddDetailTypeAppeal));
+            }
         }
-        public void FillEditableAppeal(object appeal)
-        {
-            
-        }
-        //ICommand YourCommand = new DelegateCommand<int>(a =>
-        //{
-        //    id = a; // a is the ID passed in
-        //            //Do something            
-        //});
         public RelayCommand DeleteAppealCommand
         {
             get
@@ -206,15 +173,7 @@ namespace CallLogGIISDMDK.ViewModels
                 return _loadedPage2Command;
             }
         }
-        private void NewAppeal2()
-        {
-            if (StaticData.IsNewAppeal2)
-            {
-                Appeal = "";
-                AdditionalInfo = "";
-                StaticData.IsNewAppeal2 = false;
-            }
-        }
+
         public RelayCommand UpdateComnListCommand
         {
             get
@@ -283,6 +242,12 @@ namespace CallLogGIISDMDK.ViewModels
                 return _loadedPageCommand;
             }
         }
+
+        #endregion
+        #region Methods
+        private void EditAppeal()
+        {
+        }
         void FillDisplayAppeals()
         {
             foreach (var appeal in data.GetAppeals())
@@ -293,16 +258,16 @@ namespace CallLogGIISDMDK.ViewModels
         private void NewAppeal()
         {
             StaticData.CurrentId = 0;
-            //ParticipantRole = null;
             if (StaticData.IsNewAppeal)
             {
-                // FillDisplayAppeals();
-                
                 InputPhone = "";
                 AdditionalInfo = "";
                 FullName = "";
                 Email = "";
                 Company = "";
+               
+                Type = "";
+                DetailType = "";
                 UserName = "";
                 Ogrn = "";
                 Inn = "";
@@ -326,10 +291,49 @@ namespace CallLogGIISDMDK.ViewModels
                 _route = "Входящее";
             }
         }
-        #endregion
-        #region Methods
-        private void EditAppeal()
+        private void NewAppeal2()
         {
+            if (StaticData.IsNewAppeal2)
+            {
+                Appeal = "";
+                AdditionalInfo = "";
+                Answer = "";
+                StaticData.IsNewAppeal2 = false;
+            }
+        }
+        private void FillPrompts()
+        {
+            _prompts[0] = _promptsFullName;
+            _prompts[1] = _promptsPhoneNumber;
+            _prompts[2] = _promptsEmail;
+            _prompts[3] = _promptsCompany;
+            _prompts[4] = _promptsRole;
+            _prompts[5] = _promptsStatus;
+            _prompts[6] = _promptsInn;
+            _prompts[7] = _promptsSity;
+            _prompts[8] = _promptsOgrn;
+            _prompts[9] = _promptsCommunicationСhannel;
+            _prompts[10] = _promptsType;
+            _prompts[11] = _promptsTime;
+            _prompts[12] = _promptsDetailType;
+        }
+        private void AddDetailTypeAppeal(object detailType)
+        {
+            string typeAppeal = detailType.ToString();
+            _detailType = fillAppeal_Model.AddTypeAppeal(_detailType, typeAppeal);
+            CheckFirstStepFillAppeal(null);
+            PromptsDetailType = fillAppeal_Model.ClearPrompt(DetailType, PromptsDetailType);
+        }
+        private void AddTypeAppeal(object type)
+        {
+            string typeAppeal = type.ToString();
+            _type = fillAppeal_Model.AddTypeAppeal(_type, typeAppeal);
+            CheckFirstStepFillAppeal(null);
+            PromptsType = fillAppeal_Model.ClearPrompt(Type, PromptsType);
+        }
+        public void FillEditableAppeal(object appeal)
+        {
+            StaticData.CurrentPersonalId = appeal.ToString();
         }
         private void DeleteAppeal()
         {
@@ -343,7 +347,7 @@ namespace CallLogGIISDMDK.ViewModels
         }
         void CheckFirstStepFillAppeal(object p)
         {
-            _prompts = fillAppeal_Model.CheckLeghtFields(FullName, InputPhone, Email, Company, ParticipantRole, Status, IsIrregular, Inn, Sity, Ogrn, CommunicationChannel, Type, CurrentMinute);
+            _prompts = fillAppeal_Model.CheckLeghtFields(FullName, InputPhone, Email, Company, ParticipantRole, Status, IsIrregular, Inn, Sity, Ogrn, CommunicationChannel, Type, CurrentMinute, DetailType);
             IsFirstStepFillAppeal = fillAppeal_Model.isValidFirstStep;
             if (p != null)
                 ShowPrompts();
@@ -392,6 +396,7 @@ namespace CallLogGIISDMDK.ViewModels
             PromptsCommunicationСhannel = _prompts[9];
             PromptsType = _prompts[10];
             PromptsTime = _prompts[11];
+            PromptsDetailType = _prompts[12];
         }
         private void AddAppeal()
         {
@@ -403,10 +408,7 @@ namespace CallLogGIISDMDK.ViewModels
             DateTime dateForConverted = DateTime.Parse(CurrentDay);
             string convertedDate = dateForConverted.ToString("dd/MM/yyyy");
             CurrentTime = (DateTime.Parse($"{CurrentHour.ToString()}:{CurrentMinute}")).ToString("HH:mm");
-            //  var currentTime = (DateTime.Parse($"{CurrentHour.ToString()}:{CurrentMinute}")).ToString("HH:mm");
-            //  string convertedTime = currentTime.ToString("HH:mm");
-            fileWriter.WriteAppealToFile(FullName, Company, Sity, InputPhone, Inn, ParticipantRole, Type, Status, Email, Ogrn, convertedDate, Appeal, AdditionalInfo, CommunicationChannel, CurrentTime, Route);
-            //fillAppeal_Model.SaveAppeal(FullName, InputPhone, CurrentDay, CurrentHour, CurrentMinute, Email, Company, ParticipantRole, Appeal, AdditionalInfo);
+            fileWriter.WriteAppealToFile(FullName, Company, Sity, InputPhone, Inn, ParticipantRole, Type, Status, Email, Ogrn, convertedDate, Appeal, AdditionalInfo, CommunicationChannel, CurrentTime, Route, Answer, DetailType);
         }
         private void ShowChoiseSex()
         {
@@ -746,6 +748,17 @@ namespace CallLogGIISDMDK.ViewModels
                 CheckSecondStepFillAppeal();
             }
         }
+        public string Answer
+        {
+            get { return _answer; }
+            set
+            {
+                _answer = value;
+                OnPropertyChanged("Answer");
+                CheckSecondStepFillAppeal();
+            }
+        }
+
         public string AdditionalInfo
         {
             get { return _additionalInfo; }
@@ -895,7 +908,18 @@ namespace CallLogGIISDMDK.ViewModels
                 _type = value;
                 OnPropertyChanged("Type");
                 CheckFirstStepFillAppeal(null);
-                PromptsType = fillAppeal_Model.ClearPrompt(Ogrn, PromptsType);
+                PromptsType = fillAppeal_Model.ClearPrompt(Type, PromptsType);
+            }
+        }
+        public string DetailType
+        {
+            get { return _detailType; }
+            set
+            {
+                _detailType = value;
+                OnPropertyChanged("DetailType");
+                CheckFirstStepFillAppeal(null);
+                PromptsType = fillAppeal_Model.ClearPrompt(DetailType, PromptsType);
             }
         }
         public string PromptsFullName
@@ -925,9 +949,18 @@ namespace CallLogGIISDMDK.ViewModels
             {
                 _promptsType = value;
                 OnPropertyChanged("PromptsType");
-                // CheckPositionControls();
             }
         }
+        public string PromptsDetailType
+        {
+            get { return _promptsDetailType; }
+            set
+            {
+                _promptsDetailType = value;
+                OnPropertyChanged("PromptsDetailType");
+            }
+        }
+
         public string PromptsCommunicationСhannel
         {
             get { return _promptsCommunicationСhannel; }
@@ -935,7 +968,6 @@ namespace CallLogGIISDMDK.ViewModels
             {
                 _promptsCommunicationСhannel = value;
                 OnPropertyChanged("PromptsCommunicationСhannel");
-                //  CheckPositionControls();
             }
         }
         public string PromptsTime
@@ -945,7 +977,6 @@ namespace CallLogGIISDMDK.ViewModels
             {
                 _promptsTime = value;
                 OnPropertyChanged("PromptsTime");
-                //  CheckPositionControls();
             }
         }
         public string Company
@@ -1033,6 +1064,15 @@ namespace CallLogGIISDMDK.ViewModels
             {
                 _promptsAppeal = value;
                 OnPropertyChanged("PromptsAppeal");
+            }
+        }
+        public string PromptsAnswer
+        {
+            get { return _promptsAnswer; }
+            set
+            {
+                _promptsAnswer = value;
+                OnPropertyChanged("PromptsAnswer");
             }
         }
         #endregion
@@ -1183,12 +1223,5 @@ namespace CallLogGIISDMDK.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
-        //public interface ICommand
-        //{
-        //    void Execute(object param);
-        //    bool CanExecute(object param);
-        //    event EventHandler<object> CanExecuteChanged;
-        //}
     }
 }
-

@@ -14,18 +14,18 @@ namespace CallLogGIISDMDK.WorkWithFiles
         string correctPathToXml = "";
         List<int> Years = new List<int>();
         DateTime currentDate = DateTime.Now;
+        FileSaveDialog fileSaveDialog;
         //int currentMonth = DateTime.Now.Month;
         //int currentYear = DateTime.Now.Year;
-
         //bool isHAvailabilityAppeals;
         public DefinerAvailabilityAppealsByDate()
         {
             fillYears();
             string currentYear = currentDate.Year.ToString();
-            
-                correctPathToZip = definerCorrectPathToAppeals.GetCorrectPathToAppealsZip();
-                correctPathToXml = definerCorrectPathToAppeals.GetCorrectPathToAppealsXml();
-           
+
+            correctPathToZip = definerCorrectPathToAppeals.GetCorrectPathToAppealsZip();
+            correctPathToXml = definerCorrectPathToAppeals.GetCorrectPathToAppealsXml();
+
         }
         void fillYears()
         {
@@ -54,17 +54,22 @@ namespace CallLogGIISDMDK.WorkWithFiles
             {
                 if (numberMonth < 12)
                     numberMonth++;
-                if(!CheckAvailabilityAppeals(year, numberMonth.ToString()))
+                if (!CheckAvailabilityAppeals(year, numberMonth.ToString()))
                     numberMonth--;
+            }
+            else if (route.ToString() == "Previous")
+            {
+                if (numberMonth > 1)
+                {
+                    numberMonth--;
+                    if (!CheckAvailabilityAppeals(year, numberMonth.ToString()))
+                        numberMonth++;
+                }
             }
             else
             {
-                if(numberMonth > 1)
-                {
-                    numberMonth--;
-                    if (!CheckAvailabilityAppeals( year, numberMonth.ToString()))
-                        numberMonth++;
-                }
+                if (CheckAvailabilityAppeals(year, numberMonth.ToString()))
+                    fileSaveDialog = new FileSaveDialog();
             }
             date[0] = numberMonth.ToString();
             date[1] = year;
@@ -73,21 +78,21 @@ namespace CallLogGIISDMDK.WorkWithFiles
 
         bool CheckAvailabilityAppeals(string year, string month)
         {
-            if(File.Exists($"{year}/{month}/Appeals.zip"))
+            if (File.Exists($"{year}/{month}/Appeals.zip"))
             {
                 StaticData.CorrectPathToXml = $"{year}/{month}/Appeals.xml";
                 StaticData.CorrectPathToZip = $"{year}/{month}/Appeals.zip";
+                StaticData.CorrectFolder = $"{year}/{month}/";
                 //correctPathToZip = $"{year}/{month}/Appeals.zip";
                 //correctPathToXml = $"{year}/{month}/Appeals.xml";
                 return true;
             }
             else return false;
         }
-
         public string[] GetCorrectPathToAppeal()
         {
             string[] correctPath = new string[2];
-            if(StaticData.CorrectPathToXml == "")
+            if (StaticData.CorrectPathToXml == "")
             {
                 correctPath[0] = correctPathToZip;
                 correctPath[1] = correctPathToXml;
@@ -97,8 +102,9 @@ namespace CallLogGIISDMDK.WorkWithFiles
                 correctPath[0] = StaticData.CorrectPathToZip;
                 correctPath[1] = StaticData.CorrectPathToXml;
             }
-           
+
             return correctPath;
         }
     }
 }
+

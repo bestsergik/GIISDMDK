@@ -25,7 +25,6 @@ namespace CallLogGIISDMDK.WorkWithFiles
             pathToZipAppeals = definerPath.GetCorrectPathToAppealsZip();
             pathToAppeals = definerPath.GetCorrectPathToAppealsXml();
         }
-
         public List<List<string>> GetAppeals()
         {
             DefinerCorrectPathToAppeals();
@@ -37,16 +36,17 @@ namespace CallLogGIISDMDK.WorkWithFiles
                 fileArchiving.DecompressData(pathToZipAppeals);
                 List<string> appeal;
                 XDocument xdoc = XDocument.Load(pathToAppeals);
-
                 foreach (XElement currentAppeal in xdoc.Element("Appeals").Elements())
-                { 
+                {
                     appeal = new List<string>();
                     XElement IDElement = currentAppeal.Element("ID");
                     XElement dateElement = currentAppeal.Element("date");
                     XElement timeElement = currentAppeal.Element("time");
                     XElement communicationСhannelElement = currentAppeal.Element("communicationСhannel");
                     XElement typeElement = currentAppeal.Element("type");
+                    XElement detailTypeElement = currentAppeal.Element("detailType");
                     XElement appealElement = currentAppeal.Element("appeal");
+                    XElement answerElement = currentAppeal.Element("answer");
                     XElement userElement = currentAppeal.Element("user");
                     XElement sityElement = currentAppeal.Element("sity");
                     XElement roleElement = currentAppeal.Element("role");
@@ -65,7 +65,9 @@ namespace CallLogGIISDMDK.WorkWithFiles
                     appeal.Add(timeElement.Value);
                     appeal.Add(communicationСhannelElement.Value);
                     appeal.Add(typeElement.Value);
+                    appeal.Add(detailTypeElement.Value);
                     appeal.Add(appealElement.Value);
+                    appeal.Add(answerElement.Value);
                     appeal.Add(userElement.Value);
                     appeal.Add(sityElement.Value);
                     appeal.Add(roleElement.Value);
@@ -79,18 +81,15 @@ namespace CallLogGIISDMDK.WorkWithFiles
                     appeal.Add(ogrnElement.Value);
                     appeal.Add(statusElement.Value);
                     appeal.Add(personalIDElement.Value);
-
                     appeals.Add(appeal);
                     FillDataUser(statusElement.Value, userElement.Value);
                 }
                 File.Delete(pathToAppeals);
-
                 appeals.Reverse();
                 return appeals;
             }
             else return appeals;
         }
-
         private void DefinerCorrectPathToAppeals()
         {
             string[] correctPath = new string[2];
@@ -98,7 +97,6 @@ namespace CallLogGIISDMDK.WorkWithFiles
             pathToZipAppeals = correctPath[0];
             pathToAppeals = correctPath[1];
         }
-
         bool CheckIdenticalId(List<string> idAppeals, string currentIdAppeal)
         {
             bool isIdenticalId = false;
@@ -132,4 +130,3 @@ namespace CallLogGIISDMDK.WorkWithFiles
         }
     }
 }
-

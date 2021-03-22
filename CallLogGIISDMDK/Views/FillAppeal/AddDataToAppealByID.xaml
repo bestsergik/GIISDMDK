@@ -29,29 +29,60 @@
             <TextBlock Grid.Column="1" Margin="5,10,0,0" Grid.ColumnSpan="4" Text="{Binding ID}"  Style="{StaticResource MainTitles}"/>
         </Grid>
         <Border x:Name="MainBorder" Grid.Row="1"  Margin="5" Grid.ColumnSpan="2"  BorderBrush="Gray" BorderThickness="1.5" >
-            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <ScrollViewer x:Name="MainScroll" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <Grid x:Name="CenterGrid">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="155*"/>
-                        <ColumnDefinition Width="1189*"/>
-                    </Grid.ColumnDefinitions>
+
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="260"></RowDefinition>
+                        <RowDefinition Height="408"></RowDefinition>
+                        <RowDefinition Height="1"></RowDefinition>
                         <RowDefinition Height="265"></RowDefinition>
-                        <RowDefinition Height="220"></RowDefinition>
+                        <RowDefinition Height="22"></RowDefinition>
+                        <RowDefinition Height="75"></RowDefinition>
+                        <RowDefinition x:Name="DownArrwoImageRow" Height="0.1"></RowDefinition>
+                        <RowDefinition x:Name="TitleDetailTypeAppealRow" Height="0.1"></RowDefinition>
+                        <RowDefinition x:Name="DetailTypeAppealRow" Height="0.1"></RowDefinition>
                         <RowDefinition Height="170"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Grid x:Name="TextAppeal" Margin="0,16,0,0"  Grid.ColumnSpan="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="20"></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Label Content="Содержание" Grid.ColumnSpan="2" Style="{StaticResource titleAddingDataToAppealByID}"></Label>
-                        <Grid Margin="10,0,10,0" Grid.Row="1">
-                                <TextBox x:Name="Appeal" Margin="0" Padding="0"  Text="{Binding Appeal, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealBig}"   AcceptsReturn="True" TextWrapping="Wrap" />
+
+                    <Border x:Name="AppealBorder"   CornerRadius="5" Margin="19.8,10,20.4,0"   BorderBrush="Gray" BorderThickness="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid x:Name="TextAppeal" Margin="0,16,0,0"  Grid.ColumnSpan="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Content="Обращение" Grid.ColumnSpan="2" Style="{StaticResource titleAddingDataToAppealByID}"></Label>
+                                <Grid Margin="10,0,10,0" Grid.Row="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition Height="20"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBox x:Name="Appeal" Margin="0" Padding="0"  Text="{Binding Appeal, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnableAppeal}" Style="{StaticResource AppealBig}"   AcceptsReturn="True" TextWrapping="Wrap" />
+                                    <CheckBox HorizontalAlignment="Right" Grid.Row="1" Margin="0,0,10,0" Grid.Column="1" FontSize="12" x:Name="IsHaveAppeal" Style="{StaticResource StepsFillAppeal}"   IsChecked="{Binding IsHaveAppeal}" IsEnabled="{Binding IsEnableCheckAppeal}">Только ответ</CheckBox>
+                                </Grid>
+                            </Grid>
+                            <Grid x:Name="TextAnswer" Grid.Row="1" Margin="0,16,0,0"  Grid.ColumnSpan="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Content="Ответ" Grid.ColumnSpan="2" Style="{StaticResource titleAddingDataToAppealByID}"></Label>
+                                <Grid Margin="10,0,10,10" Grid.Row="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition Height="20"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBox x:Name="Answer" Margin="0" Padding="0" IsEnabled="{Binding IsEnableAnswer}"  Text="{Binding Answer, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealBig}"   AcceptsReturn="True" TextWrapping="Wrap" />
+                                    <CheckBox HorizontalAlignment="Right" Grid.Row="1" Margin="0,0,10,0" IsEnabled="{Binding IsEnableCheckAnswer}"  Grid.Column="1" FontSize="12" x:Name="IsHaveAnswer"  Style="{StaticResource StepsFillAppeal}"  IsChecked="{Binding IsHaveAnswer}">Только обращение</CheckBox>
+                                </Grid>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid x:Name="CommonCenterGrid"  Grid.Row="1" Grid.ColumnSpan="2">
+                    </Border>
+                    <Grid x:Name="CommonCenterGrid"  Grid.Row="2" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1.5*"></ColumnDefinition>
                             <ColumnDefinition ></ColumnDefinition>
@@ -112,24 +143,19 @@
                             </Grid>
                         </Border>
 
-
                         <!-- Status -->
-
                         <Border x:Name="StatusBorder"  Grid.Row="1" Grid.Column="2"   CornerRadius="5" Margin="19.8,0,20.4,0"   BorderBrush="Gray" BorderThickness="1"  >
                             <Grid x:Name="StatusGrid" >
                                 <Grid.RowDefinitions>
                                     <RowDefinition ></RowDefinition>
                                     <RowDefinition ></RowDefinition>
                                 </Grid.RowDefinitions>
-
                                 <Grid Grid.Row="1">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="90"></RowDefinition>
                                         <RowDefinition></RowDefinition>
                                     </Grid.RowDefinitions>
-
                                     <!-- Complete -->
-
                                     <Label Padding="0" x:Name="CompleteLabel"  Grid.Column="1"  Grid.Row="1"  Content="Завершено" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
                                     <Image  Margin="14" Grid.Column="1"  Style="{StaticResource cursorHand}" Visibility="Hidden"  x:Name="completeenter" Loaded="LoadGif"></Image>
                                     <Image Margin="14" Source="complete.png" x:Name="Complete" Grid.Column="1" Style="{StaticResource cursorHand}" MouseEnter="Complete_MouseEnter"></Image>
@@ -143,15 +169,12 @@
                                     </Image>
                                     <Image Grid.Column="1" Margin="14"  MouseEnter="Complete_MouseEnter" Visibility="Hidden"  x:Name="OffComplete"  Source="offComplete.png" Style="{StaticResource cursorHand}"></Image>
                                 </Grid>
-
                                 <!-- In Work-->
-
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="90"></RowDefinition>
                                         <RowDefinition></RowDefinition>
                                     </Grid.RowDefinitions>
-
                                     <Label  x:Name="InWorkLabel" Grid.Row="1"  Content="В работе" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
                                     <Image  x:Name="inworkenter" Visibility="Hidden" Style="{StaticResource cursorHand}"     Loaded="LoadGif"></Image>
                                     <Image  Source="inWork.png" x:Name="InWork" Style="{StaticResource cursorHand}"  MouseEnter="InWork_MouseEnter"></Image>
@@ -164,13 +187,10 @@
                                         </i:Interaction.Triggers>
                                     </Image>
                                     <Image Source="offInWork.png" x:Name="OffInWork" MouseEnter="InWork_MouseEnter" Visibility="Hidden" Style="{StaticResource cursorHand}"></Image>
-
                                 </Grid>
                             </Grid>
                         </Border>
-
                         <!-- Choice phone or email   -->
-
                         <Border Grid.Row="1" CornerRadius="5" Margin="20,0,20.2,0" x:Name="PhoneEmailBorder"  BorderBrush="Gray" BorderThickness="1"    >
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -178,7 +198,6 @@
                                     <RowDefinition Height="30"></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
-
                                 <Grid Margin="0,20,0,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition></ColumnDefinition>
@@ -186,17 +205,12 @@
                                     </Grid.ColumnDefinitions>
                                     <ComboBox  x:Name="CommunicationChannel" ItemsSource="{Binding CommunicationСhannels}" VerticalAlignment="top" SelectedItem="{Binding CommunicationСhannel}"   Height="50"  SelectedIndex="20"  DropDownOpened="CommunicationChannel_DropDownOpened"    >
                                     </ComboBox>
-
                                     <ComboBox Grid.Column="1"  x:Name="Route" Visibility="Hidden"  VerticalAlignment="top"  ItemsSource="{Binding Routes}"  SelectedItem="{Binding Route}"   Height="50"  SelectedIndex="20"   >
                                     </ComboBox>
-                                    
                                 </Grid>
-
                                 <Label x:Name="DescriptionTypeConnect" Foreground="Chocolate" FontSize="13" Grid.Row="1" Visibility="Hidden" Style="{StaticResource titleAddingDataToAppealByID}"></Label>
 
-
                                 <Grid  Grid.Row="2" >
-
                                     <Grid Margin="0,4,20,0"   x:Name="EmailGrid"  Visibility="Hidden" Grid.Column="1" >
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="55"></RowDefinition>
@@ -207,7 +221,6 @@
                                         <!--<CheckBox Margin="10,2,15,0" Grid.Row="1"  HorizontalAlignment="Left" Grid.Column="1" x:Name="EditEmail" FontSize="13"  Style="{StaticResource StepsFillAppeal}" Click="EditEmail_Click">Изменить</CheckBox>-->
                                         <Label Height="0.1" x:Name="PromptEmail" Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsEmail}" ></Label>
                                     </Grid>
-
                                     <Grid  Margin="0,4,20,0"   x:Name="PhoneGrid" Visibility="Hidden"  Grid.Column="1">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="55"></RowDefinition>
@@ -231,445 +244,896 @@
                                         </Grid>
                                     </Grid>
                                 </Grid>
-
-
-
-
                             </Grid>
-                            
-                            
-                            
-                            
-                            <!--<Grid  Margin="0,10,0,0" x:Name="PhoneEmailGrid">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="80"></RowDefinition>
-                                    <RowDefinition Height="22"></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition ></ColumnDefinition>
-                                    <ColumnDefinition ></ColumnDefinition>
-                                    <ColumnDefinition ></ColumnDefinition>
-                                    <ColumnDefinition ></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid Margin="0,20,0,0" Grid.Row="2" Grid.ColumnSpan="4">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="160"></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Margin="0,0,20,0"   x:Name="EmailGrid" Visibility="Hidden" Grid.Column="1" >
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="43"></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <TextBox IsEnabled="False"  x:Name="Email" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AddingDataToAppeal}"></TextBox>
-                                        <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsEmail}" ></Label>
-                                        <CheckBox Margin="10,2,15,0" Grid.Row="1"  HorizontalAlignment="Right" Grid.Column="1" x:Name="EditEmail" FontSize="13"  Style="{StaticResource StepsFillAppeal}" Click="EditEmail_Click">Изменить</CheckBox>
-                                        --><!--<Label Grid.Row="1" Margin="0" Padding="0,2,20,0" HorizontalAlignment="Right" Foreground="#001A86"   FontSize="14" VerticalAlignment="Top"  Content="Почта" Style="{StaticResource titleBoxesFillAppeal}"></Label>--><!--
-                                    </Grid>
-                                    <Label Margin="0,8,0,0" x:Name="TypeConnectLabel" HorizontalAlignment="Right"  Foreground="Black" Visibility="Hidden" FontSize="14"   Content="" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
-                                    <Grid Margin="0,0,20,0"   x:Name="PhoneGrid" Visibility="Hidden"  Grid.Column="1">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="43"></RowDefinition>
-                                            <RowDefinition Height="22"></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="58"></ColumnDefinition>
-                                            <ColumnDefinition></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBox Grid.Column="{Binding PositionPhoneForm}" Grid.ColumnSpan="2" IsEnabled="False" x:Name="Phone"    Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AddingDataToAppeal}" TextChanged="Phone_TextChanged" />
-                                        <TextBox  Margin="10,0,0,0" Visibility="{Binding IsVisibleNumber7}"    x:Name="number7" IsEnabled="False"  Style="{StaticResource AddingDataToAppeal}" Text="+7">
-                                        </TextBox>
-                                        <Grid Grid.Row="1" Grid.ColumnSpan="2">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition></ColumnDefinition>
-                                                <ColumnDefinition></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            <CheckBox Margin="10,2,0,0"  HorizontalAlignment="Left" x:Name="IsIrregular" FontSize="13"  Style="{StaticResource StepsFillAppeal}" IsEnabled="{Binding IsEnableIrregularCheck}"  IsChecked="{Binding IsIrregular}">Нестандартный номер</CheckBox>
-                                            <CheckBox Margin="10,2,15,0"  HorizontalAlignment="Right" Grid.Column="1" x:Name="EditPhone" FontSize="13"  Style="{StaticResource StepsFillAppeal}" Click="EditPhone_Click">Изменить</CheckBox>
-                                            --><!--<Label Grid.Row="1" Margin="0" Padding="0,2,20,0" HorizontalAlignment="Right" Grid.ColumnSpan="2" Foreground="#001A86"   FontSize="14" VerticalAlignment="Top"  Content="Телефон" Style="{StaticResource titleBoxesFillAppeal}"></Label>--><!--
+                        </Border>
+                    </Grid>
+
+
+
+                    <Label Grid.Row="3"   Content="Характер обращения" Style="{StaticResource titleAddingDataToAppealByID}"></Label>
+
+                    <Border  Grid.Row="4"  x:Name="CommonTypeAppealBorder"  CornerRadius="5" Margin="5" Grid.ColumnSpan="2"  BorderBrush="Gray" BorderThickness="1.5" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.1"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="0.1"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Row="1" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Справочная информация" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="RootGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle  x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Справочная информация" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="Справочная информация">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Справочная информация" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Grid>
-                                    </Grid>
-                                </Grid>
-                                <StackPanel Grid.Column="2" Grid.RowSpan="2"   Orientation="Horizontal">
-                                    <Separator Background="LightSlateGray" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-                                </StackPanel>
-                              
-                                <Label x:Name="OutPhoneLabel" Grid.Column="1" Grid.Row="1"  Content="Исходящий звонок" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
-                                <Image  Grid.Column="1" Style="{StaticResource cursorHand}" x:Name="outgoingphone"  MouseEnter="Load_Gif" ></Image>
-                                <Image  Grid.Column="1" Style="{StaticResource cursorHand}" x:Name="outgoingphonehover"  MouseEnter="Load_Gif" >
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseDown" >
-                                            <i:InvokeCommandAction Command="{Binding SetTypeConnectCommand}" CommandParameter="out" >
-                                            </i:InvokeCommandAction>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </Image>
-                                <Image Grid.Column="1" Style="{StaticResource cursorHand}" x:Name="outgoingphoneenter" MouseEnter="Load_Gif" ></Image>
-                                <Image Grid.Column="1" Source="offPhone.png"></Image>
-
-                                <Label Name="InPhoneLabel"  Grid.Row="1"   Content="Входящий звонок" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
-                                <Image Style="{StaticResource cursorHand}" x:Name="incomingphone" ></Image>
-                                <Image Style="{StaticResource cursorHand}" x:Name="incomingphonehover" MouseEnter="Load_Gif" >
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseDown" >
-                                            <i:InvokeCommandAction Command="{Binding SetTypeConnectCommand}" CommandParameter="in" >
-                                            </i:InvokeCommandAction>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </Image>
-                                <Image  Style="{StaticResource cursorHand}" x:Name="incomingphoneenter" MouseEnter="Load_Gif" ></Image>
-                                <Image  Style="{StaticResource cursorHand}"  Source="offPhone.png">
-                                </Image>
-                                
-                                <Label  x:Name="OutEmailLabel" Grid.Column="2"  Grid.Row="1"  Content="Исходящая почта" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
-                                <Image Grid.Column="2"  Style="{StaticResource cursorHand}" x:Name="outgoingemail"  MouseEnter="Load_Gif" ></Image>
-                                <Image Grid.Column="2"  Style="{StaticResource cursorHand}" x:Name="outgoingemailhover" MouseEnter="Load_Gif" >
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseDown" >
-                                            <i:InvokeCommandAction Command="{Binding SetTypeConnectCommand}" CommandParameter="outEmail" >
-                                            </i:InvokeCommandAction>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </Image>
-                                <Image Grid.Column="2"  Style="{StaticResource cursorHand}" x:Name="outgoingemailenter" MouseEnter="Load_Gif" ></Image>
-                                <Image Grid.Column="2" Style="{StaticResource cursorHand}" Source="offEmail.png"></Image>
-                              
-                                <Label  x:Name="InEmainLabel" Grid.Column="3" Grid.Row="1"  Content="Входящая почта" Style="{StaticResource titleUnderGifAddingToAppeal}"></Label>
-                                <Image Grid.Column="3" Style="{StaticResource cursorHand}" x:Name="incomingemailgif" MouseEnter="Load_Gif" ></Image>
-                                <Image Grid.Column="3"  Style="{StaticResource cursorHand}" x:Name="incomingemailhover" MouseEnter="Load_Gif"  >
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseDown" >
-                                            <i:InvokeCommandAction Command="{Binding SetTypeConnectCommand}" CommandParameter="inEmail" >
-                                            </i:InvokeCommandAction>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </Image>
-                                <Image Grid.Column="3" Style="{StaticResource cursorHand}" x:Name="incomingemailenter" MouseEnter="Load_Gif"  ></Image>
-                                <Image Grid.Column="3"   Style="{StaticResource cursorHand}" Source="offEmail.png"></Image>
-                            </Grid>-->
-                        </Border>
-                    </Grid>
-                    <Grid Grid.Row="2" Grid.ColumnSpan="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40"></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Label   Content="Характер обращения" Style="{StaticResource titleAddingDataToAppealByID}"></Label>
-                        <Border Margin="20,2,20,20"  Grid.Row="1" x:Name="TypeAppealBorder"  CornerRadius="5"  Grid.ColumnSpan="3" BorderBrush="Gray" BorderThickness="1.2" >
-                            <Grid >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1"></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Button Grid.Row="1" >
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseDown" >
-                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Информационная консультация" >
-                                            </i:InvokeCommandAction>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                    <Button.Style>
-                                        <Style TargetType="{x:Type Button}">
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Cursor" Value="Hand" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                    <Button.Template>
-                                        <ControlTemplate TargetType ="{x:Type Button}">
-                                            <Grid RenderTransformOrigin="0.5,0.5" x:Name="RootGrid" MouseDown="RootGrid_MouseDown">
-                                                <Rectangle  x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
-                                                    <i:Interaction.Triggers>
-                                                        <i:EventTrigger EventName="MouseDown" >
-                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Информационная консультация" >
-                                                            </i:InvokeCommandAction>
-                                                        </i:EventTrigger>
-                                                    </i:Interaction.Triggers>
-                                                </Rectangle>
-                                                <Label   Style="{StaticResource typeAppeal}"  Content="Информационная консультация">
-                                                    <i:Interaction.Triggers>
-                                                        <i:EventTrigger EventName="MouseDown" >
-                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Информационная консультация" >
-                                                            </i:InvokeCommandAction>
-                                                        </i:EventTrigger>
-                                                    </i:Interaction.Triggers>
-                                                </Label>
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Grid>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property ="IsPressed" Value ="True">
-                                                    <Setter TargetName="RootGrid" Property="RenderTransform">
-                                                        <Setter.Value>
-                                                            <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
-                                <Button Grid.Row="1" Grid.Column="1" >
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseDown" >
-                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Сертификат" >
-                                            </i:InvokeCommandAction>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                    <Button.Style>
-                                        <Style TargetType="{x:Type Button}">
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Cursor" Value="Hand" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                    <Button.Template>
-                                        <ControlTemplate TargetType ="{x:Type Button}">
-                                            <Grid RenderTransformOrigin="0.5,0.5" x:Name="RootGrid" MouseDown="RootGrid_MouseDown">
-                                                <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
-                                                    <i:Interaction.Triggers>
-                                                        <i:EventTrigger EventName="MouseDown" >
-                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Сертификат" >
-                                                            </i:InvokeCommandAction>
-                                                        </i:EventTrigger>
-                                                    </i:Interaction.Triggers>
-                                                </Rectangle>
-                                                <Label   Style="{StaticResource typeAppeal}"  Content="Сертификат">
-                                                    <i:Interaction.Triggers>
-                                                        <i:EventTrigger EventName="MouseDown" >
-                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Сертификат" >
-                                                            </i:InvokeCommandAction>
-                                                        </i:EventTrigger>
-                                                    </i:Interaction.Triggers>
-                                                </Label>
-                                                <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Grid>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property ="IsPressed" Value ="True">
-                                                    <Setter TargetName="RootGrid" Property="RenderTransform">
-                                                        <Setter.Value>
-                                                            <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
-                                <Button Grid.Row="1" Grid.Column="2" >
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseDown" >
-                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Ошибка" >
-                                            </i:InvokeCommandAction>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                    <Button.Style>
-                                        <Style TargetType="{x:Type Button}">
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Cursor" Value="Hand" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                    <Button.Template>
-                                        <ControlTemplate TargetType ="{x:Type Button}">
-                                            <Grid RenderTransformOrigin="0.5,0.5" x:Name="RootGrid" MouseDown="RootGrid_MouseDown">
-                                                <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
-                                                    <i:Interaction.Triggers>
-                                                        <i:EventTrigger EventName="MouseDown" >
-                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Ошибка" >
-                                                            </i:InvokeCommandAction>
-                                                        </i:EventTrigger>
-                                                    </i:Interaction.Triggers>
-                                                </Rectangle>
-                                                <Label   Style="{StaticResource typeAppeal}"  Content="Ошибка">
-                                                    <i:Interaction.Triggers>
-                                                        <i:EventTrigger EventName="MouseDown" >
-                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Ошибка" >
-                                                            </i:InvokeCommandAction>
-                                                        </i:EventTrigger>
-                                                    </i:Interaction.Triggers>
-                                                </Label>
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Grid>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property ="IsPressed" Value ="True">
-                                                    <Setter TargetName="RootGrid" Property="RenderTransform">
-                                                        <Setter.Value>
-                                                            <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
-                                <Button Grid.Row="2"  >
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseDown" >
-                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Техническая консультация" >
-                                            </i:InvokeCommandAction>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                    <Button.Style>
-                                        <Style TargetType="{x:Type Button}">
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Cursor" Value="Hand" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                    <Button.Template>
-                                        <ControlTemplate TargetType ="{x:Type Button}">
-                                            <Grid RenderTransformOrigin="0.5,0.5" x:Name="RootGrid" MouseDown="RootGrid_MouseDown">
-                                                <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
-                                                    <i:Interaction.Triggers>
-                                                        <i:EventTrigger EventName="MouseDown" >
-                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Техническая консультация" >
-                                                            </i:InvokeCommandAction>
-                                                        </i:EventTrigger>
-                                                    </i:Interaction.Triggers>
-                                                </Rectangle>
-                                                <Label   Style="{StaticResource typeAppeal}"  Content="Техническая консультация">
-                                                    <i:Interaction.Triggers>
-                                                        <i:EventTrigger EventName="MouseDown" >
-                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Техническая консультация" >
-                                                            </i:InvokeCommandAction>
-                                                        </i:EventTrigger>
-                                                    </i:Interaction.Triggers>
-                                                </Label>
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Grid>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property ="IsPressed" Value ="True">
-                                                    <Setter TargetName="RootGrid" Property="RenderTransform">
-                                                        <Setter.Value>
-                                                            <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
-                                <Button Grid.Row="2" Grid.Column="1" >
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseDown" >
-                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Жалоба" >
-                                            </i:InvokeCommandAction>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                    <Button.Style>
-                                        <Style TargetType="{x:Type Button}">
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Cursor" Value="Hand" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                    <Button.Template>
-                                        <ControlTemplate TargetType ="{x:Type Button}">
-                                            <Grid RenderTransformOrigin="0.5,0.5" x:Name="RootGrid" MouseDown="RootGrid_MouseDown">
-                                                <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
-                                                    <i:Interaction.Triggers>
-                                                        <i:EventTrigger EventName="MouseDown" >
-                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Жалоба" >
-                                                            </i:InvokeCommandAction>
-                                                        </i:EventTrigger>
-                                                    </i:Interaction.Triggers>
-                                                </Rectangle>
-                                                <Label   Style="{StaticResource typeAppeal}"  Content="Жалоба">
-                                                    <i:Interaction.Triggers>
-                                                        <i:EventTrigger EventName="MouseDown" >
-                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Жалоба" >
-                                                            </i:InvokeCommandAction>
-                                                        </i:EventTrigger>
-                                                    </i:Interaction.Triggers>
-                                                </Label>
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Grid>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property ="IsPressed" Value ="True">
-                                                    <Setter TargetName="RootGrid" Property="RenderTransform">
-                                                        <Setter.Value>
-                                                            <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
-                                <Button Grid.Row="2" Grid.Column="2" >
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseDown" >
-                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Пожелание" >
-                                            </i:InvokeCommandAction>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                    <Button.Style>
-                                        <Style TargetType="{x:Type Button}">
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Cursor" Value="Hand" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                    <Button.Template>
-                                        <ControlTemplate TargetType ="{x:Type Button}">
-                                            <Grid RenderTransformOrigin="0.5,0.5" x:Name="RootGrid" MouseDown="RootGrid_MouseDown">
-                                                <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
-                                                    <i:Interaction.Triggers>
-                                                        <i:EventTrigger EventName="MouseDown" >
-                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Пожелание" >
-                                                            </i:InvokeCommandAction>
-                                                        </i:EventTrigger>
-                                                    </i:Interaction.Triggers>
-                                                </Rectangle>
-                                                <Label   Style="{StaticResource typeAppeal}"  Content="Пожелание">
-                                                    <i:Interaction.Triggers>
-                                                        <i:EventTrigger EventName="MouseDown" >
-                                                            <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Пожелание" >
-                                                            </i:InvokeCommandAction>
-                                                        </i:EventTrigger>
-                                                    </i:Interaction.Triggers>
-                                                </Label>
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Grid>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property ="IsPressed" Value ="True">
-                                                    <Setter TargetName="RootGrid" Property="RenderTransform">
-                                                        <Setter.Value>
-                                                            <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
-                                <!--<Label x:Name="PromptTypeAppel" Grid.Row="3" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsType}" ></Label>-->
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="RootGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Grid.Row="1" Grid.Column="1" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="ЭЦП" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="RootGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="ЭЦП" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="ЭЦП">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="ЭЦП" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="RootGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Grid.Row="1" Grid.Column="2" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Ошибка" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="RootGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Ошибка" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="Ошибка">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Ошибка" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="RootGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Grid.Row="1" Grid.Column="3" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Техническая поддержка" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="RootGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Техническая поддержка" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="Техническая поддержка">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddTypeAppealCommand}" CommandParameter="Техническая поддержка" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="RootGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
                         </Grid>
-                        </Border>
-                    </Grid>
+                    </Border>
 
-                    <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,0,0.4">
+                    <Image  Grid.Row="5" Source="arrowDown.png"></Image>
+
+                    <Label Grid.Row="6" x:Name="TitleDetailTypeAppealLable"  Content="Подробно" Style="{StaticResource titleAddingDataToAppealByID}"></Label>
+                    <Border  Grid.Row="7" x:Name="MoreDetailTypeAppealBorder"  CornerRadius="5" Margin="5" Grid.ColumnSpan="2"  BorderBrush="Gray" BorderThickness="1.5" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.1"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="0.1"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Row="1" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Невалидная ЭЦП" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="MoreDetailTypeAppealGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle  x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Невалидная ЭЦП" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="Невалидная ЭЦП">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Невалидная ЭЦП" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="MoreDetailTypeAppealGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Grid.Row="1" Grid.Column="1" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Личный кабинет" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="MoreDetailTypeAppealGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Личный кабинет" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="Личный кабинет">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Личный кабинет" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="MoreDetailTypeAppealGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Grid.Row="1" Grid.Column="2" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Приобретение ЭЦП" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="MoreDetailTypeAppealGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Приобретение ЭЦП" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="Приобретение ЭЦП">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Приобретение ЭЦП" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="MoreDetailTypeAppealGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Grid.Row="1" Grid.Column="3" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Начало работы в ГИИС ДМДК" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="MoreDetailTypeAppealGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Начало работы в ГИИС ДМДК" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="Начало работы в ГИИС ДМДК">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Начало работы в ГИИС ДМДК" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="MoreDetailTypeAppealGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Grid.Row="2"  >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Сторонний УЦ" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="MoreDetailTypeAppealGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Сторонний УЦ" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="Сторонний УЦ">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Сторонний УЦ" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="MoreDetailTypeAppealGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Grid.Row="2" Grid.Column="1" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Ошибка" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="MoreDetailTypeAppealGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Ошибка" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="Ошибка">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Ошибка" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="MoreDetailTypeAppealGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Grid.Row="2" Grid.Column="2" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Тестовый контур" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="MoreDetailTypeAppealGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Тестовый контур" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="Тестовый контур">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Тестовый контур" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="MoreDetailTypeAppealGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Grid.Row="2" Grid.Column="3" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Штатный контур" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="MoreDetailTypeAppealGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Штатный контур" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="Штатный контур">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Штатный контур" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="MoreDetailTypeAppealGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Grid.Row="2" Grid.Column="1" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Ошибка" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="MoreDetailTypeAppealGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Ошибка" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="Ошибка">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Ошибка" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="MoreDetailTypeAppealGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Grid.Row="3"  >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Юридические тонкости" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="MoreDetailTypeAppealGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Юридические тонкости" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="Юридические тонкости">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Юридические тонкости" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="MoreDetailTypeAppealGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Grid.Row="3" Grid.Column="1" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="АРМ Маркировщик" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="MoreDetailTypeAppealGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="АРМ Маркировщик" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="АРМ Маркировщик">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="АРМ Маркировщик" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="MoreDetailTypeAppealGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Grid.Row="3" Grid.Column="2" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Linux" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="MoreDetailTypeAppealGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Linux" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="Linux">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Linux" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="MoreDetailTypeAppealGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Grid.Row="3" Grid.Column="3" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Прочее" >
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType ="{x:Type Button}">
+                                        <Grid RenderTransformOrigin="0.5,0.5" x:Name="MoreDetailTypeAppealGrid" MouseDown="RootGrid_MouseDown">
+                                            <Rectangle x:Name="typeAppealColorButton1" Fill="LightGray" Margin="10" RadiusX="2" RadiusY="2">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Прочее" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Rectangle>
+                                            <Label   Style="{StaticResource typeAppeal}"  Content="Прочее">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown" >
+                                                        <i:InvokeCommandAction Command="{Binding AddDetailTypeAppealCommand}" CommandParameter="Прочее" >
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Label>
+                                            <!--<Ellipse x:Name ="OuterRing" Width ="40" Height ="40" Fill="{TemplateBinding Background}"/>-->
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property ="IsPressed" Value ="True">
+                                                <Setter TargetName="MoreDetailTypeAppealGrid" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                    <Grid Grid.Row="8" Grid.ColumnSpan="2" Margin="0,0,0,0.4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40"></RowDefinition>
                             <RowDefinition ></RowDefinition>
@@ -693,4 +1157,5 @@
         </Grid>
     </Grid>
 </Page>
+ 
  

@@ -15,43 +15,62 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="90"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="90"></RowDefinition>
-        </Grid.RowDefinitions>
-        <TextBlock Margin="40,30,0,0" Grid.ColumnSpan="4"  Style="{StaticResource MainTitles}">Форма заполнения обращения</TextBlock>
-        <Rectangle   VerticalAlignment="Bottom" Grid.ColumnSpan="5"  HorizontalAlignment="Stretch" Fill="LightSlateGray" Margin="6,0,6,0" Height="1.5"/>
-        <Grid Grid.Row="1">
+
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition Height="2.2*"></RowDefinition>
-                <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition ></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
             </Grid.RowDefinitions>
-            <Label  Content="Содержание обращения" HorizontalAlignment="Left" Grid.ColumnSpan="2" Style="{StaticResource titleBoxesFillAppeal}"></Label>
-            <Grid Margin="10" Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                <TextBox  Text="{Binding Appeal, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealBig}"   AcceptsReturn="True" TextWrapping="Wrap" />
-                <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsAppeal}" ></Label>
-            </Grid>
-            <Label  Grid.Row="2"  Content="Дополнительная информация" HorizontalAlignment="Left" Grid.ColumnSpan="2" Style="{StaticResource titleBoxesFillAppeal}"></Label>
-            <Grid Grid.Row="3" Margin="10">
-                <TextBox Text="{Binding AdditionalInfo, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealBig}" AcceptsReturn="True" TextWrapping="Wrap" />
+            <TextBlock  Grid.ColumnSpan="4"  Style="{StaticResource MainTitles}">Форма заполнения обращения</TextBlock>
+            <Border Background="WhiteSmoke" Grid.Row="1" x:Name="MainBorder"  CornerRadius="5" Margin="4" Grid.ColumnSpan="2"  BorderBrush="Black" BorderThickness="1.5" >
+                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="200"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="168"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="100"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Label  Content="Содержание обращения" HorizontalAlignment="Left" Grid.ColumnSpan="2" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                        <Grid Margin="10" Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBox  Text="{Binding Appeal, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealBig}"   AcceptsReturn="True" TextWrapping="Wrap" />
+                            <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsAppeal}" ></Label>
+                        </Grid>
+                        <Label Grid.Row="2" Content="Ответ" HorizontalAlignment="Left" Grid.ColumnSpan="2" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                        <Grid Margin="10" Grid.Row="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBox  Text="{Binding Answer, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealBig}"   AcceptsReturn="True" TextWrapping="Wrap" />
+                            <Label Grid.Row="1" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsAnswer}" ></Label>
+                        </Grid>
+                        <Label  Grid.Row="4"  Content="Дополнительная информация" HorizontalAlignment="Left" Grid.ColumnSpan="2" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+                        <Grid Grid.Row="5" Margin="10">
+                            <TextBox Text="{Binding AdditionalInfo, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource AppealBig}" AcceptsReturn="True" TextWrapping="Wrap" />
+                        </Grid>
+                    </Grid>
+                </ScrollViewer>
+            </Border>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button  Style="{StaticResource MainMenuButton}" Click="Button_Click">Назад</Button>
+                <Button Grid.Column="2"  x:Name="btnNextPage" IsCancel="{Binding IsSecondStepFillAppeal}" Command="{Binding CheckSecondStepFillAppealCommand}"  Style="{StaticResource MainMenuButton}" Click="btnNextPage_Click">Далее</Button>
             </Grid>
         </Grid>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Button  Style="{StaticResource MainMenuButton}" Click="Button_Click">Назад</Button>
-            <Button Grid.Column="2"  x:Name="btnNextPage" IsCancel="{Binding IsSecondStepFillAppeal}" Command="{Binding CheckSecondStepFillAppealCommand}"  Style="{StaticResource MainMenuButton}" Click="btnNextPage_Click">Далее</Button>
-        </Grid>
+
     </Grid>
 </Page>
+ 
  

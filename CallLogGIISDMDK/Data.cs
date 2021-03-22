@@ -42,7 +42,7 @@ namespace CallLogGIISDMDK
             List<List<string>> Appeals = GetAppeals();
             foreach (var appeal in Appeals)
             {
-                idPersonalAppeals.Add(Convert.ToInt32(appeal[18]));
+                idPersonalAppeals.Add(Convert.ToInt32(appeal[20]));
             }
             numberPersonalIdAppeal = idPersonalAppeals.Max();
             return numberPersonalIdAppeal + 1;
@@ -65,7 +65,7 @@ namespace CallLogGIISDMDK
             List<List<string>> _appeals = new List<List<string>>();
             foreach (var appeal in appeals)
             {
-                if (appeal[16] == ID)
+                if (appeal[20] == ID)
                     _appeals.Add(appeal);
             }
             return _appeals;
@@ -76,7 +76,7 @@ namespace CallLogGIISDMDK
             List<List<string>> dataAppealByPersonalID = new List<List<string>>();
             foreach (var appeal in fileReader.GetAppeals())
             {
-                if (appeal[17] == personalID.ToString())
+                if (appeal[20] == personalID.ToString())
                 {
                     dataAppealByPersonalID.Add(appeal);
                 }

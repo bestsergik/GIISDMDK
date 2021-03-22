@@ -97,6 +97,19 @@ namespace CallLogGIISDMDK.Models
             //File.Delete(_pathToAppeals);
             //return appeals;
         }
+        internal List<string> FillEditAppeal()
+        {
+            List<string> filledAppeal = new List<string>();
+            foreach (var appeal in StaticData.DataAppealByPersonalID)
+            {
+                if (appeal[18] == StaticData.CurrentPersonalId)
+                {
+                    filledAppeal = appeal;
+                    break;
+                }
+            }
+            return filledAppeal;
+        }
         internal void AddDataToCurrentAppeal(FillAppeal_VM selectedAppeal)
         {
         }
@@ -128,7 +141,15 @@ namespace CallLogGIISDMDK.Models
             appealsId.Add(appeal[0]);
             return isIdenticalId;
         }
-
+        internal List<string> GetCommonTypeAppeal()
+        {
+            List<string> types = new List<string>();
+            types.Add("Справочная информация");
+            types.Add("ЭЦП");
+            types.Add("Ошибка");
+            types.Add("Техническая поддержка");
+            return types;
+        }
         internal List<string> GetRoutes()
         {
             List<string> statuses = new List<string>();
@@ -136,7 +157,6 @@ namespace CallLogGIISDMDK.Models
             statuses.Add("Исходящий");
             return statuses;
         }
-
         public List<string> CheckSuitableAppeal(string userInput)
         {
             suitableAppeals = new List<string>();
@@ -161,12 +181,34 @@ namespace CallLogGIISDMDK.Models
             {
                 if (typeSearch == 1)
                 {
-                    if (appeal[16].Contains(insertAppeal))
+                    if (appeal[20].Contains(insertAppeal))
                     {
                         suitableAppeals.Add(appeal);
                     }
                 }
-                else
+                else if (typeSearch == 0)
+                {
+                    for (int fieldAppeal = 0; fieldAppeal < appeal.Count; fieldAppeal++)
+                    {
+                        if (appeal[fieldAppeal].ContainsWithoutRegistr(insertAppeal, StringComparison.OrdinalIgnoreCase))
+                        {
+                            suitableAppeals.Add(appeal);
+                            break;
+                        }
+                    }
+                }
+                else if (typeSearch == 2)
+                {
+                    for (int fieldAppeal = 0; fieldAppeal < appeal.Count; fieldAppeal++)
+                    {
+                        if (appeal[fieldAppeal].ContainsWithoutRegistr(insertAppeal, StringComparison.OrdinalIgnoreCase))
+                        {
+                            suitableAppeals.Add(appeal);
+                            break;
+                        }
+                    }
+                }
+                else if (typeSearch == 3)
                 {
                     for (int fieldAppeal = 0; fieldAppeal < appeal.Count; fieldAppeal++)
                     {
@@ -211,9 +253,9 @@ namespace CallLogGIISDMDK.Models
             statuses.Add("Открыто");
             return statuses;
         }
-        internal string[] CheckLeghtFields(string fullName, string inputPhone, string email, string company, string participantRole, string status, bool isReggular, string inn, string sity, string ogrn, string communicationСhannel, string type, string currentMinute)
+        internal string[] CheckLeghtFields(string fullName, string inputPhone, string email, string company, string participantRole, string status, bool isReggular, string inn, string sity, string ogrn, string communicationСhannel, string type, string currentMinute, string detailType)
         {
-            string[] prompts = new string[12] { "", "", "", "", "", "", "", "", "", "", "", "" };
+            string[] prompts = new string[13] { "", "", "", "", "", "", "", "", "", "", "", "", "" };
             if (fullName == null || fullName.Length < 1)
             {
                 prompts[0] = "Обязательное поле";
@@ -225,16 +267,6 @@ namespace CallLogGIISDMDK.Models
             else if (inputPhone != null && inputPhone.Length > 0 && inputPhone.Length < 15)
                 prompts[1] = "Некорректный номер телефона";
             else prompts[1] = "";
-            //if (inputPhone == null || inputPhone.Length < 1)
-            //{
-            //    prompts[1] = "Обязательное поле";
-            //}
-            //if(inputPhone == null && communicationСhannel == "Email")
-            //    prompts[1] = "";
-            //else if(inputPhone != null && inputPhone.Length < 1 && communicationСhannel == "Email")
-            //    prompts[1] = "";
-            //if (inputPhone != null && inputPhone.Length > 0 && inputPhone.Length < 15)
-            //    prompts[1] = "Некорректный номер телефона";
             if (isReggular && inputPhone != null && inputPhone.Length > 0) prompts[1] = "";
             if (email != null && email.Length > 0)
             {
@@ -256,7 +288,6 @@ namespace CallLogGIISDMDK.Models
                 prompts[2] = "Обязательное поле";
             if (company == null || company.Length < 1)
             {
-                //prompts[3] = "Обязательное поле";
                 prompts[3] = "";
             }
             if (participantRole == null || participantRole.Length < 1)
@@ -270,7 +301,6 @@ namespace CallLogGIISDMDK.Models
             if (inn == null || inn.Length < 1)
             {
                 prompts[6] = "";
-                //prompts[6] = "Обязательное поле";
             }
             if (inn != null && inn.Length > 0 && inn.Length < 10)
                 prompts[6] = "Некорректный ИНН";
@@ -279,7 +309,6 @@ namespace CallLogGIISDMDK.Models
             if (sity == null || sity.Length < 1)
             {
                 prompts[7] = sity = "";
-                //prompts[7] = sity = "Обязательное поле";
             }
             if (ogrn != null && ogrn.Length > 0 && ogrn.Length < 13)
                 prompts[8] = "Некорректный ОГРН";
@@ -296,6 +325,10 @@ namespace CallLogGIISDMDK.Models
             if (currentMinute == null || currentMinute.Length < 1)
             {
                 prompts[11] = currentMinute = "Обязательное поле";
+            }
+            if (detailType == null || detailType.Length < 1)
+            {
+                prompts[12] = detailType = "Обязательное поле";
             }
             for (int i = 0; i < prompts.Length; i++)
             {
@@ -333,9 +366,9 @@ namespace CallLogGIISDMDK.Models
             }
             return data;
         }
-        internal string[] CheckPrompts(string phone, string email, string status, string communicationChannel, string appeal, string type, string minute, bool isReggular)
+        internal string[] CheckPrompts(string phone, string email, string status, string communicationChannel, string appeal, string answer, string type, string detailType, string minute, bool isReggular, bool isHaveAppeal, bool isHaveAnswer)
         {
-            string[] prompts = new string[7] { "", "", "", "", "", "", "" };
+            string[] prompts = new string[9] { "", "", "", "", "", "", "", "", "" };
             if (phone == null || phone.Length < 1)
             {
                 prompts[0] = "Обязательное поле";
@@ -343,7 +376,6 @@ namespace CallLogGIISDMDK.Models
             if (phone != null && phone.Length > 0 && phone.Length < 15)
                 prompts[0] = "Некорректный номер телефона";
             if ((isReggular && phone != null && phone.Length > 0) || communicationChannel == "Email") prompts[0] = "";
-
             if (email != null && email.Length > 0)
             {
                 bool isAt = false;
@@ -362,7 +394,6 @@ namespace CallLogGIISDMDK.Models
             }
             else if (communicationChannel == "Email") prompts[1] = "Обязательное поле";
 
-
             if (status == null || status.Length < 1)
             {
                 prompts[2] = status = "Обязательное поле";
@@ -371,17 +402,25 @@ namespace CallLogGIISDMDK.Models
             {
                 prompts[3] = communicationChannel = "Обязательное поле";
             }
-            if (appeal == null || appeal.Length < 1)
+            if ((appeal == null || appeal.Length < 1) && isHaveAppeal == false)
             {
                 prompts[4] = appeal = "Обязательное поле";
             }
+            if ((answer == null || answer.Length < 1) && isHaveAnswer == false)
+            {
+                prompts[5] = answer = "Обязательное поле";
+            }
             if (type == null || type.Length < 1)
             {
-                prompts[5] = type = "Обязательное поле";
+                prompts[6] = type = "Обязательное поле";
+            }
+            if (detailType == null || detailType.Length < 1)
+            {
+                prompts[7] = detailType = "Обязательное поле";
             }
             if (minute == null || minute.Length < 1)
             {
-                prompts[6] = minute = "Обязательное поле";
+                prompts[8] = minute = "Обязательное поле";
             }
             for (int i = 0; i < prompts.Length; i++)
             {
@@ -582,4 +621,3 @@ namespace CallLogGIISDMDK.Models
         }
     }
 }
-

@@ -40,7 +40,6 @@ namespace CallLogGIISDMDK.Views
         private void AppealGrid_Loaded(object sender, RoutedEventArgs e)
         {
             int statusIndication = 0;
-            //bool isIncomingAppeal = false;
             Grid grid = (Grid)sender;
             foreach (UIElement element in grid.Children)
             {
@@ -54,20 +53,8 @@ namespace CallLogGIISDMDK.Views
                     {
                         statusIndication = 2;
                     }
-                    //if (((TextBlock)element).Text == "Входящее")
-                    //    isIncomingAppeal = true;
-                    //else if (((TextBlock)element).Text == "Исходящее")
-                    //{
-                    //    isIncomingAppeal = false;
-                    //}
                 }
-                //if (element is Ellipse)
-                //{
-                //    if (statusIndication == 1)
-                //        ((Ellipse)element).Fill = new SolidColorBrush(Colors.SteelBlue);
-                //    else if (statusIndication == 2)
-                //        ((Ellipse)element).Fill = new SolidColorBrush(Colors.Red);
-                //}
+
                 if (element is Image)
                 {
                     if (statusIndication == 1)
@@ -77,33 +64,14 @@ namespace CallLogGIISDMDK.Views
                         if (((Image)element).Name == "GIF")
                             ((Image)element).Visibility = Visibility.Visible;
                     }
-                    //((Image)element).Source = new BitmapImage(new Uri(@"question.png", UriKind.RelativeOrAbsolute));
                     else if (statusIndication == 2)
                         ((Image)element).Source = new BitmapImage(new Uri(@"attantion.png", UriKind.RelativeOrAbsolute));
                 }
             }
         }
-        //private void DetailStackPanel_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    StackPanel stackPanel = (StackPanel)sender;
-        //    foreach (UIElement element in stackPanel.Children)
-        //    {
-        //        if (element is TextBlock)
-        //        {
-        //            if (((TextBlock)element).Name == "Status")
-        //            {
-        //                Console.WriteLine(((TextBlock)element).Text);
-        //                if (((TextBlock)element).Text == "Открыто")
-        //                    ((TextBlock)element).Foreground = new SolidColorBrush(Colors.Peru);
-        //            }
-        //            if (((TextBlock)element).Name == "Срочно")
-        //                ((TextBlock)element).Foreground = new SolidColorBrush(Colors.Red);
-        //        }
-        //    }
-        //}
         private void AddDataToCurrentAppeal_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (AddDataToCurrentAppeal.IsCancel == true)
                 this.NavigationService.Navigate(new AddDataToAppealByID());
         }
@@ -114,14 +82,35 @@ namespace CallLogGIISDMDK.Views
             Grid grid = (Grid)sender;
             foreach (UIElement element in grid.Children)
             {
+                if (element is TextBox)
+                {
+                    if (((TextBox)element).Name == "Answer")
+                    {
+                        if (((TextBox)element).Text == "")
+                        {
+                            grid.RowDefinitions[3].Height = new GridLength(0.1);
+                            grid.RowDefinitions[4].Height = new GridLength(0.1);
+                        }
+                    }
+                    if (((TextBox)element).Name == "AdditionalInfo")
+                    {
+                        if (((TextBox)element).Text == "")
+                        {
+                            grid.RowDefinitions[5].Height = new GridLength(0.1);
+                            grid.RowDefinitions[6].Height = new GridLength(0.1);
+                        }
+                    }
+                    if (((TextBox)element).Name == "Appeal")
+                    {
+                        if (((TextBox)element).Text == "")
+                        {
+                            grid.RowDefinitions[1].Height = new GridLength(0.1);
+                            grid.RowDefinitions[2].Height = new GridLength(0.1);
+                        }
+                    }
+                }
                 if (element is TextBlock)
                 {
-                    //if (((TextBlock)element).Text == "Входящее")
-                    //    isIncomingAppeal = true;
-                    //else if (((TextBlock)element).Text == "Исходящее")
-                    //{
-                    //    isIncomingAppeal = false;
-                    //}
                     if (((TextBlock)element).Name == "Route")
                     {
                         if (((TextBlock)element).Text == "Входящее")
@@ -195,11 +184,11 @@ namespace CallLogGIISDMDK.Views
             if (AddDataToCurrentAppeal.Visibility == Visibility.Hidden)
                 AddDataToCurrentAppeal.Visibility = Visibility.Visible;
             if (RightPartCenterGrid.Visibility == Visibility.Hidden)
-            RightPartCenterGrid.Visibility = Visibility.Visible;
+                RightPartCenterGrid.Visibility = Visibility.Visible;
         }
         private void btnNewAppeal_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new FillAppeal_page1());
+            this.NavigationService.Navigate(new FillAppeal_page2());
         }
         private void imageTooltip_Loaded(object sender, RoutedEventArgs e)
         {
@@ -222,20 +211,10 @@ namespace CallLogGIISDMDK.Views
                         if (((TextBlock)element).Name == "TooltipPhone")
                             ((TextBlock)element).Visibility = Visibility.Visible;
                     }
-                    //if(((TextBlock)element).Name == "TooltipPhone")
-                    //{
-                    //    if (isEmail)
-                    //        ((TextBlock)element).Visibility = Visibility.Hidden;
-                    //    else ((TextBlock)element).Visibility = Visibility.Visible;
-                    //}
-                    //if(((TextBlock)element).Name == "TooltipEmail")
-                    //    if (isEmail)
-                    //        ((TextBlock)element).Visibility = Visibility.Visible;
-                    //    else ((TextBlock)element).Visibility = Visibility.Hidden;
+
                 }
             }
         }
-
         private void ToolTipGrid_Loaded(object sender, RoutedEventArgs e)
         {
             Grid grid = (Grid)sender;
@@ -262,58 +241,46 @@ namespace CallLogGIISDMDK.Views
         }
         private void Search_MouseDown(object sender, MouseButtonEventArgs e)
         {
-         
+
             if (rowSearching.Height == new GridLength(60))
                 rowSearching.Height = new GridLength(0.1);
             else rowSearching.Height = new GridLength(60);
-            //if (sender is Grid)
-            //{
-            //    if (((Grid)sender).RowDefinitions[1].Height == new GridLength(60))
-            //        ((Grid)sender).RowDefinitions[1].Height = new GridLength(0.1);
-            //    else ((Grid)sender).RowDefinitions[1].Height = new GridLength(60);
-            //}
-
-
         }
-
         private void Search_MouseDown_1(object sender, MouseButtonEventArgs e)
         {
-
         }
-
-        private void Role1_LayoutUpdated(object sender, EventArgs e)
+        private void ClientCard_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (Role1.Text == "Участник рынка")
+            if (ClientCardRow.Height == new GridLength(55))
             {
-                RolePicture1.Source = new BitmapImage(new Uri(@"guild.png", UriKind.RelativeOrAbsolute));
+                ClientCardRow.Height = new GridLength(270);
+                CardClientBriefly.Visibility = Visibility.Hidden;
+                CardClientDetail.Visibility = Visibility.Visible;
+
             }
             else
             {
-                RolePicture1.Source = new BitmapImage(new Uri(@"MRU FPP.png", UriKind.RelativeOrAbsolute));
+                ClientCardRow.Height = new GridLength(55);
+                CardClientBriefly.Visibility = Visibility.Visible;
+                CardClientDetail.Visibility = Visibility.Hidden;
             }
         }
-
-        private void RolePicture1_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Grid_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (sender is Grid)
-            {
-                if (((Grid)sender).RowDefinitions[0].Height == new GridLength(55))
-                {
-                    ((Grid)sender).RowDefinitions[0].Height = new GridLength(270);
-                    CardClientBriefly.Visibility = Visibility.Hidden;
-                    CardClientDetail.Visibility = Visibility.Visible;
-                     
-                }
-                   
-                else
-                {
-                    ((Grid)sender).RowDefinitions[0].Height = new GridLength(55);
-                    CardClientBriefly.Visibility = Visibility.Visible;
-                    CardClientDetail.Visibility = Visibility.Hidden;
-
-                }
-
-            }
+            ClientCardMini.Source = new BitmapImage(new Uri(@"clientCardHover.png", UriKind.RelativeOrAbsolute));
+        }
+        private void Grid_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ClientCardMini.Source = new BitmapImage(new Uri(@"clientCard.png", UriKind.RelativeOrAbsolute));
+        }
+        private void ckabc_Checked_1(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = (CheckBox)sender;
+            ContentPresenter CP = (ContentPresenter)cb.TemplatedParent;
+            string S = CP.TemplatedParent.ToString();
+            ComboBoxItem CBI = (ComboBoxItem)CP.TemplatedParent;
+            CBI.IsSelected = (bool)cb.IsChecked;
         }
     }
 }
+

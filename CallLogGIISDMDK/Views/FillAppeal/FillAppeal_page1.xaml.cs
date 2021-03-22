@@ -1,4 +1,5 @@
 ﻿using CallLogGIISDMDK.WorkWithFiles;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,6 +23,11 @@ namespace CallLogGIISDMDK.Views.FillAppeal
     /// </summary>
     public partial class FillAppeal_page1 : Page
     {
+        string _pathToscreenshot1 = "";
+        string _pathToscreenshot2 = "";
+        string _pathToscreenshot3 = "";
+        string _pathToscreenshot4 = "";
+        int numberscreenShot = 0;
         private string ZipPathToAppeal = @"Appeals.zip";
         Data data = new Data();
         List<string> appeals = new List<string>();
@@ -31,6 +37,7 @@ namespace CallLogGIISDMDK.Views.FillAppeal
             DefinerCorrectPathToAppeals definerPath = new DefinerCorrectPathToAppeals();
             pathToZipAppeals = definerPath.GetCorrectPathToAppealsZip();
             InitializeComponent();
+
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -43,12 +50,14 @@ namespace CallLogGIISDMDK.Views.FillAppeal
                 this.NavigationService.Navigate(new AddAppeal_page());
                 MainBorder.BorderThickness = new Thickness(1);
                 MainBorder.BorderBrush = Brushes.Green;
+
             }
             else
             {
                 MainBorder.BorderThickness = new Thickness(3);
                 MainBorder.BorderBrush = Brushes.Red;
             }
+
             //if (PromptTypeAppel.Content.ToString() != "") 
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -77,12 +86,22 @@ namespace CallLogGIISDMDK.Views.FillAppeal
                 //}
                 foreach (var appeal in data.GetAppeals())
                 {
-                    appeals.Add($"{appeal[7]},{appeal[11]},{appeal[12]},{appeal[13]},{appeal[14]},{appeal[15]},{appeal[16]}");
+                    appeals.Add($"{appeal[9]},{appeal[13]},{appeal[14]},{appeal[15]},{appeal[16]},{appeal[17]},{appeal[18]}");
                     //appeals.Add($"{appeal[12]},{appeal[11]},{appeal[7]},{appeal[13]},{appeal[15]},{appeal[14]},{appeal[16]}");
                 }
                 Searchable.IsEnabled = true;
             }
-
+            numberscreenShot = 0;
+            ScreenShotSaveButton.IsEnabled = true;
+            ScreenShotSaveButton.Background = Brushes.Peru;
+            ScreenShot1.Source = null;
+            ScreenShot2.Source = null;
+            ScreenShot3.Source = null;
+            ScreenShot4.Source = null;
+            StaticData.PathToscreenshot1 = "";
+            StaticData.PathToscreenshot2 = "";
+            StaticData.PathToscreenshot3 = "";
+            StaticData.PathToscreenshot4 = "";
         }
         void SetWatermark(string watermark)
         {
@@ -115,7 +134,6 @@ namespace CallLogGIISDMDK.Views.FillAppeal
             {
                 cmb.ItemsSource = appeals;
             }
-
         }
         private void Searchable_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -130,19 +148,18 @@ namespace CallLogGIISDMDK.Views.FillAppeal
             foreach (var appeal in data.GetAppeals())
             {
                 counter = 0;
-
-                for (int i = 7; i < 17; i++)
+                for (int i = 7; i < 19; i++)
                 {
-                    if (i == 7)
+                    if (i == 9)
                     {
                         if (currentAppeal[0] == appeal[i])
                         {
                             counter++;
                         }
                     }
-                    else if (i > 10)
+                    else if (i > 12)
                     {
-                        if (currentAppeal[i - 10] == appeal[i])
+                        if (currentAppeal[i - 12] == appeal[i])
                         {
                             counter++;
                             if (counter == 7)
@@ -154,7 +171,6 @@ namespace CallLogGIISDMDK.Views.FillAppeal
                         }
                     }
                 }
-
                 //for (int i = 0; i < 10; i++)
                 //{
                 //    if (i < 5)
@@ -181,15 +197,14 @@ namespace CallLogGIISDMDK.Views.FillAppeal
             }
             if (isMatchAppeal)
             {
-                FullName.Text = currentAppealList[12];
-                Company.Text = currentAppealList[11];
-                Sity.Text = currentAppealList[7];
-                txboxPhoneNumber.Text = currentAppealList[13];
-                INN.Text = currentAppealList[15];
-                Role.Text = currentAppealList[8];
-                Email.Text = currentAppealList[14];
-                OGRN.Text = currentAppealList[16];
-
+                FullName.Text = currentAppealList[14];
+                Company.Text = currentAppealList[13];
+                Sity.Text = currentAppealList[9];
+                txboxPhoneNumber.Text = currentAppealList[15];
+                INN.Text = currentAppealList[17];
+                Role.Text = currentAppealList[10];
+                Email.Text = currentAppealList[16];
+                OGRN.Text = currentAppealList[18];
                 //FullName.Text = currentAppealList[0];
                 //Company.Text = currentAppealList[1];
                 //Sity.Text = currentAppealList[2];
@@ -199,7 +214,6 @@ namespace CallLogGIISDMDK.Views.FillAppeal
                 //Email.Text = currentAppealList[8];
                 //OGRN.Text = currentAppealList[9];
             }
-
         }
         private void SetDefault()
         {
@@ -255,9 +269,15 @@ namespace CallLogGIISDMDK.Views.FillAppeal
                     txboxPhoneNumber.Text = "";
             }
         }
-
         private void RootGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (DownArrwoImageRow.Height == new GridLength(0.1))
+            {
+                DownArrwoImageRow.Height = new GridLength(28);
+                DetailTypeAppealRow.Height = new GridLength(330);
+                MainScroll.ScrollToBottom();
+            }
+
             Grid grid = (Grid)sender;
             foreach (UIElement element in grid.Children)
             {
@@ -268,17 +288,13 @@ namespace CallLogGIISDMDK.Views.FillAppeal
                         ((Rectangle)element).Fill = Brushes.OliveDrab;
                         ((Rectangle)element).RadiusX = 12;
                         ((Rectangle)element).RadiusY = 12;
-                        //((Rectangle)element).Margin = new Thickness(8);
                     }
                     else
                     {
                         ((Rectangle)element).Fill = Brushes.LightGray;
                         ((Rectangle)element).RadiusX = 2;
                         ((Rectangle)element).RadiusY = 2;
-
                     }
-
-
                 }
                 if (element is Label)
                 {
@@ -303,7 +319,52 @@ namespace CallLogGIISDMDK.Views.FillAppeal
                 else ((Grid)sender).RowDefinitions[1].Height = new GridLength(90);
             }
 
+        }
+        private void DetailTypeAppealBorderGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+        }
+        private void ScreenShotSaveButton_Click(object sender, RoutedEventArgs e)
+        {
 
+            OpenFileDialog ofdPicture = new OpenFileDialog();
+            ofdPicture.Filter =
+                "Image files|*.bmp;*.jpg;*.gif;*.png;*.tif|All files|*.*";
+            ofdPicture.FilterIndex = 1;
+            if (ofdPicture.ShowDialog() == true)
+            {
+                if (numberscreenShot == 0)
+                {
+                    ScreenShot1.Source =
+                     new BitmapImage(new Uri(ofdPicture.FileName));
+                    StaticData.PathToscreenshot1 = ScreenShot1.Source.ToString();
+                }
+
+                else if (numberscreenShot == 1)
+                {
+                    ScreenShot2.Source =
+                    new BitmapImage(new Uri(ofdPicture.FileName));
+                    StaticData.PathToscreenshot2 = ScreenShot1.Source.ToString();
+                }
+                else if (numberscreenShot == 2)
+                {
+                    ScreenShot3.Source =
+                    new BitmapImage(new Uri(ofdPicture.FileName));
+                    StaticData.PathToscreenshot3 = ScreenShot1.Source.ToString();
+                }
+                else if (numberscreenShot == 3)
+                {
+                    ScreenShot4.Source =
+                    new BitmapImage(new Uri(ofdPicture.FileName));
+                    StaticData.PathToscreenshot4 = ScreenShot1.Source.ToString();
+                }
+                numberscreenShot++;
+                if (numberscreenShot > 3)
+                {
+                    ScreenShotSaveButton.Background = Brushes.Gray;
+                    ScreenShotSaveButton.IsEnabled = false;
+                }
+            }
         }
     }
 }
+

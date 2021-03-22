@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AmRoMessageDialog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,7 +19,7 @@ using System.Windows.Threading;
 using WpfAnimatedGif;
 namespace CallLogGIISDMDK.Views.FillAppeal
 {
-   
+
     /// <summary>
     /// Логика взаимодействия для AddDataToAppealByID.xaml
     /// </summary>
@@ -32,7 +33,6 @@ namespace CallLogGIISDMDK.Views.FillAppeal
         {
             InitializeComponent();
         }
-
         private void AddDataToCurrentAppeal_Click(object sender, RoutedEventArgs e)
         {
             if (AddDataToCurrentAppeal.IsCancel == true)
@@ -42,10 +42,20 @@ namespace CallLogGIISDMDK.Views.FillAppeal
                 {
                     CommunicationChannel.SelectionChanged -= CommunicationChannel_SelectionChanged;
                     Route.SelectionChanged -= Route_SelectionChanged;
-                    handlerAttached = true;
+                    handlerAttached = false;
                 }
+                var messageBox = new AmRoMessageBox
+                {
+                    Background = "#284F4F",
+                    TextColor = "#ffffff",
+                    IconColor = "#3399ff",
+                    RippleEffectColor = "#000000",
+                    ClickEffectColor = "#1F2023",
+                    ShowMessageWithEffect = true,
+                    EffectArea = this,
+                };
+                messageBox.Show("Запись добавлена успешно!");
             }
-
             else
             {
                 if (completeenter.Visibility == Visibility.Hidden && inworkenter.Visibility == Visibility.Hidden)
@@ -54,29 +64,33 @@ namespace CallLogGIISDMDK.Views.FillAppeal
                     DateBorder.BorderBrush = Brushes.Red;
                 if (PhoneGrid.Visibility == Visibility.Hidden && EmailGrid.Visibility == Visibility.Hidden)
                     PhoneEmailBorder.BorderBrush = Brushes.Red;
-                if (TypeAppealBorder.BorderBrush != Brushes.Green)
-                    TypeAppealBorder.BorderBrush = Brushes.Red;
-                if (StatusBorder.BorderBrush != Brushes.Green || DateBorder.BorderBrush != Brushes.Green || PhoneEmailBorder.BorderBrush != Brushes.Green || TypeAppealBorder.BorderBrush != Brushes.Red || Appeal.Text == "")
+                if (CommonTypeAppealBorder.BorderBrush != Brushes.Green)
+                    CommonTypeAppealBorder.BorderBrush = Brushes.Red;
+                if (StatusBorder.BorderBrush != Brushes.Green || DateBorder.BorderBrush != Brushes.Green || PhoneEmailBorder.BorderBrush != Brushes.Green || CommonTypeAppealBorder.BorderBrush != Brushes.Red || Appeal.Text == "")
                 {
                     MainBorder.BorderThickness = new Thickness(2.5);
                     MainBorder.BorderBrush = Brushes.Red;
                 }
-                if(PhoneGrid.Visibility == Visibility.Hidden && EmailGrid.Visibility == Visibility.Hidden)
+                if (PhoneGrid.Visibility == Visibility.Hidden && EmailGrid.Visibility == Visibility.Hidden)
                     PhoneEmailBorder.BorderBrush = Brushes.Red;
                 else if (PhoneGrid.Visibility == Visibility.Visible && Phone.Text.Length < 15 && IsIrregular.IsChecked == false) PhoneEmailBorder.BorderBrush = Brushes.Red;
-               
+
                 else if (IsIrregular.IsChecked == true && Phone.Text == "") PhoneEmailBorder.BorderBrush = Brushes.Red;
-               
+
                 else if (EmailGrid.Visibility == Visibility.Visible && PromptEmail.Content.ToString() != "") PhoneEmailBorder.BorderBrush = Brushes.Red;
                 else PhoneEmailBorder.BorderBrush = Brushes.Green;
-
             }
             MainValid();
         }
 
-
         private void CancelAdding_Click(object sender, RoutedEventArgs e)
         {
+            if (handlerAttached)
+            {
+                CommunicationChannel.SelectionChanged -= CommunicationChannel_SelectionChanged;
+                Route.SelectionChanged -= Route_SelectionChanged;
+                handlerAttached = false;
+            }
             this.NavigationService.GoBack();
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -90,8 +104,9 @@ namespace CallLogGIISDMDK.Views.FillAppeal
             Route.SelectedIndex = -1;
             Email.Text = StaticData.Email;
             counterChoisedTypeAppeal = 0;
+            IsHaveAnswer.IsChecked = false;
+            IsHaveAppeal.IsChecked = false;
         }
-
         void MainValid()
         {
             if (StatusBorder != null)
@@ -102,7 +117,6 @@ namespace CallLogGIISDMDK.Views.FillAppeal
                     MainBorder.BorderBrush = System.Windows.Media.Brushes.Gray;
             }
         }
-
         private void ComboBoxMinuteAppel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DateBorder.BorderBrush = System.Windows.Media.Brushes.Green;
@@ -139,10 +153,17 @@ namespace CallLogGIISDMDK.Views.FillAppeal
         {
             MainValid();
         }
-     
+
         private void RootGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            
+            if (DownArrwoImageRow.Height == new GridLength(0.1))
+            {
+                DownArrwoImageRow.Height = new GridLength(28);
+                TitleDetailTypeAppealRow.Height = new GridLength(22);
+                DetailTypeAppealRow.Height = new GridLength(220);
+                MainScroll.ScrollToBottom();
+            }
+
             Grid grid = (Grid)sender;
             foreach (UIElement element in grid.Children)
             {
@@ -170,48 +191,40 @@ namespace CallLogGIISDMDK.Views.FillAppeal
                     else ((Label)element).Foreground = Brushes.Black;
                 }
             }
-            if (counterChoisedTypeAppeal > 0) TypeAppealBorder.BorderBrush = Brushes.Green;
-            else TypeAppealBorder.BorderBrush = Brushes.Gray;
+            if (counterChoisedTypeAppeal > 0) CommonTypeAppealBorder.BorderBrush = Brushes.Green;
+            else CommonTypeAppealBorder.BorderBrush = Brushes.Gray;
         }
-
         private void LoadGif(object sender, RoutedEventArgs e)
         {
             Thread newThread = new Thread(new ParameterizedThreadStart(LoadingGif));
             newThread.Start(sender);
         }
-
         private void LoadingGif(object sender)
         {
             Application.Current.Dispatcher.BeginInvoke(
 DispatcherPriority.Background,
 new Action(() =>
 {
-        var image = new BitmapImage();
-        image.BeginInit();
-        image.UriSource = new Uri(((Image)sender).Name + @".gif", UriKind.Relative);
-        image.EndInit();
-        ImageBehavior.SetAnimatedSource((Image)sender, image);
+    var image = new BitmapImage();
+    image.BeginInit();
+    image.UriSource = new Uri(((Image)sender).Name + @".gif", UriKind.Relative);
+    image.EndInit();
+    ImageBehavior.SetAnimatedSource((Image)sender, image);
 }));
         }
-
         //    private void Load_Gif(object sender, MouseEventArgs e)
         //    {
-
         //            Application.Current.Dispatcher.BeginInvoke(
         //DispatcherPriority.Background,
         //new Action(() =>
         //{
-
         //        var image = new BitmapImage();
         //        image.BeginInit();
         //        image.UriSource = new Uri(((Image)sender).Name + @".gif", UriKind.Relative);
         //        image.EndInit();
-
         //        ImageBehavior.SetAnimatedSource((Image)sender, image);
-
         //}));
         //    }
-
         private void CommunicationChannel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Route != null && Route.Visibility == Visibility.Visible)
@@ -222,7 +235,6 @@ new Action(() =>
                 Route.Visibility = Visibility.Visible;
             if (Route != null && Route.Visibility == Visibility.Visible && (PhoneGrid.Visibility == Visibility.Visible || EmailGrid.Visibility == Visibility.Visible)) DefineColorBorderPhoneEmail();
         }
-
         private void Route_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (((ComboBox)sender).SelectedItem != null && ((ComboBox)sender).SelectedItem.ToString() != "")
@@ -233,20 +245,18 @@ new Action(() =>
                     ShowEmailPhoneGrid();
                 }
             }
-              
-           
-           
-        }
 
+
+
+        }
         private void DefineColorBorderPhoneEmail()
         {
-            if(CommunicationChannel.SelectedItem.ToString() == "Телефон")
+            if (CommunicationChannel.SelectedItem.ToString() == "Телефон")
             {
-                if(Phone.Text != "")
+                if (Phone.Text != "")
                     PhoneEmailBorder.BorderBrush = Brushes.Green;
                 else PhoneEmailBorder.BorderBrush = Brushes.Gray;
             }
-
             if (CommunicationChannel.SelectedItem.ToString() == "Email")
             {
                 if (Email.Text != "")
@@ -254,10 +264,9 @@ new Action(() =>
                 else PhoneEmailBorder.BorderBrush = Brushes.Gray;
             }
         }
-
         void ShowEmailPhoneGrid()
         {
-            if(Route != null  && Route.SelectedItem.ToString() != "")
+            if (Route != null && Route.SelectedItem != null && Route.SelectedItem.ToString() != "")
             {
                 if (CommunicationChannel.SelectedItem.ToString() == "Телефон")
                 {
@@ -290,9 +299,8 @@ new Action(() =>
                     }
                 }
             }
-      
-        }
 
+        }
         private void Complete_MouseEnter(object sender, MouseEventArgs e)
         {
             Complete.Visibility = Visibility.Hidden;
@@ -300,7 +308,6 @@ new Action(() =>
             if (OffComplete.Visibility == Visibility.Visible)
                 OffComplete.Visibility = Visibility.Hidden;
         }
-
         private void Complete_MouseDown(object sender, MouseButtonEventArgs e)
         {
             inworkenter.Visibility = Visibility.Hidden;
@@ -309,21 +316,21 @@ new Action(() =>
             completeenter.Visibility = Visibility.Visible;
             OffInWork.Visibility = Visibility.Visible;
             StatusBorder.BorderBrush = Brushes.Green;
+            InWorkLabel.Foreground = Brushes.LightGray;
+            CompleteLabel.Foreground = Brushes.Black;
         }
-
         private void Complete_MouseLeave(object sender, MouseEventArgs e)
         {
-           if(completeenter.Visibility != Visibility.Visible)
+            if (completeenter.Visibility != Visibility.Visible)
             {
                 completehover.Visibility = Visibility.Hidden;
-               
+
                 if (OffComplete.Visibility == Visibility.Hidden && inworkenter.Visibility != Visibility.Visible)
                     Complete.Visibility = Visibility.Visible;
                 else
                     OffComplete.Visibility = Visibility.Visible;
             }
         }
-
         private void InWork_MouseEnter(object sender, MouseEventArgs e)
         {
             InWork.Visibility = Visibility.Hidden;
@@ -333,7 +340,6 @@ new Action(() =>
                 OffInWork.Visibility = Visibility.Hidden;
             }
         }
-
         private void InWork_MouseDown(object sender, MouseButtonEventArgs e)
         {
             completeenter.Visibility = Visibility.Hidden;
@@ -342,23 +348,23 @@ new Action(() =>
             inworkenter.Visibility = Visibility.Visible;
             OffComplete.Visibility = Visibility.Visible;
             StatusBorder.BorderBrush = Brushes.Green;
+            InWorkLabel.Foreground = Brushes.Black;
+            CompleteLabel.Foreground = Brushes.LightGray;
         }
-
         private void InWork_MouseLeave(object sender, MouseEventArgs e)
         {
             if (inworkenter.Visibility != Visibility.Visible)
             {
                 inworkhover.Visibility = Visibility.Hidden;
-              
+
                 if (OffInWork.Visibility == Visibility.Hidden && completeenter.Visibility != Visibility.Visible)
                     InWork.Visibility = Visibility.Visible;
                 else
                     OffInWork.Visibility = Visibility.Visible;
             }
-            if(completeenter.Visibility == Visibility.Visible)
+            if (completeenter.Visibility == Visibility.Visible)
                 inworkhover.Visibility = Visibility.Hidden;
         }
-
         private void AddDataToCurrentAppeal_MouseLeave(object sender, MouseEventArgs e)
         {
             if (MainBorder.BorderBrush == Brushes.Red)
@@ -366,9 +372,8 @@ new Action(() =>
                 MainBorder.BorderThickness = new Thickness(1.5);
                 MainBorder.BorderBrush = Brushes.Gray;
             }
-               
-        }
 
+        }
 
         private void CommunicationChannel_DropDownOpened(object sender, EventArgs e)
         {
@@ -381,4 +386,3 @@ new Action(() =>
         }
     }
 }
-

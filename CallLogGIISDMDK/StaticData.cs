@@ -17,17 +17,59 @@ namespace CallLogGIISDMDK
         static private int _currentId = 0;
         static private string _correctPathToZip = "";
         static private string _correctPathToXml = "";
+        static private string _correctFolder = "";
         static private string _currentPersonalId = "";
         static private List<List<string>> _dataAppealByPersonalID;
+        static private string _currrentMonth = "";
+        static private string _currrentYear = "";
+        static public string _pathToscreenshot1 = "";
+        static public string _pathToscreenshot2 = "";
+        static public string _pathToscreenshot3 = "";
+        static public string _pathToscreenshot4 = "";
 
         static private string _phone;
         static private string _email;
-
 
         static public string User
         {
             get { return _user; }
             set { _user = value; }
+        }
+        static public string CorrectFolder
+        {
+            get { return _correctFolder; }
+            set { _correctFolder = value; }
+        }
+
+        static public string PathToscreenshot1
+        {
+            get { return _pathToscreenshot1; }
+            set { _pathToscreenshot1 = value; }
+        }
+        static public string PathToscreenshot2
+        {
+            get { return _pathToscreenshot2; }
+            set { _pathToscreenshot2 = value; }
+        }
+        static public string PathToscreenshot3
+        {
+            get { return _pathToscreenshot3; }
+            set { _pathToscreenshot3 = value; }
+        }
+        static public string PathToscreenshot4
+        {
+            get { return _pathToscreenshot4; }
+            set { _pathToscreenshot4 = value; }
+        }
+        static public string CurrrentMonth
+        {
+            get { return _currrentMonth; }
+            set { _currrentMonth = value; }
+        }
+        static public string CurrrentYear
+        {
+            get { return _currrentYear; }
+            set { _currrentYear = value; }
         }
         static public string Phone
         {
@@ -49,7 +91,6 @@ namespace CallLogGIISDMDK
             get { return _currentPersonalId; }
             set { _currentPersonalId = value; }
         }
-
         static public string CorrectPathToXml
         {
             get { return _correctPathToXml; }
@@ -60,20 +101,16 @@ namespace CallLogGIISDMDK
             get { return _correctPathToZip; }
             set { _correctPathToZip = value; }
         }
-
         static public List<List<string>> DataAppealByPersonalID
         {
             get { return _dataAppealByPersonalID; }
             set { _dataAppealByPersonalID = value; }
         }
-
         static public bool IsLoggin
         {
             get { return _isLoggin; }
             set { _isLoggin = value; }
         }
-
-     
 
         static public string UserStatus
         {
@@ -140,3 +177,4 @@ namespace CallLogGIISDMDK
         }
     }
 }
+

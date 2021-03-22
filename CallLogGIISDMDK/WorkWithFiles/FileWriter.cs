@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 namespace CallLogGIISDMDK.WorkWithFiles
 {
     class FileWriter
     {
+        DefinerAvailabilityAppealsByDate definerAvailabilityAppealsByDate = new DefinerAvailabilityAppealsByDate();
         DefinerCorrectPathToAppeals definerPath = new DefinerCorrectPathToAppeals();
         int ID = 1;
         int personalID = 1;
@@ -24,8 +26,9 @@ namespace CallLogGIISDMDK.WorkWithFiles
             pathToAppeals = definerPath.GetCorrectPathToAppealsXml();
         }
         Data data = new Data();
-        public void WriteAppealToFile(string fullName, string company, string sity, string phoneNumber, string inn, string role, string type, string status, string email, string ogrn, string date, string appeal, string additionalInfo, string communicationChannel, string time, string route)
+        public void WriteAppealToFile(string fullName, string company, string sity, string phoneNumber, string inn, string role, string type, string status, string email, string ogrn, string date, string appeal, string additionalInfo, string communicationChannel, string time, string route, string answer, string detailType)
         {
+            DefineCorrectPathToAppeals();
             if (File.Exists(pathToZipAppeals))
             {
                 ID = data.GetNumberIdAppeal();
@@ -44,7 +47,9 @@ namespace CallLogGIISDMDK.WorkWithFiles
               new XElement("time", time),
               new XElement("communicationСhannel", communicationChannel),
               new XElement("type", type),
+              new XElement("detailType", detailType),
               new XElement("appeal", appeal),
+              new XElement("answer", answer),
               new XElement("user", StaticData.User),
               new XElement("sity", sity),
               new XElement("role", role),
@@ -58,7 +63,7 @@ namespace CallLogGIISDMDK.WorkWithFiles
               new XElement("ogrn", ogrn),
               new XElement("status", status),
               new XElement("personalID", personalID))
-      
+
                    )
                  );
                 appeals.Save(pathToAppeals);
@@ -73,7 +78,9 @@ namespace CallLogGIISDMDK.WorkWithFiles
                 root.Add(new XElement("time", time));
                 root.Add(new XElement("communicationСhannel", communicationChannel));
                 root.Add(new XElement("type", type));
+                root.Add(new XElement("detailType", detailType));
                 root.Add(new XElement("appeal", appeal));
+                root.Add(new XElement("answer", answer));
                 root.Add(new XElement("user", StaticData.User));
                 root.Add(new XElement("sity", sity));
                 root.Add(new XElement("role", role));
@@ -87,7 +94,6 @@ namespace CallLogGIISDMDK.WorkWithFiles
                 root.Add(new XElement("ogrn", ogrn));
                 root.Add(new XElement("status", status));
                 root.Add(new XElement("personalID", personalID));
-
                 appeals.Element("Appeals").Add(root);
                 appeals.Save(pathToAppeals);
             }
@@ -95,6 +101,37 @@ namespace CallLogGIISDMDK.WorkWithFiles
             StaticData.IsNewAppeal2 = true;
             fileArchiving.CompressData(pathToAppeals, pathToZipAppeals);
             File.Delete(pathToAppeals);
+            if (StaticData.PathToscreenshot1 != "")
+            {
+                SaveScreenshots();
+            }
+        }
+
+        private void DefineCorrectPathToAppeals()
+        {
+            string[] correctPath = new string[2];
+            correctPath = definerAvailabilityAppealsByDate.GetCorrectPathToAppeal();
+            pathToZipAppeals = correctPath[0];
+            pathToAppeals = correctPath[1];
+        }
+
+        void SaveScreenshots()
+        {
+            if (!Directory.Exists(StaticData.CorrectFolder + personalID))
+                Directory.CreateDirectory(StaticData.CorrectFolder + personalID);
+            {
+                Thread newThread = new Thread(SaveImages);
+                newThread.Start();
+            }
+        }
+
+        private void SaveImages()
+        {
+            string screen = StaticData.PathToscreenshot1;
+            string sourceFile = new Uri(screen).LocalPath;
+            System.IO.File.Copy(sourceFile, StaticData.CorrectFolder + personalID + "/" + "1.png", true);
+
         }
     }
 }
+

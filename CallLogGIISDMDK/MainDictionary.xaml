@@ -230,6 +230,17 @@
         </Style.Triggers>
     </Style>
 
+    <!--GRID-->
+    <!--GRID-->
+    <!--GRID-->
+
+    <Style x:Key="cursorHandGrid" TargetType="{x:Type Grid}">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 
     <!-- RICHTEXTBLOCKS-->
@@ -339,12 +350,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-
-
-
-
-
     <!-- LIST BOXES-->
     <!-- LIST BOXES-->
     <!-- LIST BOXES-->

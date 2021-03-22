@@ -8,7 +8,7 @@
       DataContext="{StaticResource ViewAppealsVM}"
       mc:Ignorable="d" 
       
-      Title="MenuPage" WindowTitle="Журнал Обращений ГИИС ДМДК" Loaded="Page_Loaded" >
+      Title="MenuPage" WindowTitle="Журнал Обращений ГИИС ДМДК"  >
   
     <!--<Page.Resources>
         <Style TargetType="TextBlock">

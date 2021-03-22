@@ -58,7 +58,6 @@
                     </ToolTip>
                 </Image.ToolTip>
 
-
                 <Image.Style>
                     <Style TargetType="{x:Type Image}">
                         <Setter Property="Source" Value="Search.png"/>
@@ -74,11 +73,11 @@
                 </Image.Style>
             </Image>
         </Grid>
-
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition ></ColumnDefinition>
-                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="360"></ColumnDefinition>
+                <ColumnDefinition Width="360"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Margin="20,0,20,0" >
                 <Border BorderBrush="Black"
@@ -114,7 +113,41 @@
                 </Border>
             </Grid>
             <Grid Grid.Column="1" Margin="20,0,20,0" >
-                <Border BorderBrush="Black"
+                <ComboBox Text="qwdqwf" Foreground="LightGray" Margin="0,-2,0,0" Height="44" IsEditable="True"  IsReadOnly="True" >
+                    <CheckBox Style="{StaticResource StepsFillAppeal}" IsChecked="false" Content="Справочная информация">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SeekCommonTypeAppealCommand}"
+         CommandParameter="Справочная информация" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource StepsFillAppeal}" Content="ЭЦП">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SeekCommonTypeAppealCommand}"
+         CommandParameter="ЭЦП" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource StepsFillAppeal}" Content="Ошибка">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SeekCommonTypeAppealCommand}"
+         CommandParameter="Ошибка" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource StepsFillAppeal}" Content="Техническая поддержка">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SeekCommonTypeAppealCommand}"
+         CommandParameter="Техническая поддержка" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                </ComboBox>
+                <!--<Border BorderBrush="Black"
             BorderThickness="1"
             VerticalAlignment="Center"
             CornerRadius="5">
@@ -144,7 +177,107 @@
                             </Style>
                         </TextBox.Style>
                     </TextBox>
-                </Border>
+                </Border>-->
+            </Grid>
+            <Grid Grid.Column="2" Margin="20,0,20,0">
+                <ComboBox Text="qwdqwf" Foreground="LightGray"  Margin="0,-2,0,0" Height="44" IsEditable="True"  IsReadOnly="True" >
+                    <CheckBox Style="{StaticResource StepsFillAppeal}" Content="Невалидная ЭЦП">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SeekDetailTypeAppealCommand}"
+         CommandParameter="Невалидная ЭЦП" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource StepsFillAppeal}" Content="Личный кабинет">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SeekDetailTypeAppealCommand}"
+         CommandParameter="Личный кабинет" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource StepsFillAppeal}" Content="Приобретение ЭЦП">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SeekDetailTypeAppealCommand}"
+         CommandParameter="Приобретение ЭЦП" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource StepsFillAppeal}" Content="Начало работы в ГИИС ДМДК">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SeekDetailTypeAppealCommand}"
+         CommandParameter="Начало работы в ГИИС ДМДК" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource StepsFillAppeal}" Content="Сторонний УЦ">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SeekDetailTypeAppealCommand}"
+         CommandParameter="Сторонний УЦ" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource StepsFillAppeal}" Content="Ошибка">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SeekDetailTypeAppealCommand}"
+         CommandParameter="Ошибка" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource StepsFillAppeal}" Content="Тестовый контур">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SeekDetailTypeAppealCommand}"
+         CommandParameter="Тестовый контур" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource StepsFillAppeal}" Content="Штатный контур">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SeekDetailTypeAppealCommand}"
+         CommandParameter="Штатный контур" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource StepsFillAppeal}" Content="Юридические тонкости">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SeekDetailTypeAppealCommand}"
+         CommandParameter="Юридические тонкости" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource StepsFillAppeal}" Content="АРМ маркировщик">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SeekDetailTypeAppealCommand}"
+         CommandParameter="АРМ маркировщик" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource StepsFillAppeal}" Content="Linux">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SeekDetailTypeAppealCommand}"
+         CommandParameter="Linux" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource StepsFillAppeal}" Content="Прочее">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SeekDetailTypeAppealCommand}"
+         CommandParameter="Прочее" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                </ComboBox>
             </Grid>
         </Grid>
         <Grid x:Name="CentralGrid" Grid.Row="2">
@@ -157,7 +290,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1"></RowDefinition>
                         <!--<RowDefinition Height="28"></RowDefinition>-->
-                        <RowDefinition Height="28"></RowDefinition>
+                        <RowDefinition Height="38"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <Rectangle Grid.Row="0"  HorizontalAlignment="Stretch" Fill="Gray"  VerticalAlignment="Top"  Height="1.5"/>
@@ -167,13 +300,12 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="30"></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition Width="30"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-
-                        <TextBlock Grid.Column="1" TextAlignment="Right" Padding="4,0,0,0" FontSize="18.5" Foreground="White" Text="{Binding Month}" />
-                        <TextBlock Grid.Column="2" TextAlignment="Left" Padding="4,0,0,0" FontSize="18.5" Foreground="White" Text="{Binding Year}" />
-
+                        <TextBlock Grid.Column="1" TextAlignment="Right" VerticalAlignment="Center" Padding="4,0,0,0" FontSize="18.5" Foreground="White" Text="{Binding Month}" />
+                        <TextBlock Grid.Column="2" TextAlignment="Left" VerticalAlignment="Center" Padding="4,0,0,0" FontSize="18.5" Foreground="GhostWhite" Text="{Binding Year}" />
                         <Image  x:Name="arrowLeft"  Margin="1" >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDown" >
@@ -195,8 +327,36 @@
                                 </Style>
                             </Image.Style>
                         </Image>
-
-                        <Image x:Name="arrowRight" Grid.Column="3" Margin="1" >
+                        <Image  x:Name="Export" HorizontalAlignment="Left" Grid.Column="3" Margin="6"  >
+                            <Image.ToolTip>
+                                <ToolTip Background="#81311949" Foreground="White" HasDropShadow="False"
+                Placement="Relative" HorizontalOffset="40" VerticalOffset="-30">
+                                    <Grid >
+                                        <TextBlock Grid.Row="1" Style="{StaticResource AutoCompleteStyle}" FontSize="16.5" Foreground="Cornsilk" Text="Экспорт обращений в формате Excel"></TextBlock>
+                                    </Grid>
+                                </ToolTip>
+                            </Image.ToolTip>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown" >
+                                    <i:InvokeCommandAction Command="{Binding SetMonthCommand}" CommandParameter="Export" >
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="exportToExcel.png"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Source" Value="exportToExcelHover.png"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Cursor" Value="Hand" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="arrowRight" Grid.Column="5" Margin="1" >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDown" >
                                     <i:InvokeCommandAction Command="{Binding SetMonthCommand}" CommandParameter="Next" >
@@ -218,9 +378,7 @@
                             </Image.Style>
                         </Image>
 
-
                     </Grid>
-
                     <Border Grid.Row="3" Margin="0" Padding="0" BorderBrush="Gray" BorderThickness="1" >
                         <ListBox  x:Name="BrieflyAppeal"   ItemsSource="{Binding Appeals}"
                          SelectedItem="{Binding SelectedAppeal}" >
@@ -278,34 +436,29 @@
                 </Grid>
             </Border>
             <Border  BorderBrush="Gray" BorderThickness="1" Grid.Column="1">
-                <Grid x:Name="RightPartCenterGrid" Visibility="Hidden" MouseDown="RolePicture1_MouseDown">
+                <Grid x:Name="RightPartCenterGrid" Visibility="Hidden" >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="55"></RowDefinition>
+                        <RowDefinition x:Name="ClientCardRow" Height="55"></RowDefinition>
                         <RowDefinition ></RowDefinition>
                     </Grid.RowDefinitions>
-
                     <Border BorderBrush="Gray" x:Name="CardClientBriefly" BorderThickness="1" Grid.Column="1">
-                        <Grid  DataContext="{Binding SelectedAppeal}">
+                        <Grid Style="{StaticResource cursorHandGrid}" DataContext="{Binding SelectedAppeal}" MouseLeave="Grid_MouseLeave" MouseEnter="Grid_MouseEnter" MouseDown="ClientCard_MouseDown">
+                            <Grid.ToolTip>
+                                <ToolTip Background="#81311949" Foreground="White" HasDropShadow="False"
+                Placement="Relative" HorizontalOffset="40" VerticalOffset="-30">
+                                    <Grid >
+                                        <TextBlock Grid.Row="1" Style="{StaticResource AutoCompleteStyle}" FontSize="16.5" Foreground="Cornsilk" Text="Подробнее"></TextBlock>
+                                    </Grid>
+                                </ToolTip>
+                            </Grid.ToolTip>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="487*"/>
-                                <ColumnDefinition Width="18*"/>
+                                <ColumnDefinition Width="64"/>
+                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Height="0.1" x:Name="Role1"    Style="{StaticResource DetailsViewAppeal}" Text="{Binding ParticipantRole, UpdateSourceTrigger=PropertyChanged}"  LayoutUpdated="Role1_LayoutUpdated" Grid.ColumnSpan="2" Margin="5,26"/>
-
-                            <Image Style="{StaticResource cursorHand}" x:Name="RolePicture1" Margin="15,4,0,0" MouseDown="RolePicture1_MouseDown" HorizontalAlignment="Left" VerticalAlignment="Top" Width="44" Height="44"   Source="MRU FPP.png">
-                                <Image.ToolTip>
-                                    <ToolTip Background="#81311949" Foreground="White" HasDropShadow="False"
-                Placement="Relative" HorizontalOffset="28" VerticalOffset="-36">
-                                        <Grid >
-                                            <TextBlock Grid.Row="1" Style="{StaticResource AutoCompleteStyle}" FontSize="16.5" Foreground="Cornsilk" Text="Карточка клиента"></TextBlock>
-                                        </Grid>
-                                    </ToolTip>
-                                </Image.ToolTip>
-                            </Image>
+                            <Image x:Name="ClientCardMini" Margin="15,4,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="44" Height="44" Source="clientCard.png" ></Image>
+                            <TextBlock Grid.Column="1" VerticalAlignment="Top" Grid.ColumnSpan="4" Margin="10,15,0,0" FontSize="14" Foreground="SaddleBrown" Style="{StaticResource DataAppeal}">Карточка участника</TextBlock>
                         </Grid>
                     </Border>
-
-
                     <Border Visibility="Hidden" x:Name="CardClientDetail" BorderBrush="Gray" BorderThickness="1" Grid.Column="1">
                         <Grid x:Name="TopDetailsAppeal"  DataContext="{Binding SelectedAppeal}">
                             <Grid.RowDefinitions>
@@ -327,13 +480,13 @@
                                 <ColumnDefinition Width="0.4*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Rectangle Grid.Row="1" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" Fill="Gray"  VerticalAlignment="Top"  Height="1.5"/>
-                            <TextBlock Background="LightSeaGreen" TextAlignment="Center" Padding="4,0,0,0" Grid.ColumnSpan="4"  FontSize="18.5" Foreground="White" Text="Информация клиента" />
-                            <Image Style="{StaticResource cursorHand}" x:Name="RolePicture" Grid.Column="1" Margin="15,0,0,0"  Grid.Row="1" Grid.RowSpan="5" HorizontalAlignment="Left" Width="88" Height="88"   Source="MRU FPP.png">
+                            <TextBlock Background="LightSeaGreen"  TextAlignment="Center" Padding="4,5,0,0" Grid.ColumnSpan="4"  FontSize="18.5" Foreground="White" Text="Карточка участника" />
+                            <Image Style="{StaticResource cursorHand}" MouseDown="ClientCard_MouseDown" x:Name="RolePicture" Grid.Column="1" Margin="15,0,0,0"  Grid.Row="1" Grid.RowSpan="5" HorizontalAlignment="Left" Width="88" Height="88"   Source="MRU FPP.png">
                                 <Image.ToolTip>
                                     <ToolTip Background="#81311949" Foreground="White" HasDropShadow="False"
                 Placement="Relative" HorizontalOffset="28" VerticalOffset="-36">
                                         <Grid >
-                                            <TextBlock Grid.Row="1" Style="{StaticResource AutoCompleteStyle}" FontSize="16.5" Foreground="Cornsilk" Text="Карточка клиента"></TextBlock>
+                                            <TextBlock Grid.Row="1" Style="{StaticResource AutoCompleteStyle}" FontSize="16.5" Foreground="Cornsilk" Text="Скрыть"></TextBlock>
                                         </Grid>
                                     </ToolTip>
                                 </Image.ToolTip>
@@ -421,9 +574,12 @@
                                                     <Grid x:Name="DetailAppealGrid" Loaded="DetailAppealGrid_Loaded" MouseEnter="DetailAppealGrid_MouseEnter" >
                                                         <Grid.RowDefinitions>
                                                             <RowDefinition></RowDefinition>
-                                                            <RowDefinition></RowDefinition>
                                                             <RowDefinition Height="17"></RowDefinition>
                                                             <RowDefinition ></RowDefinition>
+                                                            <RowDefinition  Height="17"></RowDefinition>
+                                                            <RowDefinition  ></RowDefinition>
+                                                            <RowDefinition  Height="17"></RowDefinition>
+                                                            <RowDefinition  ></RowDefinition>
                                                         </Grid.RowDefinitions>
                                                         <Grid x:Name="DateTime" Grid.ColumnSpan="2" Loaded="DetailAppealGrid_Loaded">
                                                             <Grid.RowDefinitions>
@@ -458,7 +614,6 @@
                                                                 <TextBlock Grid.Column="1" VerticalAlignment="Center"  Text=":" />
                                                                 <TextBlock FontSize="14" VerticalAlignment="Center"  FontWeight="Bold" HorizontalAlignment="Left"  Grid.Column="2" Text="{Binding Path=CurrentMinute}" />-->
                                                             </Grid>
-                                                            <TextBox Grid.Row="1" Grid.Column="1" BorderBrush="{x:Null}"  Foreground="DimGray"  BorderThickness="0" IsReadOnly="True" Block.LineHeight="4"  Text="Текст обращения"   TextWrapping="Wrap" Margin="0,3,0,0" Padding="0" FontSize="12"/>
                                                             <TextBlock FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="6" Margin="0,0,20,0" HorizontalAlignment="Right" Foreground="Peru" Text="{Binding Path=UserName}" />
                                                             <Image x:Name="EditAppeal" Grid.Column="4"  Margin="2" Width="29"   Height="29"   HorizontalAlignment="Right" MouseDown="EditAppeal_MouseDown" >
                                                                 <Image.ToolTip>
@@ -489,7 +644,6 @@
                                                                         </Style.Triggers>
                                                                     </Style>
                                                                 </Image.Style>
-
                                                             </Image>
                                                             <Image x:Name="DeleteAppeal" Grid.Column="5" IsManipulationEnabled="{Binding IsReadyUpdateAppeals}" Margin="2" Width="22"  Height="22"  HorizontalAlignment="Right" MouseDown="DeleteAppeal_MouseDown" >
                                                                 <Image.ToolTip>
@@ -520,7 +674,7 @@
                                                             <TextBlock Grid.Row="2" Text="{Binding Path=Type}" />
                                                             <TextBlock x:Name="CommunicationChannel" Grid.Row="3" Text="{Binding Path=CommunicationChannel}" />
                                                             <TextBlock x:Name="Route" Grid.Row="3" Text="{Binding Path=Route}" />
-                                                            <Image   Margin="0,0,0,0" Width="37"  Height="37"  HorizontalAlignment="Left"  x:Name="TypeArrow" Source="outEmail.png">
+                                                            <Image Margin="0,0,0,0" Width="37"  Height="37"  HorizontalAlignment="Left"  x:Name="TypeArrow" Source="outEmail.png">
                                                                 <Image.ToolTip>
                                                                     <ToolTip Background="#81311949" Foreground="White" HasDropShadow="False"
                 Placement="Relative" HorizontalOffset="28" VerticalOffset="-36">
@@ -536,9 +690,13 @@
                                                                 </Image.ToolTip>
                                                             </Image>
                                                         </Grid>
-                                                        <TextBox Grid.Row="1"  BorderBrush="{x:Null}"  BorderThickness="0" IsReadOnly="True" Block.LineHeight="4"  Text="{Binding Path=Appeal}"  TextWrapping="Wrap" Margin="10 " FontFamily="Trebuchet MS, Arial" FontSize="16"/>
-                                                        <TextBox Grid.Row="2"  BorderBrush="{x:Null}" Foreground="DimGray" BorderThickness="0" IsReadOnly="True" Block.LineHeight="4"  Text="Дополнительная информация" TextWrapping="Wrap" Margin="0,3,0,0"  Padding="0"  FontSize="12"/>
-                                                        <TextBox Grid.Row="3" BorderBrush="{x:Null}"  BorderThickness="0" IsReadOnly="True" Block.LineHeight="4"  Text="{Binding Path=AdditionalInfo}"  TextWrapping="Wrap" FontFamily="Trebuchet MS, Arial" Margin="10" FontSize="16"/>
+                                                        <TextBox Grid.Row="1" Grid.Column="1" BorderBrush="{x:Null}"  Foreground="DimGray"  BorderThickness="0" IsReadOnly="True" Block.LineHeight="4"  Text="Текст обращения"   TextWrapping="Wrap" Margin="0,3,0,0" Padding="0" FontSize="12"/>
+                                                        <TextBox Grid.Row="2" BorderBrush="{x:Null}" x:Name="Appeal"  BorderThickness="0" IsReadOnly="True" Block.LineHeight="4"  Text="{Binding Path=Appeal}"  TextWrapping="Wrap" Margin="10 " FontFamily="Trebuchet MS, Arial" FontSize="16"/>
+                                                        <TextBox x:Name="TitleAnswer" Grid.Row="3"  BorderBrush="{x:Null}" Foreground="DimGray" BorderThickness="0" IsReadOnly="True" Block.LineHeight="4"  Text="Ответ" TextWrapping="Wrap" Margin="0,3,0,0"  Padding="0"  FontSize="12"/>
+                                                        <TextBox x:Name="Answer" Grid.Row="4"  BorderBrush="{x:Null}"  BorderThickness="0" IsReadOnly="True" Block.LineHeight="4"  Text="{Binding Path=Answer}"  TextWrapping="Wrap" Margin="10 " FontFamily="Trebuchet MS, Arial" FontSize="16"/>
+                                                        <TextBox x:Name="TitleAdditionalInfo" Grid.Row="5"  BorderBrush="{x:Null}" Foreground="DimGray" BorderThickness="0" IsReadOnly="True" Block.LineHeight="4"  Text="Дополнительная информация" TextWrapping="Wrap" Margin="0,3,0,0"  Padding="0"  FontSize="12"/>
+                                                        <TextBox x:Name="AdditionalInfo" Grid.Row="6" BorderBrush="{x:Null}"  BorderThickness="0" IsReadOnly="True" Block.LineHeight="4"  Text="{Binding Path=AdditionalInfo}"  TextWrapping="Wrap" FontFamily="Trebuchet MS, Arial" Margin="10" FontSize="16"/>
+
                                                         <TextBlock Height="1" x:Name="personalId" Grid.Row="4" Text="{Binding Path=PersonalID}" />
                                                     </Grid>
                                                 </StackPanel>
@@ -607,6 +765,7 @@
         </Grid>
     </Grid>
 </Page>
+ 
  
  
  

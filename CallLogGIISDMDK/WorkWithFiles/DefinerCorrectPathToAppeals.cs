@@ -34,6 +34,7 @@ namespace CallLogGIISDMDK.WorkWithFiles
             correctPathToXml = currentYear + "/" + currentMonth + "/" + appealsXml;
             if (File.Exists($"{currentYear}/{currentMonth}/{appealsXml}"))
                 File.Delete($"{currentYear}/{currentMonth}/{appealsXml}");
+            StaticData.CorrectFolder = $"{currentYear}/{currentMonth}/";
         }
         public string GetCorrectPathToAppealsXml()
         {
