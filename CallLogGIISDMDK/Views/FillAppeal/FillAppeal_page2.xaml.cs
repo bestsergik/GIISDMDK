@@ -33,7 +33,7 @@ namespace CallLogGIISDMDK.Views.FillAppeal
         private void btnNextPage_Click(object sender, RoutedEventArgs e)
         {
             if (btnNextPage.IsCancel == true)
-                this.NavigationService.Navigate(new AddAppeal_page());
+                this.NavigationService.Navigate(new FillAppeal_page1());
         }
     }
 }

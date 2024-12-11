@@ -34,9 +34,32 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>goznak.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AmRoMessageDialog, Version=1.1.9.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\AmRoMessageBox.1.1.9\lib\net45\AmRoMessageDialog.dll</HintPath>
+    </Reference>
     <Reference Include="DotNetZip, Version=1.15.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.15.0\lib\net40\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="HamburgerMenu, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HamburgerMenu.0.1.0\lib\net40\HamburgerMenu.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.2.0.325, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.2.0\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.6.0.325, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.6.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
@@ -56,6 +79,12 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9e7cd3b544a090dc, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfAnimatedGif.2.0.0\lib\net40\WpfAnimatedGif.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFTextBoxAutoComplete, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFTextBoxAutoComplete.1.0.5\lib\net40\WPFTextBoxAutoComplete.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -63,6 +92,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Compress.cs" />
+    <Compile Include="Data.cs" />
     <Compile Include="FileWorker.cs" />
     <Compile Include="Models\Authorization_model.cs" />
     <Compile Include="Models\CommonInformation_model.cs" />
@@ -75,6 +105,9 @@
     <Compile Include="ViewModels\FillAppeal_VM.cs" />
     <Compile Include="ViewModels\MainWindow_VM.cs" />
     <Compile Include="ViewModels\ViewAppeals_VM.cs" />
+    <Compile Include="Views\AppealEditor_page.xaml.cs">
+      <DependentUpon>AppealEditor_page.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Authorization_page.xaml.cs">
       <DependentUpon>Authorization_page.xaml</DependentUpon>
     </Compile>
@@ -108,8 +141,17 @@
     <Compile Include="Views\BaseKnowledge\CommonInformation.xaml.cs">
       <DependentUpon>CommonInformation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FillAppeal\AddDataToAppealByID.xaml.cs">
+      <DependentUpon>AddDataToAppealByID.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FillAppeal\EditAppealByPersonalID.xaml.cs">
+      <DependentUpon>EditAppealByPersonalID.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FillAppeal\FillAppeal_page1.xaml.cs">
       <DependentUpon>FillAppeal_page1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FillAppeal\FillAppeal_page1_test.xaml.cs">
+      <DependentUpon>FillAppeal_page1_test.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FillAppeal\FillAppeal_page2.xaml.cs">
       <DependentUpon>FillAppeal_page2.xaml</DependentUpon>
@@ -123,10 +165,18 @@
     <Compile Include="Views\BaseProblems\TypicalProblems.xaml.cs">
       <DependentUpon>TypicalProblems.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ViewAppeals_page2.xaml.cs">
+      <DependentUpon>ViewAppeals_page2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ViewAppeals_page.xaml.cs">
       <DependentUpon>ViewAppeals_page.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WorkWithFiles\ConvertToExcel.cs" />
+    <Compile Include="WorkWithFiles\DefinerAvailabilityAppealsByDate.cs" />
+    <Compile Include="WorkWithFiles\DefinerCorrectPathToAppeals.cs" />
     <Compile Include="WorkWithFiles\FileReader.cs" />
+    <Compile Include="WorkWithFiles\FileRemover.cs" />
+    <Compile Include="WorkWithFiles\FileSaveDialog.cs" />
     <Compile Include="WorkWithFiles\FileWriter.cs" />
     <Page Include="MainDictionary.xaml">
       <SubType>Designer</SubType>
@@ -144,6 +194,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AppealEditor_page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Authorization_page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -188,7 +242,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FillAppeal\AddDataToAppealByID.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FillAppeal\EditAppealByPersonalID.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\FillAppeal\FillAppeal_page1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FillAppeal\FillAppeal_page1_test.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -207,6 +273,10 @@
     <Page Include="Views\BaseProblems\TypicalProblems.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ViewAppeals_page2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ViewAppeals_page.xaml">
       <SubType>Designer</SubType>
@@ -242,12 +312,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="home1.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\BaseProblems\Instructions\rootSertificates.png" />
@@ -325,16 +389,175 @@
     <Resource Include="Profile2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Home2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="iconfinder_Icons-09_7120956.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="home3.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="home4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\loupe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="goznak.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\guild.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\MRU FPP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\performed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\attantion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\incomingCall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\incomingEmail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\outCall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\outEmail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\waiting.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\editHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\deleteAppealHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\deleteAppeal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingArrowEmail.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingArrowEmailHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingArrowEmailEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\offEmail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\offInWork.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\inWorkHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\inWorkEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\inWork.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\offComplete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\completeHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\complete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\offPhone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingArrowToPhone.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingArrowToPhoneHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingArrowToPhoneEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\completeEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\completeHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingPhone.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingPhoneHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingPhoneEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingPhone.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingPhoneHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingPhoneEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingEmail.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingEmailHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\outgoingEmailEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingEmail.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingEmailHover.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\incomingEmailEnter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\arrowLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\arrowLeftHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\arrowRightHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\arrowRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\exportToExcel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\exportToExcelHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\FillAppeal\arrowDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\clientCardHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\clientCard.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

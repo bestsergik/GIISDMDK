@@ -3,24 +3,109 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace CallLogGIISDMDK
 {
-   static class StaticData
+    static class StaticData
     {
-       static private string _user;
-       static private string _userStatus = "малыш";
-       static private int _userLvl = 0;
-       static private int _userTopLvl = 0;
-       static private bool _isLoggin = false;
-   
+        static private string _user;
+        static private string _userStatus = "малыш";
+        static private int _userLvl = 0;
+        static private int _userTopLvl = 0;
+        static private bool _isLoggin = false;
+        static private bool _isNewAppeal = false;
+        static private bool _isNewAppeal2 = false;
+        static private int _currentId = 0;
+        static private string _correctPathToZip = "";
+        static private string _correctPathToXml = "";
+        static private string _correctFolder = "";
+        static private string _currentPersonalId = "";
+        static private List<List<string>> _dataAppealByPersonalID;
+        static private string _currrentMonth = "";
+        static private string _currrentYear = "";
+        static public string _pathToscreenshot1 = "";
+        static public string _pathToscreenshot2 = "";
+        static public string _pathToscreenshot3 = "";
+        static public string _pathToscreenshot4 = "";
+
+        static private string _phone;
+        static private string _email;
 
         static public string User
         {
             get { return _user; }
             set { _user = value; }
         }
+        static public string CorrectFolder
+        {
+            get { return _correctFolder; }
+            set { _correctFolder = value; }
+        }
 
+        static public string PathToscreenshot1
+        {
+            get { return _pathToscreenshot1; }
+            set { _pathToscreenshot1 = value; }
+        }
+        static public string PathToscreenshot2
+        {
+            get { return _pathToscreenshot2; }
+            set { _pathToscreenshot2 = value; }
+        }
+        static public string PathToscreenshot3
+        {
+            get { return _pathToscreenshot3; }
+            set { _pathToscreenshot3 = value; }
+        }
+        static public string PathToscreenshot4
+        {
+            get { return _pathToscreenshot4; }
+            set { _pathToscreenshot4 = value; }
+        }
+        static public string CurrrentMonth
+        {
+            get { return _currrentMonth; }
+            set { _currrentMonth = value; }
+        }
+        static public string CurrrentYear
+        {
+            get { return _currrentYear; }
+            set { _currrentYear = value; }
+        }
+        static public string Phone
+        {
+            get { return _phone; }
+            set { _phone = value; }
+        }
+        static public string Email
+        {
+            get { return _email; }
+            set { _email = value; }
+        }
+        static public int CurrentId
+        {
+            get { return _currentId; }
+            set { _currentId = value; }
+        }
+        static public string CurrentPersonalId
+        {
+            get { return _currentPersonalId; }
+            set { _currentPersonalId = value; }
+        }
+        static public string CorrectPathToXml
+        {
+            get { return _correctPathToXml; }
+            set { _correctPathToXml = value; }
+        }
+        static public string CorrectPathToZip
+        {
+            get { return _correctPathToZip; }
+            set { _correctPathToZip = value; }
+        }
+        static public List<List<string>> DataAppealByPersonalID
+        {
+            get { return _dataAppealByPersonalID; }
+            set { _dataAppealByPersonalID = value; }
+        }
         static public bool IsLoggin
         {
             get { return _isLoggin; }
@@ -35,12 +120,12 @@ namespace CallLogGIISDMDK
         static public int UserLvl
         {
             get { return _userLvl; }
-            set {
+            set
+            {
                 _userLvl = value;
                 DefineUserStatus();
             }
         }
-
         static public int UserTopLvl
         {
             get { return _userTopLvl; }
@@ -50,7 +135,26 @@ namespace CallLogGIISDMDK
                 DefineUserStatus();
             }
         }
-
+        static public bool IsNewAppeal
+        {
+            get { return _isNewAppeal; }
+            set
+            {
+                _isNewAppeal = value;
+            }
+        }
+        static public bool IsNewAppeal2
+        {
+            get { return _isNewAppeal2; }
+            set
+            {
+                _isNewAppeal2 = value;
+            }
+        }
+        public static bool ContainsWithoutRegistr(this string source, string toCheck, StringComparison comp)
+        {
+            return source != null && toCheck != null && source.IndexOf(toCheck, comp) >= 0;
+        }
         private static void DefineUserStatus()
         {
             if (UserLvl < 10)
@@ -66,8 +170,6 @@ namespace CallLogGIISDMDK
             else if (UserLvl > 300)
                 UserStatus = "Советник Бога";
         }
-
-
         static public void ClearData()
         {
             UserLvl = 0;
@@ -75,3 +177,4 @@ namespace CallLogGIISDMDK
         }
     }
 }
+

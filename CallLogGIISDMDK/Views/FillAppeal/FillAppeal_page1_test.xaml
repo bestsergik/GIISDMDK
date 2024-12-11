@@ -1,0 +1,110 @@
+﻿<Page x:Class="CallLogGIISDMDK.Views.FillAppeal.FillAppeal_page1_test"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CallLogGIISDMDK.Views.FillAppeal"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      DataContext="{StaticResource FillAppealVM}"
+      mc:Ignorable="d" 
+      Title="FillAppeal_page1_test" Loaded="Page_Loaded">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedPageCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="20" ></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Margin="40,30,0,0" Grid.ColumnSpan="4"  Style="{StaticResource MainTitles}">Форма заполнения обращения</TextBlock>
+        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1">
+            <ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition ></ColumnDefinition>
+                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Label    Content="ФИО" ></Label>
+
+                        <ComboBox Grid.Row="1" x:Name="FullName" Style="{StaticResource FillingAppeal}" 
+                      IsTextSearchEnabled="False"
+                      DropDownClosed="FullName_DropDownClosed"
+                      PreviewTextInput="PreviewTextInput_EnhanceComboSearch"
+                      SelectionChanged="FullName_SelectionChanged"
+                      PreviewKeyUp="PreviewKeyUp_EnhanceComboSearch"
+                      DataObject.Pasting="Pasting_EnhanceComboSearch">
+
+                        </ComboBox>
+                        <Label Grid.Row="2" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsInn}" ></Label>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Label    Content="Компания" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+
+                        <ComboBox Grid.Row="1" x:Name="Company"  Style="{StaticResource FillingAppeal}"
+                    
+              IsTextSearchEnabled="False"
+              PreviewTextInput="PreviewTextInput_EnhanceComboSearch"
+              PreviewKeyUp="PreviewKeyUp_EnhanceComboSearch"
+              DataObject.Pasting="Pasting_EnhanceComboSearch">
+                        </ComboBox>
+                        <Label Grid.Row="2" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsInn}" ></Label>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Label    Content="Телефон" Style="{StaticResource titleBoxesFillAppeal}"></Label>
+
+                        <ComboBox Grid.Row="1" x:Name="PhoneNumber"  Style="{StaticResource FillingAppeal}"
+                    
+              IsTextSearchEnabled="False"
+              PreviewTextInput="PreviewTextInput_EnhanceComboSearch"
+              PreviewKeyUp="PreviewKeyUp_EnhanceComboSearch"
+              DataObject.Pasting="Pasting_EnhanceComboSearch">
+                        </ComboBox>
+                        <Label Grid.Row="2" Style="{StaticResource promptsFillAppeal}"  Content="{Binding PromptsInn}" ></Label>
+                    </Grid>
+
+                </Grid>
+            </ScrollViewer>
+        </Border>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280"></ColumnDefinition>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition Width="280"></ColumnDefinition>
+
+            </Grid.ColumnDefinitions>
+            <Button  Style="{StaticResource MainMenuButton}"  >Назад</Button>
+            <Button  Grid.Column="2" Name="NextStep" IsCancel="{Binding IsFirstStepFillAppeal}" Command="{Binding CheckFirstStepFillAppealCommand}" Style="{StaticResource MainMenuButton}"  >Далее</Button>
+
+        </Grid>
+    </Grid>
+</Page>

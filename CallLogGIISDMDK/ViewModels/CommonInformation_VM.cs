@@ -19,9 +19,6 @@ namespace CallLogGIISDMDK.ViewModels
         public CommonInformation_VM()
         {
             FillCommonInformation();
-         
-       
-         
         }
 
         #region Commands
